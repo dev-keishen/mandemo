@@ -1,0 +1,27 @@
+
+skeleton.png
+size: 1024,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Group 18
+  rotate: false
+  xy: 313, 85
+  size: 307, 122
+  orig: 307, 122
+  offset: 0, 0
+  index: -1
+Group 22
+  rotate: false
+  xy: 2, 2
+  size: 309, 205
+  orig: 309, 205
+  offset: 0, 0
+  index: -1
+MINIPOKER
+  rotate: false
+  xy: 622, 104
+  size: 289, 103
+  orig: 289, 103
+  offset: 0, 0
+  index: -1

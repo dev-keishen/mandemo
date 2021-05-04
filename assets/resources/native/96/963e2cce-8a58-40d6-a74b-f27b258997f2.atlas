@@ -1,0 +1,69 @@
+
+skeleton.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Flare_
+  rotate: false
+  xy: 561, 363
+  size: 320, 147
+  orig: 320, 147
+  offset: 0, 0
+  index: -1
+MIB
+  rotate: false
+  xy: 561, 54
+  size: 273, 145
+  orig: 273, 145
+  offset: 0, 0
+  index: -1
+SLOTS_MIB
+  rotate: false
+  xy: 2, 2
+  size: 215, 50
+  orig: 215, 50
+  offset: 0, 0
+  index: -1
+baseMIB
+  rotate: false
+  xy: 284, 145
+  size: 275, 365
+  orig: 275, 365
+  offset: 0, 0
+  index: -1
+border_MIB
+  rotate: false
+  xy: 2, 140
+  size: 280, 370
+  orig: 280, 370
+  offset: 0, 0
+  index: -1
+frameMIB
+  rotate: false
+  xy: 561, 201
+  size: 278, 160
+  orig: 278, 160
+  offset: 0, 0
+  index: -1
+gun
+  rotate: true
+  xy: 883, 370
+  size: 140, 90
+  orig: 140, 90
+  offset: 0, 0
+  index: -1
+l
+  rotate: false
+  xy: 2, 99
+  size: 162, 39
+  orig: 162, 39
+  offset: 0, 0
+  index: -1
+p
+  rotate: false
+  xy: 841, 331
+  size: 14, 30
+  orig: 14, 30
+  offset: 0, 0
+  index: -1

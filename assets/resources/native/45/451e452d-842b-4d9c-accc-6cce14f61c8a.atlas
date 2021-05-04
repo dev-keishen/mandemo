@@ -1,0 +1,20 @@
+
+Beer.png
+size: 124,168
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+beer
+  rotate: true
+  xy: 2, 2
+  size: 109, 117
+  orig: 109, 117
+  offset: 0, 0
+  index: -1
+foam
+  rotate: false
+  xy: 2, 113
+  size: 94, 50
+  orig: 94, 50
+  offset: 0, 0
+  index: -1

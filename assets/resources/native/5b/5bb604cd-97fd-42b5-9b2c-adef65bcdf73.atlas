@@ -1,0 +1,34 @@
+
+skeleton.png
+size: 880,104
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Layer 644 copy
+  rotate: false
+  xy: 2, 2
+  size: 226, 98
+  orig: 226, 98
+  offset: 0, 0
+  index: -1
+Layer 645
+  rotate: false
+  xy: 458, 10
+  size: 228, 90
+  orig: 228, 90
+  offset: 0, 0
+  index: -1
+Layer 646
+  rotate: false
+  xy: 230, 2
+  size: 226, 98
+  orig: 226, 98
+  offset: 0, 0
+  index: -1
+Thông báo mới
+  rotate: false
+  xy: 688, 61
+  size: 190, 39
+  orig: 190, 39
+  offset: 0, 0
+  index: -1

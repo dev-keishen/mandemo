@@ -1,0 +1,55 @@
+
+skeleton.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+BẦU CUA
+  rotate: false
+  xy: 772, 423
+  size: 220, 87
+  orig: 220, 87
+  offset: 0, 0
+  index: -1
+Group 1
+  rotate: false
+  xy: 2, 2
+  size: 116, 135
+  orig: 116, 135
+  offset: 0, 0
+  index: -1
+Group 2
+  rotate: false
+  xy: 567, 180
+  size: 126, 120
+  orig: 126, 120
+  offset: 0, 0
+  index: -1
+Group 3
+  rotate: false
+  xy: 120, 39
+  size: 106, 98
+  orig: 106, 98
+  offset: 0, 0
+  index: -1
+Group 4
+  rotate: false
+  xy: 2, 139
+  size: 281, 371
+  orig: 281, 371
+  offset: 0, 0
+  index: -1
+Layer 1 copy 2
+  rotate: false
+  xy: 567, 302
+  size: 203, 208
+  orig: 203, 208
+  offset: 0, 0
+  index: -1
+borderTAIXIU
+  rotate: false
+  xy: 285, 140
+  size: 280, 370
+  orig: 280, 370
+  offset: 0, 0
+  index: -1

@@ -1,0 +1,27 @@
+
+Mini icon.png
+size: 324,88
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Man
+  rotate: false
+  xy: 2, 19
+  size: 121, 64
+  orig: 121, 64
+  offset: 0, 0
+  index: -1
+Slots
+  rotate: false
+  xy: 219, 41
+  size: 103, 42
+  orig: 103, 42
+  offset: 0, 0
+  index: -1
+glove
+  rotate: false
+  xy: 125, 2
+  size: 92, 81
+  orig: 92, 81
+  offset: 0, 0
+  index: -1

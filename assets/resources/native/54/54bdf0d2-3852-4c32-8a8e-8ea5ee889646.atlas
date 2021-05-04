@@ -1,0 +1,27 @@
+
+Wild.png
+size: 128,280
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+WILD
+  rotate: false
+  xy: 2, 218
+  size: 110, 59
+  orig: 110, 59
+  offset: 0, 0
+  index: -1
+car
+  rotate: true
+  xy: 2, 2
+  size: 130, 99
+  orig: 130, 99
+  offset: 0, 0
+  index: -1
+flag
+  rotate: false
+  xy: 2, 134
+  size: 122, 82
+  orig: 122, 82
+  offset: 0, 0
+  index: -1

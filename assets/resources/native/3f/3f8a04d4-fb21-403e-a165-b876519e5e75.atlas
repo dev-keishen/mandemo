@@ -1,0 +1,20 @@
+
+skeleton.png
+size: 512,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+caidat_button
+  rotate: false
+  xy: 2, 2
+  size: 89, 88
+  orig: 89, 88
+  offset: 0, 0
+  index: -1
+rou_small
+  rotate: false
+  xy: 2, 92
+  size: 333, 333
+  orig: 333, 333
+  offset: 0, 0
+  index: -1

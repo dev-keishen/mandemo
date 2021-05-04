@@ -1,0 +1,76 @@
+
+BIG WIN.png
+size: 692,156
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+!
+  rotate: true
+  xy: 417, 4
+  size: 46, 81
+  orig: 46, 81
+  offset: 0, 0
+  index: -1
+B
+  rotate: true
+  xy: 494, 66
+  size: 88, 104
+  orig: 88, 104
+  offset: 0, 0
+  index: -1
+G
+  rotate: true
+  xy: 377, 52
+  size: 102, 115
+  orig: 102, 115
+  offset: 0, 0
+  index: -1
+I
+  rotate: true
+  xy: 334, 8
+  size: 37, 81
+  orig: 37, 81
+  offset: 0, 0
+  index: -1
+Ib
+  rotate: true
+  xy: 214, 2
+  size: 43, 118
+  orig: 43, 118
+  offset: 0, 0
+  index: -1
+car
+  rotate: false
+  xy: 2, 13
+  size: 210, 141
+  orig: 210, 141
+  offset: 0, 0
+  index: -1
+glade
+  rotate: false
+  xy: 500, 33
+  size: 19, 31
+  orig: 19, 31
+  offset: 0, 0
+  index: -1
+n
+  rotate: true
+  xy: 600, 15
+  size: 63, 81
+  orig: 63, 81
+  offset: 0, 0
+  index: -1
+smoke
+  rotate: false
+  xy: 214, 47
+  size: 161, 107
+  orig: 161, 107
+  offset: 0, 0
+  index: -1
+w
+  rotate: true
+  xy: 600, 80
+  size: 74, 88
+  orig: 74, 88
+  offset: 0, 0
+  index: -1

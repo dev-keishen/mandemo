@@ -1,0 +1,34 @@
+
+Thong.png
+size: 144,144
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+heart1
+  rotate: false
+  xy: 2, 2
+  size: 28, 26
+  orig: 28, 26
+  offset: 0, 0
+  index: -1
+heart2
+  rotate: false
+  xy: 61, 12
+  size: 17, 16
+  orig: 17, 16
+  offset: 0, 0
+  index: -1
+heart3
+  rotate: false
+  xy: 32, 2
+  size: 27, 26
+  orig: 27, 26
+  offset: 0, 0
+  index: -1
+pantry
+  rotate: false
+  xy: 2, 30
+  size: 139, 112
+  orig: 139, 112
+  offset: 0, 0
+  index: -1

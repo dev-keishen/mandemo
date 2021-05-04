@@ -1,0 +1,20 @@
+
+Dices.png
+size: 208,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+D1
+  rotate: false
+  xy: 105, 5
+  size: 101, 118
+  orig: 101, 118
+  offset: 0, 0
+  index: -1
+D2
+  rotate: false
+  xy: 2, 2
+  size: 101, 121
+  orig: 101, 121
+  offset: 0, 0
+  index: -1
