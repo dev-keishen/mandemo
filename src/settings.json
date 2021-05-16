@@ -5,7 +5,7 @@
         "height": 720,
         "policy": 4
     },
-    "platform": "web-desktop",
+    "platform": "web-mobile",
     "bundleVers": {},
     "subpackages": [],
     "remoteBundles": [],
@@ -55,5 +55,6 @@
     },
     "scriptPackages": [
         "./src/chunks/bundle.js"
-    ]
+    ],
+    "orientation": "landscape"
 }
