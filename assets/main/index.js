@@ -1157,7 +1157,6 @@ System.register("chunks:///_virtual/MiniGameNodeController.ts", ['./_rollupPlugi
                 var _LoadingView$getInsta;
 
                 (_LoadingView$getInsta = LoadingView.getInstance()) === null || _LoadingView$getInsta === void 0 ? void 0 : _LoadingView$getInsta.hide();
-                GamePlayManager.STATE = NETWORK_STATE.UNLOGGED_IN;
                 LobbyViewController.getInstance().onLoggedOut();
                 break;
               }
@@ -2001,7 +2000,9 @@ System.register("chunks:///_virtual/KimCuongGameView.ts", ['./_rollupPluginModLo
           this.btn_chips.forEach(function (chip, index) {
             var ind = index;
             chip.node.on("click", function () {
-              if (!_this2.kimCuong_SlotMachineCmp.isStopped()) {
+              var _this2$tog_auto;
+
+              if (!_this2.kimCuong_SlotMachineCmp.isStopped() || ((_this2$tog_auto = _this2.tog_auto) === null || _this2$tog_auto === void 0 ? void 0 : _this2$tog_auto.isChecked)) {
                 NotiView.getInstance().showMessage("Đang Quay", _this2.node, GlobalVariables.TRUNGPS);
                 return;
               }
@@ -5817,8 +5818,12 @@ System.register("chunks:///_virtual/MiniGameNetworkHandler.ts", ['./_rollupPlugi
 
           this.ws.onclose = function (event) {
             log("MiniGameNetworkHandler::WebSocket instance closed.");
-            GamePlayManager.STATE = NETWORK_STATE.UNLOGGED_IN;
-            GamePlayManager.reconnect();
+
+            if (GamePlayManager.STATE == NETWORK_STATE.LOGGED_IN) {
+              log("MiniGameNetworkHandler::reconnect");
+              GamePlayManager.STATE = NETWORK_STATE.UNLOGGED_IN;
+              GamePlayManager.reconnect();
+            }
           };
         };
 
@@ -6523,7 +6528,9 @@ System.register("chunks:///_virtual/MiniPokerGameView.ts", ['./_rollupPluginModL
           this.btn_chips.forEach(function (chip, index) {
             var ind = index;
             chip.node.on("click", function () {
-              if (!_this2.miniPoker_SlotMachineCmp.isStopped()) {
+              var _this2$tog_auto;
+
+              if (!_this2.miniPoker_SlotMachineCmp.isStopped() || ((_this2$tog_auto = _this2.tog_auto) === null || _this2$tog_auto === void 0 ? void 0 : _this2$tog_auto.isChecked)) {
                 NotiView.getInstance().showMessage("Đang Quay", _this2.node, GlobalVariables.MINIPOKER);
                 return;
               }
@@ -8184,7 +8191,7 @@ System.register("chunks:///_virtual/LobbyViewController.ts", ['./_rollupPluginMo
 
       var ccclass = _decorator.ccclass,
           property = _decorator.property;
-      var LobbyViewController = exports('LobbyViewController', (_dec = ccclass('LobbyViewController'), _dec2 = property(Button), _dec3 = property(Button), _dec4 = property(Button), _dec5 = property(Button), _dec6 = property(Button), _dec7 = property(Button), _dec8 = property(Button), _dec9 = property(sp.Skeleton), _dec10 = property(sp.Skeleton), _dec11 = property(UITransform), _dec12 = property(UIOpacity), _dec13 = property(Label), _dec14 = property(Label), _dec15 = property(Label), _dec16 = property(Label), _dec17 = property(Sprite), _dec18 = property(SpriteFrame), _dec19 = property(FloatStringCmp), _dec(_class = (_class2 = (_temp = _class3 = /*#__PURE__*/function (_BaseFullScreenGameVi) {
+      var LobbyViewController = exports('LobbyViewController', (_dec = ccclass('LobbyViewController'), _dec2 = property(Button), _dec3 = property(Button), _dec4 = property(Button), _dec5 = property(Button), _dec6 = property(Button), _dec7 = property(Button), _dec8 = property(Button), _dec9 = property(sp.Skeleton), _dec10 = property(sp.Skeleton), _dec11 = property(UITransform), _dec12 = property(UIOpacity), _dec13 = property(Label), _dec14 = property(Label), _dec15 = property(Label), _dec16 = property(Sprite), _dec17 = property(SpriteFrame), _dec18 = property(FloatStringCmp), _dec19 = property(Label), _dec(_class = (_class2 = (_temp = _class3 = /*#__PURE__*/function (_BaseFullScreenGameVi) {
         _inheritsLoose(LobbyViewController, _BaseFullScreenGameVi);
 
         function LobbyViewController() {
@@ -8222,15 +8229,15 @@ System.register("chunks:///_virtual/LobbyViewController.ts", ['./_rollupPluginMo
 
           _initializerDefineProperty(_assertThisInitialized(_this), "lbl_news", _descriptor13, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "lb_tien", _descriptor14, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "lb_name", _descriptor14, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "lb_name", _descriptor15, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "spr_avatar", _descriptor15, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "spr_avatar", _descriptor16, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "spr_frame_AvatarDefault", _descriptor16, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "spr_frame_AvatarDefault", _descriptor17, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "floating_message", _descriptor17, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "floating_message", _descriptor18, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "lb_tien", _descriptor18, _assertThisInitialized(_this));
 
           _defineProperty(_assertThisInitialized(_this), "news", []);
 
@@ -8251,6 +8258,10 @@ System.register("chunks:///_virtual/LobbyViewController.ts", ['./_rollupPluginMo
           return this.spr_avatar.spriteFrame;
         };
 
+        _proto.handleRefreshMoney = function handleRefreshMoney(money) {
+          this.lb_tien.string = StringUtils.formatNumber(money);
+        };
+
         _proto.onLoad = function onLoad() {
           var _this$btn_login,
               _this$btn_register,
@@ -8259,6 +8270,8 @@ System.register("chunks:///_virtual/LobbyViewController.ts", ['./_rollupPluginMo
               _this$btn_profiles,
               _this2 = this,
               _this$btn_menu;
+
+          _BaseFullScreenGameVi.prototype.onLoad.call(this);
 
           LobbyViewController.instance = this;
           this.currentGameView = this;
@@ -8296,9 +8309,6 @@ System.register("chunks:///_virtual/LobbyViewController.ts", ['./_rollupPluginMo
           });
           systemEvent.on(ProfilesPopup.CHANGE_AVATAR, function (spriteFrame) {
             _this2.changeAvatar(spriteFrame);
-          });
-          systemEvent.on(LobbyViewController.REFRESH_MONEY, function () {
-            _this2.lb_tien.string = StringUtils.formatNumber(GameConfigManager.gold);
           });
           game.on(Game.EVENT_SHOW, function () {
             var timeInterupted = (director.getCurrentTime() - _this2.time) / 1000;
@@ -8680,7 +8690,8 @@ System.register("chunks:///_virtual/LobbyViewController.ts", ['./_rollupPluginMo
                   var chip = as["chip"];
                   var goldSafe = as["safe"];
                   GameConfigManager.gold = gold;
-                  systemEvent.emit(LobbyViewController.REFRESH_MONEY);
+                  console.log("refresh money");
+                  systemEvent.emit(LobbyViewController.REFRESH_MONEY, GameConfigManager.gold);
                 } else if (cmd == GLOBAL_MESSAGE.GET_JACKPOTS) {
                   var jars = dict["Js"]; // let amounts : number[] = jars.map(j => j["ba"]);
                   // systemEvent.emit(SlotGameItemView.UPDATE_JACKPOT_EVENT_KEY.replace("%gameID", GlobalVariables.TRUNGPS.toString()),amounts);
@@ -9105,35 +9116,35 @@ System.register("chunks:///_virtual/LobbyViewController.ts", ['./_rollupPluginMo
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor14 = _applyDecoratedDescriptor(_class2.prototype, "lb_tien", [_dec15], {
+      }), _descriptor14 = _applyDecoratedDescriptor(_class2.prototype, "lb_name", [_dec15], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor15 = _applyDecoratedDescriptor(_class2.prototype, "lb_name", [_dec16], {
+      }), _descriptor15 = _applyDecoratedDescriptor(_class2.prototype, "spr_avatar", [_dec16], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor16 = _applyDecoratedDescriptor(_class2.prototype, "spr_avatar", [_dec17], {
+      }), _descriptor16 = _applyDecoratedDescriptor(_class2.prototype, "spr_frame_AvatarDefault", [_dec17], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor17 = _applyDecoratedDescriptor(_class2.prototype, "spr_frame_AvatarDefault", [_dec18], {
+      }), _descriptor17 = _applyDecoratedDescriptor(_class2.prototype, "floating_message", [_dec18], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor18 = _applyDecoratedDescriptor(_class2.prototype, "floating_message", [_dec19], {
+      }), _descriptor18 = _applyDecoratedDescriptor(_class2.prototype, "lb_tien", [_dec19], {
         configurable: true,
         enumerable: true,
         writable: true,
@@ -13200,8 +13211,12 @@ System.register("chunks:///_virtual/GameNetworkHandler.ts", ['./_rollupPluginMod
 
           this.ws.onclose = function (event) {
             log("GameNetworkHandler::WebSocket instance closed.");
-            GamePlayManager.STATE = NETWORK_STATE.UNLOGGED_IN;
-            GamePlayManager.reconnect();
+
+            if (GamePlayManager.STATE == NETWORK_STATE.LOGGED_IN) {
+              log("GameNetworkHandler::reconnect");
+              GamePlayManager.STATE = NETWORK_STATE.UNLOGGED_IN;
+              GamePlayManager.reconnect();
+            }
           };
         };
 
@@ -16994,10 +17009,10 @@ System.register("chunks:///_virtual/MauBinh_CardLib.ts", ['./_rollupPluginModLoB
   };
 });
 
-System.register("chunks:///_virtual/GamePlayManager.ts", ['./_rollupPluginModLoBabelHelpers.js', 'cc', './GameConfigManager.ts', './MiniGameNetworkHandler.ts', './GlobalVariables.ts', './LoadingView.ts', './GameNetworkHandler.ts', './LobbyViewController.ts', './CCMiniGameRoot.ts'], function (exports) {
+System.register("chunks:///_virtual/GamePlayManager.ts", ['./_rollupPluginModLoBabelHelpers.js', 'cc', './GameConfigManager.ts', './NotiView.ts', './MiniGameNetworkHandler.ts', './GlobalVariables.ts', './LoadingView.ts', './GameNetworkHandler.ts', './LobbyViewController.ts', './CCMiniGameRoot.ts'], function (exports) {
   'use strict';
 
-  var _defineProperty, cclegacy, _decorator, log, GameConfigManager, MessageRequest, MessageResponse, GLOBAL_MESSAGE, LoadingView, GameNetworkHandler, LobbyViewController, CCMiniGameRoot;
+  var _defineProperty, cclegacy, _decorator, log, GameConfigManager, NotiView, MessageRequest, MessageResponse, GLOBAL_MESSAGE, LoadingView, GameNetworkHandler, LobbyViewController, CCMiniGameRoot;
 
   return {
     setters: [function (module) {
@@ -17008,6 +17023,8 @@ System.register("chunks:///_virtual/GamePlayManager.ts", ['./_rollupPluginModLoB
       log = module.log;
     }, function (module) {
       GameConfigManager = module.GameConfigManager;
+    }, function (module) {
+      NotiView = module.default;
     }, function (module) {
       MessageRequest = module.MessageRequest;
       MessageResponse = module.MessageResponse;
@@ -17141,6 +17158,19 @@ System.register("chunks:///_virtual/GamePlayManager.ts", ['./_rollupPluginModLoB
               {
                 var _CCMiniGameRoot$getIn2;
 
+                var logOutCode = message[2];
+                var mesDialog = "";
+                if (logOutCode == 1) ;else if (logOutCode == 2) {
+                  mesDialog = "Bạn bị mời ra khỏi hệ thống!";
+                } else if (logOutCode == 4) {
+                  mesDialog = "Bạn đã đăng nhập trên thiết bị khác!";
+                }
+
+                if (mesDialog.length > 0) {
+                  NotiView.getInstance().showMessage(mesDialog);
+                }
+
+                GamePlayManager.STATE = NETWORK_STATE.UNLOGGED_IN;
                 (_CCMiniGameRoot$getIn2 = CCMiniGameRoot.getInstance()) === null || _CCMiniGameRoot$getIn2 === void 0 ? void 0 : _CCMiniGameRoot$getIn2.logout();
                 break;
               }
@@ -21688,10 +21718,10 @@ System.register("chunks:///_virtual/CCSpriteFrameLoader.ts", ['./_rollupPluginMo
   };
 });
 
-System.register("chunks:///_virtual/BauCuaFullScreenGameView.ts", ['./_rollupPluginModLoBabelHelpers.js', 'cc', './GameConfigManager.ts', './JackpotItemView.ts', './NotiView.ts', './MiniGameNetworkHandler.ts', './GameUtils.ts', './GlobalVariables.ts', './BaseFullScreenGameView.ts', './ChipPanel.ts', './BauCuaBetEntry.ts', './BauCuaSettingPopup.ts', './ChipPooling.ts', './PlayerView.ts', './SoiCauPopup.ts', './UserChatPopup.ts', './UserOnlinePopup.ts', './MiniGameNodeController.ts'], function (exports) {
+System.register("chunks:///_virtual/BauCuaFullScreenGameView.ts", ['./_rollupPluginModLoBabelHelpers.js', 'cc', './GameConfigManager.ts', './JackpotItemView.ts', './NotiView.ts', './MiniGameNetworkHandler.ts', './GameUtils.ts', './GlobalVariables.ts', './BaseFullScreenGameView.ts', './ChipPanel.ts', './BauCuaBetEntry.ts', './BauCuaSettingPopup.ts', './ChipPooling.ts', './PlayerView.ts', './SoiCauPopup.ts', './UserChatPopup.ts', './UserOnlinePopup.ts', './LobbyViewController.ts', './MiniGameNodeController.ts'], function (exports) {
   'use strict';
 
-  var _defineProperty, _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, cclegacy, _decorator, sp, Label, Button, UITransform, Sprite, SpriteFrame, Vec3, Tween, tween, GameConfigManager, JackpotItemView, NotiView, MessageResponse, GameUtils, GlobalVariables, GLOBAL_MESSAGE, BaseFullScreenGameView, ChipPanel, BauCuaBetEntry, BauCuaSettingPopup, ChipPooling, PlayerView, SoiCauPopup, UserChatPopup, UserOnlinePopup, MiniGameNodeController;
+  var _defineProperty, _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, cclegacy, _decorator, sp, Label, Button, UITransform, Sprite, SpriteFrame, Vec3, systemEvent, Tween, tween, GameConfigManager, JackpotItemView, NotiView, MessageResponse, GameUtils, GlobalVariables, GLOBAL_MESSAGE, BaseFullScreenGameView, ChipPanel, BauCuaBetEntry, BauCuaSettingPopup, ChipPooling, PlayerView, SoiCauPopup, UserChatPopup, UserOnlinePopup, LobbyViewController, MiniGameNodeController;
 
   return {
     setters: [function (module) {
@@ -21710,6 +21740,7 @@ System.register("chunks:///_virtual/BauCuaFullScreenGameView.ts", ['./_rollupPlu
       Sprite = module.Sprite;
       SpriteFrame = module.SpriteFrame;
       Vec3 = module.Vec3;
+      systemEvent = module.systemEvent;
       Tween = module.Tween;
       tween = module.tween;
     }, function (module) {
@@ -21743,6 +21774,8 @@ System.register("chunks:///_virtual/BauCuaFullScreenGameView.ts", ['./_rollupPlu
       UserChatPopup = module.UserChatPopup;
     }, function (module) {
       UserOnlinePopup = module.UserOnlinePopup;
+    }, function (module) {
+      LobbyViewController = module.LobbyViewController;
     }, function (module) {
       MiniGameNodeController = module.default;
     }],
@@ -21864,6 +21897,8 @@ System.register("chunks:///_virtual/BauCuaFullScreenGameView.ts", ['./_rollupPlu
               _this$btn_soicau,
               _this$btn_exit;
 
+          _BaseFullScreenGameVi.prototype.onLoad.call(this);
+
           this.dice_result_origin_pos = new Vec3(this.dice_result_node.node.position);
           BauCuaFullScreenGameView.instance = this;
           this.gameID = GlobalVariables.BAU_CUA_FULL;
@@ -21888,6 +21923,24 @@ System.register("chunks:///_virtual/BauCuaFullScreenGameView.ts", ['./_rollupPlu
 
             (_this2$bauCuaSettingP = _this2.bauCuaSettingPopup) === null || _this2$bauCuaSettingP === void 0 ? void 0 : _this2$bauCuaSettingP.show();
           });
+        };
+
+        _proto.handleRefreshMoney = function handleRefreshMoney(money) {
+          var player = this.getPlayerByUID(GameConfigManager.uid);
+
+          if (player == null) {
+            return;
+          }
+
+          var infos = this._playerInfo.filter(function (p) {
+            return p.uid == GameConfigManager.uid;
+          });
+
+          if (infos.length > 0) {
+            infos[0].gold = money;
+          }
+
+          player.refresh();
         };
 
         _proto.handleBackGameFromInterupt = function handleBackGameFromInterupt(timeInterupted) {
@@ -21967,6 +22020,14 @@ System.register("chunks:///_virtual/BauCuaFullScreenGameView.ts", ['./_rollupPlu
 
             var _balance = dict["ba"];
             this.updateJackpotLabel(_balance); // }
+          } else if (cmd == GLOBAL_MESSAGE.REFRESH_MONEY) {
+            var as = dict["As"];
+            var vip = as["vip"];
+            var gold = as["gold"];
+            var chip = as["chip"];
+            var goldSafe = as["safe"];
+            GameConfigManager.gold = gold;
+            systemEvent.emit(LobbyViewController.REFRESH_MONEY, GameConfigManager.gold + BauCuaFullScreenGameView.KEEP_MONEY);
           } // else if (cmd == 303) {
           //     // MsgPackArray * playerArr = dict->getArray("us");
           //     // gameView->showPlayersToBeInvited(playerArr);
@@ -22665,7 +22726,7 @@ System.register("chunks:///_virtual/BauCuaFullScreenGameView.ts", ['./_rollupPlu
         };
 
         return BauCuaFullScreenGameView;
-      }(BaseFullScreenGameView), _defineProperty(_class3, "instance", null), _defineProperty(_class3, "IS_START", false), _defineProperty(_class3, "IS_END", true), _temp), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, "bauCuaBetEntries", [_dec2], {
+      }(BaseFullScreenGameView), _defineProperty(_class3, "instance", null), _defineProperty(_class3, "IS_START", false), _defineProperty(_class3, "IS_END", true), _defineProperty(_class3, "KEEP_MONEY", 50000), _temp), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, "bauCuaBetEntries", [_dec2], {
         configurable: true,
         enumerable: true,
         writable: true,
@@ -24690,7 +24751,7 @@ System.register("chunks:///_virtual/TaiXiuBetRankItemView.ts", ['./_rollupPlugin
 System.register("chunks:///_virtual/BaseFullScreenGameView.ts", ['./_rollupPluginModLoBabelHelpers.js', 'cc', './LoadingView.ts', './LobbyViewController.ts'], function (exports) {
   'use strict';
 
-  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, _defineProperty, cclegacy, _decorator, Node, UIOpacity, tween, Component, LoadingView, LobbyViewController;
+  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, _defineProperty, cclegacy, _decorator, Node, systemEvent, UIOpacity, tween, Component, LoadingView, LobbyViewController;
 
   return {
     setters: [function (module) {
@@ -24703,6 +24764,7 @@ System.register("chunks:///_virtual/BaseFullScreenGameView.ts", ['./_rollupPlugi
       cclegacy = module.cclegacy;
       _decorator = module._decorator;
       Node = module.Node;
+      systemEvent = module.systemEvent;
       UIOpacity = module.UIOpacity;
       tween = module.tween;
       Component = module.Component;
@@ -24736,10 +24798,22 @@ System.register("chunks:///_virtual/BaseFullScreenGameView.ts", ['./_rollupPlugi
 
           _defineProperty(_assertThisInitialized(_this), "gameID", -2);
 
+          _defineProperty(_assertThisInitialized(_this), "refreshMoneyCb", []);
+
           return _this;
         }
 
         var _proto = BaseFullScreenGameView.prototype;
+
+        _proto.onLoad = function onLoad() {
+          var _this2 = this;
+
+          systemEvent.on(LobbyViewController.REFRESH_MONEY, function (money) {
+            _this2.handleRefreshMoney(money);
+          });
+        };
+
+        _proto.handleRefreshMoney = function handleRefreshMoney(money) {};
 
         _proto.handleBackGameFromInterupt = function handleBackGameFromInterupt(timeInterupted) {};
 
@@ -24761,7 +24835,7 @@ System.register("chunks:///_virtual/BaseFullScreenGameView.ts", ['./_rollupPlugi
 
         _proto.show = function show(fadeTime) {
           var _this$black_screen,
-              _this2 = this;
+              _this3 = this;
 
           if (fadeTime === void 0) {
             fadeTime = 0.4;
@@ -24771,7 +24845,7 @@ System.register("chunks:///_virtual/BaseFullScreenGameView.ts", ['./_rollupPlugi
           var show = tween(fadeUI).sequence(tween().call(function () {
             fadeUI.opacity = 255;
             fadeUI.node.active = true;
-            _this2.root.active = true;
+            _this3.root.active = true;
           }), tween().to(fadeTime, {
             opacity: 0
           }), tween().call(function () {
@@ -24782,7 +24856,7 @@ System.register("chunks:///_virtual/BaseFullScreenGameView.ts", ['./_rollupPlugi
 
         _proto.hide = function hide(fadeTime) {
           var _this$black_screen2,
-              _this3 = this;
+              _this4 = this;
 
           if (fadeTime === void 0) {
             fadeTime = 0.4;
@@ -24795,7 +24869,7 @@ System.register("chunks:///_virtual/BaseFullScreenGameView.ts", ['./_rollupPlugi
           }), tween().to(fadeTime, {
             opacity: 255
           }), tween().call(function () {
-            _this3.root.active = false;
+            _this4.root.active = false;
             fadeUI.node.active = false;
           }));
           return hide;
