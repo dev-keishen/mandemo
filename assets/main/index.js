@@ -1779,7 +1779,7 @@ System.register("chunks:///_virtual/MiniGameNodeController.ts", ['./_rollupPlugi
 System.register("chunks:///_virtual/KimCuongGameView.ts", ['./_rollupPluginModLoBabelHelpers.js', 'cc', './GameConfigManager.ts', './StringUtils.ts', './NotiView.ts', './MiniGameNetworkHandler.ts', './GlobalVariables.ts', './MiniPokerMessageHandler.ts', './BaseMiniGameView.ts', './KimCuongMessageHandler.ts', './MiniGameNodeController.ts', './GamePlayManager.ts', './KimCuong_SlotMachineItemView.ts', './KimCuong_SlotMachineCmp.ts', './KimCuongBetHistoryView.ts', './KimCuongBetRankView.ts', './KimCuongNoHuView.ts', './KimCuongLineSelectionView.ts'], function (exports) {
   'use strict';
 
-  var _defineProperty, _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, cclegacy, _decorator, Label, Button, Node, sp, Toggle, sys, tween, resources, SpriteFrame, Tween, UIOpacity, Color, Vec3, GameConfigManager, StringUtils, NotiView, MessageRequest, MiniGameNetworkHandler, GlobalVariables, MiniPoker_Message, BaseMiniGameView, KimCuongMessageHandler, MiniGameNodeController, GamePlayManager, KimCuongItem, KimCuongSlotMachineCmp_SlotMachineCmp, KimCuongBetHistoryView, KimCuongBetRankView, KimCuongNoHuView, KimCuongLineSelectionView;
+  var _defineProperty, _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, cclegacy, _decorator, Label, Button, Node, sp, Toggle, SpriteFrame, sys, tween, Tween, UIOpacity, Color, Vec3, GameConfigManager, StringUtils, NotiView, MessageRequest, MiniGameNetworkHandler, GlobalVariables, MiniPoker_Message, BaseMiniGameView, KimCuongMessageHandler, MiniGameNodeController, GamePlayManager, KimCuongItem, KimCuongSlotMachineCmp_SlotMachineCmp, KimCuongBetHistoryView, KimCuongBetRankView, KimCuongNoHuView, KimCuongLineSelectionView;
 
   return {
     setters: [function (module) {
@@ -1796,10 +1796,9 @@ System.register("chunks:///_virtual/KimCuongGameView.ts", ['./_rollupPluginModLo
       Node = module.Node;
       sp = module.sp;
       Toggle = module.Toggle;
+      SpriteFrame = module.SpriteFrame;
       sys = module.sys;
       tween = module.tween;
-      resources = module.resources;
-      SpriteFrame = module.SpriteFrame;
       Tween = module.Tween;
       UIOpacity = module.UIOpacity;
       Color = module.Color;
@@ -1839,7 +1838,7 @@ System.register("chunks:///_virtual/KimCuongGameView.ts", ['./_rollupPluginModLo
       KimCuongLineSelectionView = module.default;
     }],
     execute: function () {
-      var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _dec8, _dec9, _dec10, _dec11, _dec12, _dec13, _dec14, _dec15, _dec16, _dec17, _dec18, _dec19, _dec20, _dec21, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11, _descriptor12, _descriptor13, _descriptor14, _descriptor15, _descriptor16, _descriptor17, _descriptor18, _descriptor19, _descriptor20, _class3, _temp;
+      var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _dec8, _dec9, _dec10, _dec11, _dec12, _dec13, _dec14, _dec15, _dec16, _dec17, _dec18, _dec19, _dec20, _dec21, _dec22, _dec23, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11, _descriptor12, _descriptor13, _descriptor14, _descriptor15, _descriptor16, _descriptor17, _descriptor18, _descriptor19, _descriptor20, _descriptor21, _descriptor22, _class3, _temp;
 
       cclegacy._RF.push({}, "105b5U1AshNabC9YLOR+TRc", "KimCuongGameView", undefined);
 
@@ -1854,7 +1853,7 @@ System.register("chunks:///_virtual/KimCuongGameView.ts", ['./_rollupPluginModLo
         _defineProperty(this, "bet", void 0);
       };
 
-      var KimCuongGameView = exports('default', (_dec = ccclass('KimCuongGameView'), _dec2 = property(Label), _dec3 = property(Label), _dec4 = property(KimCuongBetHistoryView), _dec5 = property(KimCuongBetRankView), _dec6 = property([Button]), _dec7 = property(Button), _dec8 = property(Button), _dec9 = property(Button), _dec10 = property(Button), _dec11 = property(Button), _dec12 = property(Node), _dec13 = property(sp.Skeleton), _dec14 = property(Label), _dec15 = property(KimCuongSlotMachineCmp_SlotMachineCmp), _dec16 = property(Toggle), _dec17 = property(Toggle), _dec18 = property(KimCuongNoHuView), _dec19 = property(KimCuongLineSelectionView), _dec20 = property(Label), _dec21 = property([sp.SkeletonData]), _dec(_class = (_class2 = (_temp = _class3 = /*#__PURE__*/function (_BaseMiniGameView) {
+      var KimCuongGameView = exports('default', (_dec = ccclass('KimCuongGameView'), _dec2 = property(Label), _dec3 = property(Label), _dec4 = property(KimCuongBetHistoryView), _dec5 = property(KimCuongBetRankView), _dec6 = property([Button]), _dec7 = property(Button), _dec8 = property(Button), _dec9 = property(Button), _dec10 = property(Button), _dec11 = property(Button), _dec12 = property(Node), _dec13 = property(sp.Skeleton), _dec14 = property(Label), _dec15 = property(KimCuongSlotMachineCmp_SlotMachineCmp), _dec16 = property(Toggle), _dec17 = property(Toggle), _dec18 = property(KimCuongNoHuView), _dec19 = property(KimCuongLineSelectionView), _dec20 = property(Label), _dec21 = property([SpriteFrame]), _dec22 = property([SpriteFrame]), _dec23 = property([sp.SkeletonData]), _dec(_class = (_class2 = (_temp = _class3 = /*#__PURE__*/function (_BaseMiniGameView) {
         _inheritsLoose(KimCuongGameView, _BaseMiniGameView);
 
         function KimCuongGameView() {
@@ -1906,13 +1905,11 @@ System.register("chunks:///_virtual/KimCuongGameView.ts", ['./_rollupPluginModLo
 
           _initializerDefineProperty(_assertThisInitialized(_this), "line_num_text", _descriptor19, _assertThisInitialized(_this));
 
-          _defineProperty(_assertThisInitialized(_this), "_aid", 1);
+          _initializerDefineProperty(_assertThisInitialized(_this), "loaded_item_normal", _descriptor20, _assertThisInitialized(_this));
 
-          _defineProperty(_assertThisInitialized(_this), "loaded_item_normal", []);
+          _initializerDefineProperty(_assertThisInitialized(_this), "loaded_item_blur", _descriptor21, _assertThisInitialized(_this));
 
-          _defineProperty(_assertThisInitialized(_this), "loaded_item_blur", []);
-
-          _initializerDefineProperty(_assertThisInitialized(_this), "loaded_anim_item", _descriptor20, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "loaded_anim_item", _descriptor22, _assertThisInitialized(_this));
 
           _defineProperty(_assertThisInitialized(_this), "bet", 0);
 
@@ -1931,6 +1928,8 @@ System.register("chunks:///_virtual/KimCuongGameView.ts", ['./_rollupPluginModLo
           _defineProperty(_assertThisInitialized(_this), "moneyExchange", 0);
 
           _defineProperty(_assertThisInitialized(_this), "wonJackpot", false);
+
+          _defineProperty(_assertThisInitialized(_this), "_aid", 1);
 
           return _this;
         }
@@ -1967,7 +1966,6 @@ System.register("chunks:///_virtual/KimCuongGameView.ts", ['./_rollupPluginModLo
           _BaseMiniGameView.prototype.onLoad.call(this);
 
           KimCuongGameView.instance = this;
-          var self = this;
 
           KimCuongMessageHandler.onResultError = function (mes) {
             NotiView.getInstance().showMessage(mes, _this2.node, GlobalVariables.TRUNGPS);
@@ -2044,29 +2042,7 @@ System.register("chunks:///_virtual/KimCuongGameView.ts", ['./_rollupPluginModLo
             GamePlayManager.sendRefreshMoney();
           };
 
-          var symbols = [];
-
-          for (var i = 0; i <= 5; i++) {
-            symbols.push("cc-mini-game/kimcuong/sprites/symbol/tps_symbol_" + i);
-            symbols.push("cc-mini-game/kimcuong/sprites/symbol_blur/tps_symbol_blur_" + i);
-          }
-
-          var count = 0;
-          symbols.forEach(function (x) {
-            resources.load(x + "/spriteFrame", SpriteFrame, function (err, sf) {
-              count++;
-
-              if (sf.name.indexOf("_blur") < 0) {
-                self.loaded_item_normal.push(sf);
-              } else {
-                self.loaded_item_blur.push(sf);
-              }
-
-              if (count >= symbols.length) {
-                self.kimCuong_SlotMachineCmp.init();
-              }
-            });
-          });
+          this.kimCuong_SlotMachineCmp.init();
         };
 
         _proto.highlightBet = function highlightBet(ind) {
@@ -2509,7 +2485,21 @@ System.register("chunks:///_virtual/KimCuongGameView.ts", ['./_rollupPluginModLo
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor20 = _applyDecoratedDescriptor(_class2.prototype, "loaded_anim_item", [_dec21], {
+      }), _descriptor20 = _applyDecoratedDescriptor(_class2.prototype, "loaded_item_normal", [_dec21], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return [];
+        }
+      }), _descriptor21 = _applyDecoratedDescriptor(_class2.prototype, "loaded_item_blur", [_dec22], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return [];
+        }
+      }), _descriptor22 = _applyDecoratedDescriptor(_class2.prototype, "loaded_anim_item", [_dec23], {
         configurable: true,
         enumerable: true,
         writable: true,
@@ -4095,10 +4085,10 @@ System.register("chunks:///_virtual/MiniPoker_SlotMachineItemView.ts", ['./_roll
   };
 });
 
-System.register("chunks:///_virtual/Downloader.ts", ['./_rollupPluginModLoBabelHelpers.js', 'cc'], function (exports) {
+System.register("chunks:///_virtual/Downloader.ts", ['./_rollupPluginModLoBabelHelpers.js', 'cc', './LobbyViewController.ts'], function (exports) {
   'use strict';
 
-  var _defineProperty, cclegacy, _decorator, resources, SpriteFrame;
+  var _defineProperty, cclegacy, _decorator, LobbyViewController;
 
   return {
     setters: [function (module) {
@@ -4106,8 +4096,8 @@ System.register("chunks:///_virtual/Downloader.ts", ['./_rollupPluginModLoBabelH
     }, function (module) {
       cclegacy = module.cclegacy;
       _decorator = module._decorator;
-      resources = module.resources;
-      SpriteFrame = module.SpriteFrame;
+    }, function (module) {
+      LobbyViewController = module.LobbyViewController;
     }],
     execute: function () {
       cclegacy._RF.push({}, "1d8859GvwFEDL6Gr0cL0Ypp", "Downloader", undefined);
@@ -4435,14 +4425,14 @@ System.register("chunks:///_virtual/Downloader.ts", ['./_rollupPluginModLoBabelH
         };
 
         Downloader.loadRemoteSpriteFrame = function loadRemoteSpriteFrame(url, onCompleted) {
+          var _LobbyViewController$;
+
           var split = url.split("/");
           var avatarName = split[split.length - 1];
-          var localPath = "lobby/sprites/avatar/" + avatarName.substr(0, avatarName.length - 4) + "/spriteFrame";
-          resources.load(localPath, SpriteFrame, function (err, spriteFrame) {
-            if (err == undefined) {
-              onCompleted(spriteFrame);
-            }
-          }); // assetManager.loadRemote(GameConfigManager.avaURL,(err,imageAsset : ImageAsset) => {
+          var avatars = (_LobbyViewController$ = LobbyViewController.getInstance()) === null || _LobbyViewController$ === void 0 ? void 0 : _LobbyViewController$.sprFrame_avatars.filter(function (a) {
+            return avatarName.indexOf(a.name) >= 0;
+          });
+          onCompleted((avatars === null || avatars === void 0 ? void 0 : avatars.length) > 0 ? avatars[0] : null); // assetManager.loadRemote(GameConfigManager.avaURL,(err,imageAsset : ImageAsset) => {
           //     if(err == null) {
           //         let spriteFrame = new SpriteFrame();
           //         let texture = new Texture2D();
@@ -6314,7 +6304,7 @@ System.register("chunks:///_virtual/MiniPokerBetRankView.ts", ['./_rollupPluginM
 System.register("chunks:///_virtual/MiniPokerGameView.ts", ['./_rollupPluginModLoBabelHelpers.js', 'cc', './GameConfigManager.ts', './StringUtils.ts', './NotiView.ts', './MiniGameNetworkHandler.ts', './GlobalVariables.ts', './MiniPokerMessageHandler.ts', './MauBinh_CardLib.ts', './BaseMiniGameView.ts', './MiniPokerBetHistoryView.ts', './MiniPokerBetRankView.ts', './MiniPokerNoHuView.ts', './MiniPoker_SlotMachineCmp.ts', './MiniGameNodeController.ts', './GamePlayManager.ts'], function (exports) {
   'use strict';
 
-  var _defineProperty, _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, cclegacy, _decorator, Label, Button, Node, sp, Toggle, sys, tween, resources, SpriteFrame, Tween, UIOpacity, Vec3, Color, GameConfigManager, StringUtils, NotiView, MessageRequest, MiniGameNetworkHandler, GlobalVariables, MiniPokerMessageHandler, MiniPoker_Message, MauBinh_CardLib, MAU_BINH_RESULT, GameCard, BaseMiniGameView, MiniPokerBetHistoryView, MiniPokerBetRankView, MiniPokerNoHuView, MiniPokerSlotMachineCmp_SlotMachineCmp, MiniGameNodeController, GamePlayManager;
+  var _defineProperty, _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, cclegacy, _decorator, Label, Button, Node, sp, Toggle, SpriteFrame, sys, tween, Tween, UIOpacity, Vec3, Color, GameConfigManager, StringUtils, NotiView, MessageRequest, MiniGameNetworkHandler, GlobalVariables, MiniPokerMessageHandler, MiniPoker_Message, MauBinh_CardLib, MAU_BINH_RESULT, GameCard, BaseMiniGameView, MiniPokerBetHistoryView, MiniPokerBetRankView, MiniPokerNoHuView, MiniPokerSlotMachineCmp_SlotMachineCmp, MiniGameNodeController, GamePlayManager;
 
   return {
     setters: [function (module) {
@@ -6331,10 +6321,9 @@ System.register("chunks:///_virtual/MiniPokerGameView.ts", ['./_rollupPluginModL
       Node = module.Node;
       sp = module.sp;
       Toggle = module.Toggle;
+      SpriteFrame = module.SpriteFrame;
       sys = module.sys;
       tween = module.tween;
-      resources = module.resources;
-      SpriteFrame = module.SpriteFrame;
       Tween = module.Tween;
       UIOpacity = module.UIOpacity;
       Vec3 = module.Vec3;
@@ -6373,7 +6362,7 @@ System.register("chunks:///_virtual/MiniPokerGameView.ts", ['./_rollupPluginModL
       GamePlayManager = module.GamePlayManager;
     }],
     execute: function () {
-      var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _dec8, _dec9, _dec10, _dec11, _dec12, _dec13, _dec14, _dec15, _dec16, _dec17, _dec18, _dec19, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11, _descriptor12, _descriptor13, _descriptor14, _descriptor15, _descriptor16, _descriptor17, _descriptor18, _class3, _temp;
+      var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _dec8, _dec9, _dec10, _dec11, _dec12, _dec13, _dec14, _dec15, _dec16, _dec17, _dec18, _dec19, _dec20, _dec21, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11, _descriptor12, _descriptor13, _descriptor14, _descriptor15, _descriptor16, _descriptor17, _descriptor18, _descriptor19, _descriptor20, _class3, _temp;
 
       cclegacy._RF.push({}, "29658cf5wRFxp/x7Wny4LCJ", "MiniPokerGameView", undefined);
 
@@ -6388,7 +6377,7 @@ System.register("chunks:///_virtual/MiniPokerGameView.ts", ['./_rollupPluginModL
         _defineProperty(this, "bet", void 0);
       };
 
-      var MiniPokerGameView = exports('default', (_dec = ccclass('MiniPokerGameView'), _dec2 = property(Label), _dec3 = property(MiniPokerBetHistoryView), _dec4 = property(MiniPokerBetRankView), _dec5 = property([Button]), _dec6 = property(Button), _dec7 = property(Button), _dec8 = property(Button), _dec9 = property(Button), _dec10 = property(Button), _dec11 = property(Node), _dec12 = property(sp.Skeleton), _dec13 = property(Label), _dec14 = property(Label), _dec15 = property(MiniPokerSlotMachineCmp_SlotMachineCmp), _dec16 = property(sp.Skeleton), _dec17 = property(Toggle), _dec18 = property(Toggle), _dec19 = property(MiniPokerNoHuView), _dec(_class = (_class2 = (_temp = _class3 = /*#__PURE__*/function (_BaseMiniGameView) {
+      var MiniPokerGameView = exports('default', (_dec = ccclass('MiniPokerGameView'), _dec2 = property(Label), _dec3 = property(MiniPokerBetHistoryView), _dec4 = property(MiniPokerBetRankView), _dec5 = property([Button]), _dec6 = property(Button), _dec7 = property(Button), _dec8 = property(Button), _dec9 = property(Button), _dec10 = property(Button), _dec11 = property(Node), _dec12 = property(sp.Skeleton), _dec13 = property(Label), _dec14 = property(Label), _dec15 = property(MiniPokerSlotMachineCmp_SlotMachineCmp), _dec16 = property(sp.Skeleton), _dec17 = property(Toggle), _dec18 = property(Toggle), _dec19 = property(MiniPokerNoHuView), _dec20 = property([SpriteFrame]), _dec21 = property([SpriteFrame]), _dec(_class = (_class2 = (_temp = _class3 = /*#__PURE__*/function (_BaseMiniGameView) {
         _inheritsLoose(MiniPokerGameView, _BaseMiniGameView);
 
         function MiniPokerGameView() {
@@ -6438,11 +6427,11 @@ System.register("chunks:///_virtual/MiniPokerGameView.ts", ['./_rollupPluginModL
 
           _initializerDefineProperty(_assertThisInitialized(_this), "miniPokerNoHuView", _descriptor18, _assertThisInitialized(_this));
 
+          _initializerDefineProperty(_assertThisInitialized(_this), "loaded_card_normal", _descriptor19, _assertThisInitialized(_this));
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "loaded_card_blur", _descriptor20, _assertThisInitialized(_this));
+
           _defineProperty(_assertThisInitialized(_this), "_aid", 1);
-
-          _defineProperty(_assertThisInitialized(_this), "loaded_card_normal", []);
-
-          _defineProperty(_assertThisInitialized(_this), "loaded_card_blur", []);
 
           _defineProperty(_assertThisInitialized(_this), "bet", 0);
 
@@ -6485,8 +6474,6 @@ System.register("chunks:///_virtual/MiniPokerGameView.ts", ['./_rollupPluginModL
 
         _proto.onLoad = function onLoad() {
           var _this2 = this;
-
-          var self = this;
 
           _BaseMiniGameView.prototype.onLoad.call(this);
 
@@ -6568,35 +6555,7 @@ System.register("chunks:///_virtual/MiniPokerGameView.ts", ['./_rollupPluginModL
             GamePlayManager.sendRefreshMoney();
           };
 
-          var card_asset_path = [];
-
-          for (var i = 1; i <= 13; i++) {
-            card_asset_path.push("cc-mini-game/minipoker/sprites/card/Card_" + i + "C");
-            card_asset_path.push("cc-mini-game/minipoker/sprites/card/Card_" + i + "T");
-            card_asset_path.push("cc-mini-game/minipoker/sprites/card/Card_" + i + "R");
-            card_asset_path.push("cc-mini-game/minipoker/sprites/card/Card_" + i + "B");
-            card_asset_path.push("cc-mini-game/minipoker/sprites/cardblur/Card_" + i + "C_blur");
-            card_asset_path.push("cc-mini-game/minipoker/sprites/cardblur/Card_" + i + "T_blur");
-            card_asset_path.push("cc-mini-game/minipoker/sprites/cardblur/Card_" + i + "R_blur");
-            card_asset_path.push("cc-mini-game/minipoker/sprites/cardblur/Card_" + i + "B_blur");
-          }
-
-          var count = 0;
-          card_asset_path.forEach(function (x) {
-            resources.load(x + "/spriteFrame", SpriteFrame, function (err, sf) {
-              count++;
-
-              if (sf.name.indexOf("_blur") < 0) {
-                self.loaded_card_normal.push(sf);
-              } else {
-                self.loaded_card_blur.push(sf);
-              }
-
-              if (count >= card_asset_path.length) {
-                self.miniPoker_SlotMachineCmp.init();
-              }
-            });
-          });
+          this.miniPoker_SlotMachineCmp.init();
         };
 
         _proto.highlightBet = function highlightBet(ind) {
@@ -6993,6 +6952,20 @@ System.register("chunks:///_virtual/MiniPokerGameView.ts", ['./_rollupPluginModL
         writable: true,
         initializer: function initializer() {
           return null;
+        }
+      }), _descriptor19 = _applyDecoratedDescriptor(_class2.prototype, "loaded_card_normal", [_dec20], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return [];
+        }
+      }), _descriptor20 = _applyDecoratedDescriptor(_class2.prototype, "loaded_card_blur", [_dec21], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return [];
         }
       })), _class2)) || _class));
       /**
@@ -8185,13 +8158,13 @@ System.register("chunks:///_virtual/LobbyViewController.ts", ['./_rollupPluginMo
       NETWORK_STATE = module.NETWORK_STATE;
     }],
     execute: function () {
-      var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _dec8, _dec9, _dec10, _dec11, _dec12, _dec13, _dec14, _dec15, _dec16, _dec17, _dec18, _dec19, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11, _descriptor12, _descriptor13, _descriptor14, _descriptor15, _descriptor16, _descriptor17, _descriptor18, _class3, _temp;
+      var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _dec8, _dec9, _dec10, _dec11, _dec12, _dec13, _dec14, _dec15, _dec16, _dec17, _dec18, _dec19, _dec20, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11, _descriptor12, _descriptor13, _descriptor14, _descriptor15, _descriptor16, _descriptor17, _descriptor18, _descriptor19, _class3, _temp;
 
       cclegacy._RF.push({}, "2fe45yrM+FOMJreDKza1LMJ", "LobbyViewController", undefined);
 
       var ccclass = _decorator.ccclass,
           property = _decorator.property;
-      var LobbyViewController = exports('LobbyViewController', (_dec = ccclass('LobbyViewController'), _dec2 = property(Button), _dec3 = property(Button), _dec4 = property(Button), _dec5 = property(Button), _dec6 = property(Button), _dec7 = property(Button), _dec8 = property(Button), _dec9 = property(sp.Skeleton), _dec10 = property(sp.Skeleton), _dec11 = property(UITransform), _dec12 = property(UIOpacity), _dec13 = property(Label), _dec14 = property(Label), _dec15 = property(Label), _dec16 = property(Sprite), _dec17 = property(SpriteFrame), _dec18 = property(FloatStringCmp), _dec19 = property(Label), _dec(_class = (_class2 = (_temp = _class3 = /*#__PURE__*/function (_BaseFullScreenGameVi) {
+      var LobbyViewController = exports('LobbyViewController', (_dec = ccclass('LobbyViewController'), _dec2 = property(Button), _dec3 = property(Button), _dec4 = property(Button), _dec5 = property(Button), _dec6 = property(Button), _dec7 = property(Button), _dec8 = property(Button), _dec9 = property(sp.Skeleton), _dec10 = property(sp.Skeleton), _dec11 = property(UITransform), _dec12 = property(UIOpacity), _dec13 = property(Label), _dec14 = property(Label), _dec15 = property(Label), _dec16 = property(Sprite), _dec17 = property(SpriteFrame), _dec18 = property(FloatStringCmp), _dec19 = property(Label), _dec20 = property([SpriteFrame]), _dec(_class = (_class2 = (_temp = _class3 = /*#__PURE__*/function (_BaseFullScreenGameVi) {
         _inheritsLoose(LobbyViewController, _BaseFullScreenGameVi);
 
         function LobbyViewController() {
@@ -8238,6 +8211,8 @@ System.register("chunks:///_virtual/LobbyViewController.ts", ['./_rollupPluginMo
           _initializerDefineProperty(_assertThisInitialized(_this), "floating_message", _descriptor17, _assertThisInitialized(_this));
 
           _initializerDefineProperty(_assertThisInitialized(_this), "lb_tien", _descriptor18, _assertThisInitialized(_this));
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "sprFrame_avatars", _descriptor19, _assertThisInitialized(_this));
 
           _defineProperty(_assertThisInitialized(_this), "news", []);
 
@@ -9150,6 +9125,13 @@ System.register("chunks:///_virtual/LobbyViewController.ts", ['./_rollupPluginMo
         writable: true,
         initializer: function initializer() {
           return null;
+        }
+      }), _descriptor19 = _applyDecoratedDescriptor(_class2.prototype, "sprFrame_avatars", [_dec20], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return [];
         }
       })), _class2)) || _class));
       /**
