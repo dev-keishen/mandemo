@@ -17657,7 +17657,7 @@ System.register("chunks:///_virtual/BauCuaSettingPopup.ts", ['./_rollupPluginMod
           var savedHidechat = localStorage.getItem(BauCuaSettingPopup.SAVE_HIDE_CHAT_KEY);
 
           if (savedHidechat == null || savedHidechat == undefined) {
-            this.toggle_hideChat.isChecked = true;
+            this.toggle_hideChat.isChecked = false;
           } else {
             this.toggle_hideChat.isChecked = savedHidechat == "true" ? true : false;
           }
@@ -22665,7 +22665,7 @@ System.register("chunks:///_virtual/BauCuaFullScreenGameView.ts", ['./_rollupPlu
         };
 
         return BauCuaFullScreenGameView;
-      }(BaseFullScreenGameView), _defineProperty(_class3, "instance", null), _defineProperty(_class3, "IS_START", false), _defineProperty(_class3, "IS_END", false), _temp), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, "bauCuaBetEntries", [_dec2], {
+      }(BaseFullScreenGameView), _defineProperty(_class3, "instance", null), _defineProperty(_class3, "IS_START", false), _defineProperty(_class3, "IS_END", true), _temp), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, "bauCuaBetEntries", [_dec2], {
         configurable: true,
         enumerable: true,
         writable: true,
