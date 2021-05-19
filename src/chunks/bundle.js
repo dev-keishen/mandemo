@@ -9,7 +9,8 @@ System.register("chunks:///_virtual/_rollupPluginModLoBabelHelpers.js", [], func
         assertThisInitialized: _assertThisInitialized,
         defineProperty: _defineProperty,
         inheritsLoose: _inheritsLoose,
-        initializerDefineProperty: _initializerDefineProperty
+        initializerDefineProperty: _initializerDefineProperty,
+        setPrototypeOf: _setPrototypeOf
       });
 
       function _defineProperty(obj, key, value) {
@@ -30,7 +31,16 @@ System.register("chunks:///_virtual/_rollupPluginModLoBabelHelpers.js", [], func
       function _inheritsLoose(subClass, superClass) {
         subClass.prototype = Object.create(superClass.prototype);
         subClass.prototype.constructor = subClass;
-        subClass.__proto__ = superClass;
+
+        _setPrototypeOf(subClass, superClass);
+      }
+
+      function _setPrototypeOf(o, p) {
+        _setPrototypeOf = exports('setPrototypeOf', Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+          o.__proto__ = p;
+          return o;
+        });
+        return _setPrototypeOf(o, p);
       }
 
       function _assertThisInitialized(self) {

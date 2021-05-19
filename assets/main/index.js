@@ -927,6 +927,34 @@ System.register("chunks:///_virtual/MiniGameNodeController.ts", ['./_rollupPlugi
           }
         };
 
+        _proto.hideMiniGame = function hideMiniGame(gameID) {
+          switch (gameID) {
+            case GlobalVariables.TAIXIU:
+              {
+                var _this$minigameviews$;
+
+                (_this$minigameviews$ = this.minigameviews[0].getComponent(TaiXiuGameView)) === null || _this$minigameviews$ === void 0 ? void 0 : _this$minigameviews$.hide();
+                break;
+              }
+
+            case GlobalVariables.MINIPOKER:
+              {
+                var _this$minigameviews$2;
+
+                (_this$minigameviews$2 = this.minigameviews[1].getComponent(MiniPokerGameView)) === null || _this$minigameviews$2 === void 0 ? void 0 : _this$minigameviews$2.hide();
+                break;
+              }
+
+            case GlobalVariables.TRUNGPS:
+              {
+                var _this$minigameviews$3;
+
+                (_this$minigameviews$3 = this.minigameviews[2].getComponent(KimCuongGameView)) === null || _this$minigameviews$3 === void 0 ? void 0 : _this$minigameviews$3.hide();
+                break;
+              }
+          }
+        };
+
         _proto.isDownloading = function isDownloading() {//return MiniPokerGameView.getInstance().getDownloadState() == DOWNLOAD_STATE.DOWNLOADING ||
           //TrenDuoiGameView.getInstance().getDownloadState() == DOWNLOAD_STATE.DOWNLOADING ||
           //KimCuongGameView.getInstance().getDownloadState() == DOWNLOAD_STATE.DOWNLOADING ||
@@ -1078,16 +1106,25 @@ System.register("chunks:///_virtual/MiniGameNodeController.ts", ['./_rollupPlugi
           });
         };
 
-        _proto.closeAll = function closeAll() {//this.close();
-          //this.minigameviews.forEach(x => x.hide(true));
+        _proto.closeAll = function closeAll() {
+          this.close();
+          this.hideMiniGame(GlobalVariables.TAIXIU);
+          this.hideMiniGame(GlobalVariables.TRUNGPS);
+          this.hideMiniGame(GlobalVariables.MINIPOKER);
         };
 
-        _proto.turnOffAutoSpin = function turnOffAutoSpin() {//MiniPokerGameView.getInstance().turnOffAutoSpin();
-          //KimCuongGameView.getInstance().turnOffAutoSpin();
-          //DragonBallGameView.getInstance().turnOffAutoSpin();
+        _proto.turnOffAutoSpin = function turnOffAutoSpin() {
+          MiniPokerGameView.getInstance().turnOffAutoSpin();
+          KimCuongGameView.getInstance().turnOffAutoSpin();
         };
 
-        _proto.forceAllMachineStop = function forceAllMachineStop(stopAuto) {//MiniPokerGameView.getInstance().forceMachineStop(stopAuto);
+        _proto.forceAllMachineStop = function forceAllMachineStop(stopAuto) {
+          if (stopAuto === void 0) {
+            stopAuto = true;
+          }
+
+          MiniPokerGameView.getInstance().forceMachineStop(stopAuto);
+          KimCuongGameView.getInstance().forceMachineStop(stopAuto);
         };
 
         _proto.isOpened = function isOpened() {
@@ -3491,8 +3528,6 @@ System.register("chunks:///_virtual/FullScreenGameItemView.ts", ['./_rollupPlugi
           systemEvent.off(LobbyViewController.UPDATE_JACKPOT_EVENT_KEY.replace("%gameID", this.gameID.toString()));
           systemEvent.on(LobbyViewController.UPDATE_JACKPOT_EVENT_KEY.replace("%gameID", gameID.toString()), function (data) {
             data.forEach(function (d, i) {
-              console.log(d);
-
               if (_this3.jackpotItemView[i] != null && _this3.jackpotItemView[i] != undefined) {
                 _this3.jackpotItemView[i].updateAmount(d);
               }
@@ -5769,7 +5804,7 @@ System.register("chunks:///_virtual/XocDiaFullScreenGameView.ts", ['./_rollupPlu
     execute: function () {
       exports('XocDia_Message', void 0);
 
-      var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _dec8, _dec9, _dec10, _dec11, _dec12, _dec13, _dec14, _dec15, _dec16, _dec17, _dec18, _dec19, _dec20, _dec21, _dec22, _dec23, _dec24, _dec25, _dec26, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11, _descriptor12, _descriptor13, _descriptor14, _descriptor15, _descriptor16, _descriptor17, _descriptor18, _descriptor19, _descriptor20, _descriptor21, _descriptor22, _descriptor23, _descriptor24, _descriptor25, _class3, _temp;
+      var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _dec8, _dec9, _dec10, _dec11, _dec12, _dec13, _dec14, _dec15, _dec16, _dec17, _dec18, _dec19, _dec20, _dec21, _dec22, _dec23, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11, _descriptor12, _descriptor13, _descriptor14, _descriptor15, _descriptor16, _descriptor17, _descriptor18, _descriptor19, _descriptor20, _descriptor21, _descriptor22, _class3, _temp;
 
       cclegacy._RF.push({}, "236dfQ7oXpLtIJqhH4UlyWx", "XocDiaFullScreenGameView", undefined);
 
@@ -5792,7 +5827,7 @@ System.register("chunks:///_virtual/XocDiaFullScreenGameView.ts", ['./_rollupPlu
         XocDia_Message[XocDia_Message["CAN_HET"] = 912] = "CAN_HET";
       })(XocDia_Message || (XocDia_Message = exports('XocDia_Message', {})));
 
-      var XocDiaFullScreenGameView = exports('XocDiaFullScreenGameView', (_dec = ccclass('XocDiaFullScreenGameView'), _dec2 = property([BauCuaBetEntry]), _dec3 = property(sp.Skeleton), _dec4 = property(Label), _dec5 = property(Label), _dec6 = property(ChipPooling), _dec7 = property([PlayerView]), _dec8 = property(PlayerView), _dec9 = property(UserOnlinePopup), _dec10 = property(UserChatPopup), _dec11 = property(ChipPanel), _dec12 = property(Button), _dec13 = property(Button), _dec14 = property(Button), _dec15 = property(Button), _dec16 = property(UITransform), _dec17 = property(Sprite), _dec18 = property(Sprite), _dec19 = property(Sprite), _dec20 = property(Sprite), _dec21 = property(Sprite), _dec22 = property(Sprite), _dec23 = property(SoiCauPopup), _dec24 = property(BauCuaSettingPopup), _dec25 = property([SpriteFrame]), _dec26 = property([SpriteFrame]), _dec(_class = (_class2 = (_temp = _class3 = /*#__PURE__*/function (_BaseFullScreenGameVi) {
+      var XocDiaFullScreenGameView = exports('XocDiaFullScreenGameView', (_dec = ccclass('XocDiaFullScreenGameView'), _dec2 = property([BauCuaBetEntry]), _dec3 = property(sp.Skeleton), _dec4 = property(sp.Skeleton), _dec5 = property(Label), _dec6 = property(Label), _dec7 = property(ChipPooling), _dec8 = property([PlayerView]), _dec9 = property(PlayerView), _dec10 = property(UserOnlinePopup), _dec11 = property(UserChatPopup), _dec12 = property(ChipPanel), _dec13 = property(Button), _dec14 = property(Button), _dec15 = property(Button), _dec16 = property(Button), _dec17 = property(UITransform), _dec18 = property(SoiCauPopup), _dec19 = property([Sprite]), _dec20 = property([SpriteFrame]), _dec21 = property(Label), _dec22 = property(Label), _dec23 = property(BauCuaSettingPopup), _dec(_class = (_class2 = (_temp = _class3 = /*#__PURE__*/function (_BaseFullScreenGameVi) {
         _inheritsLoose(XocDiaFullScreenGameView, _BaseFullScreenGameVi);
 
         function XocDiaFullScreenGameView() {
@@ -5806,53 +5841,47 @@ System.register("chunks:///_virtual/XocDiaFullScreenGameView.ts", ['./_rollupPlu
 
           _initializerDefineProperty(_assertThisInitialized(_this), "bauCuaBetEntries", _descriptor, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "shake_anim", _descriptor2, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "shake_anim_replace", _descriptor2, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "lbl_countdown", _descriptor3, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "shake_anim", _descriptor3, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "lbl_userOnline", _descriptor4, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "lbl_countdown", _descriptor4, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "chipPooling", _descriptor5, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "lbl_userOnline", _descriptor5, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "playerViews", _descriptor6, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "chipPooling", _descriptor6, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "my_info", _descriptor7, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "playerViews", _descriptor7, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "userOnlinePopup", _descriptor8, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "my_info", _descriptor8, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "userChatPopup", _descriptor9, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "userOnlinePopup", _descriptor9, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "chipPanel", _descriptor10, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "userChatPopup", _descriptor10, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "btn_user", _descriptor11, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "chipPanel", _descriptor11, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "btn_chat", _descriptor12, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "btn_user", _descriptor12, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "btn_soicau", _descriptor13, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "btn_chat", _descriptor13, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "btn_exit", _descriptor14, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "btn_soicau", _descriptor14, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "dice_result_node", _descriptor15, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "btn_exit", _descriptor15, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "dice1", _descriptor16, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "dice_result_node", _descriptor16, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "dice2", _descriptor17, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "soiCauPopup", _descriptor17, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "dice3", _descriptor18, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "last_result", _descriptor18, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "last_dice1", _descriptor19, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "sprFrame_cau_result", _descriptor19, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "last_dice2", _descriptor20, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "lbl_chan_count", _descriptor20, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "last_dice3", _descriptor21, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "lbl_le_count", _descriptor21, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "soiCauPopup", _descriptor22, _assertThisInitialized(_this));
-
-          _initializerDefineProperty(_assertThisInitialized(_this), "bauCuaSettingPopup", _descriptor23, _assertThisInitialized(_this));
-
-          _initializerDefineProperty(_assertThisInitialized(_this), "dice_frames", _descriptor24, _assertThisInitialized(_this));
-
-          _initializerDefineProperty(_assertThisInitialized(_this), "last_dice_frames", _descriptor25, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "bauCuaSettingPopup", _descriptor22, _assertThisInitialized(_this));
 
           _defineProperty(_assertThisInitialized(_this), "_coinValues", []);
 
@@ -6069,8 +6098,8 @@ System.register("chunks:///_virtual/XocDiaFullScreenGameView.ts", ['./_rollupPlu
                   this.updateViewPostions();
                   var coinsValue = dict["coins"];
                   this.setValueForCoinBtns(coinsValue);
-                  var tr = dict["htr"]; // this.setBangSoiCau(tr);
-
+                  var tr = dict["tr"];
+                  this.setBangSoiCau(tr);
                   var rates = dict["ets"];
                   this.setRateLabels(rates);
                   return;
@@ -6178,14 +6207,7 @@ System.register("chunks:///_virtual/XocDiaFullScreenGameView.ts", ['./_rollupPlu
 
         _proto.setBangSoiCau = function setBangSoiCau(tr) {
           for (var i = 0; i < tr.length; i++) {
-            var rtDict = tr[i];
-            var d1 = rtDict["d1"];
-            var d2 = rtDict["d2"];
-            var d3 = rtDict["d3"];
-            var rt = [];
-            rt.push(d1);
-            rt.push(d2);
-            rt.push(d3);
+            var rt = tr[i];
 
             this._danhSachSoiCau.push(rt);
           }
@@ -6244,6 +6266,7 @@ System.register("chunks:///_virtual/XocDiaFullScreenGameView.ts", ['./_rollupPlu
         _proto.startGame = function startGame(banker) {
           var _this4 = this;
 
+          this.resetShakeDiskCoin();
           this.chipPooling.activeAll(false);
           Tween.stopAllByTarget(this.node);
           this.stopCountDown();
@@ -6265,6 +6288,8 @@ System.register("chunks:///_virtual/XocDiaFullScreenGameView.ts", ['./_rollupPlu
         };
 
         _proto["continue"] = function _continue(rmt) {
+          this._danhSachSoiCau = [];
+          this.resetAllPlayerViewAction();
           this.chipPooling.activeAll(false);
           Tween.stopAllByTarget(this.node);
           this.stopCountDown();
@@ -6275,12 +6300,29 @@ System.register("chunks:///_virtual/XocDiaFullScreenGameView.ts", ['./_rollupPlu
         };
 
         _proto.wait = function wait() {
+          this._danhSachSoiCau = [];
+          this.resetAllPlayerViewAction();
           this.chipPooling.activeAll(false);
           Tween.stopAllByTarget(this.node);
           this.stopCountDown();
           this.bauCuaBetEntries.forEach(function (b) {
             return b.hideAll();
           });
+        };
+
+        _proto.resetAllPlayerViewAction = function resetAllPlayerViewAction() {
+          this._playerInfo = [];
+          this.playerViews.forEach(function (p) {
+            Tween.stopAllByTarget(p.node);
+          });
+          this.resetShakeDiskCoin();
+        };
+
+        _proto.resetShakeDiskCoin = function resetShakeDiskCoin() {
+          this.playerViews.forEach(function (p) {
+            p.shakeDiskCoins = [];
+          });
+          this.my_info.shakeDiskCoins = [];
         };
 
         _proto.resetDicePanel = function resetDicePanel() {
@@ -6359,13 +6401,21 @@ System.register("chunks:///_virtual/XocDiaFullScreenGameView.ts", ['./_rollupPlu
             var _ret = _loop(i);
 
             if (_ret === "continue") continue;
-          } // this.payChips(entryWinners, rt);
+          }
 
+          this.payChips(entryWinners, rt);
         };
 
         _proto.payChips = function payChips(entryWinners, rt) {
+          var entryBetWin = [];
+          this.bauCuaBetEntries.forEach(function (be, i) {
+            if (be.isGlowing()) {
+              entryBetWin.push(i);
+            }
+          });
+
           var isLoseEntry = function isLoseEntry(index) {
-            return rt.filter(function (x) {
+            return entryBetWin.filter(function (x) {
               return x == index;
             }).length <= 0;
           };
@@ -6547,7 +6597,24 @@ System.register("chunks:///_virtual/XocDiaFullScreenGameView.ts", ['./_rollupPlu
             newCoin.setPosition(desPos);
           }
 
+          if (player.isVisible()) {
+            newCoin.name = player.getUID() + "%" + eid;
+          } else {
+            var f = this._playerInfo.filter(function (p) {
+              return p.displayName == name;
+            });
+
+            var uid = "";
+
+            if (f.length > 0) {
+              uid = f[0].uid;
+            }
+
+            newCoin.name = uid + "%" + eid;
+          }
+
           this.bauCuaBetEntries[eid].addCoin(newCoin);
+          player.shakeDiskCoins.push(newCoin);
 
           var infos = this._playerInfo.filter(function (p) {
             return p.displayName == name;
@@ -6611,7 +6678,7 @@ System.register("chunks:///_virtual/XocDiaFullScreenGameView.ts", ['./_rollupPlu
         };
 
         _proto.showResult = function showResult(rt) {
-          this.shake_anim.setAnimation(0, "open2", false);
+          this.shake_anim.setAnimation(0, "open", false);
 
           if (rt % 2 == 0) {
             this.bauCuaBetEntries[2].showGlow();
@@ -6633,56 +6700,83 @@ System.register("chunks:///_virtual/XocDiaFullScreenGameView.ts", ['./_rollupPlu
             } else if (rt == 4) {
               this.bauCuaBetEntries[4].showGlow();
             }
-          } // let dice1_ind = rt[0];
-          // if (dice1_ind < this.dice_frames.length) {
-          //     this.dice1.spriteFrame = this.dice_frames[dice1_ind];
-          // }
-          // let dice2_ind = rt[1];
-          // if (dice2_ind < this.dice_frames.length) {
-          //     this.dice2.spriteFrame = this.dice_frames[dice2_ind];
-          // }
-          // let dice3_ind = rt[2];
-          // if (dice3_ind < this.dice_frames.length) {
-          //     this.dice3.spriteFrame = this.dice_frames[dice3_ind];
-          // }
-          // this.dice_result_node.node.active = true;
-          // Tween.stopAllByTarget(this.dice_result_node.node);
-          // let offset = new Vec3(-0.14 * GameConfigManager.getSizeWidth(), 30, 0);
-          // let move = tween(this.dice_result_node.node).parallel(
-          //     tween().to(0.3, { scale: new Vec3(0.8, 0.8, 0.8) }),
-          //     tween().by(1.2, { position: offset }, { easing: 'expoOut' })
-          // );
-          // move.start();
-          // this.updateBangSoiCau();
+          }
 
+          var count = 0;
+          var coinArr = [];
+
+          for (var i = 0; i < 4; i++) {
+            coinArr.push(i);
+          }
+
+          for (var _i3 = 0; _i3 < coinArr.length; _i3++) {
+            var index = coinArr[_i3];
+            var coin = 1;
+
+            if (count < rt) {
+              coin = 0;
+              count++;
+            }
+
+            var slot1_Name = "white";
+
+            if (index > 0) {
+              slot1_Name += index + 1;
+            }
+
+            var color = "red";
+
+            if (coin == 0) {
+              color = "white";
+            }
+
+            var slot2_Name = color;
+
+            if (index > 0) {
+              slot2_Name += index + 1;
+            }
+
+            var slot1 = this.shake_anim.findSlot(slot1_Name);
+            var slot2 = this.shake_anim_replace.findSlot(slot2_Name);
+            var attachment = slot2.getAttachment();
+            slot1.setAttachment(attachment);
+          }
+
+          this.updateBangSoiCau();
         };
 
         _proto.updateBangSoiCau = function updateBangSoiCau() {
+          var _this7 = this;
+
           var rt = this._danhSachSoiCau[this._danhSachSoiCau.length - 1];
-          var dice1_ind = rt[0];
+          var chanCount = 0;
+          var leCount = 0;
 
-          if (dice1_ind < this.last_dice_frames.length) {
-            this.last_dice1.spriteFrame = this.last_dice_frames[dice1_ind];
-          }
+          this._danhSachSoiCau.forEach(function (cau) {
+            if (!cau) {
+              leCount++;
+            } else {
+              chanCount++;
+            }
+          });
 
-          var dice2_ind = rt[1];
+          this.lbl_chan_count.string = chanCount;
+          this.lbl_le_count.string = leCount;
 
-          if (dice2_ind < this.last_dice_frames.length) {
-            this.last_dice2.spriteFrame = this.last_dice_frames[dice2_ind];
-          }
+          var lastResult = this._danhSachSoiCau.filter(function (cau, index) {
+            return index >= _this7._danhSachSoiCau.length - 7;
+          });
 
-          var dice3_ind = rt[2];
-
-          if (dice3_ind < this.last_dice_frames.length) {
-            this.last_dice3.spriteFrame = this.last_dice_frames[dice3_ind];
-          }
-
-          this.soiCauPopup.updateBangSoiCau(this._danhSachSoiCau);
+          lastResult.forEach(function (cau, index) {
+            if (index < _this7.last_result.length) {
+              _this7.last_result[index].spriteFrame = cau ? _this7.sprFrame_cau_result[1] : _this7.sprFrame_cau_result[0];
+            }
+          }); // this.soiCauPopup.updateBangSoiCau(this._danhSachSoiCau);
         };
 
         _proto.playShakeAnim = function playShakeAnim() {
           var _this$shake_anim,
-              _this7 = this;
+              _this8 = this;
 
           var track = (_this$shake_anim = this.shake_anim) === null || _this$shake_anim === void 0 ? void 0 : _this$shake_anim.setAnimation(0, "shake", false);
 
@@ -6693,9 +6787,9 @@ System.register("chunks:///_virtual/XocDiaFullScreenGameView.ts", ['./_rollupPlu
               var name = trackEntry.animation ? trackEntry.animation.name : '';
 
               if (name == "shake") {
-                var _this7$shake_anim;
+                var _this8$shake_anim;
 
-                (_this7$shake_anim = _this7.shake_anim) === null || _this7$shake_anim === void 0 ? void 0 : _this7$shake_anim.setAnimation(0, "idle2", true);
+                (_this8$shake_anim = _this8.shake_anim) === null || _this8$shake_anim === void 0 ? void 0 : _this8$shake_anim.setAnimation(0, "idle2", true);
               }
             });
           }
@@ -6718,173 +6812,152 @@ System.register("chunks:///_virtual/XocDiaFullScreenGameView.ts", ['./_rollupPlu
         initializer: function initializer() {
           return [];
         }
-      }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, "shake_anim", [_dec3], {
+      }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, "shake_anim_replace", [_dec3], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, "lbl_countdown", [_dec4], {
+      }), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, "shake_anim", [_dec4], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, "lbl_userOnline", [_dec5], {
+      }), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, "lbl_countdown", [_dec5], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, "chipPooling", [_dec6], {
+      }), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, "lbl_userOnline", [_dec6], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor6 = _applyDecoratedDescriptor(_class2.prototype, "playerViews", [_dec7], {
+      }), _descriptor6 = _applyDecoratedDescriptor(_class2.prototype, "chipPooling", [_dec7], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor7 = _applyDecoratedDescriptor(_class2.prototype, "playerViews", [_dec8], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return [];
         }
-      }), _descriptor7 = _applyDecoratedDescriptor(_class2.prototype, "my_info", [_dec8], {
+      }), _descriptor8 = _applyDecoratedDescriptor(_class2.prototype, "my_info", [_dec9], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor8 = _applyDecoratedDescriptor(_class2.prototype, "userOnlinePopup", [_dec9], {
+      }), _descriptor9 = _applyDecoratedDescriptor(_class2.prototype, "userOnlinePopup", [_dec10], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor9 = _applyDecoratedDescriptor(_class2.prototype, "userChatPopup", [_dec10], {
+      }), _descriptor10 = _applyDecoratedDescriptor(_class2.prototype, "userChatPopup", [_dec11], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor10 = _applyDecoratedDescriptor(_class2.prototype, "chipPanel", [_dec11], {
+      }), _descriptor11 = _applyDecoratedDescriptor(_class2.prototype, "chipPanel", [_dec12], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor11 = _applyDecoratedDescriptor(_class2.prototype, "btn_user", [_dec12], {
+      }), _descriptor12 = _applyDecoratedDescriptor(_class2.prototype, "btn_user", [_dec13], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor12 = _applyDecoratedDescriptor(_class2.prototype, "btn_chat", [_dec13], {
+      }), _descriptor13 = _applyDecoratedDescriptor(_class2.prototype, "btn_chat", [_dec14], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor13 = _applyDecoratedDescriptor(_class2.prototype, "btn_soicau", [_dec14], {
+      }), _descriptor14 = _applyDecoratedDescriptor(_class2.prototype, "btn_soicau", [_dec15], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor14 = _applyDecoratedDescriptor(_class2.prototype, "btn_exit", [_dec15], {
+      }), _descriptor15 = _applyDecoratedDescriptor(_class2.prototype, "btn_exit", [_dec16], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor15 = _applyDecoratedDescriptor(_class2.prototype, "dice_result_node", [_dec16], {
+      }), _descriptor16 = _applyDecoratedDescriptor(_class2.prototype, "dice_result_node", [_dec17], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor16 = _applyDecoratedDescriptor(_class2.prototype, "dice1", [_dec17], {
+      }), _descriptor17 = _applyDecoratedDescriptor(_class2.prototype, "soiCauPopup", [_dec18], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor17 = _applyDecoratedDescriptor(_class2.prototype, "dice2", [_dec18], {
-        configurable: true,
-        enumerable: true,
-        writable: true,
-        initializer: function initializer() {
-          return null;
-        }
-      }), _descriptor18 = _applyDecoratedDescriptor(_class2.prototype, "dice3", [_dec19], {
-        configurable: true,
-        enumerable: true,
-        writable: true,
-        initializer: function initializer() {
-          return null;
-        }
-      }), _descriptor19 = _applyDecoratedDescriptor(_class2.prototype, "last_dice1", [_dec20], {
-        configurable: true,
-        enumerable: true,
-        writable: true,
-        initializer: function initializer() {
-          return null;
-        }
-      }), _descriptor20 = _applyDecoratedDescriptor(_class2.prototype, "last_dice2", [_dec21], {
-        configurable: true,
-        enumerable: true,
-        writable: true,
-        initializer: function initializer() {
-          return null;
-        }
-      }), _descriptor21 = _applyDecoratedDescriptor(_class2.prototype, "last_dice3", [_dec22], {
-        configurable: true,
-        enumerable: true,
-        writable: true,
-        initializer: function initializer() {
-          return null;
-        }
-      }), _descriptor22 = _applyDecoratedDescriptor(_class2.prototype, "soiCauPopup", [_dec23], {
-        configurable: true,
-        enumerable: true,
-        writable: true,
-        initializer: function initializer() {
-          return null;
-        }
-      }), _descriptor23 = _applyDecoratedDescriptor(_class2.prototype, "bauCuaSettingPopup", [_dec24], {
-        configurable: true,
-        enumerable: true,
-        writable: true,
-        initializer: function initializer() {
-          return null;
-        }
-      }), _descriptor24 = _applyDecoratedDescriptor(_class2.prototype, "dice_frames", [_dec25], {
+      }), _descriptor18 = _applyDecoratedDescriptor(_class2.prototype, "last_result", [_dec19], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return [];
         }
-      }), _descriptor25 = _applyDecoratedDescriptor(_class2.prototype, "last_dice_frames", [_dec26], {
+      }), _descriptor19 = _applyDecoratedDescriptor(_class2.prototype, "sprFrame_cau_result", [_dec20], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return [];
+        }
+      }), _descriptor20 = _applyDecoratedDescriptor(_class2.prototype, "lbl_chan_count", [_dec21], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor21 = _applyDecoratedDescriptor(_class2.prototype, "lbl_le_count", [_dec22], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor22 = _applyDecoratedDescriptor(_class2.prototype, "bauCuaSettingPopup", [_dec23], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
         }
       })), _class2)) || _class));
       /**
@@ -10221,6 +10294,7 @@ System.register("chunks:///_virtual/LobbyViewController.ts", ['./_rollupPluginMo
 
         _proto.backFromGame = function backFromGame(gameID) {
           this.currentGameView = this;
+          GamePlayManager.sendRefreshMoney();
           var view = this.getGameView(gameID);
 
           if (view != this) {
@@ -10764,10 +10838,10 @@ System.register("chunks:///_virtual/LineCmp.ts", ['./_rollupPluginModLoBabelHelp
   };
 });
 
-System.register("chunks:///_virtual/PlayerView.ts", ['./_rollupPluginModLoBabelHelpers.js', 'cc', './GameConfigManager.ts', './StringUtils.ts', './BubbleChat.ts', './Downloader.ts', './BauCuaFullScreenGameView.ts'], function (exports) {
+System.register("chunks:///_virtual/PlayerView.ts", ['./_rollupPluginModLoBabelHelpers.js', 'cc', './GameConfigManager.ts', './StringUtils.ts', './BubbleChat.ts', './Downloader.ts', './BauCuaFullScreenGameView.ts', './LobbyViewController.ts'], function (exports) {
   'use strict';
 
-  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, _defineProperty, cclegacy, _decorator, Sprite, Node, sp, Label, Tween, UIOpacity, Vec3, tween, Component, GameConfigManager, StringUtils, BubbleChat, Downloader, BauCuaFullScreenGameView;
+  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, _defineProperty, cclegacy, _decorator, Sprite, Node, sp, Label, Tween, UIOpacity, Vec3, tween, Component, GameConfigManager, StringUtils, BubbleChat, Downloader, BauCuaFullScreenGameView, LobbyViewController;
 
   return {
     setters: [function (module) {
@@ -10798,6 +10872,8 @@ System.register("chunks:///_virtual/PlayerView.ts", ['./_rollupPluginModLoBabelH
       Downloader = module.default;
     }, function (module) {
       BauCuaFullScreenGameView = module.BauCuaFullScreenGameView;
+    }, function (module) {
+      LobbyViewController = module.LobbyViewController;
     }],
     execute: function () {
       var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _dec8, _dec9, _dec10, _dec11, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _temp;
@@ -10867,7 +10943,9 @@ System.register("chunks:///_virtual/PlayerView.ts", ['./_rollupPluginModLoBabelH
           this.lbl_displayName.string = info.displayName;
           this.lbl_money.string = StringUtils.formatMoneyNumber(info.gold);
           Downloader.loadRemoteSpriteFrame(info.avatarURL, function (sf) {
-            _this2.spr_avatar.spriteFrame = sf;
+            var _LobbyViewController$;
+
+            _this2.spr_avatar.spriteFrame = sf == null ? (_LobbyViewController$ = LobbyViewController.getInstance()) === null || _LobbyViewController$ === void 0 ? void 0 : _LobbyViewController$.spr_frame_AvatarDefault : sf;
           });
         };
 
@@ -13182,6 +13260,10 @@ System.register("chunks:///_virtual/BauCuaBetEntry.ts", ['./_rollupPluginModLoBa
           this.glow.active = isShow;
         };
 
+        _proto.isGlowing = function isGlowing() {
+          return this.glow.active;
+        };
+
         _proto.setTotalBet = function setTotalBet(totalBet) {
           this.lbl_total_bet.node.parent.active = true;
           this.lbl_total_bet.string = StringUtils.formatMoneyNumber(totalBet);
@@ -13222,6 +13304,7 @@ System.register("chunks:///_virtual/BauCuaBetEntry.ts", ['./_rollupPluginModLoBa
               coin.setSiblingIndex(coin.parent.children.length - 1);
             }), tween().delay(0.4).call(function () {
               var opa = coin.getComponent(UIOpacity);
+              opa.opacity = 0;
               tween(opa).to(0.7, {
                 opacity: 255
               }).start();
@@ -13242,129 +13325,134 @@ System.register("chunks:///_virtual/BauCuaBetEntry.ts", ['./_rollupPluginModLoBa
         };
 
         _proto.payChipsForPlayers = function payChipsForPlayers(uid) {
-          var _LobbyViewController$2,
-              _this4 = this;
+          var _this4 = this;
 
-          var viewInstance = (_LobbyViewController$2 = LobbyViewController.getInstance()) === null || _LobbyViewController$2 === void 0 ? void 0 : _LobbyViewController$2.getView();
-          var player = viewInstance.getVisiblePlayerByID(uid);
+          try {
+            var _LobbyViewController$2;
 
-          if (player == null) {
-            var hiddenView = viewInstance.getPlayerByUID(uid);
-            var hiddenPos = hiddenView != null ? hiddenView.node.position : Vec3.ZERO;
-            var count = 0;
-            this.listBetCoin.forEach(function (bc) {
-              if (bc.name.indexOf(uid) >= 0) {
-                var seq = tween(bc).sequence(tween().delay(4.5 + count * 0.02), tween().call(function () {
-                  tween(bc.getComponent(UIOpacity)).to(0.6, {
-                    opacity: 0
-                  }).start();
-                }), tween().to(0.6, {
-                  position: new Vec3(hiddenPos)
-                }));
-                seq.start();
-                count++;
-              }
+            var viewInstance = (_LobbyViewController$2 = LobbyViewController.getInstance()) === null || _LobbyViewController$2 === void 0 ? void 0 : _LobbyViewController$2.getView();
+            var player = viewInstance.getVisiblePlayerByID(uid);
+
+            if (player == null) {
+              var hiddenView = viewInstance.getPlayerByUID(uid);
+              var hiddenPos = hiddenView != null ? hiddenView.node.position : Vec3.ZERO;
+              var count = 0;
+              this.listBetCoin.forEach(function (bc) {
+                if (bc.name.indexOf(uid) >= 0) {
+                  var seq = tween(bc).sequence(tween().delay(4.5 + count * 0.02), tween().call(function () {
+                    tween(bc.getComponent(UIOpacity)).to(0.6, {
+                      opacity: 0
+                    }).start();
+                  }), tween().to(0.6, {
+                    position: new Vec3(hiddenPos)
+                  }));
+                  seq.start();
+                  count++;
+                }
+              });
+              return;
+            }
+
+            var coinsBet = player.shakeDiskCoins.filter(function (sk) {
+              return _this4.listBetCoin.filter(function (bc) {
+                return sk.name == bc.name;
+              }).length > 0;
             });
-            return;
-          }
+            var coinPay = [];
 
-          var coinsBet = player.shakeDiskCoins.filter(function (sk) {
-            return _this4.listBetCoin.filter(function (bc) {
-              return sk.name == bc.name;
-            }).length > 0;
-          });
-          var coinPay = [];
+            for (var i = 0; i < coinsBet.length; i++) {
+              var _viewInstance$getChip;
 
-          for (var i = 0; i < coinsBet.length; i++) {
-            var _viewInstance$getChip;
+              var coin = instantiate(coinsBet[i]);
+              coin.parent = coinsBet[i].parent;
+              coinPay.push(coin);
+              viewInstance === null || viewInstance === void 0 ? void 0 : (_viewInstance$getChip = viewInstance.getChipPooling()) === null || _viewInstance$getChip === void 0 ? void 0 : _viewInstance$getChip.payCoin.push(coin);
+            }
 
-            var coin = instantiate(coinsBet[i]);
-            coin.parent = coinsBet[i].parent;
-            coinPay.push(coin);
-            viewInstance === null || viewInstance === void 0 ? void 0 : (_viewInstance$getChip = viewInstance.getChipPooling()) === null || _viewInstance$getChip === void 0 ? void 0 : _viewInstance$getChip.payCoin.push(coin);
-          }
+            var sequence = tween(player.node).sequence(tween().delay(2.7), tween().call(function () {
+              var paysequence = tween(player.node).sequence(tween().delay(0.5), tween().call(function () {
+                var payPosition = player === null || player === void 0 ? void 0 : player.getMoneyPositions()[1].position;
 
-          var sequence = tween(player.node).sequence(tween().delay(2.7), tween().call(function () {
-            var paysequence = tween(player.node).sequence(tween().delay(0.5), tween().call(function () {
-              var payPosition = player === null || player === void 0 ? void 0 : player.getMoneyPositions()[1].position;
+                for (var _i = 0; _i < coinPay.length; _i++) {
+                  var _viewInstance$getChip2;
 
-              for (var _i = 0; _i < coinPay.length; _i++) {
-                var _viewInstance$getChip2;
+                  var _coin = coinPay[_i];
+                  viewInstance === null || viewInstance === void 0 ? void 0 : (_viewInstance$getChip2 = viewInstance.getChipPooling()) === null || _viewInstance$getChip2 === void 0 ? void 0 : _viewInstance$getChip2.onTop(_coin);
 
-                var _coin = coinPay[_i];
-                viewInstance === null || viewInstance === void 0 ? void 0 : (_viewInstance$getChip2 = viewInstance.getChipPooling()) === null || _viewInstance$getChip2 === void 0 ? void 0 : _viewInstance$getChip2.onTop(_coin);
+                  if (_coin == null) {
+                    console.log("can't find coin");
+                    continue;
+                  }
 
-                if (_coin == null) {
-                  console.log("can't find coin");
-                  continue;
+                  var move = tween(_coin).to(0.9, {
+                    position: new Vec3(payPosition.x, payPosition.y + _i * 3, payPosition.z)
+                  }, {
+                    easing: 'expoOut'
+                  });
+                  move.start();
+                }
+              }), tween().delay(1.5), tween().call(function () {
+                var iconMoneyPosition = player.getIconMoneyPosition().position;
+
+                var _loop2 = function _loop2(_i2) {
+                  var coin = coinPay[_i2];
+                  var hide = tween(coin).sequence(tween().call(function () {
+                    tween(coin.getComponent(UIOpacity)).to(0.2, {
+                      opacity: 0
+                    }).start();
+                  }), tween().to(0.2, {
+                    position: new Vec3(iconMoneyPosition)
+                  }, {
+                    easing: 'linear'
+                  }));
+                  hide.start();
+                };
+
+                for (var _i2 = 0; _i2 < coinPay.length; _i2++) {
+                  _loop2(_i2);
                 }
 
-                var move = tween(_coin).to(0.9, {
-                  position: new Vec3(payPosition.x, payPosition.y + _i * 3, payPosition.z)
+                var _loop3 = function _loop3(_i3) {
+                  var coin = coinsBet[_i3];
+                  var hide = tween(coin).sequence(tween().call(function () {
+                    tween(coin.getComponent(UIOpacity)).to(0.2, {
+                      opacity: 0
+                    }).start();
+                  }), tween().to(0.2, {
+                    position: new Vec3(iconMoneyPosition)
+                  }, {
+                    easing: 'linear'
+                  }));
+                  hide.start();
+                };
+
+                for (var _i3 = 0; _i3 < coinsBet.length; _i3++) {
+                  _loop3(_i3);
+                }
+              }));
+              paysequence.start();
+            }), tween().call(function () {
+              player.showWinFx(0.9, 4);
+            }), tween().call(function () {
+              var moneyPosition = player === null || player === void 0 ? void 0 : player.getMoneyPositions()[0].position;
+
+              for (var _i4 = 0; _i4 < coinsBet.length; _i4++) {
+                var _viewInstance$getChip3;
+
+                var _coin2 = coinsBet[_i4];
+                viewInstance === null || viewInstance === void 0 ? void 0 : (_viewInstance$getChip3 = viewInstance.getChipPooling()) === null || _viewInstance$getChip3 === void 0 ? void 0 : _viewInstance$getChip3.onTop(_coin2);
+                var move = tween(_coin2).to(0.9, {
+                  position: new Vec3(moneyPosition.x, moneyPosition.y + _i4 * 3, moneyPosition.z)
                 }, {
                   easing: 'expoOut'
                 });
                 move.start();
               }
-            }), tween().delay(1.5), tween().call(function () {
-              var iconMoneyPosition = player.getIconMoneyPosition().position;
-
-              var _loop2 = function _loop2(_i2) {
-                var coin = coinPay[_i2];
-                var hide = tween(coin).sequence(tween().call(function () {
-                  tween(coin.getComponent(UIOpacity)).to(0.2, {
-                    opacity: 0
-                  }).start();
-                }), tween().to(0.2, {
-                  position: new Vec3(iconMoneyPosition)
-                }, {
-                  easing: 'linear'
-                }));
-                hide.start();
-              };
-
-              for (var _i2 = 0; _i2 < coinPay.length; _i2++) {
-                _loop2(_i2);
-              }
-
-              var _loop3 = function _loop3(_i3) {
-                var coin = coinsBet[_i3];
-                var hide = tween(coin).sequence(tween().call(function () {
-                  tween(coin.getComponent(UIOpacity)).to(0.2, {
-                    opacity: 0
-                  }).start();
-                }), tween().to(0.2, {
-                  position: new Vec3(iconMoneyPosition)
-                }, {
-                  easing: 'linear'
-                }));
-                hide.start();
-              };
-
-              for (var _i3 = 0; _i3 < coinsBet.length; _i3++) {
-                _loop3(_i3);
-              }
             }));
-            paysequence.start();
-          }), tween().call(function () {
-            player.showWinFx(0.9, 4);
-          }), tween().call(function () {
-            var moneyPosition = player === null || player === void 0 ? void 0 : player.getMoneyPositions()[0].position;
-
-            for (var _i4 = 0; _i4 < coinsBet.length; _i4++) {
-              var _viewInstance$getChip3;
-
-              var _coin2 = coinsBet[_i4];
-              viewInstance === null || viewInstance === void 0 ? void 0 : (_viewInstance$getChip3 = viewInstance.getChipPooling()) === null || _viewInstance$getChip3 === void 0 ? void 0 : _viewInstance$getChip3.onTop(_coin2);
-              var move = tween(_coin2).to(0.9, {
-                position: new Vec3(moneyPosition.x, moneyPosition.y + _i4 * 3, moneyPosition.z)
-              }, {
-                easing: 'expoOut'
-              });
-              move.start();
-            }
-          }));
-          sequence.start();
+            sequence.start();
+          } catch (ex) {
+            console.log("some error occur in payChipsForPlayers");
+          }
         };
 
         return BauCuaBetEntry;
@@ -14926,7 +15014,7 @@ System.register("chunks:///_virtual/CCMiniGameRoot.ts", ['./_rollupPluginModLoBa
         _proto.closeMiniGameNode = function closeMiniGameNode() {
           if (this.mini_game_node_instance) {
             this.mini_game_node_instance.node.active = false;
-            this.mini_game_node_instance.turnOffAutoSpin();
+            this.mini_game_node_instance.forceAllMachineStop();
             this.mini_game_node_instance.closeAll();
           }
         };
@@ -18522,6 +18610,10 @@ System.register("chunks:///_virtual/GamePlayManager.ts", ['./_rollupPluginModLoB
         };
 
         GamePlayManager.sendChat = function sendChat(content, roomID) {
+          if (GamePlayManager.STATE == NETWORK_STATE.UNLOGGED_IN) {
+            return;
+          }
+
           var dict = {};
           dict["cmd"] = 102;
           dict["mgs"] = content;
@@ -18549,6 +18641,10 @@ System.register("chunks:///_virtual/GamePlayManager.ts", ['./_rollupPluginModLoB
         };
 
         GamePlayManager.sendRefreshMoney = function sendRefreshMoney() {
+          if (GamePlayManager.STATE == NETWORK_STATE.UNLOGGED_IN) {
+            return;
+          }
+
           var dict = {};
           dict["cmd"] = GLOBAL_MESSAGE.REFRESH_MONEY;
           var mes = [MessageRequest.ZonePlugin_Type, "Simms", "channelPlugin", dict];
@@ -21514,7 +21610,7 @@ System.register("chunks:///_virtual/NotiView.ts", ['./_rollupPluginModLoBabelHel
           var startPos = new Vec3(0, GameConfigManager.getSizeHeight() / 2 + this.bg_transform.contentSize.height / 2, 0);
           var endPos = new Vec3(0, GameConfigManager.getSizeHeight() / 2 - this.bg_transform.contentSize.height / 2, 0);
           this.node.setPosition(startPos);
-          this.node.getComponent(UIOpacity).opacity = 0;
+          this.node.getComponent(UIOpacity).opacity = 1;
           var sequence = tween(this.node).sequence(tween(this.node).to(0.2, {
             position: endPos
           }), tween().delay(2.0), tween(this.node).to(0.3, {
@@ -21524,7 +21620,7 @@ System.register("chunks:///_virtual/NotiView.ts", ['./_rollupPluginModLoBabelHel
           var sequenceFade = tween(this.node.getComponent(UIOpacity)).sequence(tween(this.node.getComponent(UIOpacity)).to(0.2, {
             opacity: 255
           }), tween().delay(2.0), tween(this.node.getComponent(UIOpacity)).to(0.3, {
-            opacity: 0
+            opacity: 1
           }));
           sequenceFade.start();
         };
@@ -23775,6 +23871,7 @@ System.register("chunks:///_virtual/BauCuaFullScreenGameView.ts", ['./_rollupPlu
           this.playerViews.forEach(function (p) {
             Tween.stopAllByTarget(p.node);
           });
+          this.resetShakeDiskCoin();
         };
 
         _proto.resetShakeDiskCoin = function resetShakeDiskCoin() {
