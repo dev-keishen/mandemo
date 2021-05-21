@@ -9331,7 +9331,9 @@ System.register("chunks:///_virtual/BatCmp.ts", ['./_rollupPluginModLoBabelHelpe
         };
 
         _proto.hide = function hide() {
-          DragView.DISABLE = false;
+          setTimeout(function () {
+            DragView.DISABLE = false;
+          }, 500);
 
           if (this.originalPos == undefined) {
             this.originalPos = new Vec3(this.node.position);
@@ -9649,6 +9651,7 @@ System.register("chunks:///_virtual/LobbyViewController.ts", ['./_rollupPluginMo
 
         _proto.handleBackGameFromInterupt = function handleBackGameFromInterupt(timeInterupted) {
           console.log("handleBackGameFromInterupt::lobby");
+          GameNetworkHandler.reconnect();
         };
 
         _proto.autoLoginAcc = function autoLoginAcc() {
@@ -10948,13 +10951,13 @@ System.register("chunks:///_virtual/PlayerView.ts", ['./_rollupPluginModLoBabelH
       LobbyViewController = module.LobbyViewController;
     }],
     execute: function () {
-      var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _dec8, _dec9, _dec10, _dec11, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _temp;
+      var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _dec8, _dec9, _dec10, _dec11, _dec12, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11, _temp;
 
       cclegacy._RF.push({}, "393bfLI/xZJPpBTLyjAbMuD", "PlayerView", undefined);
 
       var ccclass = _decorator.ccclass,
           property = _decorator.property;
-      var PlayerView = exports('PlayerView', (_dec = ccclass('PlayerView'), _dec2 = property(Sprite), _dec3 = property(Node), _dec4 = property(sp.Skeleton), _dec5 = property(Label), _dec6 = property(Node), _dec7 = property(Label), _dec8 = property(Label), _dec9 = property([Node]), _dec10 = property([BubbleChat]), _dec11 = property(Boolean), _dec(_class = (_class2 = (_temp = /*#__PURE__*/function (_Component) {
+      var PlayerView = exports('PlayerView', (_dec = ccclass('PlayerView'), _dec2 = property(Sprite), _dec3 = property(Node), _dec4 = property(Node), _dec5 = property(sp.Skeleton), _dec6 = property(Label), _dec7 = property(Node), _dec8 = property(Label), _dec9 = property(Label), _dec10 = property([Node]), _dec11 = property([BubbleChat]), _dec12 = property(Boolean), _dec(_class = (_class2 = (_temp = /*#__PURE__*/function (_Component) {
         _inheritsLoose(PlayerView, _Component);
 
         function PlayerView() {
@@ -10970,21 +10973,23 @@ System.register("chunks:///_virtual/PlayerView.ts", ['./_rollupPluginModLoBabelH
 
           _initializerDefineProperty(_assertThisInitialized(_this), "avatar_light", _descriptor2, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "win_fx", _descriptor3, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "result", _descriptor3, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "lbl_displayName", _descriptor4, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "win_fx", _descriptor4, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "icon", _descriptor5, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "lbl_displayName", _descriptor5, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "lbl_money", _descriptor6, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "icon", _descriptor6, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "lbl_addmoney", _descriptor7, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "lbl_money", _descriptor7, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "money_positions", _descriptor8, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "lbl_addmoney", _descriptor8, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "bubbleChats", _descriptor9, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "money_positions", _descriptor9, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "is_hidden", _descriptor10, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "bubbleChats", _descriptor10, _assertThisInitialized(_this));
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "is_hidden", _descriptor11, _assertThisInitialized(_this));
 
           _defineProperty(_assertThisInitialized(_this), "currentBubbleChatInd", 0);
 
@@ -11068,24 +11073,24 @@ System.register("chunks:///_virtual/PlayerView.ts", ['./_rollupPluginModLoBabelH
         _proto.showWinFx = function showWinFx(delay, timeToShow) {
           var _this3 = this;
 
-          Tween.stopAllByTarget(this.win_fx.node);
-          Tween.stopAllByTarget(this.win_fx.getComponent(UIOpacity));
+          Tween.stopAllByTarget(this.result);
+          Tween.stopAllByTarget(this.result.getComponent(UIOpacity));
           Tween.stopAllByTarget(this.avatar_light);
           Tween.stopAllByTarget(this.avatar_light.getComponent(UIOpacity));
           var startWinFxPos = new Vec3(0, -15, 0);
-          var sequence = tween(this.win_fx.node).sequence(tween().delay(delay), tween().call(function () {
+          var sequence = tween(this.result).sequence(tween().delay(delay), tween().call(function () {
             _this3.setWinAmount(_this3.winning);
 
             _this3.refresh();
 
             BauCuaFullScreenGameView.getInstance().refreshUserOnlinePopup();
-            _this3.win_fx.node.active = true;
+            _this3.result.active = true;
 
-            var skeleton = _this3.win_fx.getComponent(UIOpacity);
+            var resultOpa = _this3.result.getComponent(UIOpacity);
 
-            skeleton.opacity = 255;
+            resultOpa.opacity = 255;
 
-            _this3.win_fx.node.setPosition(startWinFxPos);
+            _this3.result.setPosition(startWinFxPos);
 
             _this3.win_fx.setAnimation(0, "animation", true);
           }), tween().by(0.4, {
@@ -11117,12 +11122,12 @@ System.register("chunks:///_virtual/PlayerView.ts", ['./_rollupPluginModLoBabelH
             }).start()));
             seq.start();
           }), tween().delay(timeToShow), tween().call(function () {
-            var skeleton = _this3.win_fx.getComponent(UIOpacity);
+            var resultOpa = _this3.result.getComponent(UIOpacity);
 
-            var seq = tween(skeleton).to(0.5, {
+            var seq = tween(resultOpa).to(0.5, {
               opacity: 1
             }).call(function () {
-              _this3.win_fx.node.active = false;
+              _this3.result.active = false;
             });
             seq.start();
           }));
@@ -11158,56 +11163,63 @@ System.register("chunks:///_virtual/PlayerView.ts", ['./_rollupPluginModLoBabelH
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, "win_fx", [_dec4], {
+      }), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, "result", [_dec4], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, "lbl_displayName", [_dec5], {
+      }), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, "win_fx", [_dec5], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, "icon", [_dec6], {
+      }), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, "lbl_displayName", [_dec6], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor6 = _applyDecoratedDescriptor(_class2.prototype, "lbl_money", [_dec7], {
+      }), _descriptor6 = _applyDecoratedDescriptor(_class2.prototype, "icon", [_dec7], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor7 = _applyDecoratedDescriptor(_class2.prototype, "lbl_addmoney", [_dec8], {
+      }), _descriptor7 = _applyDecoratedDescriptor(_class2.prototype, "lbl_money", [_dec8], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor8 = _applyDecoratedDescriptor(_class2.prototype, "money_positions", [_dec9], {
+      }), _descriptor8 = _applyDecoratedDescriptor(_class2.prototype, "lbl_addmoney", [_dec9], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor9 = _applyDecoratedDescriptor(_class2.prototype, "money_positions", [_dec10], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return [];
         }
-      }), _descriptor9 = _applyDecoratedDescriptor(_class2.prototype, "bubbleChats", [_dec10], {
+      }), _descriptor10 = _applyDecoratedDescriptor(_class2.prototype, "bubbleChats", [_dec11], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return [];
         }
-      }), _descriptor10 = _applyDecoratedDescriptor(_class2.prototype, "is_hidden", [_dec11], {
+      }), _descriptor11 = _applyDecoratedDescriptor(_class2.prototype, "is_hidden", [_dec12], {
         configurable: true,
         enumerable: true,
         writable: true,
@@ -12383,6 +12395,7 @@ System.register("chunks:///_virtual/TaiXiuGameView.ts", ['./_rollupPluginModLoBa
           };
 
           if (withFx) {
+            var timeToBeginShowBat = 1.0;
             var sequence = tween(this.node).sequence(tween().delay(timeTraTienCanKeo), tween().call(function () {
               _this5.remainTimeToBetting.enabled = false;
 
@@ -12400,13 +12413,14 @@ System.register("chunks:///_virtual/TaiXiuGameView.ts", ['./_rollupPluginModLoBa
               _this5.dice2.setAnimation(0, frameDice2, false);
 
               _this5.dice3.setAnimation(0, frameDice3, false);
-            }), tween().delay(timeDiceRolling), tween().call(function () {
-              showDices();
-
+            }), tween().delay(timeDiceRolling - timeToBeginShowBat), tween().call(function () {
               if (_this5.btn_nan.isChecked) {
                 _this5.batCmp.node.active = true;
                 _this5.batCmp.onOpenBat = showResult;
-              } else {
+              }
+            }), tween().delay(timeToBeginShowBat), tween().call(function () {
+              showDices();
+              if (_this5.btn_nan.isChecked) ;else {
                 showResult();
               }
             }));
@@ -14815,12 +14829,7 @@ System.register("chunks:///_virtual/GameNetworkHandler.ts", ['./_rollupPluginMod
 
           this.ws.onclose = function (event) {
             log("GameNetworkHandler::WebSocket instance closed.");
-
-            if (GamePlayManager.STATE == NETWORK_STATE.LOGGED_IN) {
-              log("GameNetworkHandler::reconnect");
-              GamePlayManager.STATE = NETWORK_STATE.UNLOGGED_IN;
-              GamePlayManager.reconnect();
-            }
+            GameNetworkHandler.reconnect();
           };
         };
 
@@ -14830,6 +14839,14 @@ System.register("chunks:///_virtual/GameNetworkHandler.ts", ['./_rollupPluginMod
 
         GameNetworkHandler.close = function close() {
           GameNetworkHandler.ws && GameNetworkHandler.ws.close();
+        };
+
+        GameNetworkHandler.reconnect = function reconnect() {
+          if (GamePlayManager.STATE == NETWORK_STATE.LOGGED_IN) {
+            log("GameNetworkHandler::reconnect");
+            GamePlayManager.STATE = NETWORK_STATE.UNLOGGED_IN;
+            GamePlayManager.reconnect();
+          }
         };
 
         return GameNetworkHandler;
@@ -18698,8 +18715,12 @@ System.register("chunks:///_virtual/GamePlayManager.ts", ['./_rollupPluginModLoB
           GameNetworkHandler.send(data);
         };
 
+        GamePlayManager.canSendChat = function canSendChat() {
+          return GamePlayManager.timeoutChat == null;
+        };
+
         GamePlayManager.sendChat = function sendChat(content, roomID) {
-          if (GamePlayManager.STATE == NETWORK_STATE.UNLOGGED_IN) {
+          if (GamePlayManager.STATE == NETWORK_STATE.UNLOGGED_IN || !GamePlayManager.canSendChat()) {
             return;
           }
 
@@ -18708,6 +18729,9 @@ System.register("chunks:///_virtual/GamePlayManager.ts", ['./_rollupPluginModLoB
           dict["mgs"] = content;
           var data = [MessageRequest.RoomPlugin_Type, "Simms", GamePlayManager.roomID, dict];
           GameNetworkHandler.send(data);
+          GamePlayManager.timeoutChat = setTimeout(function () {
+            GamePlayManager.timeoutChat = null;
+          }, 2000);
         };
 
         GamePlayManager.login = function login() {
@@ -18820,7 +18844,7 @@ System.register("chunks:///_virtual/GamePlayManager.ts", ['./_rollupPluginModLoB
         };
 
         return GamePlayManager;
-      }(), _defineProperty(_class2, "roomID", ""), _defineProperty(_class2, "roomPassword", ""), _defineProperty(_class2, "STATE", NETWORK_STATE.UNLOGGED_IN), _temp)) || _class));
+      }(), _defineProperty(_class2, "roomID", ""), _defineProperty(_class2, "roomPassword", ""), _defineProperty(_class2, "STATE", NETWORK_STATE.UNLOGGED_IN), _defineProperty(_class2, "timeoutChat", null), _temp)) || _class));
       /**
        * [1] Class member could be defined like this.
        * [2] Use `property` decorator if your want the member to be serializable.
@@ -20940,6 +20964,7 @@ System.register("chunks:///_virtual/BubbleChat.ts", ['./_rollupPluginModLoBabelH
           Tween.stopAllByTarget(this.chat_content_node_opacity);
           this.chat_content_node.scale = Vec3.ZERO;
           this.chat_content_node_opacity.opacity = 255;
+          if (content.length > 10) ;
           this.lbl_content.string = content;
           var seq = tween(this.chat_content_node).sequence(tween().to(0.25, {
             scale: Vec3.ONE
@@ -20975,9 +21000,10 @@ System.register("chunks:///_virtual/BubbleChat.ts", ['./_rollupPluginModLoBabelH
         };
 
         _proto.update = function update(dt) {
-          var _this$lbl_content_tra, _this$lbl_content_tra2;
+          var _this$lbl_content_tra;
 
-          var size = new Size(((_this$lbl_content_tra = this.lbl_content_transform) === null || _this$lbl_content_tra === void 0 ? void 0 : _this$lbl_content_tra.contentSize.width) + 30, ((_this$lbl_content_tra2 = this.lbl_content_transform) === null || _this$lbl_content_tra2 === void 0 ? void 0 : _this$lbl_content_tra2.contentSize.height) + 10);
+          var content_text_size = (_this$lbl_content_tra = this.lbl_content_transform) === null || _this$lbl_content_tra === void 0 ? void 0 : _this$lbl_content_tra.contentSize;
+          var size = new Size(content_text_size.width + 30, content_text_size.height + 10);
           this.background.setContentSize(size);
         };
 
