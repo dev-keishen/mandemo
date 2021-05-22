@@ -10017,6 +10017,35 @@ System.register("chunks:///_virtual/LobbyViewController.ts", ['./_rollupPluginMo
           this.onLoggedOut();
         };
 
+        _proto.showInvite = function showInvite(fromUser, roomDict) {
+          var _PopupController$getI10;
+
+          if (GameConfigManager.IS_REJECT_ALL) {
+            return;
+          }
+
+          var userName = fromUser["u"];
+          var userMoney = fromUser["m"];
+          var aid = roomDict["aid"];
+          var gameID = roomDict["gid"];
+          var roomID = roomDict["rid"];
+          var serverID = roomDict["sid"];
+          var bet = roomDict["b"];
+          var MMBI = 0;
+
+          if (roomDict["MMBI"] != null && roomDict["MMBI"] != undefined) {
+            MMBI = roomDict["MMBI"];
+          }
+
+          var roomPassword = "";
+
+          if (roomDict["pwd"] != null && roomDict["pwd"] != undefined) {
+            roomPassword = roomDict["pwd"];
+          }
+
+          (_PopupController$getI10 = PopupController.getInstance()) === null || _PopupController$getI10 === void 0 ? void 0 : _PopupController$getI10.showInvitePopup(userName, userMoney, gameID);
+        };
+
         _proto.handleLobbyMessage = function handleLobbyMessage(message) {
           if (this.currentGameView != this) {
             this.currentGameView.handleMessage(message);
@@ -10043,9 +10072,9 @@ System.register("chunks:///_virtual/LobbyViewController.ts", ['./_rollupPluginMo
                   // UserDefault:: getInstance() -> setBoolForKey("isLastLoginSucceeded", true);
                   return;
                 } else if (cmd == GLOBAL_MESSAGE.JOIN_TABLE_INVITATION) {
-                  // MsgPackDict * fromUserDict = dict -> getDict("fu");
-                  // MsgPackDict * roomDict = dict -> getDict("ri");
-                  // gameListView -> showInvite(fromUserDict, roomDict);
+                  var fromUserDict = dict["fu"];
+                  var roomDict = dict["ri"];
+                  this.showInvite(fromUserDict, roomDict);
                   return;
                 } else if (cmd == GLOBAL_MESSAGE.REFRESH_MONEY) {
                   var as = dict["As"];
@@ -10249,6 +10278,7 @@ System.register("chunks:///_virtual/LobbyViewController.ts", ['./_rollupPluginMo
 
                     GameConfigManager.customerID = customerID;
                     GameConfigManager.uid = userID;
+                    console.log("my uid:", GameConfigManager.uid);
                     GameConfigManager.displayName = displayName;
                     GameConfigManager.avaURL = avatarURL; // GameConfigManager:: getInstance() -> phoneNumber = phoneNumber;
                     // GameConfigManager:: getInstance() -> activatePhoneMessage = activateMessage;
@@ -10334,9 +10364,9 @@ System.register("chunks:///_virtual/LobbyViewController.ts", ['./_rollupPluginMo
 
         _proto.playGame = function playGame(gameID) {
           if (GamePlayManager.STATE == NETWORK_STATE.UNLOGGED_IN) {
-            var _PopupController$getI10;
+            var _PopupController$getI11;
 
-            (_PopupController$getI10 = PopupController.getInstance()) === null || _PopupController$getI10 === void 0 ? void 0 : _PopupController$getI10.showLoginPopup();
+            (_PopupController$getI11 = PopupController.getInstance()) === null || _PopupController$getI11 === void 0 ? void 0 : _PopupController$getI11.showLoginPopup();
             return;
           }
 
@@ -14955,6 +14985,164 @@ System.register("chunks:///_virtual/GameNetworkHandler.ts", ['./_rollupPluginMod
   };
 });
 
+System.register("chunks:///_virtual/InvitePopup.ts", ['./_rollupPluginModLoBabelHelpers.js', 'cc', './CommonPopup.ts', './GameConfigManager.ts', './StringUtils.ts', './GlobalVariables.ts', './LobbyViewController.ts'], function (exports) {
+  'use strict';
+
+  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, _defineProperty, cclegacy, _decorator, Button, Label, CommonPopup, GameConfigManager, StringUtils, GlobalVariables, LobbyViewController;
+
+  return {
+    setters: [function (module) {
+      _applyDecoratedDescriptor = module.applyDecoratedDescriptor;
+      _inheritsLoose = module.inheritsLoose;
+      _initializerDefineProperty = module.initializerDefineProperty;
+      _assertThisInitialized = module.assertThisInitialized;
+      _defineProperty = module.defineProperty;
+    }, function (module) {
+      cclegacy = module.cclegacy;
+      _decorator = module._decorator;
+      Button = module.Button;
+      Label = module.Label;
+    }, function (module) {
+      CommonPopup = module.CommonPopup;
+    }, function (module) {
+      GameConfigManager = module.GameConfigManager;
+    }, function (module) {
+      StringUtils = module.StringUtils;
+    }, function (module) {
+      GlobalVariables = module.GlobalVariables;
+    }, function (module) {
+      LobbyViewController = module.LobbyViewController;
+    }],
+    execute: function () {
+      var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _temp;
+
+      cclegacy._RF.push({}, "538611JT0RAq5jphitE2lrB", "InvitePopup", undefined);
+
+      var ccclass = _decorator.ccclass,
+          property = _decorator.property;
+      var InvitePopup = exports('InvitePopup', (_dec = ccclass('InvitePopup'), _dec2 = property(Button), _dec3 = property(Button), _dec4 = property(Label), _dec5 = property(Label), _dec6 = property(Label), _dec(_class = (_class2 = (_temp = /*#__PURE__*/function (_CommonPopup) {
+        _inheritsLoose(InvitePopup, _CommonPopup);
+
+        function InvitePopup() {
+          var _this;
+
+          for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+          }
+
+          _this = _CommonPopup.call.apply(_CommonPopup, [this].concat(args)) || this;
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "btn_accept", _descriptor, _assertThisInitialized(_this));
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "btn_rejectall", _descriptor2, _assertThisInitialized(_this));
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "lbl_name", _descriptor3, _assertThisInitialized(_this));
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "lbl_money", _descriptor4, _assertThisInitialized(_this));
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "lbl_game", _descriptor5, _assertThisInitialized(_this));
+
+          _defineProperty(_assertThisInitialized(_this), "gameID", GlobalVariables.LOBBY);
+
+          return _this;
+        }
+
+        var _proto = InvitePopup.prototype;
+
+        _proto.onLoad = function onLoad() {
+          var _this2 = this;
+
+          _CommonPopup.prototype.onLoad.call(this);
+
+          this.btn_accept.node.on("click", function () {
+            var _LobbyViewController$;
+
+            (_LobbyViewController$ = LobbyViewController.getInstance()) === null || _LobbyViewController$ === void 0 ? void 0 : _LobbyViewController$.playGame(_this2.gameID);
+
+            _this2.hide();
+          });
+          this.btn_rejectall.node.on("click", function () {
+            GameConfigManager.IS_REJECT_ALL = true;
+
+            _this2.hide();
+          });
+        };
+
+        _proto.display = function display(name, money, gameID) {
+          this.gameID = gameID;
+          this.lbl_name.string = name;
+          this.lbl_money.string = StringUtils.formatNumber(money);
+
+          switch (gameID) {
+            case GlobalVariables.BAU_CUA_FULL:
+              {
+                this.lbl_game.string = "Bầu Cua";
+                break;
+              }
+
+            case GlobalVariables.XOCDIA:
+              {
+                this.lbl_game.string = "Xóc Dĩa";
+                break;
+              }
+          }
+
+          this.show();
+        };
+
+        return InvitePopup;
+      }(CommonPopup), _temp), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, "btn_accept", [_dec2], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, "btn_rejectall", [_dec3], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, "lbl_name", [_dec4], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, "lbl_money", [_dec5], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, "lbl_game", [_dec6], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      })), _class2)) || _class));
+      /**
+       * [1] Class member could be defined like this.
+       * [2] Use `property` decorator if your want the member to be serializable.
+       * [3] Your initialization goes here.
+       * [4] Your update function goes here.
+       *
+       * Learn more about scripting: https://docs.cocos.com/creator/3.0/manual/en/scripting/
+       * Learn more about CCClass: https://docs.cocos.com/creator/3.0/manual/en/scripting/ccclass.html
+       * Learn more about life-cycle callbacks: https://docs.cocos.com/creator/3.0/manual/en/scripting/life-cycle-callbacks.html
+       */
+
+      cclegacy._RF.pop();
+    }
+  };
+});
+
 System.register("chunks:///_virtual/GameSettingPopup.ts", ['./_rollupPluginModLoBabelHelpers.js', 'cc', './GameConfigManager.ts', './SettingPopup.ts', './PopupController.ts'], function (exports) {
   'use strict';
 
@@ -16028,10 +16216,10 @@ System.register("chunks:///_virtual/BaseMiniGameView.ts", ['./_rollupPluginModLo
   };
 });
 
-System.register("chunks:///_virtual/PopupController.ts", ['./_rollupPluginModLoBabelHelpers.js', 'cc', './CommonPopup.ts', './ChangeAvatarPopup.ts', './ChangePasswordPopup.ts', './GameHistoryPopup.ts', './GameSettingPopup.ts', './LoginPopup.ts', './RegisterPopup.ts', './ProfilesPopup.ts', './GamePlayManager.ts'], function (exports) {
+System.register("chunks:///_virtual/PopupController.ts", ['./_rollupPluginModLoBabelHelpers.js', 'cc', './CommonPopup.ts', './ChangeAvatarPopup.ts', './ChangePasswordPopup.ts', './GameHistoryPopup.ts', './GameSettingPopup.ts', './InvitePopup.ts', './LoginPopup.ts', './RegisterPopup.ts', './ProfilesPopup.ts', './GamePlayManager.ts'], function (exports) {
   'use strict';
 
-  var _defineProperty, _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, cclegacy, _decorator, Component, CommonPopup, ChangeAvatarPopup, ChangePasswordPopup, GameHistoryPopup, GameSettingPopup, LoginPopup, RegisterPopup, ProfilesPopup, GamePlayManager, NETWORK_STATE;
+  var _defineProperty, _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, cclegacy, _decorator, Component, CommonPopup, ChangeAvatarPopup, ChangePasswordPopup, GameHistoryPopup, GameSettingPopup, InvitePopup, LoginPopup, RegisterPopup, ProfilesPopup, GamePlayManager, NETWORK_STATE;
 
   return {
     setters: [function (module) {
@@ -16055,6 +16243,8 @@ System.register("chunks:///_virtual/PopupController.ts", ['./_rollupPluginModLoB
     }, function (module) {
       GameSettingPopup = module.GameSettingPopup;
     }, function (module) {
+      InvitePopup = module.InvitePopup;
+    }, function (module) {
       LoginPopup = module.LoginPopup;
     }, function (module) {
       RegisterPopup = module.RegisterPopup;
@@ -16065,13 +16255,13 @@ System.register("chunks:///_virtual/PopupController.ts", ['./_rollupPluginModLoB
       NETWORK_STATE = module.NETWORK_STATE;
     }],
     execute: function () {
-      var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _dec8, _dec9, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _class3, _temp;
+      var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _dec8, _dec9, _dec10, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _class3, _temp;
 
       cclegacy._RF.push({}, "66febuP1UhEB5GjMYCCMDhb", "PopupController", undefined);
 
       var ccclass = _decorator.ccclass,
           property = _decorator.property;
-      var PopupController = exports('PopupController', (_dec = ccclass('PopupController'), _dec2 = property(LoginPopup), _dec3 = property(RegisterPopup), _dec4 = property(ProfilesPopup), _dec5 = property(ChangePasswordPopup), _dec6 = property(GameHistoryPopup), _dec7 = property(GameSettingPopup), _dec8 = property(ChangeAvatarPopup), _dec9 = property(CommonPopup), _dec(_class = (_class2 = (_temp = _class3 = /*#__PURE__*/function (_Component) {
+      var PopupController = exports('PopupController', (_dec = ccclass('PopupController'), _dec2 = property(LoginPopup), _dec3 = property(RegisterPopup), _dec4 = property(ProfilesPopup), _dec5 = property(ChangePasswordPopup), _dec6 = property(GameHistoryPopup), _dec7 = property(GameSettingPopup), _dec8 = property(ChangeAvatarPopup), _dec9 = property(InvitePopup), _dec10 = property(CommonPopup), _dec(_class = (_class2 = (_temp = _class3 = /*#__PURE__*/function (_Component) {
         _inheritsLoose(PopupController, _Component);
 
         function PopupController() {
@@ -16097,7 +16287,9 @@ System.register("chunks:///_virtual/PopupController.ts", ['./_rollupPluginModLoB
 
           _initializerDefineProperty(_assertThisInitialized(_this), "changeAvatarPopup", _descriptor7, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "commonPopup", _descriptor8, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "invitePopup", _descriptor8, _assertThisInitialized(_this));
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "commonPopup", _descriptor9, _assertThisInitialized(_this));
 
           return _this;
         }
@@ -16118,6 +16310,7 @@ System.register("chunks:///_virtual/PopupController.ts", ['./_rollupPluginModLoB
           this.hideRegisterPopup();
           this.hideChangePasswordPopup();
           this.hideProfilesPopup();
+          this.hideInvitePopup();
         };
 
         _proto.showCommonPopup = function showCommonPopup(msg, onOK, onCancel) {
@@ -16231,6 +16424,18 @@ System.register("chunks:///_virtual/PopupController.ts", ['./_rollupPluginModLoB
           (_this$changeAvatarPop2 = this.changeAvatarPopup) === null || _this$changeAvatarPop2 === void 0 ? void 0 : _this$changeAvatarPop2.hide();
         };
 
+        _proto.showInvitePopup = function showInvitePopup(name, money, gameID) {
+          var _this$invitePopup;
+
+          (_this$invitePopup = this.invitePopup) === null || _this$invitePopup === void 0 ? void 0 : _this$invitePopup.display(name, money, gameID);
+        };
+
+        _proto.hideInvitePopup = function hideInvitePopup() {
+          var _this$invitePopup2;
+
+          (_this$invitePopup2 = this.invitePopup) === null || _this$invitePopup2 === void 0 ? void 0 : _this$invitePopup2.hide();
+        };
+
         return PopupController;
       }(Component), _defineProperty(_class3, "instance", null), _temp), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, "loginPopup", [_dec2], {
         configurable: true,
@@ -16281,7 +16486,14 @@ System.register("chunks:///_virtual/PopupController.ts", ['./_rollupPluginModLoB
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor8 = _applyDecoratedDescriptor(_class2.prototype, "commonPopup", [_dec9], {
+      }), _descriptor8 = _applyDecoratedDescriptor(_class2.prototype, "invitePopup", [_dec9], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor9 = _applyDecoratedDescriptor(_class2.prototype, "commonPopup", [_dec10], {
         configurable: true,
         enumerable: true,
         writable: true,
@@ -18794,7 +19006,7 @@ System.register("chunks:///_virtual/GamePlayManager.ts", ['./_rollupPluginModLoB
           GameNetworkHandler.send(mes);
         };
 
-        GamePlayManager.sendInvite = function sendInvite() {
+        GamePlayManager.getUserInLobby = function getUserInLobby() {
           if (GamePlayManager.STATE == NETWORK_STATE.UNLOGGED_IN) {
             return;
           }
@@ -18810,6 +19022,10 @@ System.register("chunks:///_virtual/GamePlayManager.ts", ['./_rollupPluginModLoB
           if (GamePlayManager.STATE == NETWORK_STATE.UNLOGGED_IN) {
             return;
           }
+
+          names.push("de97dffc-9fa2-46dc-8cee-3a2de75ba8d7"); // kushi
+
+          names.push("055ee000-a89e-476b-88c9-d0b33374aa02"); // lavi
 
           var dict = {};
           dict["cmd"] = 304;
@@ -19146,7 +19362,7 @@ System.register("chunks:///_virtual/UserChatTextItem.ts", ['./_rollupPluginModLo
 System.register("chunks:///_virtual/InvitationPlayerView.ts", ['./_rollupPluginModLoBabelHelpers.js', 'cc', './StringUtils.ts'], function (exports) {
   'use strict';
 
-  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, cclegacy, _decorator, Label, Toggle, Component, StringUtils;
+  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, _defineProperty, cclegacy, _decorator, Label, Toggle, Component, StringUtils;
 
   return {
     setters: [function (module) {
@@ -19154,6 +19370,7 @@ System.register("chunks:///_virtual/InvitationPlayerView.ts", ['./_rollupPluginM
       _inheritsLoose = module.inheritsLoose;
       _initializerDefineProperty = module.initializerDefineProperty;
       _assertThisInitialized = module.assertThisInitialized;
+      _defineProperty = module.defineProperty;
     }, function (module) {
       cclegacy = module.cclegacy;
       _decorator = module._decorator;
@@ -19188,6 +19405,8 @@ System.register("chunks:///_virtual/InvitationPlayerView.ts", ['./_rollupPluginM
 
           _initializerDefineProperty(_assertThisInitialized(_this), "toggle_invite", _descriptor3, _assertThisInitialized(_this));
 
+          _defineProperty(_assertThisInitialized(_this), "uid", "");
+
           return _this;
         }
 
@@ -19200,10 +19419,11 @@ System.register("chunks:///_virtual/InvitationPlayerView.ts", ['./_rollupPluginM
         };
 
         _proto.getName = function getName() {
-          return this.lbl_displayName.string;
+          return this.uid;
         };
 
-        _proto.show = function show(displayName, money) {
+        _proto.show = function show(uid, displayName, money) {
+          this.uid = uid;
           this.toggle_invite.isChecked = true;
           this.lbl_money.string = StringUtils.formatMoneyNumber(money);
           this.lbl_displayName.string = displayName;
@@ -25351,7 +25571,7 @@ System.register("chunks:///_virtual/GameConfigManager.ts", ['./_rollupPluginModL
         };
 
         return GameConfigManager;
-      }(), _defineProperty(_class2, "DIS_URL", "https://cfg.xeui.io/distributor?command=regdis&bundle=%bundle%&appName=%appName%"), _defineProperty(_class2, "CONFIG_URL", "https://cfg.xeui.io/acs?command=get-bid&distId=%distId%&versionId=%versionId%&platformId=%platformId%&appId=%appId%"), _defineProperty(_class2, "IDdomainURL", ""), _defineProperty(_class2, "SAdomainURL", ""), _defineProperty(_class2, "MainWSURL", ""), _defineProperty(_class2, "MiniWSURL", ""), _defineProperty(_class2, "liveChatURL", ""), _defineProperty(_class2, "helpURL", ""), _defineProperty(_class2, "hotlineNumber", ""), _defineProperty(_class2, "hashSecretKey", "domaytimduocday"), _defineProperty(_class2, "brand", "789.club"), _defineProperty(_class2, "bundleID", "com.gamebai.sunclub"), _defineProperty(_class2, "appName", "789club"), _defineProperty(_class2, "gameConfigVersion", 20), _defineProperty(_class2, "disID", ""), _defineProperty(_class2, "appID", ""), _defineProperty(_class2, "signature", ""), _defineProperty(_class2, "loginInfo", ""), _defineProperty(_class2, "username", ""), _defineProperty(_class2, "password", ""), _defineProperty(_class2, "serverAccessToken", ""), _defineProperty(_class2, "serverRefreshToken", ""), _defineProperty(_class2, "displayName", ""), _defineProperty(_class2, "uid", ""), _defineProperty(_class2, "gold", 0), _defineProperty(_class2, "avaURL", ""), _defineProperty(_class2, "customerID", ""), _defineProperty(_class2, "LOGGED_USER_NAME", "LOGGED_USER_NAME"), _defineProperty(_class2, "LOGGED_PASSWORD", "LOGGED_PASSWORD"), _defineProperty(_class2, "IS_LAST_LOGIN_SUCCEED", "IS_LAST_LOGIN_SUCCEED"), _defineProperty(_class2, "suffix", "?command="), _temp)) || _class));
+      }(), _defineProperty(_class2, "DIS_URL", "https://cfg.xeui.io/distributor?command=regdis&bundle=%bundle%&appName=%appName%"), _defineProperty(_class2, "CONFIG_URL", "https://cfg.xeui.io/acs?command=get-bid&distId=%distId%&versionId=%versionId%&platformId=%platformId%&appId=%appId%"), _defineProperty(_class2, "IDdomainURL", ""), _defineProperty(_class2, "SAdomainURL", ""), _defineProperty(_class2, "MainWSURL", ""), _defineProperty(_class2, "MiniWSURL", ""), _defineProperty(_class2, "liveChatURL", ""), _defineProperty(_class2, "helpURL", ""), _defineProperty(_class2, "hotlineNumber", ""), _defineProperty(_class2, "hashSecretKey", "domaytimduocday"), _defineProperty(_class2, "brand", "789.club"), _defineProperty(_class2, "bundleID", "com.gamebai.sunclub"), _defineProperty(_class2, "appName", "789club"), _defineProperty(_class2, "gameConfigVersion", 20), _defineProperty(_class2, "disID", ""), _defineProperty(_class2, "appID", ""), _defineProperty(_class2, "signature", ""), _defineProperty(_class2, "loginInfo", ""), _defineProperty(_class2, "username", ""), _defineProperty(_class2, "password", ""), _defineProperty(_class2, "serverAccessToken", ""), _defineProperty(_class2, "serverRefreshToken", ""), _defineProperty(_class2, "displayName", ""), _defineProperty(_class2, "uid", ""), _defineProperty(_class2, "gold", 0), _defineProperty(_class2, "avaURL", ""), _defineProperty(_class2, "customerID", ""), _defineProperty(_class2, "LOGGED_USER_NAME", "LOGGED_USER_NAME"), _defineProperty(_class2, "LOGGED_PASSWORD", "LOGGED_PASSWORD"), _defineProperty(_class2, "IS_LAST_LOGIN_SUCCEED", "IS_LAST_LOGIN_SUCCEED"), _defineProperty(_class2, "IS_REJECT_ALL", false), _defineProperty(_class2, "suffix", "?command="), _temp)) || _class));
       /**
        * [1] Class member could be defined like this.
        * [2] Use `property` decorator if your want the member to be serializable.
@@ -25748,7 +25968,7 @@ System.register("chunks:///_virtual/UserInvitePopup.ts", ['./_rollupPluginModLoB
 
         _proto.fetchUserInvitations = function fetchUserInvitations() {
           LoadingView.getInstance().show();
-          GamePlayManager.sendInvite();
+          GamePlayManager.getUserInLobby();
         };
 
         _proto.getPooledView = function getPooledView() {
@@ -25782,7 +26002,7 @@ System.register("chunks:///_virtual/UserInvitePopup.ts", ['./_rollupPluginModLoB
             var view = _this3.getPooledView();
 
             view.node.active = true;
-            view === null || view === void 0 ? void 0 : view.show(p["dn"], p["m"]);
+            view === null || view === void 0 ? void 0 : view.show(p["uid"], p["dn"], p["m"]);
           });
           (_LoadingView$getInsta = LoadingView.getInstance()) === null || _LoadingView$getInsta === void 0 ? void 0 : _LoadingView$getInsta.hide();
           this.show();
@@ -31996,11 +32216,11 @@ System.register("chunks:///_virtual/ChangeAvatarPopup.ts", ['./_rollupPluginModL
   };
 });
 
-System.register("chunks:///_virtual/main", ['./CommonPopup.ts', './GameConfigManager.ts', './StringUtils.ts', './JackpotItemView.ts', './MiniGameNetworkHandler.ts', './GamePlatformManager.ts', './GameNetworkHandler.ts', './NotiView.ts', './GameUtils.ts', './GlobalVariables.ts', './LoadingView.ts', './BaseFullScreenGameView.ts', './ChipItem.ts', './ChipPanel.ts', './BlinkCmp.ts', './BauCuaBetEntry.ts', './SettingPopup.ts', './BauCuaSettingPopup.ts', './ChipPooling.ts', './BubbleChat.ts', './Downloader.ts', './PlayerView.ts', './SoiCauItemPopup.ts', './SoiCauPopup.ts', './UserChatTextItem.ts', './UserChatPopup.ts', './InvitationPlayerView.ts', './UserInvitePopup.ts', './UserOnlinePopup.ts', './BauCuaFullScreenGameView.ts', './XocDiaSoiCauPopup.ts', './XocDiaFullScreenGameView.ts', './GameHTTPNetwork.ts', './FloatStringCmp.ts', './MD5Algorithm.ts', './TransitionFadeScreen.ts', './ChangeAvatarPopup.ts', './ChangePasswordPopup.ts', './GameHistoryItemView.ts', './GameHistoryPopup.ts', './GameSettingPopup.ts', './LoginPopup.ts', './RegisterPopup.ts', './PopupController.ts', './ProfilesPopup.ts', './LobbyViewController.ts', './MiniGamePopup.ts', './MiniPokerMessageHandler.ts', './MauBinh_CardLib.ts', './BaseMiniGameView.ts', './MiniPokerBetHistoryItemView.ts', './MiniPokerBetHistoryView.ts', './MiniPokerBetRankItemView.ts', './MiniPokerBetRankView.ts', './MiniPokerNoHuView.ts', './MiniPoker_SlotMachineItemView.ts', './MiniPoker_SlotMachineColumn.ts', './MiniPoker_SlotMachineCmp.ts', './MiniPokerGameView.ts', './TaiXiuGameItemView.ts', './ChatItemView.ts', './TaiXiuChatView.ts', './TaiXiuMessageHandler.ts', './DragView.ts', './BatCmp.ts', './TaiXiuBetHistoryItemView.ts', './TaiXiuBetHistoryView.ts', './TaiXiuBetRankItemView.ts', './TaiXiuBetRankView.ts', './TaiXiuPopupCmp.ts', './TaiXiuSessionAnalyticsItemView.ts', './TaiXiuSessionAnalyticsView.ts', './LineCmp.ts', './TaiXiuSessionHistorySumItemView.ts', './TaiXiuSessionHistoryView.ts', './TaiXiuGameView.ts', './BigLoadingView.ts', './KimCuongMessageHandler.ts', './MiniGameNodeDragView.ts', './MiniGameNodeController.ts', './CCMiniGameRoot.ts', './GamePlayManager.ts', './KimCuong_SlotMachineItemView.ts', './KimCuong_SlotMachineColumn.ts', './KimCuong_SlotMachineCmp.ts', './KimCuongBetHistoryDetail.ts', './KimCuongBetHistoryItemView.ts', './KimCuongBetHistoryView.ts', './KimCuongBetRankItemView.ts', './KimCuongBetRankView.ts', './KimCuongNoHuView.ts', './KimCuongGameView.ts', './KimCuongLineSelectionView.ts', './CCComponentLoader.ts', './FullScreenGameItemView.ts', './CCMiniGameCommonPopup.ts', './CCButtonLoader.ts', './ScaleCmp.ts', './MiniSlotGameItemView.ts', './SpinButtonCmp.ts', './SoundButtonCmp.ts', './CCSpriteFrameLoader.ts', './LineSpriteComponent.ts', './TaiXiuSessionHistoryResultSumItemView.ts', './TaiXiuSessionHistoryResultItemView.ts', './TaiXiuSessionHistoryDiceItemView.ts'], function () {
+System.register("chunks:///_virtual/main", ['./CommonPopup.ts', './GameConfigManager.ts', './StringUtils.ts', './JackpotItemView.ts', './MiniGameNetworkHandler.ts', './GamePlatformManager.ts', './GameNetworkHandler.ts', './NotiView.ts', './GameUtils.ts', './GlobalVariables.ts', './LoadingView.ts', './BaseFullScreenGameView.ts', './ChipItem.ts', './ChipPanel.ts', './BlinkCmp.ts', './BauCuaBetEntry.ts', './SettingPopup.ts', './BauCuaSettingPopup.ts', './ChipPooling.ts', './BubbleChat.ts', './Downloader.ts', './PlayerView.ts', './SoiCauItemPopup.ts', './SoiCauPopup.ts', './UserChatTextItem.ts', './UserChatPopup.ts', './InvitationPlayerView.ts', './UserInvitePopup.ts', './UserOnlinePopup.ts', './BauCuaFullScreenGameView.ts', './XocDiaSoiCauPopup.ts', './XocDiaFullScreenGameView.ts', './GameHTTPNetwork.ts', './FloatStringCmp.ts', './MD5Algorithm.ts', './TransitionFadeScreen.ts', './ChangeAvatarPopup.ts', './ChangePasswordPopup.ts', './GameHistoryItemView.ts', './GameHistoryPopup.ts', './GameSettingPopup.ts', './InvitePopup.ts', './LoginPopup.ts', './RegisterPopup.ts', './PopupController.ts', './ProfilesPopup.ts', './LobbyViewController.ts', './MiniGamePopup.ts', './MiniPokerMessageHandler.ts', './MauBinh_CardLib.ts', './BaseMiniGameView.ts', './MiniPokerBetHistoryItemView.ts', './MiniPokerBetHistoryView.ts', './MiniPokerBetRankItemView.ts', './MiniPokerBetRankView.ts', './MiniPokerNoHuView.ts', './MiniPoker_SlotMachineItemView.ts', './MiniPoker_SlotMachineColumn.ts', './MiniPoker_SlotMachineCmp.ts', './MiniPokerGameView.ts', './TaiXiuGameItemView.ts', './ChatItemView.ts', './TaiXiuChatView.ts', './TaiXiuMessageHandler.ts', './DragView.ts', './BatCmp.ts', './TaiXiuBetHistoryItemView.ts', './TaiXiuBetHistoryView.ts', './TaiXiuBetRankItemView.ts', './TaiXiuBetRankView.ts', './TaiXiuPopupCmp.ts', './TaiXiuSessionAnalyticsItemView.ts', './TaiXiuSessionAnalyticsView.ts', './LineCmp.ts', './TaiXiuSessionHistorySumItemView.ts', './TaiXiuSessionHistoryView.ts', './TaiXiuGameView.ts', './BigLoadingView.ts', './KimCuongMessageHandler.ts', './MiniGameNodeDragView.ts', './MiniGameNodeController.ts', './CCMiniGameRoot.ts', './GamePlayManager.ts', './KimCuong_SlotMachineItemView.ts', './KimCuong_SlotMachineColumn.ts', './KimCuong_SlotMachineCmp.ts', './KimCuongBetHistoryDetail.ts', './KimCuongBetHistoryItemView.ts', './KimCuongBetHistoryView.ts', './KimCuongBetRankItemView.ts', './KimCuongBetRankView.ts', './KimCuongNoHuView.ts', './KimCuongGameView.ts', './KimCuongLineSelectionView.ts', './CCComponentLoader.ts', './FullScreenGameItemView.ts', './CCMiniGameCommonPopup.ts', './CCButtonLoader.ts', './ScaleCmp.ts', './MiniSlotGameItemView.ts', './SpinButtonCmp.ts', './SoundButtonCmp.ts', './CCSpriteFrameLoader.ts', './LineSpriteComponent.ts', './TaiXiuSessionHistoryResultSumItemView.ts', './TaiXiuSessionHistoryResultItemView.ts', './TaiXiuSessionHistoryDiceItemView.ts'], function () {
   'use strict';
 
   return {
-    setters: [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+    setters: [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
     execute: function () {}
   };
 });
