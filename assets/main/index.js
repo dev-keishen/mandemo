@@ -1031,6 +1031,16 @@ System.register("chunks:///_virtual/MiniGameNodeController.ts", ['./_rollupPlugi
                 this.closed_node.setPosition(_pos);
                 break;
               }
+
+            case GlobalVariables.TIENLEN:
+              {
+                var _pos2 = new Vec3(this.closed_node.getPosition());
+
+                _pos2.y = CCMiniGameRoot.WIN_SIZE_HEIGHT / 2 - this.closed_node.getComponent(UITransform).contentSize.height / 2;
+                _pos2.x = CCMiniGameRoot.WIN_SIZE_WIDTH / 2 - 3 * (this.closed_node.getComponent(UITransform).contentSize.width / 2);
+                this.closed_node.setPosition(_pos2);
+                break;
+              }
           }
         };
 
@@ -7663,10 +7673,10 @@ System.register("chunks:///_virtual/MiniPokerBetRankView.ts", ['./_rollupPluginM
   };
 });
 
-System.register("chunks:///_virtual/MiniPokerGameView.ts", ['./_rollupPluginModLoBabelHelpers.js', 'cc', './GameConfigManager.ts', './StringUtils.ts', './MiniGameNetworkHandler.ts', './NotiView.ts', './GlobalVariables.ts', './MiniPokerMessageHandler.ts', './MauBinh_CardLib.ts', './BaseMiniGameView.ts', './MiniPokerBetHistoryView.ts', './MiniPokerBetRankView.ts', './MiniPokerNoHuView.ts', './MiniPoker_SlotMachineCmp.ts', './MiniGameNodeController.ts', './GamePlayManager.ts'], function (exports) {
+System.register("chunks:///_virtual/MiniPokerGameView.ts", ['./_rollupPluginModLoBabelHelpers.js', 'cc', './GameConfigManager.ts', './StringUtils.ts', './MiniGameNetworkHandler.ts', './NotiView.ts', './GlobalVariables.ts', './MauBinh_CardLib.ts', './MiniPokerMessageHandler.ts', './BaseMiniGameView.ts', './MiniPokerBetHistoryView.ts', './MiniPokerBetRankView.ts', './MiniPokerNoHuView.ts', './MiniPoker_SlotMachineCmp.ts', './MiniGameNodeController.ts', './GamePlayManager.ts'], function (exports) {
   'use strict';
 
-  var _defineProperty, _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, cclegacy, _decorator, Label, Button, Node, sp, Toggle, SpriteFrame, sys, tween, Tween, UIOpacity, Vec3, Color, GameConfigManager, StringUtils, MessageRequest, MiniGameNetworkHandler, NotiView, GlobalVariables, MiniPokerMessageHandler, MiniPoker_Message, MauBinh_CardLib, MAU_BINH_RESULT, GameCard, BaseMiniGameView, MiniPokerBetHistoryView, MiniPokerBetRankView, MiniPokerNoHuView, MiniPokerSlotMachineCmp_SlotMachineCmp, MiniGameNodeController, GamePlayManager;
+  var _defineProperty, _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, cclegacy, _decorator, Label, Button, Node, sp, Toggle, SpriteFrame, sys, tween, Tween, UIOpacity, Vec3, Color, GameConfigManager, StringUtils, MessageRequest, MiniGameNetworkHandler, NotiView, GlobalVariables, MauBinh_CardLib, MAU_BINH_RESULT, GameCard, MiniPokerMessageHandler, MiniPoker_Message, BaseMiniGameView, MiniPokerBetHistoryView, MiniPokerBetRankView, MiniPokerNoHuView, MiniPokerSlotMachineCmp_SlotMachineCmp, MiniGameNodeController, GamePlayManager;
 
   return {
     setters: [function (module) {
@@ -7702,12 +7712,12 @@ System.register("chunks:///_virtual/MiniPokerGameView.ts", ['./_rollupPluginModL
     }, function (module) {
       GlobalVariables = module.GlobalVariables;
     }, function (module) {
-      MiniPokerMessageHandler = module.default;
-      MiniPoker_Message = module.MiniPoker_Message;
-    }, function (module) {
       MauBinh_CardLib = module.default;
       MAU_BINH_RESULT = module.MAU_BINH_RESULT;
       GameCard = module.GameCard;
+    }, function (module) {
+      MiniPokerMessageHandler = module.default;
+      MiniPoker_Message = module.MiniPoker_Message;
     }, function (module) {
       BaseMiniGameView = module.default;
     }, function (module) {
@@ -9448,10 +9458,10 @@ System.register("chunks:///_virtual/BatCmp.ts", ['./_rollupPluginModLoBabelHelpe
   };
 });
 
-System.register("chunks:///_virtual/LobbyViewController.ts", ['./_rollupPluginModLoBabelHelpers.js', 'cc', './GameConfigManager.ts', './StringUtils.ts', './MiniGameNetworkHandler.ts', './GamePlatformManager.ts', './GameNetworkHandler.ts', './NotiView.ts', './GlobalVariables.ts', './LoadingView.ts', './BaseFullScreenGameView.ts', './Downloader.ts', './BauCuaFullScreenGameView.ts', './XocDiaFullScreenGameView.ts', './GameHTTPNetwork.ts', './FloatStringCmp.ts', './MD5Algorithm.ts', './TransitionFadeScreen.ts', './PopupController.ts', './ProfilesPopup.ts', './MiniGameNodeController.ts', './CCMiniGameRoot.ts', './GamePlayManager.ts'], function (exports) {
+System.register("chunks:///_virtual/LobbyViewController.ts", ['./_rollupPluginModLoBabelHelpers.js', 'cc', './GameConfigManager.ts', './StringUtils.ts', './MiniGameNetworkHandler.ts', './GamePlatformManager.ts', './GameNetworkHandler.ts', './NotiView.ts', './GlobalVariables.ts', './LoadingView.ts', './BaseFullScreenGameView.ts', './Downloader.ts', './BauCuaFullScreenGameView.ts', './TienLenFullScreenGameView.ts', './XocDiaFullScreenGameView.ts', './GameHTTPNetwork.ts', './FloatStringCmp.ts', './MD5Algorithm.ts', './TransitionFadeScreen.ts', './GameListView.ts', './PopupController.ts', './ProfilesPopup.ts', './TableListView.ts', './MiniGameNodeController.ts', './CCMiniGameRoot.ts', './GamePlayManager.ts'], function (exports) {
   'use strict';
 
-  var _defineProperty, _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, cclegacy, _decorator, Button, sp, UITransform, UIOpacity, Label, Sprite, SpriteFrame, sys, systemEvent, game, Game, director, log, Tween, Vec3, tween, GameConfigManager, StringUtils, MessageResponse, MessageRequest, GamePlatformManager, GameNetworkHandler, NotiView, GlobalVariables, GLOBAL_MESSAGE, LoadingView, BaseFullScreenGameView, Downloader, BauCuaFullScreenGameView, XocDiaFullScreenGameView, GameHTTPNetwork, FloatStringCmp, MD5Algorithm, TransitionFadeScreen, PopupController, ProfilesPopup, MiniGameNodeController, CCMiniGameRoot, GamePlayManager, NETWORK_STATE;
+  var _defineProperty, _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, cclegacy, _decorator, Node, Button, sp, UITransform, UIOpacity, Label, Sprite, SpriteFrame, sys, systemEvent, game, Game, director, log, Tween, Vec3, tween, GameConfigManager, StringUtils, MessageResponse, MessageRequest, GamePlatformManager, GameNetworkHandler, NotiView, GlobalVariables, GLOBAL_MESSAGE, LoadingView, BaseFullScreenGameView, Downloader, BauCuaFullScreenGameView, TienLenFullScreenGameView, XocDiaFullScreenGameView, GameHTTPNetwork, FloatStringCmp, MD5Algorithm, TransitionFadeScreen, GameListView, PopupController, ProfilesPopup, TableListView, MiniGameNodeController, CCMiniGameRoot, GameState, GamePlayManager, NETWORK_STATE;
 
   return {
     setters: [function (module) {
@@ -9463,6 +9473,7 @@ System.register("chunks:///_virtual/LobbyViewController.ts", ['./_rollupPluginMo
     }, function (module) {
       cclegacy = module.cclegacy;
       _decorator = module._decorator;
+      Node = module.Node;
       Button = module.Button;
       sp = module.sp;
       UITransform = module.UITransform;
@@ -9504,6 +9515,8 @@ System.register("chunks:///_virtual/LobbyViewController.ts", ['./_rollupPluginMo
     }, function (module) {
       BauCuaFullScreenGameView = module.BauCuaFullScreenGameView;
     }, function (module) {
+      TienLenFullScreenGameView = module.TienLenFullScreenGameView;
+    }, function (module) {
       XocDiaFullScreenGameView = module.XocDiaFullScreenGameView;
     }, function (module) {
       GameHTTPNetwork = module.default;
@@ -9514,25 +9527,30 @@ System.register("chunks:///_virtual/LobbyViewController.ts", ['./_rollupPluginMo
     }, function (module) {
       TransitionFadeScreen = module.TransitionFadeScreen;
     }, function (module) {
+      GameListView = module.GameListView;
+    }, function (module) {
       PopupController = module.PopupController;
     }, function (module) {
       ProfilesPopup = module.ProfilesPopup;
+    }, function (module) {
+      TableListView = module.TableListView;
     }, function (module) {
       MiniGameNodeController = module.default;
     }, function (module) {
       CCMiniGameRoot = module.CCMiniGameRoot;
     }, function (module) {
+      GameState = module.GameState;
       GamePlayManager = module.GamePlayManager;
       NETWORK_STATE = module.NETWORK_STATE;
     }],
     execute: function () {
-      var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _dec8, _dec9, _dec10, _dec11, _dec12, _dec13, _dec14, _dec15, _dec16, _dec17, _dec18, _dec19, _dec20, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11, _descriptor12, _descriptor13, _descriptor14, _descriptor15, _descriptor16, _descriptor17, _descriptor18, _descriptor19, _class3, _temp;
+      var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _dec8, _dec9, _dec10, _dec11, _dec12, _dec13, _dec14, _dec15, _dec16, _dec17, _dec18, _dec19, _dec20, _dec21, _dec22, _dec23, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11, _descriptor12, _descriptor13, _descriptor14, _descriptor15, _descriptor16, _descriptor17, _descriptor18, _descriptor19, _descriptor20, _descriptor21, _descriptor22, _class3, _temp;
 
       cclegacy._RF.push({}, "2fe45yrM+FOMJreDKza1LMJ", "LobbyViewController", undefined);
 
       var ccclass = _decorator.ccclass,
           property = _decorator.property;
-      var LobbyViewController = exports('LobbyViewController', (_dec = ccclass('LobbyViewController'), _dec2 = property(Button), _dec3 = property(Button), _dec4 = property(Button), _dec5 = property(Button), _dec6 = property(Button), _dec7 = property(Button), _dec8 = property(Button), _dec9 = property(sp.Skeleton), _dec10 = property(sp.Skeleton), _dec11 = property(UITransform), _dec12 = property(UIOpacity), _dec13 = property(Label), _dec14 = property(Label), _dec15 = property(Label), _dec16 = property(Sprite), _dec17 = property(SpriteFrame), _dec18 = property(FloatStringCmp), _dec19 = property(Label), _dec20 = property([SpriteFrame]), _dec(_class = (_class2 = (_temp = _class3 = /*#__PURE__*/function (_BaseFullScreenGameVi) {
+      var LobbyViewController = exports('LobbyViewController', (_dec = ccclass('LobbyViewController'), _dec2 = property(Node), _dec3 = property(Button), _dec4 = property(Button), _dec5 = property(Button), _dec6 = property(Button), _dec7 = property(Button), _dec8 = property(Button), _dec9 = property(Button), _dec10 = property(sp.Skeleton), _dec11 = property(sp.Skeleton), _dec12 = property(UITransform), _dec13 = property(UIOpacity), _dec14 = property(Label), _dec15 = property(Label), _dec16 = property(Label), _dec17 = property(Sprite), _dec18 = property(SpriteFrame), _dec19 = property(FloatStringCmp), _dec20 = property(Label), _dec21 = property([SpriteFrame]), _dec22 = property(GameListView), _dec23 = property(TableListView), _dec(_class = (_class2 = (_temp = _class3 = /*#__PURE__*/function (_BaseFullScreenGameVi) {
         _inheritsLoose(LobbyViewController, _BaseFullScreenGameVi);
 
         function LobbyViewController() {
@@ -9544,43 +9562,49 @@ System.register("chunks:///_virtual/LobbyViewController.ts", ['./_rollupPluginMo
 
           _this = _BaseFullScreenGameVi.call.apply(_BaseFullScreenGameVi, [this].concat(args)) || this;
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "btn_login", _descriptor, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "footer", _descriptor, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "btn_register", _descriptor2, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "btn_login", _descriptor2, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "btn_forgotPassword", _descriptor3, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "btn_register", _descriptor3, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "btn_hotline", _descriptor4, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "btn_forgotPassword", _descriptor4, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "btn_menu", _descriptor5, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "btn_hotline", _descriptor5, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "btn_news", _descriptor6, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "btn_menu", _descriptor6, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "btn_profiles", _descriptor7, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "btn_news", _descriptor7, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "ava_border", _descriptor8, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "btn_profiles", _descriptor8, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "sp_logo_header", _descriptor9, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "ava_border", _descriptor9, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "sp_header_frame", _descriptor10, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "sp_logo_header", _descriptor10, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "logo", _descriptor11, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "sp_header_frame", _descriptor11, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "lbl_userID", _descriptor12, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "logo", _descriptor12, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "lbl_news", _descriptor13, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "lbl_userID", _descriptor13, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "lb_name", _descriptor14, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "lbl_news", _descriptor14, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "spr_avatar", _descriptor15, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "lb_name", _descriptor15, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "spr_frame_AvatarDefault", _descriptor16, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "spr_avatar", _descriptor16, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "floating_message", _descriptor17, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "spr_frame_AvatarDefault", _descriptor17, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "lb_tien", _descriptor18, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "floating_message", _descriptor18, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "sprFrame_avatars", _descriptor19, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "lb_tien", _descriptor19, _assertThisInitialized(_this));
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "sprFrame_avatars", _descriptor20, _assertThisInitialized(_this));
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "gameListView", _descriptor21, _assertThisInitialized(_this));
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "tableListView", _descriptor22, _assertThisInitialized(_this));
 
           _defineProperty(_assertThisInitialized(_this), "news", []);
 
@@ -9599,6 +9623,10 @@ System.register("chunks:///_virtual/LobbyViewController.ts", ['./_rollupPluginMo
 
         _proto.getAvatar = function getAvatar() {
           return this.spr_avatar.spriteFrame;
+        };
+
+        _proto.getTableListView = function getTableListView() {
+          return this.tableListView;
         };
 
         _proto.getCurrentViewGameID = function getCurrentViewGameID() {
@@ -9625,6 +9653,13 @@ System.register("chunks:///_virtual/LobbyViewController.ts", ['./_rollupPluginMo
             case GlobalVariables.XOCDIA:
               {
                 return XocDiaFullScreenGameView.IS_END;
+              }
+
+            case GlobalVariables.TIENLEN:
+              {
+                var _TienLenFullScreenGam;
+
+                return ((_TienLenFullScreenGam = TienLenFullScreenGameView.getInstance()) === null || _TienLenFullScreenGam === void 0 ? void 0 : _TienLenFullScreenGam.getState()) != GameState.PLAYING;
               }
           }
 
@@ -9813,6 +9848,10 @@ System.register("chunks:///_virtual/LobbyViewController.ts", ['./_rollupPluginMo
               }
             });
           }
+        };
+
+        _proto.getLogo = function getLogo() {
+          return this.sp_logo_header;
         };
 
         _proto.onLoggedIn = function onLoggedIn() {
@@ -10009,6 +10048,52 @@ System.register("chunks:///_virtual/LobbyViewController.ts", ['./_rollupPluginMo
           showNewsSeq.start();
         };
 
+        _proto.showFooter = function showFooter(withFx) {
+          if (withFx === void 0) {
+            withFx = true;
+          }
+
+          if (withFx) {
+            var _this$footer, _this$footer2, _this$footer2$getComp;
+
+            Tween.stopAllByTarget(this.footer);
+            var startPos = new Vec3((_this$footer = this.footer) === null || _this$footer === void 0 ? void 0 : _this$footer.position);
+            var footerHeight = (_this$footer2 = this.footer) === null || _this$footer2 === void 0 ? void 0 : (_this$footer2$getComp = _this$footer2.getComponent(UITransform)) === null || _this$footer2$getComp === void 0 ? void 0 : _this$footer2$getComp.contentSize.height;
+            startPos.y = -GameConfigManager.getSizeHeight() / 2 - footerHeight;
+            this.footer.setPosition(startPos);
+            tween(this.footer).by(0.5, {
+              position: new Vec3(0, footerHeight, 0)
+            }, {
+              easing: 'expoOut'
+            }).start();
+          } else {
+            this.footer.active = true;
+          }
+        };
+
+        _proto.hideFooter = function hideFooter(withFx) {
+          if (withFx === void 0) {
+            withFx = true;
+          }
+
+          if (withFx) {
+            var _this$footer3, _this$footer4, _this$footer4$getComp;
+
+            Tween.stopAllByTarget(this.footer);
+            var startPos = new Vec3((_this$footer3 = this.footer) === null || _this$footer3 === void 0 ? void 0 : _this$footer3.position);
+            var footerHeight = (_this$footer4 = this.footer) === null || _this$footer4 === void 0 ? void 0 : (_this$footer4$getComp = _this$footer4.getComponent(UITransform)) === null || _this$footer4$getComp === void 0 ? void 0 : _this$footer4$getComp.contentSize.height;
+            startPos.y = -GameConfigManager.getSizeHeight() / 2;
+            this.footer.setPosition(startPos);
+            tween(this.footer).by(0.5, {
+              position: new Vec3(0, -1 * footerHeight, 0)
+            }, {
+              easing: 'expoOut'
+            }).start();
+          } else {
+            this.footer.active = false;
+          }
+        };
+
         _proto.handleLeaveRoomResponse = function handleLeaveRoomResponse(message) {
           if (message === void 0) {
             message = null;
@@ -10061,6 +10146,39 @@ System.register("chunks:///_virtual/LobbyViewController.ts", ['./_rollupPluginMo
           (_PopupController$getI10 = PopupController.getInstance()) === null || _PopupController$getI10 === void 0 ? void 0 : _PopupController$getI10.showInvitePopup(userName, userMoney, gameID);
         };
 
+        _proto.showTables = function showTables(tableArr) {
+          var _this$sp_logo_header3, _this$gameListView, _this$tableListView;
+
+          LoadingView.getInstance().hide();
+          (_this$sp_logo_header3 = this.sp_logo_header) === null || _this$sp_logo_header3 === void 0 ? void 0 : _this$sp_logo_header3.setAnimation(0, "tint", false);
+          this.hideFooter();
+          (_this$gameListView = this.gameListView) === null || _this$gameListView === void 0 ? void 0 : _this$gameListView.hide();
+          (_this$tableListView = this.tableListView) === null || _this$tableListView === void 0 ? void 0 : _this$tableListView.show(tableArr);
+        };
+
+        _proto.showGameList = function showGameList() {
+          var _this$tableListView2, _this$gameListView2;
+
+          this.showFooter();
+          (_this$tableListView2 = this.tableListView) === null || _this$tableListView2 === void 0 ? void 0 : _this$tableListView2.hide();
+          (_this$gameListView2 = this.gameListView) === null || _this$gameListView2 === void 0 ? void 0 : _this$gameListView2.show();
+        };
+
+        _proto.handleJoinRoomResponse = function handleJoinRoomResponse(message) {
+          var joinResult = message[1];
+
+          if (joinResult) {
+            this.showFullScreenGame();
+          } else {
+            this.switchGameScreen(GlobalVariables.LOBBY);
+            var mesDialog = "";
+            mesDialog = message[4];
+            NotiView.getInstance().showMessage(mesDialog);
+          }
+
+          LoadingView.getInstance().hide();
+        };
+
         _proto.handleLobbyMessage = function handleLobbyMessage(message) {
           if (this.currentGameView != this) {
             this.currentGameView.handleMessage(message);
@@ -10076,15 +10194,15 @@ System.register("chunks:///_virtual/LobbyViewController.ts", ['./_rollupPluginMo
                 var cmd = dict["cmd"];
 
                 if (cmd == GLOBAL_MESSAGE.GET_TABLES) {
-                  // if (dict -> isExistKey("mgs")) {
-                  //     string message = dict -> getString("mgs");
-                  //     PopupDialogUtil:: showMessage(message);
-                  //     gameListView -> onBackClick(nullptr);
-                  //     return;
-                  // }
-                  // MsgPackArray * tableArr = dict -> getArray("rs");
-                  // gameListView -> tableList -> reload(tableArr);
-                  // UserDefault:: getInstance() -> setBoolForKey("isLastLoginSucceeded", true);
+                  if (dict["mgs"] != null && dict["mgs"] != undefined) {
+                    var _message = dict["mgs"];
+                    NotiView.getInstance().showMessage(_message);
+                    this.showGameList();
+                    return;
+                  }
+
+                  var tableArr = dict["rs"];
+                  this.showTables(tableArr);
                   return;
                 } else if (cmd == GLOBAL_MESSAGE.JOIN_TABLE_INVITATION) {
                   var fromUserDict = dict["fu"];
@@ -10098,7 +10216,7 @@ System.register("chunks:///_virtual/LobbyViewController.ts", ['./_rollupPluginMo
                   var chip = as["chip"];
                   var goldSafe = as["safe"];
                   GameConfigManager.gold = gold;
-                  console.log("refresh money");
+                  console.log("refresh money:" + GameConfigManager.gold);
                   systemEvent.emit(LobbyViewController.REFRESH_MONEY, GameConfigManager.gold);
                 } else if (cmd == GLOBAL_MESSAGE.GET_JACKPOTS) {
                   var jars = dict["Js"];
@@ -10130,8 +10248,6 @@ System.register("chunks:///_virtual/LobbyViewController.ts", ['./_rollupPluginMo
                   // gameListView -> createTableResponse(vectorBets);
                   return;
                 } else if (cmd == GLOBAL_MESSAGE.QUICK_PLAY || cmd == GLOBAL_MESSAGE.CREATE_TABLE || cmd == GLOBAL_MESSAGE.QUICK_PLAY_WITH_BET) {
-                  var _LoadingView$getInsta;
-
                   if (dict["ri"] != null && dict["ri"] != undefined) {
                     var tableDict = dict["ri"];
                     var roomID = tableDict["rid"];
@@ -10163,35 +10279,38 @@ System.register("chunks:///_virtual/LobbyViewController.ts", ['./_rollupPluginMo
                     //     }
 
 
+                    this.switchGameScreen(gameID);
                     GamePlayManager.joinRoom(roomID, serverID, roomPassword);
-                    this.showFullScreenGame(gameID);
                   } else {
+                    var _LoadingView$getInsta;
+
+                    (_LoadingView$getInsta = LoadingView.getInstance()) === null || _LoadingView$getInsta === void 0 ? void 0 : _LoadingView$getInsta.hide();
+
                     if (dict["mgs"] != undefined && dict["mgs"] != null) {
                       var mesDialog = dict["mgs"];
                       NotiView.getInstance().showMessage(mesDialog);
-                      return;
+                    } else {
+                      NotiView.getInstance().showMessage("Không tìm thấy phòng thích hợp!");
                     }
-
-                    NotiView.getInstance().showMessage("Không tìm thấy phòng thích hợp!");
                   }
 
-                  (_LoadingView$getInsta = LoadingView.getInstance()) === null || _LoadingView$getInsta === void 0 ? void 0 : _LoadingView$getInsta.hide();
                   return;
                 } else if (cmd == GLOBAL_MESSAGE.ERROR_MESSAGE) {
-                  // LoadingProgressUtil:: getInstance() -> close();
-                  // string mesDialog;
-                  // if (dict -> isExistKey("mgs")) {
-                  //     mesDialog = dict -> getString("mgs");
-                  // }
-                  // if (mesDialog.size() > 0) {
-                  //     PopupMessageUtil:: showMessage(mesDialog);
-                  //     return;
-                  // }
-                  // if (GameConfigManager:: getInstance() -> debug && dict -> isExistKey("c")) {
-                  //     int errCode = (int)dict -> getUInt64("c");
-                  //     PopupDialogUtil:: showMessage("Xảy ra lỗi (" + StringUtil:: intToString(errCode) + ")");
-                  //     return;
-                  // }
+                  var _LoadingView$getInsta2;
+
+                  (_LoadingView$getInsta2 = LoadingView.getInstance()) === null || _LoadingView$getInsta2 === void 0 ? void 0 : _LoadingView$getInsta2.hide();
+
+                  var _mesDialog;
+
+                  if (dict["mgs"] != null && dict["mgs"] != undefined) {
+                    _mesDialog = dict["mgs"];
+                  }
+
+                  if (_mesDialog.length > 0) {
+                    NotiView.getInstance().showMessage(_mesDialog);
+                    return;
+                  }
+
                   return;
                 } else if (cmd == GLOBAL_MESSAGE.VERIFY_PHONE_NUMBER) {
                   // cap nhat sdt
@@ -10266,9 +10385,8 @@ System.register("chunks:///_virtual/LobbyViewController.ts", ['./_rollupPluginMo
                     var broadcastMessages = dict["bcm"];
 
                     for (var i = 0; i < broadcastMessages.length; i++) {
-                      var _message = broadcastMessages[i];
-                      console.log("cuong check:", _message);
-                      this.news.push(_message);
+                      var _message2 = broadcastMessages[i];
+                      this.news.push(_message2);
                     } // int newNews = (int)dict -> getUInt64("na");
                     // if (newNews > 0) {
                     //     GamePlayManager:: getInstance() -> newNews = true;
@@ -10385,15 +10503,27 @@ System.register("chunks:///_virtual/LobbyViewController.ts", ['./_rollupPluginMo
             return;
           }
 
-          if (gameID == GlobalVariables.BAU_CUA_FULL || gameID == GlobalVariables.XOCDIA) {
-            LoadingView.getInstance().show();
-            var dict = {};
-            dict["cmd"] = GLOBAL_MESSAGE.QUICK_PLAY;
-            dict["gid"] = gameID;
-            dict["aid"] = 1;
-            var mes = [MessageRequest.ZonePlugin_Type, "Simms", "channelPlugin", dict];
-            GameNetworkHandler.send(mes);
-            return;
+          switch (gameID) {
+            case GlobalVariables.BAU_CUA_FULL:
+            case GlobalVariables.XOCDIA:
+              {
+                LoadingView.getInstance().show();
+                var dict = {};
+                dict["cmd"] = GLOBAL_MESSAGE.QUICK_PLAY;
+                dict["gid"] = gameID;
+                dict["aid"] = 1;
+                var mes = [MessageRequest.ZonePlugin_Type, "Simms", "channelPlugin", dict];
+                GameNetworkHandler.send(mes);
+                break;
+              }
+
+            case GlobalVariables.TIENLEN:
+              {
+                var _this$tableListView3;
+
+                (_this$tableListView3 = this.tableListView) === null || _this$tableListView3 === void 0 ? void 0 : _this$tableListView3.getTables(gameID);
+                break;
+              }
           }
         };
 
@@ -10401,9 +10531,12 @@ System.register("chunks:///_virtual/LobbyViewController.ts", ['./_rollupPluginMo
           return null;
         };
 
-        _proto.showFullScreenGame = function showFullScreenGame(gameID) {
-          this.currentGameView = this.getGameView(gameID);
+        _proto.showFullScreenGame = function showFullScreenGame() {
           TransitionFadeScreen.start(this, this.currentGameView, 0.4);
+        };
+
+        _proto.switchGameScreen = function switchGameScreen(gameID) {
+          this.currentGameView = this.getGameView(gameID);
         };
 
         _proto.getView = function getView() {
@@ -10468,6 +10601,11 @@ System.register("chunks:///_virtual/LobbyViewController.ts", ['./_rollupPluginMo
               {
                 return XocDiaFullScreenGameView.getInstance();
               }
+
+            case GlobalVariables.TIENLEN:
+              {
+                return TienLenFullScreenGameView.getInstance();
+              }
           }
 
           return null;
@@ -10483,138 +10621,159 @@ System.register("chunks:///_virtual/LobbyViewController.ts", ['./_rollupPluginMo
         };
 
         return LobbyViewController;
-      }(BaseFullScreenGameView), _defineProperty(_class3, "REFRESH_MONEY", "REFRESH_MONEY"), _defineProperty(_class3, "UPDATE_JACKPOT_EVENT_KEY", "update-jackpot-%gameID"), _defineProperty(_class3, "instance", null), _temp), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, "btn_login", [_dec2], {
+      }(BaseFullScreenGameView), _defineProperty(_class3, "REFRESH_MONEY", "REFRESH_MONEY"), _defineProperty(_class3, "UPDATE_JACKPOT_EVENT_KEY", "update-jackpot-%gameID"), _defineProperty(_class3, "instance", null), _temp), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, "footer", [_dec2], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, "btn_register", [_dec3], {
+      }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, "btn_login", [_dec3], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, "btn_forgotPassword", [_dec4], {
+      }), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, "btn_register", [_dec4], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, "btn_hotline", [_dec5], {
+      }), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, "btn_forgotPassword", [_dec5], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, "btn_menu", [_dec6], {
+      }), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, "btn_hotline", [_dec6], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor6 = _applyDecoratedDescriptor(_class2.prototype, "btn_news", [_dec7], {
+      }), _descriptor6 = _applyDecoratedDescriptor(_class2.prototype, "btn_menu", [_dec7], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor7 = _applyDecoratedDescriptor(_class2.prototype, "btn_profiles", [_dec8], {
+      }), _descriptor7 = _applyDecoratedDescriptor(_class2.prototype, "btn_news", [_dec8], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor8 = _applyDecoratedDescriptor(_class2.prototype, "ava_border", [_dec9], {
+      }), _descriptor8 = _applyDecoratedDescriptor(_class2.prototype, "btn_profiles", [_dec9], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor9 = _applyDecoratedDescriptor(_class2.prototype, "sp_logo_header", [_dec10], {
+      }), _descriptor9 = _applyDecoratedDescriptor(_class2.prototype, "ava_border", [_dec10], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor10 = _applyDecoratedDescriptor(_class2.prototype, "sp_header_frame", [_dec11], {
+      }), _descriptor10 = _applyDecoratedDescriptor(_class2.prototype, "sp_logo_header", [_dec11], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor11 = _applyDecoratedDescriptor(_class2.prototype, "logo", [_dec12], {
+      }), _descriptor11 = _applyDecoratedDescriptor(_class2.prototype, "sp_header_frame", [_dec12], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor12 = _applyDecoratedDescriptor(_class2.prototype, "lbl_userID", [_dec13], {
+      }), _descriptor12 = _applyDecoratedDescriptor(_class2.prototype, "logo", [_dec13], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor13 = _applyDecoratedDescriptor(_class2.prototype, "lbl_news", [_dec14], {
+      }), _descriptor13 = _applyDecoratedDescriptor(_class2.prototype, "lbl_userID", [_dec14], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor14 = _applyDecoratedDescriptor(_class2.prototype, "lb_name", [_dec15], {
+      }), _descriptor14 = _applyDecoratedDescriptor(_class2.prototype, "lbl_news", [_dec15], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor15 = _applyDecoratedDescriptor(_class2.prototype, "spr_avatar", [_dec16], {
+      }), _descriptor15 = _applyDecoratedDescriptor(_class2.prototype, "lb_name", [_dec16], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor16 = _applyDecoratedDescriptor(_class2.prototype, "spr_frame_AvatarDefault", [_dec17], {
+      }), _descriptor16 = _applyDecoratedDescriptor(_class2.prototype, "spr_avatar", [_dec17], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor17 = _applyDecoratedDescriptor(_class2.prototype, "floating_message", [_dec18], {
+      }), _descriptor17 = _applyDecoratedDescriptor(_class2.prototype, "spr_frame_AvatarDefault", [_dec18], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor18 = _applyDecoratedDescriptor(_class2.prototype, "lb_tien", [_dec19], {
+      }), _descriptor18 = _applyDecoratedDescriptor(_class2.prototype, "floating_message", [_dec19], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor19 = _applyDecoratedDescriptor(_class2.prototype, "sprFrame_avatars", [_dec20], {
+      }), _descriptor19 = _applyDecoratedDescriptor(_class2.prototype, "lb_tien", [_dec20], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor20 = _applyDecoratedDescriptor(_class2.prototype, "sprFrame_avatars", [_dec21], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return [];
+        }
+      }), _descriptor21 = _applyDecoratedDescriptor(_class2.prototype, "gameListView", [_dec22], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor22 = _applyDecoratedDescriptor(_class2.prototype, "tableListView", [_dec23], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
         }
       })), _class2)) || _class));
       /**
@@ -10991,7 +11150,7 @@ System.register("chunks:///_virtual/LineCmp.ts", ['./_rollupPluginModLoBabelHelp
 System.register("chunks:///_virtual/PlayerView.ts", ['./_rollupPluginModLoBabelHelpers.js', 'cc', './GameConfigManager.ts', './StringUtils.ts', './BubbleChat.ts', './Downloader.ts', './BauCuaFullScreenGameView.ts', './LobbyViewController.ts'], function (exports) {
   'use strict';
 
-  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, _defineProperty, cclegacy, _decorator, Sprite, Node, sp, Label, Tween, UIOpacity, Vec3, tween, Component, GameConfigManager, StringUtils, BubbleChat, Downloader, BauCuaFullScreenGameView, LobbyViewController;
+  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, _defineProperty, cclegacy, _decorator, Sprite, Node, sp, Label, Button, Color, Tween, UIOpacity, Vec3, tween, Component, GameConfigManager, StringUtils, BubbleChat, Downloader, BauCuaFullScreenGameView, LobbyViewController;
 
   return {
     setters: [function (module) {
@@ -11007,6 +11166,8 @@ System.register("chunks:///_virtual/PlayerView.ts", ['./_rollupPluginModLoBabelH
       Node = module.Node;
       sp = module.sp;
       Label = module.Label;
+      Button = module.Button;
+      Color = module.Color;
       Tween = module.Tween;
       UIOpacity = module.UIOpacity;
       Vec3 = module.Vec3;
@@ -11026,13 +11187,13 @@ System.register("chunks:///_virtual/PlayerView.ts", ['./_rollupPluginModLoBabelH
       LobbyViewController = module.LobbyViewController;
     }],
     execute: function () {
-      var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _dec8, _dec9, _dec10, _dec11, _dec12, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11, _temp;
+      var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _dec8, _dec9, _dec10, _dec11, _dec12, _dec13, _dec14, _dec15, _dec16, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11, _descriptor12, _descriptor13, _descriptor14, _descriptor15, _temp;
 
       cclegacy._RF.push({}, "393bfLI/xZJPpBTLyjAbMuD", "PlayerView", undefined);
 
       var ccclass = _decorator.ccclass,
           property = _decorator.property;
-      var PlayerView = exports('PlayerView', (_dec = ccclass('PlayerView'), _dec2 = property(Sprite), _dec3 = property(Node), _dec4 = property(Node), _dec5 = property(sp.Skeleton), _dec6 = property(Label), _dec7 = property(Node), _dec8 = property(Label), _dec9 = property(Label), _dec10 = property([Node]), _dec11 = property([BubbleChat]), _dec12 = property(Boolean), _dec(_class = (_class2 = (_temp = /*#__PURE__*/function (_Component) {
+      var PlayerView = exports('PlayerView', (_dec = ccclass('PlayerView'), _dec2 = property(Sprite), _dec3 = property(Node), _dec4 = property(Node), _dec5 = property(sp.Skeleton), _dec6 = property(Label), _dec7 = property(Node), _dec8 = property(Label), _dec9 = property(Label), _dec10 = property(Sprite), _dec11 = property(Sprite), _dec12 = property(Node), _dec13 = property(Button), _dec14 = property([Node]), _dec15 = property([BubbleChat]), _dec16 = property(Boolean), _dec(_class = (_class2 = (_temp = /*#__PURE__*/function (_Component) {
         _inheritsLoose(PlayerView, _Component);
 
         function PlayerView() {
@@ -11060,11 +11221,19 @@ System.register("chunks:///_virtual/PlayerView.ts", ['./_rollupPluginModLoBabelH
 
           _initializerDefineProperty(_assertThisInitialized(_this), "lbl_addmoney", _descriptor8, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "money_positions", _descriptor9, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "spr_host", _descriptor9, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "bubbleChats", _descriptor10, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "spr_ready", _descriptor10, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "is_hidden", _descriptor11, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "content", _descriptor11, _assertThisInitialized(_this));
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "btn_invite", _descriptor12, _assertThisInitialized(_this));
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "money_positions", _descriptor13, _assertThisInitialized(_this));
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "bubbleChats", _descriptor14, _assertThisInitialized(_this));
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "is_hidden", _descriptor15, _assertThisInitialized(_this));
 
           _defineProperty(_assertThisInitialized(_this), "currentBubbleChatInd", 0);
 
@@ -11086,6 +11255,20 @@ System.register("chunks:///_virtual/PlayerView.ts", ['./_rollupPluginModLoBabelH
         _proto.setUserInfo = function setUserInfo(info) {
           var _this2 = this;
 
+          if (info == null) {
+            if (this.content != null && this.btn_invite != null) {
+              this.content.active = false;
+              this.btn_invite.node.active = true;
+            }
+
+            return;
+          } else {
+            if (this.content != null && this.btn_invite != null) {
+              this.content.active = true;
+              this.btn_invite.node.active = false;
+            }
+          }
+
           if (this.is_hidden) {
             return;
           }
@@ -11099,6 +11282,10 @@ System.register("chunks:///_virtual/PlayerView.ts", ['./_rollupPluginModLoBabelH
 
             _this2.spr_avatar.spriteFrame = sf == null ? (_LobbyViewController$ = LobbyViewController.getInstance()) === null || _LobbyViewController$ === void 0 ? void 0 : _LobbyViewController$.spr_frame_AvatarDefault : sf;
           });
+
+          if (this.spr_host != null) {
+            this.spr_host.node.active = info.isHost;
+          }
         };
 
         _proto.isThisPlayer = function isThisPlayer() {
@@ -11107,6 +11294,19 @@ System.register("chunks:///_virtual/PlayerView.ts", ['./_rollupPluginModLoBabelH
           }
 
           return this.lbl_displayName.string == GameConfigManager.displayName;
+        };
+
+        _proto.isHost = function isHost() {
+          if (this.info == null) return false;
+          return this.info.isHost;
+        };
+
+        _proto.ready = function ready(isReady) {
+          if (isReady === void 0) {
+            isReady = true;
+          }
+
+          this.spr_ready.node.active = isReady;
         };
 
         _proto.getName = function getName() {
@@ -11141,11 +11341,26 @@ System.register("chunks:///_virtual/PlayerView.ts", ['./_rollupPluginModLoBabelH
           this.lbl_money.string = StringUtils.formatMoneyNumber(this.info.gold);
         };
 
+        _proto.setMoney = function setMoney(money) {
+          if (this.info == null) {
+            return;
+          }
+
+          this.info.gold = money;
+          this.refresh();
+        };
+
         _proto.setWinAmount = function setWinAmount(winAmount) {
+          this.lbl_addmoney.color = Color.WHITE;
           this.lbl_addmoney.string = "+" + StringUtils.formatMoneyNumber(winAmount);
         };
 
-        _proto.showWinFx = function showWinFx(delay, timeToShow) {
+        _proto.setLoseAmount = function setLoseAmount(loseAmount) {
+          this.lbl_addmoney.color = new Color(255, 163, 0, 255);
+          this.lbl_addmoney.string = "-" + StringUtils.formatMoneyNumber(loseAmount);
+        };
+
+        _proto.showLoseFx = function showLoseFx(delay, timeToShow) {
           var _this3 = this;
 
           Tween.stopAllByTarget(this.result);
@@ -11154,7 +11369,7 @@ System.register("chunks:///_virtual/PlayerView.ts", ['./_rollupPluginModLoBabelH
           Tween.stopAllByTarget(this.avatar_light.getComponent(UIOpacity));
           var startWinFxPos = new Vec3(0, -15, 0);
           var sequence = tween(this.result).sequence(tween().delay(delay), tween().call(function () {
-            _this3.setWinAmount(_this3.winning);
+            _this3.setLoseAmount(_this3.winning);
 
             _this3.refresh();
 
@@ -11167,35 +11382,11 @@ System.register("chunks:///_virtual/PlayerView.ts", ['./_rollupPluginModLoBabelH
 
             _this3.result.setPosition(startWinFxPos);
 
-            _this3.win_fx.setAnimation(0, "animation", true);
+            _this3.win_fx.setAnimation(0, "", true);
           }), tween().by(0.4, {
             position: new Vec3(0, 65, 0)
           }, {
             easing: 'expoOut'
-          }), tween().call(function () {
-            var seq = tween(_this3.avatar_light).sequence(tween().call(function () {
-              var opa = _this3.avatar_light.getComponent(UIOpacity);
-
-              opa.opacity = 1;
-              _this3.avatar_light.active = true;
-              var fadeIn = tween(opa).sequence(tween().to(0.5, {
-                opacity: 255
-              }), tween().delay(timeToShow), tween().to(0.5, {
-                opacity: 1
-              }), tween().call(function () {
-                _this3.avatar_light.active = false;
-
-                var opa = _this3.avatar_light.getComponent(UIOpacity);
-
-                opa.opacity = 1;
-                Tween.stopAllByTarget(_this3.avatar_light);
-                Tween.stopAllByTarget(opa);
-              }));
-              fadeIn.start();
-            }), tween(_this3.avatar_light).repeatForever(tween(_this3.avatar_light).by(5.0, {
-              eulerAngles: new Vec3(0, 0, 360)
-            }).start()));
-            seq.start();
           }), tween().delay(timeToShow), tween().call(function () {
             var resultOpa = _this3.result.getComponent(UIOpacity);
 
@@ -11203,6 +11394,70 @@ System.register("chunks:///_virtual/PlayerView.ts", ['./_rollupPluginModLoBabelH
               opacity: 1
             }).call(function () {
               _this3.result.active = false;
+            });
+            seq.start();
+          }));
+          sequence.start();
+        };
+
+        _proto.showWinFx = function showWinFx(delay, timeToShow) {
+          var _this4 = this;
+
+          Tween.stopAllByTarget(this.result);
+          Tween.stopAllByTarget(this.result.getComponent(UIOpacity));
+          Tween.stopAllByTarget(this.avatar_light);
+          Tween.stopAllByTarget(this.avatar_light.getComponent(UIOpacity));
+          var startWinFxPos = new Vec3(0, -15, 0);
+          var sequence = tween(this.result).sequence(tween().delay(delay), tween().call(function () {
+            _this4.setWinAmount(_this4.winning);
+
+            _this4.refresh();
+
+            BauCuaFullScreenGameView.getInstance().refreshUserOnlinePopup();
+            _this4.result.active = true;
+
+            var resultOpa = _this4.result.getComponent(UIOpacity);
+
+            resultOpa.opacity = 255;
+
+            _this4.result.setPosition(startWinFxPos);
+
+            _this4.win_fx.setAnimation(0, "animation", true);
+          }), tween().by(0.4, {
+            position: new Vec3(0, 65, 0)
+          }, {
+            easing: 'expoOut'
+          }), tween().call(function () {
+            var seq = tween(_this4.avatar_light).sequence(tween().call(function () {
+              var opa = _this4.avatar_light.getComponent(UIOpacity);
+
+              opa.opacity = 1;
+              _this4.avatar_light.active = true;
+              var fadeIn = tween(opa).sequence(tween().to(0.5, {
+                opacity: 255
+              }), tween().delay(timeToShow), tween().to(0.5, {
+                opacity: 1
+              }), tween().call(function () {
+                _this4.avatar_light.active = false;
+
+                var opa = _this4.avatar_light.getComponent(UIOpacity);
+
+                opa.opacity = 1;
+                Tween.stopAllByTarget(_this4.avatar_light);
+                Tween.stopAllByTarget(opa);
+              }));
+              fadeIn.start();
+            }), tween(_this4.avatar_light).repeatForever(tween(_this4.avatar_light).by(5.0, {
+              eulerAngles: new Vec3(0, 0, 360)
+            }).start()));
+            seq.start();
+          }), tween().delay(timeToShow), tween().call(function () {
+            var resultOpa = _this4.result.getComponent(UIOpacity);
+
+            var seq = tween(resultOpa).to(0.5, {
+              opacity: 1
+            }).call(function () {
+              _this4.result.active = false;
             });
             seq.start();
           }));
@@ -11221,6 +11476,11 @@ System.register("chunks:///_virtual/PlayerView.ts", ['./_rollupPluginModLoBabelH
           if (this.currentBubbleChatInd >= this.bubbleChats.length) {
             this.currentBubbleChatInd = 0;
           }
+        };
+
+        _proto.hideBubbleChat = function hideBubbleChat() {
+          var chat = this.bubbleChats[this.currentBubbleChatInd];
+          chat.hideImmedialy();
         };
 
         return PlayerView;
@@ -11280,21 +11540,49 @@ System.register("chunks:///_virtual/PlayerView.ts", ['./_rollupPluginModLoBabelH
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor9 = _applyDecoratedDescriptor(_class2.prototype, "money_positions", [_dec10], {
+      }), _descriptor9 = _applyDecoratedDescriptor(_class2.prototype, "spr_host", [_dec10], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor10 = _applyDecoratedDescriptor(_class2.prototype, "spr_ready", [_dec11], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor11 = _applyDecoratedDescriptor(_class2.prototype, "content", [_dec12], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor12 = _applyDecoratedDescriptor(_class2.prototype, "btn_invite", [_dec13], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor13 = _applyDecoratedDescriptor(_class2.prototype, "money_positions", [_dec14], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return [];
         }
-      }), _descriptor10 = _applyDecoratedDescriptor(_class2.prototype, "bubbleChats", [_dec11], {
+      }), _descriptor14 = _applyDecoratedDescriptor(_class2.prototype, "bubbleChats", [_dec15], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return [];
         }
-      }), _descriptor11 = _applyDecoratedDescriptor(_class2.prototype, "is_hidden", [_dec12], {
+      }), _descriptor15 = _applyDecoratedDescriptor(_class2.prototype, "is_hidden", [_dec16], {
         configurable: true,
         enumerable: true,
         writable: true,
@@ -14834,6 +15122,202 @@ System.register("chunks:///_virtual/KimCuongBetHistoryItemView.ts", ['./_rollupP
   };
 });
 
+System.register("chunks:///_virtual/CardItem.ts", ['./_rollupPluginModLoBabelHelpers.js', 'cc'], function (exports) {
+  'use strict';
+
+  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, _defineProperty, cclegacy, _decorator, Sprite, Button, SpriteFrame, Vec3, Color, Tween, Component;
+
+  return {
+    setters: [function (module) {
+      _applyDecoratedDescriptor = module.applyDecoratedDescriptor;
+      _inheritsLoose = module.inheritsLoose;
+      _initializerDefineProperty = module.initializerDefineProperty;
+      _assertThisInitialized = module.assertThisInitialized;
+      _defineProperty = module.defineProperty;
+    }, function (module) {
+      cclegacy = module.cclegacy;
+      _decorator = module._decorator;
+      Sprite = module.Sprite;
+      Button = module.Button;
+      SpriteFrame = module.SpriteFrame;
+      Vec3 = module.Vec3;
+      Color = module.Color;
+      Tween = module.Tween;
+      Component = module.Component;
+    }],
+    execute: function () {
+      var _dec, _dec2, _dec3, _dec4, _class, _class2, _descriptor, _descriptor2, _descriptor3, _temp;
+
+      cclegacy._RF.push({}, "52d19nOijBGoqu+3PdUtl+l", "CardItem", undefined);
+
+      var ccclass = _decorator.ccclass,
+          property = _decorator.property;
+      var CardItem = exports('CardItem', (_dec = ccclass('CardItem'), _dec2 = property(Sprite), _dec3 = property(Button), _dec4 = property([SpriteFrame]), _dec(_class = (_class2 = (_temp = /*#__PURE__*/function (_Component) {
+        _inheritsLoose(CardItem, _Component);
+
+        function CardItem() {
+          var _this;
+
+          for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+          }
+
+          _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "spr_card", _descriptor, _assertThisInitialized(_this));
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "button", _descriptor2, _assertThisInitialized(_this));
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "sprFrame_cards", _descriptor3, _assertThisInitialized(_this));
+
+          _defineProperty(_assertThisInitialized(_this), "card", null);
+
+          _defineProperty(_assertThisInitialized(_this), "isSelected", false);
+
+          _defineProperty(_assertThisInitialized(_this), "locked_position", Vec3.ZERO);
+
+          return _this;
+        }
+
+        var _proto = CardItem.prototype;
+
+        _proto.setAsHideCard = function setAsHideCard() {
+          this.spr_card.spriteFrame = this.sprFrame_cards[0];
+          this.spr_card.color = Color.WHITE;
+        };
+
+        _proto.setInteractable = function setInteractable(isInteractable) {
+          this.button.interactable = isInteractable;
+        };
+
+        _proto.reset = function reset() {
+          Tween.stopAllByTarget(this.node);
+          this.setAsHideCard();
+          this.isSelected = false;
+          this.setInteractable(false);
+          this.hide();
+        };
+
+        _proto.onClick = function onClick() {
+          this.isSelected = !this.isSelected;
+          var newPos = new Vec3(this.locked_position);
+          newPos.y += this.isSelected ? 20 : 0;
+          this.node.setPosition(newPos);
+        };
+
+        _proto.getSelected = function getSelected() {
+          return this.isSelected;
+        };
+
+        _proto.cannotBeSelected = function cannotBeSelected() {
+          this.isSelected = false;
+          this.node.setPosition(this.locked_position);
+          this.setGray();
+          this.setInteractable(false);
+        };
+
+        _proto.setGray = function setGray() {
+          this.spr_card.color = Color.GRAY;
+        };
+
+        _proto.lockPosition = function lockPosition(target) {
+          this.locked_position = new Vec3(target);
+        };
+
+        _proto.canBeSelected = function canBeSelected() {
+          this.isSelected = false;
+          this.node.setPosition(this.locked_position);
+          this.spr_card.color = Color.WHITE;
+          this.setInteractable(true);
+        };
+
+        _proto.show = function show() {
+          var _this2 = this;
+
+          if (this.card != null) {
+            var f = this.sprFrame_cards.filter(function (x) {
+              var _this2$card;
+
+              return x.name.indexOf((_this2$card = _this2.card) === null || _this2$card === void 0 ? void 0 : _this2$card.getResourceName()) >= 0;
+            });
+
+            if (f.length > 0) {
+              this.spr_card.spriteFrame = f[0];
+            } else {
+              this.setAsHideCard();
+            }
+          }
+
+          this.node.active = true;
+          this.spr_card.color = Color.WHITE;
+        };
+
+        _proto.hide = function hide() {
+          this.node.active = false;
+          this.spr_card.color = Color.WHITE;
+        };
+
+        _proto.setCard = function setCard(card) {
+          this.card = card;
+        };
+
+        _proto.getCard = function getCard() {
+          return this.card;
+        };
+
+        _proto.getCode = function getCode() {
+          if (this.card == null) {
+            return -1;
+          }
+
+          return this.card.serverCode;
+        };
+
+        _proto.setAsOnTop = function setAsOnTop() {
+          var _this$node$parent;
+
+          this.node.setSiblingIndex(((_this$node$parent = this.node.parent) === null || _this$node$parent === void 0 ? void 0 : _this$node$parent.children.length) - 1);
+        };
+
+        return CardItem;
+      }(Component), _temp), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, "spr_card", [_dec2], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, "button", [_dec3], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, "sprFrame_cards", [_dec4], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return [];
+        }
+      })), _class2)) || _class));
+      /**
+       * [1] Class member could be defined like this.
+       * [2] Use `property` decorator if your want the member to be serializable.
+       * [3] Your initialization goes here.
+       * [4] Your update function goes here.
+       *
+       * Learn more about scripting: https://docs.cocos.com/creator/3.0/manual/en/scripting/
+       * Learn more about CCClass: https://docs.cocos.com/creator/3.0/manual/en/scripting/ccclass.html
+       * Learn more about life-cycle callbacks: https://docs.cocos.com/creator/3.0/manual/en/scripting/life-cycle-callbacks.html
+       */
+
+      cclegacy._RF.pop();
+    }
+  };
+});
+
 System.register("chunks:///_virtual/GameNetworkHandler.ts", ['./_rollupPluginModLoBabelHelpers.js', 'cc', './GameConfigManager.ts', './MiniGameNetworkHandler.ts', './GamePlatformManager.ts', './GamePlayManager.ts'], function (exports) {
   'use strict';
 
@@ -15152,6 +15636,703 @@ System.register("chunks:///_virtual/InvitePopup.ts", ['./_rollupPluginModLoBabel
        * Learn more about CCClass: https://docs.cocos.com/creator/3.0/manual/en/scripting/ccclass.html
        * Learn more about life-cycle callbacks: https://docs.cocos.com/creator/3.0/manual/en/scripting/life-cycle-callbacks.html
        */
+
+      cclegacy._RF.pop();
+    }
+  };
+});
+
+System.register("chunks:///_virtual/DemLa_CardLib.ts", ['cc', './MauBinh_CardLib.ts'], function (exports) {
+  'use strict';
+
+  var cclegacy, _decorator, GameCard;
+
+  return {
+    setters: [function (module) {
+      cclegacy = module.cclegacy;
+      _decorator = module._decorator;
+    }, function (module) {
+      GameCard = module.GameCard;
+    }],
+    execute: function () {
+      var _dec, _class;
+
+      cclegacy._RF.push({}, "554dcR4AABPd4pSTlcTNNNU", "DemLa_CardLib", undefined);
+
+      var ccclass = _decorator.ccclass,
+          property = _decorator.property;
+      var DemLa_CardLib = exports('default', (_dec = ccclass('DemLa_CardLib'), _dec(_class = /*#__PURE__*/function () {
+        function DemLa_CardLib() {}
+
+        DemLa_CardLib.getCombination = function getCombination(cards, n, r, vectorCombinationOfCards) {
+          // A temporary array to store all combination one by one
+          var cardsIn = [];
+
+          for (var i = 0; i < r; i++) {
+            var cardTemp = new GameCard();
+            cardsIn.push(cardTemp);
+          } // Print all combination using temprary array 'data[]'
+
+
+          DemLa_CardLib.combinationUtil(cards, n, r, 0, cardsIn, 0, vectorCombinationOfCards);
+        }
+        /* arr[]  ---> Input Array
+         n      ---> Size of input array
+         r      ---> Size of a combination to be printed
+         index  ---> Current index in data[]
+         data[] ---> Temporary array to store current combination
+         i      ---> index of current element in arr[]     */
+        ;
+
+        DemLa_CardLib.combinationUtil = function combinationUtil(cards, n, r, index, cardsIn, i, vectorCombinationOfCards) {
+          // Current cobination is ready, print it
+          if (index == r) {
+            var newVectorCard = cardsIn;
+            vectorCombinationOfCards.push(newVectorCard);
+            return;
+          } // When no more elements are there to put in data[]
+
+
+          if (i >= n) return; // current is included, put next at next location
+
+          var card = cards[i];
+          cardsIn[index] = card;
+          DemLa_CardLib.combinationUtil(cards, n, r, index + 1, cardsIn, i + 1, vectorCombinationOfCards); // current is excluded, replace it with next (Note that
+          // i+1 is passed, but index is not changed)
+
+          DemLa_CardLib.combinationUtil(cards, n, r, index, cardsIn, i + 1, vectorCombinationOfCards);
+        };
+
+        DemLa_CardLib.sortVector = function sortVector(vector, reverse) {
+          if (reverse) {
+            var i = 0;
+
+            while (i < vector.length - 1) {
+              var card1 = vector[i];
+              var N1 = card1.N;
+              var S1 = card1.S;
+              var j = void 0;
+
+              for (j = i + 1; j < vector.length; j++) {
+                var card2 = vector[j];
+                var N2 = card2.N;
+                var S2 = card2.S;
+
+                if (N1 > N2) {
+                  var temp = card1;
+                  vector[i] = vector[j];
+                  vector[j] = temp;
+                  i = 0;
+                  break;
+                } else if (N1 == N2) {
+                  if (S1 < S2) {
+                    var _temp = card1;
+                    vector[i] = vector[j];
+                    vector[j] = _temp;
+                    i = 0;
+                    break;
+                  }
+                }
+              }
+
+              if (i != 0 || j == vector.length) {
+                i++;
+              }
+            }
+          } else {
+            var _i = 0;
+
+            while (_i < vector.length - 1) {
+              var _card = vector[_i];
+              var _N = _card.N;
+              var _S = _card.S;
+
+              var _j = void 0;
+
+              for (_j = _i + 1; _j < vector.length; _j++) {
+                var _card2 = vector[_j];
+                var _N2 = _card2.N;
+                var _S2 = _card2.S;
+
+                if (_N > _N2) {
+                  var _temp2 = _card;
+                  vector[_i] = vector[_j];
+                  vector[_j] = _temp2;
+                  _i = 0;
+                  break;
+                } else if (_N == _N2) {
+                  if (_S > _S2) {
+                    var _temp3 = _card;
+                    vector[_i] = vector[_j];
+                    vector[_j] = _temp3;
+                    _i = 0;
+                    break;
+                  }
+                }
+              }
+
+              if (_i != 0 || _j == vector.length) {
+                _i++;
+              }
+            }
+          }
+
+          return vector;
+        };
+
+        DemLa_CardLib.sortList = function sortList(list) {
+          if (list.length == 0) {
+            return;
+          }
+
+          var i = 0;
+
+          while (i < list.length - 1) {
+            var p1 = list[i];
+            var j = void 0;
+
+            for (j = i + 1; j < list.length; j++) {
+              var p2 = list[j];
+
+              if (p1 > p2) {
+                var temp = p1;
+                list[i] = list[j];
+                list[j] = temp;
+                i = 0;
+                break;
+              }
+            }
+
+            if (i != 0 || j == list.length) {
+              i++;
+            }
+          }
+
+          return list;
+        };
+
+        DemLa_CardLib.getRecommendCards = function getRecommendCards(list, myCards) {
+          list = DemLa_CardLib.sortVector(list, false);
+          var cards = [];
+
+          if (list.length == 1) {
+            var card = list[0];
+
+            if (card.N == 15) {
+              // neu la 2
+              // tim cay 2 lon hon
+              for (var i = 0; i < myCards.length; i++) {
+                var icard = myCards[i];
+
+                if (icard.N == 15 && icard.S > card.S) {
+                  cards.push(icard);
+                  return cards;
+                }
+              } // tim tu quy
+
+
+              cards = DemLa_CardLib.getHigherFours2(0, myCards);
+              if (cards.length > 0) return cards; // tim 4 doi thong
+              // vi tim 4 doi thong bat ky nen cho card_max = 3 bich
+              //            GameCard *cmax = new GameCard();
+
+              var cmax = new GameCard();
+              cmax.N = 3;
+              cmax.S = 1;
+              cards = DemLa_CardLib.getHigherFourPairs(cmax, myCards);
+              if (cards.length > 0) return cards; // tim 3 doi thong
+
+              return DemLa_CardLib.getHigherThreePairs(cmax, myCards);
+            } else {
+              for (var _i2 = 0; _i2 < myCards.length; _i2++) {
+                var c = myCards[_i2];
+
+                if (c.N > card.N) {
+                  cards.push(c);
+                  break;
+                }
+
+                if (c.N == card.N && c.S > card.S) {
+                  cards.push(c);
+                  break;
+                }
+              }
+            }
+
+            return cards;
+          } else if (DemLa_CardLib.isPairs(list)) {
+            // tim doi 2 lon hon
+            cards = DemLa_CardLib.getHigherPairs(list, myCards);
+
+            if (cards.length > 0) {
+              return cards;
+            } else if (list[0].N == 15) {
+              // neu la doi 2
+              // tim tu quy
+              cards = DemLa_CardLib.getHigherFours2(0, myCards);
+
+              if (cards.length > 0) {
+                return cards;
+              } // tim 4 doi thong
+              // vi tim 4 doi thong bat ky nen cho card_max = 3 bich
+
+
+              var _cmax = new GameCard();
+
+              _cmax.N = 3;
+              _cmax.S = 1;
+              cards = DemLa_CardLib.getHigherFourPairs(_cmax, myCards);
+              if (cards.length > 0) return cards;
+            }
+          } else if (DemLa_CardLib.isThreeOfAKind(list)) {
+            return DemLa_CardLib.getHigherThrees(list, myCards);
+          } else if (DemLa_CardLib.isFourOfAKind(list)) {
+            cards = DemLa_CardLib.getHigherFours(list, myCards);
+
+            if (cards.length > 0) {
+              return cards;
+            } // tim 4 doi thong
+            // vi tim 4 doi thong bat ky nen cho card_max = 3 bich
+
+
+            var _cmax2 = new GameCard();
+
+            _cmax2.N = 3;
+            _cmax2.S = 1;
+            cards = DemLa_CardLib.getHigherFourPairs(_cmax2, myCards);
+            if (cards.length > 0) return cards; //        return getHigherFours(list, myCards);
+          } else if (DemLa_CardLib.isThreePairsStraight(list)) {
+            cards = DemLa_CardLib.getHigherThreePairs2(list, myCards);
+
+            if (cards.length < 1) {
+              var _cmax3 = new GameCard();
+
+              _cmax3.N = 3;
+              _cmax3.S = 1;
+              cards = DemLa_CardLib.getHigherFourPairs(_cmax3, myCards);
+            }
+
+            if (cards.length < 1) return DemLa_CardLib.getHigherFours2(0, myCards);
+          } else if (DemLa_CardLib.isStraight(list)) {
+            return DemLa_CardLib.getHigherStraight(list, myCards);
+          } else if (DemLa_CardLib.isFourPairsStraight(list)) {
+            return DemLa_CardLib.getHigherFourPairs2(list, myCards);
+          }
+
+          return cards;
+        };
+
+        DemLa_CardLib.isStraight = function isStraight(cards) {
+          var isStraight = true;
+          if (cards.length < 3) return false;
+
+          for (var i = 0; i < cards.length - 1; i++) {
+            var n1 = cards[i].N;
+            var n2 = cards[i + 1].N;
+            if (n1 == 15 || n2 == 15) return false;
+            isStraight = isStraight && n1 + 1 == n2;
+          }
+
+          return isStraight;
+        };
+
+        DemLa_CardLib.isStraight_Sam = function isStraight_Sam(cards) {
+          // sanh 2,3,4 Q,K,A
+          var valueList1 = []; // sanh 1,2,3,4
+
+          var valueList2 = [];
+          cards.forEach(function (card) {
+            valueList1.push(card.N == 15 ? 2 : card.N);
+            valueList2.push(card.N == 15 ? 2 : card.N == 14 ? 1 : card.N);
+          });
+
+          if (DemLa_CardLib.checkSanh_sam(valueList1)) {
+            return true;
+          }
+
+          if (DemLa_CardLib.checkSanh_sam(valueList2)) {
+            return true;
+          }
+
+          return false;
+        };
+
+        DemLa_CardLib.checkSanh_sam = function checkSanh_sam(cards) {
+          if (cards.length < 3) return false; //    cards.Sort();
+
+          cards = DemLa_CardLib.sortList(cards);
+          var isSanh = true;
+          var n_start = cards[0];
+
+          for (var i = 1; i < cards.length; i++) {
+            isSanh = isSanh && cards[i] == n_start + i;
+          }
+
+          return isSanh;
+        };
+
+        DemLa_CardLib.loaiboxamvatuquy = function loaiboxamvatuquy(myCardsIn) {
+          // luu y myCardsIn da sort
+          //    myCardsIn.Sort(delegate(Card x, Card y) {
+          //        if(x.N> y.N)
+          //            return 1;
+          //        if(x.N == y.N)
+          //            return y.S- x.S;
+          //        return -1;
+          //    });
+          myCardsIn = DemLa_CardLib.sortVector(myCardsIn, true);
+          var list = [];
+          var n = 0;
+          var c = 0; // so lan gap cay n
+          // danh sach nhung cay bai bi bo
+
+          for (var i = 0; i < myCardsIn.length; i++) {
+            if (n == myCardsIn[i].N) {
+              c++;
+              if (c < 3) list.push(myCardsIn[i]);
+            } else {
+              c = 1;
+              n = myCardsIn[i].N;
+              list.push(myCardsIn[i]);
+            }
+          } // sort lai input list
+          //    myCardsIn.Sort(ComparisionTienLen);
+
+
+          myCardsIn = DemLa_CardLib.sortVector(myCardsIn, false);
+          return list;
+        };
+
+        DemLa_CardLib.loaiboxamdoivatuquy = function loaiboxamdoivatuquy(myCardsIn) {
+          // luu y myCardsIn da sort
+          //    myCardsIn.Sort(delegate(Card x, Card y) {
+          //        if(x.N> y.N)
+          //            return 1;
+          //        if(x.N == y.N)
+          //            return y.S- x.S; // intent xep nguoc
+          //        return -1;
+          //    });
+          myCardsIn = DemLa_CardLib.sortVector(myCardsIn, true);
+          var list = [];
+          var n = 0;
+          var c = 0; // so lan gap cay n
+          // danh sach nhung cay bai bi bo
+
+          for (var i = 0; i < myCardsIn.length; i++) {
+            if (n == myCardsIn[i].N) {
+              c++;
+              if (c < 2) list.push(myCardsIn[i]);
+            } else {
+              c = 1;
+              n = myCardsIn[i].N;
+              list.push(myCardsIn[i]);
+            }
+          } // sort lai input list
+          //    myCardsIn.Sort(ComparisionTienLen);
+
+
+          myCardsIn = DemLa_CardLib.sortVector(myCardsIn, false);
+          return list;
+        };
+
+        DemLa_CardLib.isPairs = function isPairs(list) {
+          if (list.length != 2) return false;
+          return list[0].N == list[1].N;
+        };
+
+        DemLa_CardLib.isThreeOfAKind = function isThreeOfAKind(list) {
+          if (list.length != 3) return false;
+          return list[0].N == list[1].N && list[1].N == list[2].N;
+        };
+
+        DemLa_CardLib.isFourOfAKind = function isFourOfAKind(list) {
+          if (list.length != 4) return false;
+          return list[0].N == list[1].N && list[1].N == list[2].N && list[2].N == list[3].N;
+        };
+
+        DemLa_CardLib.isThreePairsStraight = function isThreePairsStraight(list) {
+          if (list.length != 6) return false;
+          list.forEach(function (card) {
+            if (card.N == 15) {
+              return false;
+            }
+          });
+          return list[0].N == list[1].N && list[1].N == list[2].N - 1 && list[1].N == list[3].N - 1 && list[1].N == list[4].N - 2 && list[1].N == list[5].N - 2;
+        };
+
+        DemLa_CardLib.isFourPairsStraight = function isFourPairsStraight(list) {
+          if (list.length != 8) return false;
+          list.forEach(function (card) {
+            if (card.N == 15) {
+              return false;
+            }
+          });
+          return list[0].N == list[1].N && list[1].N == list[2].N - 1 && list[1].N == list[3].N - 1 && list[1].N == list[4].N - 2 && list[1].N == list[5].N - 2 && list[1].N == list[6].N - 3 && list[1].N == list[7].N - 3;
+        };
+
+        DemLa_CardLib.getHigherStraight = function getHigherStraight(list, myCardsIn, sam) {
+          if (sam === void 0) {
+            sam = false;
+          }
+
+          var myCards = DemLa_CardLib.loaiboxamdoivatuquy(myCardsIn); //    myCards.Sort(ComparisionTienLen);
+
+          myCardsIn = DemLa_CardLib.sortVector(myCardsIn, false);
+          var straight = [];
+          if (myCards.length < list.length) return straight;
+
+          for (var i = 0; i < myCards.length - 1; i++) {
+            if (myCards[i].N < list[0].N) continue;
+            if (myCards[i].N == list[0].N && sam) continue;
+            if (myCards.length - i < list.length) break;
+
+            for (var j = 0; j < list.length; j++) {
+              var k = j;
+
+              if (j > 0) {
+                while (i + k < myCards.length - 1 && straight[j - 1].N == myCards[i + k].N) {
+                  k++;
+                } // avoid to add same N into straight
+
+              }
+
+              if (j < list.length - 1) {
+                straight.push(myCards[i + k]);
+              } else if (myCards[i + k].N == list[j].N && myCards[i + k].S < list[j].S) {
+                var s = k;
+
+                while (i + s < myCards.length - 1 && list[j].N == myCards[i + s].N && myCards[i + s].S < list[j].S) {
+                  s++;
+                }
+
+                if (s > k) s--;
+                straight.push(myCards[i + s]); // find the bigger S for last card if have the same N
+              } else {
+                straight.push(myCards[i + k]);
+              }
+            } //			for (int st = 0; st < straight.Count; st ++)
+            //			{
+            //				Debug.Log("Straight "+st+" " + straight[st].N);
+            //			}
+
+
+            if (straight.length == list.length && (sam ? DemLa_CardLib.isStraight_Sam(straight) : DemLa_CardLib.isStraight(straight))) {
+              if (straight[0].N == list[0].N) {
+                if (straight[list.length - 1].S > list[list.length - 1].S) {
+                  return straight;
+                } else {
+                  straight = [];
+                }
+              } else {
+                return straight;
+              }
+            } else {
+              straight = [];
+            }
+          }
+
+          return straight;
+        };
+
+        DemLa_CardLib.getHigherPairs = function getHigherPairs(list, myCards, sam) {
+          if (sam === void 0) {
+            sam = false;
+          }
+
+          var pairs = [];
+          if (myCards.length < 2) return pairs; //    myCards.Sort(ComparisionTienLen);
+
+          myCards = DemLa_CardLib.sortVector(myCards, false); //		Debug.LogError("N :"+ list.at(0).N);
+
+          for (var i = 0; i < myCards.length - 1; i++) {
+            if (myCards[i].N < list[0].N) continue;
+            if (myCards[i].N == list[0].N && sam) continue;
+
+            if (myCards[i].N == myCards[i + 1].N) {
+              if (myCards[i].N == list[0].N) {
+                if (myCards[i + 1].S > list[1].S) {
+                  pairs.push(myCards[i]);
+                  pairs.push(myCards[i + 1]);
+                  return pairs;
+                }
+              } else {
+                pairs.push(myCards[i]);
+                pairs.push(myCards[i + 1]);
+                return pairs;
+              }
+            }
+          }
+
+          return pairs;
+        };
+
+        DemLa_CardLib.getHigherThrees = function getHigherThrees(list, myCards, sam) {
+          if (sam === void 0) {
+            sam = false;
+          }
+
+          var threes = [];
+          if (myCards.length < 3) return threes; //    myCards.Sort(ComparisionTienLen);
+
+          myCards = DemLa_CardLib.sortVector(myCards, false);
+
+          for (var i = 0; i < myCards.length - 2; i++) {
+            if (myCards[i].N < list[0].N) continue;
+            if (myCards[i].N == list[0].N && sam) continue;
+
+            if (myCards[i].N == myCards[i + 1].N && myCards[i + 1].N == myCards[i + 2].N) {
+              if (myCards[i].N == list[0].N) {
+                if (myCards[i + 2].S > list[2].S) {
+                  threes.push(myCards[i]);
+                  threes.push(myCards[i + 1]);
+                  threes.push(myCards[i + 2]);
+                  return threes;
+                }
+              } else {
+                threes.push(myCards[i]);
+                threes.push(myCards[i + 1]);
+                threes.push(myCards[i + 2]);
+                return threes;
+              }
+            }
+          }
+
+          return threes;
+        };
+
+        DemLa_CardLib.getHigherFours = function getHigherFours(list, myCards) {
+          return DemLa_CardLib.getHigherFours2(list[0].N, myCards);
+        };
+
+        DemLa_CardLib.getHigherFours2 = function getHigherFours2(n, myCards) {
+          var fours = [];
+          if (myCards.length < 4) return fours; //    myCards.Sort(ComparisionTienLen);
+
+          myCards = DemLa_CardLib.sortVector(myCards, false);
+
+          for (var i = 0; i < myCards.length - 3; i++) {
+            if (myCards[i].N < n) continue;
+
+            if (myCards[i].N == myCards[i + 1].N && myCards[i + 1].N == myCards[i + 2].N && myCards[i + 2].N == myCards[i + 3].N) {
+              fours.push(myCards[i]);
+              fours.push(myCards[i + 1]);
+              fours.push(myCards[i + 2]);
+              fours.push(myCards[i + 3]);
+              return fours;
+            }
+          }
+
+          return fours;
+        };
+
+        DemLa_CardLib.getHigherThreePairs = function getHigherThreePairs(cmax, myCardsIn, sam) {
+          if (sam === void 0) {
+            sam = false;
+          } // bo tat ca cac xam va tu quy trong list cua minh
+          //    myCardsIn.Sort(ComparisionTienLen);
+
+
+          myCardsIn = DemLa_CardLib.sortVector(myCardsIn, false);
+          var myCards = DemLa_CardLib.loaiboxamvatuquy(myCardsIn); //		Debug.LogError("cmax: "+ cmax->N +" S: "+ cmax.S);
+
+          var sixs = [];
+          if (myCards.length < 6) return sixs;
+
+          for (var i = 0; i < myCards.length - 5; i++) {
+            if (myCards[i].N < cmax.N - 2) continue;
+            if (myCards[i].N == cmax.N - 2 && sam) continue;
+
+            if (myCards[i].N == myCards[i + 1].N && myCards[i].N == myCards[i + 2].N - 1 && myCards[i].N == myCards[i + 3].N - 1 && myCards[i].N == myCards[i + 4].N - 2 && myCards[i].N == myCards[i + 5].N - 2 && myCards[i + 5].N != 15) {
+              if (myCards[i].N == cmax.N - 2) {
+                if (myCards[i + 5].S > cmax.S) {
+                  sixs.push(myCards[i]);
+                  sixs.push(myCards[i + 1]);
+                  sixs.push(myCards[i + 2]);
+                  sixs.push(myCards[i + 3]);
+                  sixs.push(myCards[i + 4]);
+                  sixs.push(myCards[i + 5]);
+                  return sixs;
+                }
+              } else {
+                sixs.push(myCards[i]);
+                sixs.push(myCards[i + 1]);
+                sixs.push(myCards[i + 2]);
+                sixs.push(myCards[i + 3]);
+                sixs.push(myCards[i + 4]);
+                sixs.push(myCards[i + 5]);
+                return sixs;
+              }
+            }
+          }
+
+          return sixs;
+        };
+
+        DemLa_CardLib.getHigherFourPairs = function getHigherFourPairs(cmax, myCardsIn, sam) {
+          if (sam === void 0) {
+            sam = false;
+          } // bo tat ca cac xam va tu quy trong list cua minh
+          //    myCardsIn.Sort(ComparisionTienLen);
+
+
+          myCardsIn = DemLa_CardLib.sortVector(myCardsIn, false);
+          var myCards = DemLa_CardLib.loaiboxamvatuquy(myCardsIn); //		Debug.LogError("cmax: "+ cmax->N +" S: "+ cmax.S);
+
+          var eights = [];
+          if (myCards.length < 8) return eights;
+
+          for (var i = 0; i < myCards.length - 7; i++) {
+            if (myCards[i].N < cmax.N - 3) continue;
+            if (myCards[i].N == cmax.N - 3 && sam) continue;
+
+            if (myCards[i].N == myCards[i + 1].N && myCards[i].N == myCards[i + 2].N - 1 && myCards[i].N == myCards[i + 3].N - 1 && myCards[i].N == myCards[i + 4].N - 2 && myCards[i].N == myCards[i + 5].N - 2 && myCards[i].N == myCards[i + 6].N - 3 && myCards[i].N == myCards[i + 7].N - 3) {
+              if (myCards[i].N == cmax.N - 3) {
+                if (myCards[i + 7].S > cmax.S) {
+                  eights.push(myCards[i]);
+                  eights.push(myCards[i + 1]);
+                  eights.push(myCards[i + 2]);
+                  eights.push(myCards[i + 3]);
+                  eights.push(myCards[i + 4]);
+                  eights.push(myCards[i + 5]);
+                  eights.push(myCards[i + 6]);
+                  eights.push(myCards[i + 7]);
+                  return eights;
+                }
+              } else {
+                eights.push(myCards[i]);
+                eights.push(myCards[i + 1]);
+                eights.push(myCards[i + 2]);
+                eights.push(myCards[i + 3]);
+                eights.push(myCards[i + 4]);
+                eights.push(myCards[i + 5]);
+                eights.push(myCards[i + 6]);
+                eights.push(myCards[i + 7]);
+                return eights;
+              }
+            }
+          }
+
+          return eights;
+        };
+
+        DemLa_CardLib.getHigherThreePairs2 = function getHigherThreePairs2(list, myCards, sam) {
+          if (sam === void 0) {
+            sam = false;
+          }
+
+          return DemLa_CardLib.getHigherThreePairs(list[list.length - 1], myCards, sam);
+        };
+
+        DemLa_CardLib.getHigherFourPairs2 = function getHigherFourPairs2(list, myCards, sam) {
+          if (sam === void 0) {
+            sam = false;
+          }
+
+          return DemLa_CardLib.getHigherFourPairs(list[list.length - 1], myCards, sam);
+        };
+
+        return DemLa_CardLib;
+      }()) || _class));
 
       cclegacy._RF.pop();
     }
@@ -15819,6 +17000,210 @@ System.register("chunks:///_virtual/KimCuongNoHuView.ts", ['./_rollupPluginModLo
       // //         this.node.runAction(cc.fadeOut(0.5));
       // //     }
       // // }
+
+      cclegacy._RF.pop();
+    }
+  };
+});
+
+System.register("chunks:///_virtual/GameBaiPlayerView.ts", ['./_rollupPluginModLoBabelHelpers.js', 'cc', './PlayerView.ts'], function (exports) {
+  'use strict';
+
+  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, _defineProperty, cclegacy, _decorator, Node, Sprite, Tween, tween, Vec3, PlayerView;
+
+  return {
+    setters: [function (module) {
+      _applyDecoratedDescriptor = module.applyDecoratedDescriptor;
+      _inheritsLoose = module.inheritsLoose;
+      _initializerDefineProperty = module.initializerDefineProperty;
+      _assertThisInitialized = module.assertThisInitialized;
+      _defineProperty = module.defineProperty;
+    }, function (module) {
+      cclegacy = module.cclegacy;
+      _decorator = module._decorator;
+      Node = module.Node;
+      Sprite = module.Sprite;
+      Tween = module.Tween;
+      tween = module.tween;
+      Vec3 = module.Vec3;
+    }, function (module) {
+      PlayerView = module.PlayerView;
+    }],
+    execute: function () {
+      var _dec, _dec2, _dec3, _dec4, _dec5, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _temp;
+
+      cclegacy._RF.push({}, "61f2aWYKNNGX7URr2T4Bp/t", "GameBaiPlayerView", undefined);
+
+      var ccclass = _decorator.ccclass,
+          property = _decorator.property;
+      var GameBaiPlayerView = exports('GameBaiPlayerView', (_dec = ccclass('GameBaiPlayerView'), _dec2 = property(Node), _dec3 = property(Sprite), _dec4 = property(Node), _dec5 = property(Number), _dec(_class = (_class2 = (_temp = /*#__PURE__*/function (_PlayerView) {
+        _inheritsLoose(GameBaiPlayerView, _PlayerView);
+
+        function GameBaiPlayerView() {
+          var _this;
+
+          for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+          }
+
+          _this = _PlayerView.call.apply(_PlayerView, [this].concat(args)) || this;
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "card_pos", _descriptor, _assertThisInitialized(_this));
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "spr_countdown", _descriptor2, _assertThisInitialized(_this));
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "nodeTimer", _descriptor3, _assertThisInitialized(_this));
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "maxTime", _descriptor4, _assertThisInitialized(_this));
+
+          _defineProperty(_assertThisInitialized(_this), "cards", []);
+
+          return _this;
+        }
+
+        var _proto = GameBaiPlayerView.prototype;
+
+        _proto.getCardPos = function getCardPos() {
+          return this.card_pos;
+        };
+
+        _proto.addCard = function addCard(card, isInteractable) {
+          if (isInteractable === void 0) {
+            isInteractable = false;
+          }
+
+          card.setInteractable(isInteractable);
+          this.cards.push(card);
+        };
+
+        _proto.getSelectedCards = function getSelectedCards() {
+          return this.cards.filter(function (card) {
+            return card.getSelected();
+          });
+        };
+
+        _proto.getPlayerCard = function getPlayerCard() {
+          return this.cards;
+        };
+
+        _proto.startCountDown = function startCountDown(remainTime) {
+          var _this2 = this;
+
+          Tween.stopAllByTarget(this.nodeTimer);
+          this.nodeTimer.active = true;
+          var countdown = Math.floor(remainTime);
+          var sequence = tween(this.nodeTimer).repeat(countdown, tween().sequence(tween().call(function () {
+            _this2.spr_countdown.fillStart = countdown / _this2.maxTime;
+          }), tween().delay(1), tween().call(function () {
+            countdown -= 1;
+          })));
+          sequence.start();
+        };
+
+        _proto.stopCountDown = function stopCountDown() {
+          this.nodeTimer.active = false;
+          this.spr_countdown.fillStart = 1;
+        };
+
+        _proto.resetUI = function resetUI() {
+          this.cards = [];
+          this.stopCountDown();
+          this.ready(false);
+        };
+
+        _proto.getCardItemWithCode = function getCardItemWithCode(code) {
+          var f = this.cards.filter(function (c) {
+            return c.getCode() == code;
+          });
+
+          if (f.length > 0) {
+            return f[0];
+          }
+
+          return null;
+        };
+
+        _proto.removeCardItemWithCode = function removeCardItemWithCode(code) {
+          this.cards = this.cards.filter(function (c) {
+            return c.getCode() != code;
+          });
+        };
+
+        _proto.popCard = function popCard() {
+          return this.cards.pop();
+        };
+
+        _proto.rearrangeCard = function rearrangeCard() {
+          var _this3 = this;
+
+          var velocity = 900;
+
+          var _loop = function _loop(i) {
+            var target = new Vec3(_this3.getCardPos().position);
+            target.x += i * 80;
+            var card = _this3.cards[i];
+
+            if (card.node.position.x != target.x) {
+              Tween.stopAllByTarget(card.node);
+              var distance = Vec3.distance(card.node.position, target);
+              var time = distance / velocity;
+              var move = tween(card.node).sequence(tween().call(function () {
+                card.setInteractable(false);
+              }), tween().to(time, {
+                position: target
+              }), tween().call(function () {
+                card.lockPosition(target);
+                card.setInteractable(true);
+              }));
+              move.start();
+            }
+          };
+
+          for (var i = 0; i < this.cards.length; i++) {
+            _loop(i);
+          }
+        };
+
+        return GameBaiPlayerView;
+      }(PlayerView), _temp), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, "card_pos", [_dec2], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, "spr_countdown", [_dec3], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, "nodeTimer", [_dec4], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, "maxTime", [_dec5], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return 20;
+        }
+      })), _class2)) || _class));
+      /**
+       * [1] Class member could be defined like this.
+       * [2] Use `property` decorator if your want the member to be serializable.
+       * [3] Your initialization goes here.
+       * [4] Your update function goes here.
+       *
+       * Learn more about scripting: https://docs.cocos.com/creator/3.0/manual/en/scripting/
+       * Learn more about CCClass: https://docs.cocos.com/creator/3.0/manual/en/scripting/ccclass.html
+       * Learn more about life-cycle callbacks: https://docs.cocos.com/creator/3.0/manual/en/scripting/life-cycle-callbacks.html
+       */
 
       cclegacy._RF.pop();
     }
@@ -19050,6 +20435,19 @@ System.register("chunks:///_virtual/GamePlayManager.ts", ['./_rollupPluginModLoB
           GameNetworkHandler.send(mes);
         };
 
+        GamePlayManager.getTables = function getTables(gameID) {
+          if (GamePlayManager.STATE == NETWORK_STATE.UNLOGGED_IN) {
+            return;
+          }
+
+          var dict = {};
+          dict["cmd"] = GLOBAL_MESSAGE.GET_TABLES;
+          dict["gid"] = gameID;
+          dict["aid"] = 1;
+          var mes = [MessageRequest.ZonePlugin_Type, "Simms", "channelPlugin", dict];
+          GameNetworkHandler.send(mes);
+        };
+
         GamePlayManager.handleMessage = function handleMessage(message) {
           message = JSON.parse(message);
           var messageType = message[0];
@@ -19099,22 +20497,25 @@ System.register("chunks:///_virtual/GamePlayManager.ts", ['./_rollupPluginModLoB
 
             case MessageResponse.JoinRoom_Response:
               {
+                var _LobbyViewController$2;
+
+                (_LobbyViewController$2 = LobbyViewController.getInstance()) === null || _LobbyViewController$2 === void 0 ? void 0 : _LobbyViewController$2.handleJoinRoomResponse(message);
                 break;
               }
 
             case MessageResponse.LeaveRoom_Response:
               {
-                var _LobbyViewController$2;
+                var _LobbyViewController$3;
 
-                (_LobbyViewController$2 = LobbyViewController.getInstance()) === null || _LobbyViewController$2 === void 0 ? void 0 : _LobbyViewController$2.handleLeaveRoomResponse(message);
+                (_LobbyViewController$3 = LobbyViewController.getInstance()) === null || _LobbyViewController$3 === void 0 ? void 0 : _LobbyViewController$3.handleLeaveRoomResponse(message);
                 break;
               }
 
             case MessageResponse.Extension_Response:
               {
-                var _LobbyViewController$3;
+                var _LobbyViewController$4;
 
-                (_LobbyViewController$3 = LobbyViewController.getInstance()) === null || _LobbyViewController$3 === void 0 ? void 0 : _LobbyViewController$3.handleLobbyMessage(message);
+                (_LobbyViewController$4 = LobbyViewController.getInstance()) === null || _LobbyViewController$4 === void 0 ? void 0 : _LobbyViewController$4.handleLobbyMessage(message);
                 break;
               }
 
@@ -19131,6 +20532,300 @@ System.register("chunks:///_virtual/GamePlayManager.ts", ['./_rollupPluginModLoB
 
         return GamePlayManager;
       }(), _defineProperty(_class2, "roomID", ""), _defineProperty(_class2, "roomPassword", ""), _defineProperty(_class2, "STATE", NETWORK_STATE.UNLOGGED_IN), _defineProperty(_class2, "timeoutChat", null), _temp)) || _class));
+      /**
+       * [1] Class member could be defined like this.
+       * [2] Use `property` decorator if your want the member to be serializable.
+       * [3] Your initialization goes here.
+       * [4] Your update function goes here.
+       *
+       * Learn more about scripting: https://docs.cocos.com/creator/3.0/manual/en/scripting/
+       * Learn more about CCClass: https://docs.cocos.com/creator/3.0/manual/en/scripting/ccclass.html
+       * Learn more about life-cycle callbacks: https://docs.cocos.com/creator/3.0/manual/en/scripting/life-cycle-callbacks.html
+       */
+
+      cclegacy._RF.pop();
+    }
+  };
+});
+
+System.register("chunks:///_virtual/TableListView.ts", ['./_rollupPluginModLoBabelHelpers.js', 'cc', './GameConfigManager.ts', './MiniGameNetworkHandler.ts', './GameNetworkHandler.ts', './GlobalVariables.ts', './LoadingView.ts', './TableItemView.ts', './LobbyViewController.ts', './GamePlayManager.ts'], function (exports) {
+  'use strict';
+
+  var _defineProperty, _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, cclegacy, _decorator, Node, Button, sys, instantiate, Component, GameConfigManager, MessageRequest, GameNetworkHandler, GLOBAL_MESSAGE, GlobalVariables, LoadingView, TableItemView, LobbyViewController, GamePlayManager;
+
+  return {
+    setters: [function (module) {
+      _defineProperty = module.defineProperty;
+      _applyDecoratedDescriptor = module.applyDecoratedDescriptor;
+      _inheritsLoose = module.inheritsLoose;
+      _initializerDefineProperty = module.initializerDefineProperty;
+      _assertThisInitialized = module.assertThisInitialized;
+    }, function (module) {
+      cclegacy = module.cclegacy;
+      _decorator = module._decorator;
+      Node = module.Node;
+      Button = module.Button;
+      sys = module.sys;
+      instantiate = module.instantiate;
+      Component = module.Component;
+    }, function (module) {
+      GameConfigManager = module.GameConfigManager;
+    }, function (module) {
+      MessageRequest = module.MessageRequest;
+    }, function (module) {
+      GameNetworkHandler = module.GameNetworkHandler;
+    }, function (module) {
+      GLOBAL_MESSAGE = module.GLOBAL_MESSAGE;
+      GlobalVariables = module.GlobalVariables;
+    }, function (module) {
+      LoadingView = module.default;
+    }, function (module) {
+      TableItemView = module.TableItemView;
+    }, function (module) {
+      LobbyViewController = module.LobbyViewController;
+    }, function (module) {
+      GamePlayManager = module.GamePlayManager;
+    }],
+    execute: function () {
+      var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _temp;
+
+      cclegacy._RF.push({}, "74c98TqVuxN8axTRhAkKQNQ", "TableListView", undefined);
+
+      var ccclass = _decorator.ccclass,
+          property = _decorator.property;
+      var TableInfo = exports('TableInfo', function TableInfo() {
+        _defineProperty(this, "roomID", void 0);
+
+        _defineProperty(this, "bet", void 0);
+
+        _defineProperty(this, "serverID", void 0);
+
+        _defineProperty(this, "maxUser", void 0);
+
+        _defineProperty(this, "userCount", void 0);
+
+        _defineProperty(this, "minMoney", void 0);
+
+        _defineProperty(this, "minMoneyBuyIn", void 0);
+
+        _defineProperty(this, "maxMoneyBuyIn", void 0);
+
+        _defineProperty(this, "hasPassword", false);
+
+        _defineProperty(this, "isBigTable", false);
+
+        _defineProperty(this, "chan_gameMode", void 0);
+
+        _defineProperty(this, "chan_chickyMode", void 0);
+      });
+      var TableListView = exports('TableListView', (_dec = ccclass('TableListView'), _dec2 = property(Node), _dec3 = property(Button), _dec4 = property(Button), _dec5 = property(Button), _dec6 = property(TableItemView), _dec(_class = (_class2 = (_temp = /*#__PURE__*/function (_Component) {
+        _inheritsLoose(TableListView, _Component);
+
+        function TableListView() {
+          var _this;
+
+          for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+          }
+
+          _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "root", _descriptor, _assertThisInitialized(_this));
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "btn_trove", _descriptor2, _assertThisInitialized(_this));
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "btn_choinhanh", _descriptor3, _assertThisInitialized(_this));
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "btn_luatchoi", _descriptor4, _assertThisInitialized(_this));
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "item_template", _descriptor5, _assertThisInitialized(_this));
+
+          _defineProperty(_assertThisInitialized(_this), "pooled_items", []);
+
+          _defineProperty(_assertThisInitialized(_this), "gameID", -1);
+
+          return _this;
+        }
+
+        var _proto = TableListView.prototype;
+
+        _proto.onLoad = function onLoad() {
+          var _this$btn_trove,
+              _this$btn_choinhanh,
+              _this2 = this,
+              _this$btn_luatchoi;
+
+          (_this$btn_trove = this.btn_trove) === null || _this$btn_trove === void 0 ? void 0 : _this$btn_trove.node.on('click', function () {
+            var _LobbyViewController$;
+
+            (_LobbyViewController$ = LobbyViewController.getInstance()) === null || _LobbyViewController$ === void 0 ? void 0 : _LobbyViewController$.showGameList();
+          });
+          (_this$btn_choinhanh = this.btn_choinhanh) === null || _this$btn_choinhanh === void 0 ? void 0 : _this$btn_choinhanh.node.on('click', function () {
+            _this2.onPlayNow();
+          });
+          (_this$btn_luatchoi = this.btn_luatchoi) === null || _this$btn_luatchoi === void 0 ? void 0 : _this$btn_luatchoi.node.on('click', function () {
+            sys.openURL(GameConfigManager.helpURL);
+          });
+        };
+
+        _proto.onPlayNow = function onPlayNow() {
+          LoadingView.getInstance().show();
+          var dict = {};
+          dict["cmd"] = GLOBAL_MESSAGE.QUICK_PLAY;
+          dict["gid"] = this.gameID;
+          dict["aid"] = 1;
+
+          if (this.gameID == GlobalVariables.SAM || this.gameID == GlobalVariables.TIENLEN) {
+            dict["Mu"] = 2;
+          }
+
+          var mes = [MessageRequest.ZonePlugin_Type, "Simms", "channelPlugin", dict];
+          GameNetworkHandler.send(mes);
+        };
+
+        _proto.getPooledItem = function getPooledItem() {
+          var items = this.pooled_items.filter(function (x) {
+            return !x.node.active;
+          });
+
+          if (items.length <= 0) {
+            var _this$item_template;
+
+            var item = instantiate((_this$item_template = this.item_template) === null || _this$item_template === void 0 ? void 0 : _this$item_template.node);
+            item.parent = this.item_template.node.parent;
+            var cmp = item === null || item === void 0 ? void 0 : item.getComponent(TableItemView);
+            this.pooled_items.push(cmp);
+            return cmp;
+          }
+
+          return items[0].getComponent(TableItemView);
+        };
+
+        _proto.getTables = function getTables(gameID) {
+          var _LoadingView$getInsta, _LobbyViewController$2;
+
+          (_LoadingView$getInsta = LoadingView.getInstance()) === null || _LoadingView$getInsta === void 0 ? void 0 : _LoadingView$getInsta.show();
+          (_LobbyViewController$2 = LobbyViewController.getInstance()) === null || _LobbyViewController$2 === void 0 ? void 0 : _LobbyViewController$2.getLogo().setAnimation(0, "loading", true);
+          GamePlayManager.getTables(gameID);
+        };
+
+        _proto.show = function show(tableArr) {
+          var _this3 = this;
+
+          var tablesInfo = [];
+
+          for (var i = 0; i < tableArr.length; i++) {
+            var newTableInfo = new TableInfo();
+            var tableDict = tableArr[i];
+
+            if (tableDict["inc"] != null && tableDict["inc"] != undefined && tableDict["inc"] == true) {
+              continue;
+            }
+
+            this.gameID = tableDict["gid"];
+            newTableInfo.roomID = tableDict["rid"];
+            newTableInfo.bet = tableDict["b"];
+            newTableInfo.serverID = tableDict["sid"];
+            newTableInfo.maxUser = tableDict["Mu"];
+            newTableInfo.userCount = tableDict["uC"];
+            newTableInfo.minMoney = tableDict["mM"];
+            newTableInfo.minMoneyBuyIn = tableDict["mMBI"];
+            newTableInfo.maxMoneyBuyIn = tableDict["MMBI"];
+
+            if (tableDict["hpwd"] != null && tableDict["hpwd"] != undefined) {
+              newTableInfo.hasPassword = tableDict["hpwd"];
+            }
+
+            if (tableDict["hg"] != null && tableDict["hg"] != undefined) {
+              newTableInfo.isBigTable = tableDict["hg"];
+            } //... fix chan
+
+
+            if (tableDict["rMt"] != null && tableDict["rMt"] != undefined) {
+              var vlRoomMode = tableDict["rMt"];
+              newTableInfo.chan_gameMode = vlRoomMode["gM"];
+              newTableInfo.chan_chickyMode = vlRoomMode["ckM"];
+            }
+
+            tablesInfo.push(newTableInfo);
+          }
+
+          var allTablesInfo = tablesInfo.reduce(function (r, a) {
+            r[a.bet] = r[a.bet] || [];
+            r[a.bet].push(a);
+            return r;
+          }, Object.create(null));
+          var groupTables = [];
+
+          var _loop = function _loop(bet) {
+            var table = new TableInfo();
+            table.bet = bet;
+            table.userCount = 0;
+            allTablesInfo[bet].forEach(function (ti) {
+              table.userCount += ti.userCount;
+            });
+            groupTables.push(table);
+          };
+
+          for (var bet in allTablesInfo) {
+            _loop(bet);
+          }
+
+          groupTables = groupTables.sort(function (a, b) {
+            return a.isBigTable && a.bet > b.bet ? -1 : 1;
+          });
+          groupTables.forEach(function (c) {
+            var item = _this3.getPooledItem();
+
+            item.show(c.bet, c.userCount, _this3.gameID);
+          });
+          this.root.active = true;
+        };
+
+        _proto.hide = function hide() {
+          this.root.active = false;
+          this.pooled_items.forEach(function (x) {
+            return x.hide();
+          });
+        };
+
+        return TableListView;
+      }(Component), _temp), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, "root", [_dec2], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, "btn_trove", [_dec3], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, "btn_choinhanh", [_dec4], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, "btn_luatchoi", [_dec5], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, "item_template", [_dec6], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      })), _class2)) || _class));
       /**
        * [1] Class member could be defined like this.
        * [2] Use `property` decorator if your want the member to be serializable.
@@ -19928,6 +21623,82 @@ System.register("chunks:///_virtual/TaiXiuGameItemView.ts", ['./_rollupPluginMod
           return null;
         }
       })), _class2)) || _class));
+      /**
+       * [1] Class member could be defined like this.
+       * [2] Use `property` decorator if your want the member to be serializable.
+       * [3] Your initialization goes here.
+       * [4] Your update function goes here.
+       *
+       * Learn more about scripting: https://docs.cocos.com/creator/3.0/manual/en/scripting/
+       * Learn more about CCClass: https://docs.cocos.com/creator/3.0/manual/en/scripting/ccclass.html
+       * Learn more about life-cycle callbacks: https://docs.cocos.com/creator/3.0/manual/en/scripting/life-cycle-callbacks.html
+       */
+
+      cclegacy._RF.pop();
+    }
+  };
+});
+
+System.register("chunks:///_virtual/GameListView.ts", ['./_rollupPluginModLoBabelHelpers.js', 'cc'], function (exports) {
+  'use strict';
+
+  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, cclegacy, _decorator, Node, Component;
+
+  return {
+    setters: [function (module) {
+      _applyDecoratedDescriptor = module.applyDecoratedDescriptor;
+      _inheritsLoose = module.inheritsLoose;
+      _initializerDefineProperty = module.initializerDefineProperty;
+      _assertThisInitialized = module.assertThisInitialized;
+    }, function (module) {
+      cclegacy = module.cclegacy;
+      _decorator = module._decorator;
+      Node = module.Node;
+      Component = module.Component;
+    }],
+    execute: function () {
+      var _dec, _dec2, _class, _class2, _descriptor, _temp;
+
+      cclegacy._RF.push({}, "8af2eJgizdNvZApom6+tjRv", "GameListView", undefined);
+
+      var ccclass = _decorator.ccclass,
+          property = _decorator.property;
+      var GameListView = exports('GameListView', (_dec = ccclass('GameListView'), _dec2 = property(Node), _dec(_class = (_class2 = (_temp = /*#__PURE__*/function (_Component) {
+        _inheritsLoose(GameListView, _Component);
+
+        function GameListView() {
+          var _this;
+
+          for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+          }
+
+          _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "root", _descriptor, _assertThisInitialized(_this));
+
+          return _this;
+        }
+
+        var _proto = GameListView.prototype;
+
+        _proto.show = function show() {
+          this.root.active = true;
+        };
+
+        _proto.hide = function hide() {
+          this.root.active = false;
+        };
+
+        return GameListView;
+      }(Component), _temp), _descriptor = _applyDecoratedDescriptor(_class2.prototype, "root", [_dec2], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _class2)) || _class));
       /**
        * [1] Class member could be defined like this.
        * [2] Use `property` decorator if your want the member to be serializable.
@@ -21390,7 +23161,7 @@ System.register("chunks:///_virtual/BubbleChat.ts", ['./_rollupPluginModLoBabelH
           this.chat_content_node.scale = Vec3.ZERO;
           this.chat_content_node_opacity.opacity = 255;
           var _final = "";
-          var max = 20;
+          var max = 30;
 
           if (content.length > max) {
             var segment = content.length / max;
@@ -21438,6 +23209,13 @@ System.register("chunks:///_virtual/BubbleChat.ts", ['./_rollupPluginModLoBabelH
             }).start();
           }));
           seq.start();
+        };
+
+        _proto.hideImmedialy = function hideImmedialy() {
+          Tween.stopAllByTarget(this.chat_content_node);
+          Tween.stopAllByTarget(this.chat_content_node_opacity);
+          this.chat_content_node.scale = Vec3.ZERO;
+          this.chat_content_node_opacity.opacity = 1;
         };
 
         _proto.update = function update(dt) {
@@ -21874,6 +23652,126 @@ System.register("chunks:///_virtual/TaiXiuMessageHandler.ts", ['./_rollupPluginM
       // }
 
       _defineProperty(TaiXiuMessageHandler, "chat_array", []);
+
+      cclegacy._RF.pop();
+    }
+  };
+});
+
+System.register("chunks:///_virtual/CardPooling.ts", ['./_rollupPluginModLoBabelHelpers.js', 'cc', './CardItem.ts'], function (exports) {
+  'use strict';
+
+  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, _defineProperty, cclegacy, _decorator, instantiate, Component, CardItem;
+
+  return {
+    setters: [function (module) {
+      _applyDecoratedDescriptor = module.applyDecoratedDescriptor;
+      _inheritsLoose = module.inheritsLoose;
+      _initializerDefineProperty = module.initializerDefineProperty;
+      _assertThisInitialized = module.assertThisInitialized;
+      _defineProperty = module.defineProperty;
+    }, function (module) {
+      cclegacy = module.cclegacy;
+      _decorator = module._decorator;
+      instantiate = module.instantiate;
+      Component = module.Component;
+    }, function (module) {
+      CardItem = module.CardItem;
+    }],
+    execute: function () {
+      var _dec, _dec2, _class, _class2, _descriptor, _temp;
+
+      cclegacy._RF.push({}, "9eb0bXmVghMdYaMVoNl+bpZ", "CardPooling", undefined);
+
+      var ccclass = _decorator.ccclass,
+          property = _decorator.property;
+      var CardPooling = exports('CardPooling', (_dec = ccclass('CardPooling'), _dec2 = property(CardItem), _dec(_class = (_class2 = (_temp = /*#__PURE__*/function (_Component) {
+        _inheritsLoose(CardPooling, _Component);
+
+        function CardPooling() {
+          var _this;
+
+          for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+          }
+
+          _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "card_template", _descriptor, _assertThisInitialized(_this));
+
+          _defineProperty(_assertThisInitialized(_this), "pooled_card", []);
+
+          return _this;
+        }
+
+        var _proto = CardPooling.prototype;
+
+        _proto.onLoad = function onLoad() {
+          for (var i = 0; i < 52; i++) {
+            var card = instantiate(this.card_template.node);
+            card.parent = this.card_template.node.parent;
+            card.active = false;
+            this.pooled_card.push(card.getComponent(CardItem));
+          }
+        };
+
+        _proto.getPooledCard = function getPooledCard() {
+          var f = this.pooled_card.filter(function (c) {
+            return !c.node.active;
+          });
+
+          if (f.length > 0) {
+            var card = f[0];
+            card.setAsHideCard();
+            card.node.setSiblingIndex(this.pooled_card.length - 1);
+            card.node.setPosition(this.card_template.node.position);
+            return card;
+          }
+
+          return null;
+        };
+
+        _proto.reset = function reset() {
+          var _this2 = this;
+
+          this.pooled_card.forEach(function (card) {
+            card.reset();
+            card.node.setPosition(_this2.card_template.node.position);
+          });
+        };
+
+        _proto.clearCardsNotInTheseCards = function clearCardsNotInTheseCards(cards) {
+          var _this3 = this;
+
+          this.pooled_card.forEach(function (card) {
+            if (cards.filter(function (c) {
+              return c.getCode() == card.getCode();
+            }).length <= 0) {
+              card.reset();
+              card.node.setPosition(_this3.card_template.node.position);
+            }
+          });
+        };
+
+        return CardPooling;
+      }(Component), _temp), _descriptor = _applyDecoratedDescriptor(_class2.prototype, "card_template", [_dec2], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _class2)) || _class));
+      /**
+       * [1] Class member could be defined like this.
+       * [2] Use `property` decorator if your want the member to be serializable.
+       * [3] Your initialization goes here.
+       * [4] Your update function goes here.
+       *
+       * Learn more about scripting: https://docs.cocos.com/creator/3.0/manual/en/scripting/
+       * Learn more about CCClass: https://docs.cocos.com/creator/3.0/manual/en/scripting/ccclass.html
+       * Learn more about life-cycle callbacks: https://docs.cocos.com/creator/3.0/manual/en/scripting/life-cycle-callbacks.html
+       */
 
       cclegacy._RF.pop();
     }
@@ -22541,10 +24439,10 @@ System.register("chunks:///_virtual/SoundButtonCmp.ts", ['./_rollupPluginModLoBa
   };
 });
 
-System.register("chunks:///_virtual/MiniPokerBetHistoryView.ts", ['./_rollupPluginModLoBabelHelpers.js', 'cc', './CommonPopup.ts', './StringUtils.ts', './GlobalVariables.ts', './GameHTTPNetwork.ts', './MauBinh_CardLib.ts', './MiniPokerBetHistoryItemView.ts'], function (exports) {
+System.register("chunks:///_virtual/MiniPokerBetHistoryView.ts", ['./_rollupPluginModLoBabelHelpers.js', 'cc', './CommonPopup.ts', './StringUtils.ts', './GlobalVariables.ts', './MauBinh_CardLib.ts', './GameHTTPNetwork.ts', './MiniPokerBetHistoryItemView.ts'], function (exports) {
   'use strict';
 
-  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, _defineProperty, cclegacy, _decorator, Button, Label, Node, UIOpacity, CommonPopup, StringUtils, GlobalVariables, GameHTTPNetwork, GameCard, MiniPokerBetHistoryItemView;
+  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, _defineProperty, cclegacy, _decorator, Button, Label, Node, UIOpacity, CommonPopup, StringUtils, GlobalVariables, GameCard, GameHTTPNetwork, MiniPokerBetHistoryItemView;
 
   return {
     setters: [function (module) {
@@ -22567,9 +24465,9 @@ System.register("chunks:///_virtual/MiniPokerBetHistoryView.ts", ['./_rollupPlug
     }, function (module) {
       GlobalVariables = module.GlobalVariables;
     }, function (module) {
-      GameHTTPNetwork = module.default;
-    }, function (module) {
       GameCard = module.GameCard;
+    }, function (module) {
+      GameHTTPNetwork = module.default;
     }, function (module) {
       MiniPokerBetHistoryItemView = module.default;
     }],
@@ -23901,6 +25799,8 @@ System.register("chunks:///_virtual/BauCuaFullScreenGameView.ts", ['./_rollupPlu
         _defineProperty(this, "avatarURL", "");
 
         _defineProperty(this, "uid", "");
+
+        _defineProperty(this, "isHost", false);
       });
       var BauCuaFullScreenGameView = exports('BauCuaFullScreenGameView', (_dec = ccclass('BauCuaFullScreenGameView'), _dec2 = property([BauCuaBetEntry]), _dec3 = property(sp.Skeleton), _dec4 = property(Label), _dec5 = property(Label), _dec6 = property(ChipPooling), _dec7 = property([PlayerView]), _dec8 = property(PlayerView), _dec9 = property(UserOnlinePopup), _dec10 = property(UserChatPopup), _dec11 = property(UserInvitePopup), _dec12 = property(ChipPanel), _dec13 = property(Button), _dec14 = property(Button), _dec15 = property(Button), _dec16 = property(Button), _dec17 = property(Button), _dec18 = property(UITransform), _dec19 = property(Sprite), _dec20 = property(Sprite), _dec21 = property(Sprite), _dec22 = property(Sprite), _dec23 = property(Sprite), _dec24 = property(Sprite), _dec25 = property(SoiCauPopup), _dec26 = property(BauCuaSettingPopup), _dec27 = property(JackpotItemView), _dec28 = property([SpriteFrame]), _dec29 = property([SpriteFrame]), _dec(_class = (_class2 = (_temp = _class3 = /*#__PURE__*/function (_BaseFullScreenGameVi) {
         _inheritsLoose(BauCuaFullScreenGameView, _BaseFullScreenGameVi);
@@ -25128,6 +27028,138 @@ System.register("chunks:///_virtual/BauCuaFullScreenGameView.ts", ['./_rollupPlu
         writable: true,
         initializer: function initializer() {
           return [];
+        }
+      })), _class2)) || _class));
+      /**
+       * [1] Class member could be defined like this.
+       * [2] Use `property` decorator if your want the member to be serializable.
+       * [3] Your initialization goes here.
+       * [4] Your update function goes here.
+       *
+       * Learn more about scripting: https://docs.cocos.com/creator/3.0/manual/en/scripting/
+       * Learn more about CCClass: https://docs.cocos.com/creator/3.0/manual/en/scripting/ccclass.html
+       * Learn more about life-cycle callbacks: https://docs.cocos.com/creator/3.0/manual/en/scripting/life-cycle-callbacks.html
+       */
+
+      cclegacy._RF.pop();
+    }
+  };
+});
+
+System.register("chunks:///_virtual/TienLenSettingPopup.ts", ['./_rollupPluginModLoBabelHelpers.js', 'cc', './NotiView.ts', './LoadingView.ts', './SettingPopup.ts', './LobbyViewController.ts', './GamePlayManager.ts'], function (exports) {
+  'use strict';
+
+  var _defineProperty, _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, cclegacy, _decorator, Button, Toggle, NotiView, LoadingView, SettingPopup, LobbyViewController, GamePlayManager;
+
+  return {
+    setters: [function (module) {
+      _defineProperty = module.defineProperty;
+      _applyDecoratedDescriptor = module.applyDecoratedDescriptor;
+      _inheritsLoose = module.inheritsLoose;
+      _initializerDefineProperty = module.initializerDefineProperty;
+      _assertThisInitialized = module.assertThisInitialized;
+    }, function (module) {
+      cclegacy = module.cclegacy;
+      _decorator = module._decorator;
+      Button = module.Button;
+      Toggle = module.Toggle;
+    }, function (module) {
+      NotiView = module.default;
+    }, function (module) {
+      LoadingView = module.default;
+    }, function (module) {
+      SettingPopup = module.SettingPopup;
+    }, function (module) {
+      LobbyViewController = module.LobbyViewController;
+    }, function (module) {
+      GamePlayManager = module.GamePlayManager;
+    }],
+    execute: function () {
+      var _dec, _dec2, _dec3, _class, _class2, _descriptor, _descriptor2, _class3, _temp;
+
+      cclegacy._RF.push({}, "aada59+C+ZFrr59BsMUwJZW", "TienLenSettingPopup", undefined);
+
+      var ccclass = _decorator.ccclass,
+          property = _decorator.property;
+      var TienLenSettingPopup = exports('TienLenSettingPopup', (_dec = ccclass('TienLenSettingPopup'), _dec2 = property(Button), _dec3 = property(Toggle), _dec(_class = (_class2 = (_temp = _class3 = /*#__PURE__*/function (_SettingPopup) {
+        _inheritsLoose(TienLenSettingPopup, _SettingPopup);
+
+        function TienLenSettingPopup() {
+          var _this;
+
+          for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+          }
+
+          _this = _SettingPopup.call.apply(_SettingPopup, [this].concat(args)) || this;
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "btn_exit", _descriptor, _assertThisInitialized(_this));
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "toggle_autoready", _descriptor2, _assertThisInitialized(_this));
+
+          return _this;
+        }
+
+        var _proto = TienLenSettingPopup.prototype;
+
+        _proto.isAutoReady = function isAutoReady() {
+          var _this$toggle_autoread;
+
+          return (_this$toggle_autoread = this.toggle_autoready) === null || _this$toggle_autoread === void 0 ? void 0 : _this$toggle_autoread.isChecked;
+        };
+
+        _proto.onLoad = function onLoad() {
+          var _this$btn_exit,
+              _this2 = this,
+              _this$toggle_autoread2;
+
+          _SettingPopup.prototype.onLoad.call(this);
+
+          (_this$btn_exit = this.btn_exit) === null || _this$btn_exit === void 0 ? void 0 : _this$btn_exit.node.on("click", function () {
+            return _this2.exitRoom();
+          });
+          (_this$toggle_autoread2 = this.toggle_autoready) === null || _this$toggle_autoread2 === void 0 ? void 0 : _this$toggle_autoread2.node.on("toggle", function () {
+            localStorage.setItem(TienLenSettingPopup.SAVE_TLMN_AUTO_READY_KEY, _this2.isAutoReady() ? "true" : "false");
+          });
+          var savedauto = localStorage.getItem(TienLenSettingPopup.SAVE_TLMN_AUTO_READY_KEY);
+
+          if (savedauto == null || savedauto == undefined) {
+            this.toggle_autoready.isChecked = false;
+          } else {
+            this.toggle_autoready.isChecked = savedauto == "true" ? true : false;
+          }
+        };
+
+        _proto.exitRoom = function exitRoom() {
+          var _LobbyViewController$;
+
+          var ended = (_LobbyViewController$ = LobbyViewController.getInstance()) === null || _LobbyViewController$ === void 0 ? void 0 : _LobbyViewController$.isEnded();
+
+          if (!ended) {
+            var _NotiView$getInstance, _LobbyViewController$2;
+
+            (_NotiView$getInstance = NotiView.getInstance()) === null || _NotiView$getInstance === void 0 ? void 0 : _NotiView$getInstance.showMessage("Ván chơi chưa kết thúc!", null, (_LobbyViewController$2 = LobbyViewController.getInstance()) === null || _LobbyViewController$2 === void 0 ? void 0 : _LobbyViewController$2.getCurrentViewGameID());
+            return;
+          }
+
+          GamePlayManager.leaveRoom();
+          LoadingView.getInstance().show();
+        };
+
+        return TienLenSettingPopup;
+      }(SettingPopup), _defineProperty(_class3, "SAVE_TLMN_AUTO_READY_KEY", "SAVE_TLMN_AUTO_READY_KEY"), _temp), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, "btn_exit", [_dec2], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, "toggle_autoready", [_dec3], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
         }
       })), _class2)) || _class));
       /**
@@ -27324,6 +29356,8 @@ System.register("chunks:///_virtual/BaseFullScreenGameView.ts", ['./_rollupPlugi
 
         _proto.resetUI = function resetUI() {};
 
+        _proto.initUI = function initUI() {};
+
         _proto.handleRefreshMoney = function handleRefreshMoney(money) {};
 
         _proto.handleBackGameFromInterupt = function handleBackGameFromInterupt(timeInterupted) {};
@@ -27352,6 +29386,7 @@ System.register("chunks:///_virtual/BaseFullScreenGameView.ts", ['./_rollupPlugi
             fadeTime = 0.4;
           }
 
+          this.initUI();
           var fadeUI = (_this$black_screen = this.black_screen) === null || _this$black_screen === void 0 ? void 0 : _this$black_screen.getComponent(UIOpacity);
           var show = tween(fadeUI).sequence(tween().call(function () {
             fadeUI.opacity = 255;
@@ -28229,6 +30264,179 @@ System.register("chunks:///_virtual/KimCuongBetHistoryDetail.ts", ['./_rollupPlu
       // //         this.node.parent.parent,isClear);
       // //     }
       // // }
+
+      cclegacy._RF.pop();
+    }
+  };
+});
+
+System.register("chunks:///_virtual/TableItemView.ts", ['./_rollupPluginModLoBabelHelpers.js', 'cc', './StringUtils.ts', './MiniGameNetworkHandler.ts', './GameNetworkHandler.ts', './GlobalVariables.ts', './LoadingView.ts'], function (exports) {
+  'use strict';
+
+  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, _defineProperty, cclegacy, _decorator, Button, Label, Sprite, SpriteFrame, EventHandler, Component, StringUtils, MessageRequest, GameNetworkHandler, GLOBAL_MESSAGE, GlobalVariables, LoadingView;
+
+  return {
+    setters: [function (module) {
+      _applyDecoratedDescriptor = module.applyDecoratedDescriptor;
+      _inheritsLoose = module.inheritsLoose;
+      _initializerDefineProperty = module.initializerDefineProperty;
+      _assertThisInitialized = module.assertThisInitialized;
+      _defineProperty = module.defineProperty;
+    }, function (module) {
+      cclegacy = module.cclegacy;
+      _decorator = module._decorator;
+      Button = module.Button;
+      Label = module.Label;
+      Sprite = module.Sprite;
+      SpriteFrame = module.SpriteFrame;
+      EventHandler = module.EventHandler;
+      Component = module.Component;
+    }, function (module) {
+      StringUtils = module.StringUtils;
+    }, function (module) {
+      MessageRequest = module.MessageRequest;
+    }, function (module) {
+      GameNetworkHandler = module.GameNetworkHandler;
+    }, function (module) {
+      GLOBAL_MESSAGE = module.GLOBAL_MESSAGE;
+      GlobalVariables = module.GlobalVariables;
+    }, function (module) {
+      LoadingView = module.default;
+    }],
+    execute: function () {
+      var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _temp;
+
+      cclegacy._RF.push({}, "d1c07bzGzxPEri9QsXoa5hG", "TableItemView", undefined);
+
+      var ccclass = _decorator.ccclass,
+          property = _decorator.property;
+      var TableItemView = exports('TableItemView', (_dec = ccclass('TableItemView'), _dec2 = property(Button), _dec3 = property(Label), _dec4 = property(Label), _dec5 = property(Sprite), _dec6 = property([SpriteFrame]), _dec(_class = (_class2 = (_temp = /*#__PURE__*/function (_Component) {
+        _inheritsLoose(TableItemView, _Component);
+
+        function TableItemView() {
+          var _this;
+
+          for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+          }
+
+          _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "button", _descriptor, _assertThisInitialized(_this));
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "lbl_bet", _descriptor2, _assertThisInitialized(_this));
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "lbl_user", _descriptor3, _assertThisInitialized(_this));
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "spr_table", _descriptor4, _assertThisInitialized(_this));
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "sprFrame_table", _descriptor5, _assertThisInitialized(_this));
+
+          _defineProperty(_assertThisInitialized(_this), "bet", 0);
+
+          _defineProperty(_assertThisInitialized(_this), "gameID", -1);
+
+          return _this;
+        }
+
+        var _proto = TableItemView.prototype;
+
+        _proto.show = function show(bet, userCount, gameID) {
+          if (this.button.clickEvents.length == 0) {
+            var clickEventHandler = new EventHandler();
+            clickEventHandler.target = this.node; // This node is the node to which your event handler code component belongs
+
+            clickEventHandler.component = "TableItemView"; // This is the code file name
+
+            clickEventHandler.handler = "onJoinRoom";
+            this.button.clickEvents.push(clickEventHandler);
+          }
+
+          this.bet = bet;
+          this.gameID = gameID;
+          this.lbl_bet.string = StringUtils.formatMoneyNumber(bet);
+          this.lbl_user.string = userCount;
+          var tableType = 4;
+
+          if (bet <= 1000) {
+            tableType = 1;
+          } else if (bet <= 10000) {
+            tableType = 2;
+          } else if (bet <= 100000) {
+            tableType = 3;
+          }
+
+          this.spr_table.spriteFrame = this.sprFrame_table[tableType];
+          this.node.active = true;
+        };
+
+        _proto.hide = function hide() {
+          this.node.active = false;
+        };
+
+        _proto.onJoinRoom = function onJoinRoom() {
+          LoadingView.getInstance().show();
+          var dict = {};
+          dict["cmd"] = GLOBAL_MESSAGE.QUICK_PLAY_WITH_BET;
+          dict["gid"] = this.gameID;
+          dict["aid"] = 1;
+          dict["b"] = this.bet;
+
+          if (this.gameID == GlobalVariables.SAM || this.gameID == GlobalVariables.TIENLEN) {
+            dict["Mu"] = 2;
+          }
+
+          var mes = [MessageRequest.ZonePlugin_Type, "Simms", "channelPlugin", dict];
+          GameNetworkHandler.send(mes);
+        };
+
+        return TableItemView;
+      }(Component), _temp), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, "button", [_dec2], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, "lbl_bet", [_dec3], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, "lbl_user", [_dec4], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, "spr_table", [_dec5], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, "sprFrame_table", [_dec6], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return [];
+        }
+      })), _class2)) || _class));
+      /**
+       * [1] Class member could be defined like this.
+       * [2] Use `property` decorator if your want the member to be serializable.
+       * [3] Your initialization goes here.
+       * [4] Your update function goes here.
+       *
+       * Learn more about scripting: https://docs.cocos.com/creator/3.0/manual/en/scripting/
+       * Learn more about CCClass: https://docs.cocos.com/creator/3.0/manual/en/scripting/ccclass.html
+       * Learn more about life-cycle callbacks: https://docs.cocos.com/creator/3.0/manual/en/scripting/life-cycle-callbacks.html
+       */
 
       cclegacy._RF.pop();
     }
@@ -31820,6 +34028,1245 @@ System.register("chunks:///_virtual/TaiXiuSessionHistorySumItemView.ts", ['./_ro
   };
 });
 
+System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPluginModLoBabelHelpers.js', 'cc', './GameConfigManager.ts', './StringUtils.ts', './MiniGameNetworkHandler.ts', './GameNetworkHandler.ts', './NotiView.ts', './GameUtils.ts', './GlobalVariables.ts', './BaseFullScreenGameView.ts', './UserChatPopup.ts', './UserInvitePopup.ts', './BauCuaFullScreenGameView.ts', './MauBinh_CardLib.ts', './DemLa_CardLib.ts', './CardPooling.ts', './GameBaiPlayerView.ts', './TienLenSettingPopup.ts', './LobbyViewController.ts', './MiniGameNodeController.ts', './GamePlayManager.ts'], function (exports) {
+  'use strict';
+
+  var _defineProperty, _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, cclegacy, _decorator, Button, Sprite, SpriteFrame, Label, systemEvent, tween, Tween, Vec3, GameConfigManager, StringUtils, MessageRequest, MessageResponse, GameNetworkHandler, NotiView, GameUtils, GlobalVariables, GLOBAL_MESSAGE, BaseFullScreenGameView, UserChatPopup, UserInvitePopup, PlayerInfo, GameCard, DemLa_CardLib, CardPooling, GameBaiPlayerView, TienLenSettingPopup, LobbyViewController, MiniGameNodeController, GameState, GamePlayManager;
+
+  return {
+    setters: [function (module) {
+      _defineProperty = module.defineProperty;
+      _applyDecoratedDescriptor = module.applyDecoratedDescriptor;
+      _inheritsLoose = module.inheritsLoose;
+      _initializerDefineProperty = module.initializerDefineProperty;
+      _assertThisInitialized = module.assertThisInitialized;
+    }, function (module) {
+      cclegacy = module.cclegacy;
+      _decorator = module._decorator;
+      Button = module.Button;
+      Sprite = module.Sprite;
+      SpriteFrame = module.SpriteFrame;
+      Label = module.Label;
+      systemEvent = module.systemEvent;
+      tween = module.tween;
+      Tween = module.Tween;
+      Vec3 = module.Vec3;
+    }, function (module) {
+      GameConfigManager = module.GameConfigManager;
+    }, function (module) {
+      StringUtils = module.StringUtils;
+    }, function (module) {
+      MessageRequest = module.MessageRequest;
+      MessageResponse = module.MessageResponse;
+    }, function (module) {
+      GameNetworkHandler = module.GameNetworkHandler;
+    }, function (module) {
+      NotiView = module.default;
+    }, function (module) {
+      GameUtils = module.default;
+    }, function (module) {
+      GlobalVariables = module.GlobalVariables;
+      GLOBAL_MESSAGE = module.GLOBAL_MESSAGE;
+    }, function (module) {
+      BaseFullScreenGameView = module.BaseFullScreenGameView;
+    }, function (module) {
+      UserChatPopup = module.UserChatPopup;
+    }, function (module) {
+      UserInvitePopup = module.UserInvitePopup;
+    }, function (module) {
+      PlayerInfo = module.PlayerInfo;
+    }, function (module) {
+      GameCard = module.GameCard;
+    }, function (module) {
+      DemLa_CardLib = module.default;
+    }, function (module) {
+      CardPooling = module.CardPooling;
+    }, function (module) {
+      GameBaiPlayerView = module.GameBaiPlayerView;
+    }, function (module) {
+      TienLenSettingPopup = module.TienLenSettingPopup;
+    }, function (module) {
+      LobbyViewController = module.LobbyViewController;
+    }, function (module) {
+      MiniGameNodeController = module.default;
+    }, function (module) {
+      GameState = module.GameState;
+      GamePlayManager = module.GamePlayManager;
+    }],
+    execute: function () {
+      exports('DemLa_Message', void 0);
+
+      var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _dec8, _dec9, _dec10, _dec11, _dec12, _dec13, _dec14, _dec15, _dec16, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11, _descriptor12, _descriptor13, _descriptor14, _descriptor15, _class3, _temp;
+
+      cclegacy._RF.push({}, "f34ca6K3Q5JJL5yzQl1DJ2f", "TienLenFullScreenGameView", undefined);
+
+      var ccclass = _decorator.ccclass,
+          property = _decorator.property;
+      var DemLa_Message;
+
+      (function (DemLa_Message) {
+        DemLa_Message[DemLa_Message["DEAL_CARDS"] = 250] = "DEAL_CARDS";
+        DemLa_Message[DemLa_Message["DANH_BAI"] = 251] = "DANH_BAI";
+        DemLa_Message[DemLa_Message["FINISH_GAME"] = 252] = "FINISH_GAME";
+        DemLa_Message[DemLa_Message["SEND_DAND_BAI"] = 253] = "SEND_DAND_BAI";
+        DemLa_Message[DemLa_Message["PASS"] = 254] = "PASS";
+      })(DemLa_Message || (DemLa_Message = exports('DemLa_Message', {})));
+
+      var TienLenFullScreenGameView = exports('TienLenFullScreenGameView', (_dec = ccclass('TienLenFullScreenGameView'), _dec2 = property(GameBaiPlayerView), _dec3 = property(GameBaiPlayerView), _dec4 = property(UserChatPopup), _dec5 = property(UserInvitePopup), _dec6 = property(Button), _dec7 = property(Button), _dec8 = property(Button), _dec9 = property(Button), _dec10 = property(Button), _dec11 = property(Button), _dec12 = property(Sprite), _dec13 = property([SpriteFrame]), _dec14 = property(Label), _dec15 = property(TienLenSettingPopup), _dec16 = property(CardPooling), _dec(_class = (_class2 = (_temp = _class3 = /*#__PURE__*/function (_BaseFullScreenGameVi) {
+        _inheritsLoose(TienLenFullScreenGameView, _BaseFullScreenGameVi);
+
+        function TienLenFullScreenGameView() {
+          var _this;
+
+          for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+          }
+
+          _this = _BaseFullScreenGameVi.call.apply(_BaseFullScreenGameVi, [this].concat(args)) || this;
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "my_info", _descriptor, _assertThisInitialized(_this));
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "opponent_info", _descriptor2, _assertThisInitialized(_this));
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "userChatPopup", _descriptor3, _assertThisInitialized(_this));
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "userInvitePopup", _descriptor4, _assertThisInitialized(_this));
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "btn_chat", _descriptor5, _assertThisInitialized(_this));
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "btn_exit", _descriptor6, _assertThisInitialized(_this));
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "btn_ready", _descriptor7, _assertThisInitialized(_this));
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "btn_begin", _descriptor8, _assertThisInitialized(_this));
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "btn_boluot", _descriptor9, _assertThisInitialized(_this));
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "btn_danhbai", _descriptor10, _assertThisInitialized(_this));
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "spr_table", _descriptor11, _assertThisInitialized(_this));
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "sprFrame_tables", _descriptor12, _assertThisInitialized(_this));
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "lbl_info", _descriptor13, _assertThisInitialized(_this));
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "tienLenSettingPopup", _descriptor14, _assertThisInitialized(_this));
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "cardPooling", _descriptor15, _assertThisInitialized(_this));
+
+          _defineProperty(_assertThisInitialized(_this), "_playerInfo", []);
+
+          _defineProperty(_assertThisInitialized(_this), "_timeToFinish", 0);
+
+          _defineProperty(_assertThisInitialized(_this), "_state", GameState.WAITING);
+
+          _defineProperty(_assertThisInitialized(_this), "pendingMessage", []);
+
+          _defineProperty(_assertThisInitialized(_this), "_isNewTurnRound", true);
+
+          _defineProperty(_assertThisInitialized(_this), "_lastTurnCards", []);
+
+          return _this;
+        }
+
+        TienLenFullScreenGameView.getInstance = function getInstance() {
+          return TienLenFullScreenGameView.instance;
+        };
+
+        var _proto = TienLenFullScreenGameView.prototype;
+
+        _proto.getState = function getState() {
+          return this._state;
+        };
+
+        _proto.testCard = function testCard() {
+          /*Card_3T-9
+          Card_4R-14
+          Card_4C-15
+          Card_5B-16*/
+          var a = [4];
+          var b = [8, 9, 10, 11, 16, 17, 38, 36, 37, 45, 46, 51, 2];
+          var cardA = a.map(function (x) {
+            var c = new GameCard();
+            c.decodeCard(x, GlobalVariables.TIENLEN);
+            return c;
+          });
+          console.log("--------LAST-------");
+          cardA.forEach(function (r) {
+            console.log(r.getResourceName() + "-" + r.serverCode);
+          });
+          console.log("--------MY-------");
+          var cardB = b.map(function (x) {
+            var c = new GameCard();
+            c.decodeCard(x, GlobalVariables.TIENLEN);
+            return c;
+          });
+          cardB.forEach(function (r) {
+            console.log(r.getResourceName() + "-" + r.serverCode);
+          });
+          var recommendCards = DemLa_CardLib.getRecommendCards(cardA, cardB);
+          console.log("--------RECOMMEND-------");
+          recommendCards.forEach(function (r) {
+            console.log(r.getResourceName() + "-" + r.serverCode);
+          });
+        };
+
+        _proto.onLoad = function onLoad() {
+          var _this$btn_chat,
+              _this2 = this,
+              _this$btn_exit,
+              _this$btn_begin,
+              _this$btn_ready,
+              _this$btn_boluot,
+              _this$btn_danhbai; // this.testCard();
+
+
+          _BaseFullScreenGameVi.prototype.onLoad.call(this);
+
+          TienLenFullScreenGameView.instance = this;
+          this.gameID = GlobalVariables.TIENLEN;
+          (_this$btn_chat = this.btn_chat) === null || _this$btn_chat === void 0 ? void 0 : _this$btn_chat.node.on("click", function () {
+            var _this2$userChatPopup;
+
+            (_this2$userChatPopup = _this2.userChatPopup) === null || _this2$userChatPopup === void 0 ? void 0 : _this2$userChatPopup.show();
+          });
+          (_this$btn_exit = this.btn_exit) === null || _this$btn_exit === void 0 ? void 0 : _this$btn_exit.node.on("click", function () {
+            var _this2$tienLenSetting;
+
+            (_this2$tienLenSetting = _this2.tienLenSettingPopup) === null || _this2$tienLenSetting === void 0 ? void 0 : _this2$tienLenSetting.show();
+          });
+          (_this$btn_begin = this.btn_begin) === null || _this$btn_begin === void 0 ? void 0 : _this$btn_begin.node.on("click", function () {
+            _this2.btn_begin.node.active = false;
+
+            _this2.sendReady();
+          });
+          (_this$btn_ready = this.btn_ready) === null || _this$btn_ready === void 0 ? void 0 : _this$btn_ready.node.on("click", function () {
+            _this2.btn_ready.node.active = false;
+
+            _this2.sendReady();
+          });
+          (_this$btn_boluot = this.btn_boluot) === null || _this$btn_boluot === void 0 ? void 0 : _this$btn_boluot.node.on("click", function () {
+            _this2.onBoLuot();
+          });
+          (_this$btn_danhbai = this.btn_danhbai) === null || _this$btn_danhbai === void 0 ? void 0 : _this$btn_danhbai.node.on("click", function () {
+            _this2.onDanhBai();
+          });
+        };
+
+        _proto.onBoLuot = function onBoLuot() {
+          this.btn_boluot.node.active = false;
+          this.btn_danhbai.node.active = false;
+          this.sendPass();
+        };
+
+        _proto.onDanhBai = function onDanhBai() {
+          var _this$my_info;
+
+          var _choosingCards = (_this$my_info = this.my_info) === null || _this$my_info === void 0 ? void 0 : _this$my_info.getSelectedCards().map(function (c) {
+            return c.getCard();
+          });
+
+          var _lastTurnCards = this._lastTurnCards.map(function (c) {
+            return c.getCard();
+          });
+
+          if ((_choosingCards === null || _choosingCards === void 0 ? void 0 : _choosingCards.length) == 0) {
+            NotiView.getInstance().showMessage("Bạn chưa chọn bài để đánh!", this.root, GlobalVariables.TIENLEN);
+            return;
+          }
+
+          if ((_choosingCards === null || _choosingCards === void 0 ? void 0 : _choosingCards.length) >= 2) {
+            DemLa_CardLib.sortVector(_choosingCards, false);
+
+            if (DemLa_CardLib.isPairs(_choosingCards) || DemLa_CardLib.isThreeOfAKind(_choosingCards) || DemLa_CardLib.isFourOfAKind(_choosingCards) || DemLa_CardLib.isStraight(_choosingCards) || DemLa_CardLib.isThreePairsStraight(_choosingCards) || DemLa_CardLib.isFourPairsStraight(_choosingCards)) {
+              if (this._lastTurnCards.length > 0) {
+                if (DemLa_CardLib.getRecommendCards(_lastTurnCards, _choosingCards).length != (_choosingCards === null || _choosingCards === void 0 ? void 0 : _choosingCards.length)) {
+                  NotiView.getInstance().showMessage("Bài đánh không hợp lệ!", this.root, GlobalVariables.TIENLEN);
+                  return;
+                }
+              }
+            } else {
+              NotiView.getInstance().showMessage("Bài đánh không hợp lệ!", this.root, GlobalVariables.TIENLEN);
+              return;
+            }
+          } else if (this._lastTurnCards.length > 0 && (_choosingCards === null || _choosingCards === void 0 ? void 0 : _choosingCards.length) != _lastTurnCards.length) {
+            NotiView.getInstance().showMessage("Bài đánh không hợp lệ!", this.root, GlobalVariables.TIENLEN);
+            return;
+          }
+
+          this.btn_boluot.node.active = false;
+          this.btn_danhbai.node.active = false;
+          this.sendDanhBai();
+        };
+
+        _proto.showInvite = function showInvite() {
+          var _this$userInvitePopup;
+
+          (_this$userInvitePopup = this.userInvitePopup) === null || _this$userInvitePopup === void 0 ? void 0 : _this$userInvitePopup.fetchUserInvitations();
+        };
+
+        _proto.sendPass = function sendPass() {
+          var dict = {};
+          dict["cmd"] = DemLa_Message.PASS;
+          var data = [MessageRequest.RoomPlugin_Type, "Simms", GamePlayManager.roomID, dict];
+          GameNetworkHandler.send(data);
+        };
+
+        _proto.sendDanhBai = function sendDanhBai() {
+          var cardsArr = this.my_info.getSelectedCards().map(function (card) {
+            return card.getCode();
+          });
+          var dict = {};
+          dict["cmd"] = DemLa_Message.SEND_DAND_BAI;
+          dict["cs"] = cardsArr;
+          var data = [MessageRequest.RoomPlugin_Type, "Simms", GamePlayManager.roomID, dict];
+          GameNetworkHandler.send(data);
+        };
+
+        _proto.resetUI = function resetUI() {
+          var _this$userChatPopup, _this$tienLenSettingP, _this$userInvitePopup2;
+
+          (_this$userChatPopup = this.userChatPopup) === null || _this$userChatPopup === void 0 ? void 0 : _this$userChatPopup.close();
+          (_this$tienLenSettingP = this.tienLenSettingPopup) === null || _this$tienLenSettingP === void 0 ? void 0 : _this$tienLenSettingP.close();
+          (_this$userInvitePopup2 = this.userInvitePopup) === null || _this$userInvitePopup2 === void 0 ? void 0 : _this$userInvitePopup2.close();
+        };
+
+        _proto.initUI = function initUI() {
+          this.btn_ready.node.active = false;
+          this.btn_begin.node.active = false;
+          this.btn_danhbai.node.active = false;
+          this.btn_boluot.node.active = false;
+          this.my_info.setUserInfo(null);
+          this.opponent_info.setUserInfo(null);
+          this.my_info.resetUI();
+          this.opponent_info.resetUI();
+          this._isNewTurnRound = true;
+          this.cardPooling.reset();
+        };
+
+        _proto.handleRefreshMoney = function handleRefreshMoney(money) {
+          var player = this.getPlayerByUID(GameConfigManager.uid);
+
+          if (player == null) {
+            return;
+          }
+
+          var infos = this._playerInfo.filter(function (p) {
+            return p.uid == GameConfigManager.uid;
+          });
+
+          if (infos.length > 0) {
+            infos[0].gold = money;
+          }
+
+          player.refresh();
+        };
+
+        _proto.handleBackGameFromInterupt = function handleBackGameFromInterupt(timeInterupted) {
+          console.log("handleBackGameFromInterupt::baucua", timeInterupted);
+
+          if (this._state == GameState.WAITING) {
+            this.forceLeaveRoom();
+          } else {
+            this.continueCountDownBy(-timeInterupted);
+          }
+        };
+
+        _proto.handleLeaveRoomResponse = function handleLeaveRoomResponse(message) {
+          _BaseFullScreenGameVi.prototype.handleLeaveRoomResponse.call(this, message);
+        };
+
+        _proto.showChat = function showChat(name, content) {
+          var _this$bauCuaSettingPo;
+
+          if (((_this$bauCuaSettingPo = this.bauCuaSettingPopup) === null || _this$bauCuaSettingPo === void 0 ? void 0 : _this$bauCuaSettingPo.isHideChat()) && name != GameConfigManager.uid) {
+            return;
+          }
+
+          var player = this.getPlayerByUID(name);
+
+          if (player == null) {
+            return;
+          }
+
+          player.showBubbleChat(content);
+        };
+
+        _proto.getPlayerByUID = function getPlayerByUID(uid) {
+          if (uid == GameConfigManager.uid) {
+            return this.my_info;
+          } else if (this.opponent_info.getUID() == uid) {
+            return this.opponent_info;
+          }
+
+          return null;
+        };
+
+        _proto.handleInGameMessage = function handleInGameMessage(message) {
+          var dict = message[1];
+          var cmd = dict["cmd"];
+
+          if (cmd == GLOBAL_MESSAGE.INGAME_USER_CHAT) {
+            // chat
+            var name = dict["uid"];
+            var content = dict["mgs"];
+            this.showChat(name, content);
+          } else if (cmd == GLOBAL_MESSAGE.INGAME_USER_READY) {
+            // nguoi choi san sang
+            var uid = dict["uid"];
+            this.setReadyForPlayer(uid);
+          } else if (cmd == GLOBAL_MESSAGE.INGAME_CHANGE_HOST) {
+            // thay doi chu phong
+            var _uid = dict["uid"];
+            this.setHostPlayer(_uid);
+          } else if (cmd == 303) {
+            var playerArr = dict["us"];
+            this.userInvitePopup.showPlayersToBeInvited(playerArr);
+          } else if (cmd == GLOBAL_MESSAGE.REFRESH_MONEY) {
+            var as = dict["As"];
+            var vip = as["vip"];
+            var gold = as["gold"];
+            var chip = as["chip"];
+            var goldSafe = as["safe"];
+            GameConfigManager.gold = gold;
+            systemEvent.emit(LobbyViewController.REFRESH_MONEY, GameConfigManager.gold);
+          } // else if (cmd == 303) {
+          //     // MsgPackArray * playerArr = dict->getArray("us");
+          //     // gameView->showPlayersToBeInvited(playerArr);
+          // }
+          else {
+              return false;
+            }
+
+          return true;
+        };
+
+        _proto.setHostPlayer = function setHostPlayer(uid) {
+          var _this3 = this,
+              _this$btn_ready2,
+              _this$my_info2,
+              _this$opponent_info;
+
+          this._playerInfo.forEach(function (p) {
+            p.isHost = p.uid == uid;
+
+            var player = _this3.getPlayerByUID(p.uid);
+
+            if (player != null) {
+              player.setUserInfo(p);
+            }
+          });
+
+          if ((_this$btn_ready2 = this.btn_ready) === null || _this$btn_ready2 === void 0 ? void 0 : _this$btn_ready2.node.active) {
+            this.btn_ready.node.active = false;
+          }
+
+          (_this$my_info2 = this.my_info) === null || _this$my_info2 === void 0 ? void 0 : _this$my_info2.ready(false);
+          (_this$opponent_info = this.opponent_info) === null || _this$opponent_info === void 0 ? void 0 : _this$opponent_info.ready(false);
+        };
+
+        _proto.setReadyForPlayer = function setReadyForPlayer(uid) {
+          var player = this.getPlayerByUID(uid);
+
+          if (player != null) {
+            player.ready();
+          }
+
+          if (this.getIsHost() && !this.isMe(uid)) {
+            this.btn_begin.node.active = true;
+          }
+        };
+
+        _proto.isMe = function isMe(uid) {
+          return uid == GameConfigManager.uid;
+        };
+
+        _proto.update = function update(dt) {
+          var _this4 = this;
+
+          if (this.root.active) {
+            if (this.pendingMessage.length > 0) {
+              this.pendingMessage.forEach(function (m) {
+                _this4.handleMessage(m);
+              });
+              this.pendingMessage = [];
+            }
+          }
+        };
+
+        _proto.handleMessage = function handleMessage(message) {
+          if (!this.root.active) {
+            this.pendingMessage.push(message);
+            return;
+          }
+
+          if (this.handleInGameMessage(message)) {
+            return;
+          }
+
+          var messageType = message[0];
+          var dict = message[1];
+          var cmd = dict["cmd"];
+
+          switch (messageType) {
+            case MessageResponse.Extension_Response:
+              {
+                if (cmd == GLOBAL_MESSAGE.INGAME_JOIN_TABLE_INFOS) {
+                  var b = dict["b"]; // muc cuoc
+
+                  var gS = dict["gS"]; // game state
+
+                  var rmT = dict["rmT"]; // remaining time
+
+                  rmT = rmT / 1000;
+                  var aid = dict["aid"];
+                  var maxUser = dict["Mu"];
+                  var hasPassword = false;
+
+                  if (dict["hpwd"] != null && dict["hpwd"] != undefined) {
+                    hasPassword = dict["hpwd"];
+                  }
+
+                  this._state = GameState.WAITING;
+
+                  if (gS == 3 || gS == 4) {
+                    this._state = GameState.VIEWING;
+                  }
+
+                  this.setGameConfig(b, gS, rmT, aid, maxUser, hasPassword);
+                  var timeToFinish = dict["tfeg"];
+                  timeToFinish /= 1000;
+                  this._timeToFinish = timeToFinish;
+                  var arrPlayer = dict["ps"];
+
+                  for (var i = 0; i < arrPlayer.length; i++) {
+                    var playerInfoDict = arrPlayer[i];
+                    var C = playerInfoDict["C"]; // chu ban
+
+                    var m = playerInfoDict["m"]; // money
+
+                    var pS = playerInfoDict["pS"]; // player state
+
+                    var rmC = playerInfoDict["rmC"]; // so bai con lai
+
+                    var sit = playerInfoDict["sit"]; // cho ngoi
+
+                    var dn = playerInfoDict["dn"]; // display name
+
+                    var uid = playerInfoDict["uid"]; // user id
+
+                    var r = playerInfoDict["r"]; // ready
+
+                    var playing = playerInfoDict["pi"];
+                    var platformID = playerInfoDict["pid"]; // platform
+
+                    var as = playerInfoDict["As"];
+                    var avaURL = playerInfoDict["a"];
+                    var customerID = 0;
+
+                    if (playerInfoDict["id"] != null && playerInfoDict["id"] != undefined) {
+                      customerID = playerInfoDict["id"];
+                    }
+
+                    this.addPlayer(dn, uid, C, m, pS, rmC, sit, r, platformID, playing, as, avaURL, customerID);
+                  }
+
+                  this.prepareNewGame();
+                  if (this._state == GameState.VIEWING) ;
+                  return;
+                } else if (cmd == GLOBAL_MESSAGE.INGAME_USER_LEAVE_AND_JOIN_TABLE) {
+                  var t = dict["t"]; // t = 1: vao phong || t = 2: ra phong
+
+                  if (t == 1) {
+                    var _playerInfoDict = dict["p"];
+                    var _C = _playerInfoDict["C"]; // chu ban
+
+                    var a = _playerInfoDict["a"]; // avatar
+
+                    var g = _playerInfoDict["g"]; // gender
+
+                    var _m = _playerInfoDict["m"]; // money
+
+                    var _sit = _playerInfoDict["sit"];
+                    var _dn = _playerInfoDict["dn"]; // display name
+
+                    var _uid2 = _playerInfoDict["uid"]; // user id
+
+                    var _r = false; // ready
+
+                    var _platformID = _playerInfoDict["pid"]; // platform
+
+                    if (_playerInfoDict["r"] != null && _playerInfoDict["r"] != undefined) {
+                      _r = _playerInfoDict["r"];
+                    }
+
+                    var _as = _playerInfoDict["As"];
+                    var _avaURL = _playerInfoDict["a"];
+                    var _customerID = 0;
+
+                    if (_playerInfoDict["id"] != null && _playerInfoDict["id"] != undefined) {
+                      _customerID = _playerInfoDict["id"];
+                    }
+
+                    this.addPlayer(_dn, _uid2, _C, _m, 0, 0, _sit, _r, _platformID, true, _as, _avaURL, _customerID);
+                  } else if (t == 2) {
+                    var _playerInfoDict2 = dict["p"];
+                    var _uid3 = _playerInfoDict2["uid"]; // user id
+
+                    this.removePlayer(_uid3);
+                  }
+
+                  return;
+                }
+
+                if (cmd == DemLa_Message.DEAL_CARDS) {
+                  // chia bai
+                  var cardsArr = dict["cs"];
+                  var nextPlayerUID = dict["tP"]["uid"];
+                  var listPlaying = dict["lpi"];
+                  var listUpdateMoney = null;
+
+                  if (dict["ps"] != null && dict["ps"] != undefined) {
+                    listUpdateMoney = dict["ps"];
+                  }
+
+                  this.startGame(cardsArr, nextPlayerUID, listPlaying, listUpdateMoney);
+                } else if (cmd == DemLa_Message.DANH_BAI) {
+                  var dictFromPlayer = dict["fP"];
+                  var dictToPlayer = dict["tP"];
+                  var state = dictFromPlayer["pS"];
+
+                  if (state == 1) {
+                    var arrCards = dictFromPlayer["dCs"];
+                    var fromPlayer = dictFromPlayer["uid"];
+                    var toPlayer = dictToPlayer["uid"];
+                    var mX = 0;
+                    var lM = 0;
+
+                    if (dictFromPlayer["mX"] != null && dictFromPlayer["mX"] != undefined) {
+                      mX = dictFromPlayer["mX"];
+                      lM = dictFromPlayer["lm"];
+                    }
+
+                    this.danhBai(fromPlayer, arrCards, toPlayer, mX, lM);
+
+                    if (dictFromPlayer["rfu"] != null && dictFromPlayer["rfu"] != undefined) {
+                      var dictRefundPlayer = dict["rfu"];
+                      var refundPlayer = dictRefundPlayer["uid"];
+                      var moneyRefund = dictRefundPlayer["m"];
+                      var mXRefund = dictRefundPlayer["mX"];
+                      this.refundMoney(refundPlayer, moneyRefund, mXRefund);
+                    }
+                  } else if (state == 2) {
+                    var _fromPlayer = dictFromPlayer["uid"];
+                    var _toPlayer = dictToPlayer["uid"];
+                    this.addBoLuotPlayer(_fromPlayer);
+                    this.nextTurn(_toPlayer);
+                  }
+                } else if (cmd == DemLa_Message.FINISH_GAME) {
+                  var finishArr = [];
+
+                  if (dict["fP"] != null && dict["fP"] != null) {
+                    var _dictFromPlayer = dict["fP"];
+                    var _arrCards = _dictFromPlayer["dCs"];
+                    var _fromPlayer2 = _dictFromPlayer["uid"];
+                    var _mX = 0;
+                    var _lM = 0;
+
+                    if (dict["sm"] != null && dict["sm"] != null) {
+                      _mX = _dictFromPlayer["mX"];
+                      _lM = _dictFromPlayer["lm"];
+                    }
+
+                    this.danhBai(_fromPlayer2, _arrCards, "", _mX, _lM);
+                    finishArr.push(_dictFromPlayer);
+                  }
+
+                  var _arrPlayer = dict["ps"];
+
+                  for (var _i = 0; _i < _arrPlayer.length; _i++) {
+                    var playerDict = _arrPlayer[_i];
+                    finishArr.push(playerDict);
+                  }
+
+                  this.finishThisGame(finishArr);
+                } else if (cmd == GLOBAL_MESSAGE.ERROR_MESSAGE) {
+                  var errorMessage;
+
+                  if (dict["mgs"] != null && dict["mgs"] != undefined) {
+                    errorMessage = dict["mgs"];
+                  }
+
+                  if (errorMessage.length > 0) {
+                    NotiView.getInstance().showMessage(errorMessage, this.root, GlobalVariables.TIENLEN);
+                    return;
+                  }
+                }
+              }
+          }
+        };
+
+        _proto.finishThisGame = function finishThisGame(finishArr) {
+          var _this5 = this;
+
+          for (var i = 0; i < finishArr.length; i++) {
+            var playerDict = finishArr[i];
+            var uid = playerDict["uid"];
+            var player = this.getPlayerByUID(uid);
+
+            if (player != null) {
+              player.stopCountDown();
+              player.hideBubbleChat();
+              var winnings = playerDict["mX"];
+
+              if (playerDict["sm"] != null && playerDict["sm"] != undefined) {
+                winnings = playerDict["sm"];
+              }
+
+              var ag = playerDict["m"];
+              player.setMoney(ag);
+              player.winning = Math.abs(winnings);
+
+              if (winnings > 0) {
+                player.showWinFx(0, this._timeToFinish * 0.5);
+              } else {
+                player.showLoseFx(0, this._timeToFinish * 0.5);
+              }
+            }
+          }
+
+          var finishAct = tween(this.node).sequence(tween().delay(this._timeToFinish), tween().call(function () {
+            _this5._state = GameState.WAITING;
+
+            _this5.prepareNewGame();
+          }));
+          finishAct.start();
+        };
+
+        _proto.addBoLuotPlayer = function addBoLuotPlayer(fromPlayer) {
+          this._isNewTurnRound = true;
+          var player = this.getPlayerByUID(fromPlayer);
+
+          if (player != null) {
+            player.showBubbleChat("Bỏ");
+          }
+
+          this._lastTurnCards.forEach(function (card) {
+            card.setGray();
+          });
+
+          this.clearCardInTable();
+        };
+
+        _proto.danhBai = function danhBai(fromPlayer, arrCards, toPlayer, mX, lM) {
+          this._isNewTurnRound = false;
+
+          if (mX > 0) {
+            if (this.isMe(fromPlayer)) {
+              this.opponent_info.winning = Math.abs(mX);
+              this.opponent_info.showLoseFx(0, 3);
+              this.my_info.winning = Math.abs(mX);
+              this.my_info.showWinFx(0, 3);
+            } else {
+              this.opponent_info.winning = Math.abs(mX);
+              this.opponent_info.showWinFx(0, 3);
+              this.my_info.winning = Math.abs(mX);
+              this.my_info.showLoseFx(0, 3);
+            }
+          }
+
+          this._lastTurnCards.forEach(function (card) {
+            card.setGray();
+          });
+
+          var randNum1 = GameUtils.getRandomInt(0, 100) - 75;
+          var randNum2 = GameUtils.getRandomInt(0, 100) - 50;
+          var posX = this.cardPooling.node.position.x + randNum1;
+          var posY = this.cardPooling.node.position.y + randNum2;
+          this._lastTurnCards = [];
+
+          if (this.isMe(fromPlayer)) {
+            for (var i = 0; i < arrCards.length; i++) {
+              var _this$my_info3, _this$my_info4;
+
+              var code = arrCards[i];
+              var card = (_this$my_info3 = this.my_info) === null || _this$my_info3 === void 0 ? void 0 : _this$my_info3.getCardItemWithCode(code);
+
+              if (card != null && card != undefined) {
+                this._lastTurnCards.push(card);
+              }
+
+              (_this$my_info4 = this.my_info) === null || _this$my_info4 === void 0 ? void 0 : _this$my_info4.removeCardItemWithCode(code);
+            }
+
+            this.my_info.rearrangeCard();
+
+            if (this._lastTurnCards.length >= 8) {
+              posX -= 140;
+            } else if (this._lastTurnCards.length >= 5) {
+              posX -= 70;
+            }
+
+            this._lastTurnCards.forEach(function (card) {
+              Tween.stopAllByTarget(card.node);
+              var seq = tween(card.node).sequence(tween().call(function () {
+                card.setAsOnTop();
+              }), tween().to(0.2, {
+                position: new Vec3(posX, posY, 0),
+                scale: new Vec3(0.55, 0.55, 0.55)
+              }));
+              seq.start();
+              posX += 40;
+            });
+          } else {
+            for (var _i2 = 0; _i2 < arrCards.length; _i2++) {
+              var _this$opponent_info2;
+
+              var _code = arrCards[_i2];
+
+              var _card = (_this$opponent_info2 = this.opponent_info) === null || _this$opponent_info2 === void 0 ? void 0 : _this$opponent_info2.popCard();
+
+              if (_card != null && _card != undefined) {
+                var data = new GameCard();
+                data.decodeCard(_code, GlobalVariables.TIENLEN);
+
+                _card.setCard(data);
+
+                _card.show();
+
+                this._lastTurnCards.push(_card);
+              }
+            }
+
+            if (this._lastTurnCards.length >= 8) {
+              posX -= 140;
+            } else if (this._lastTurnCards.length >= 5) {
+              posX -= 70;
+            }
+
+            this._lastTurnCards.forEach(function (card) {
+              Tween.stopAllByTarget(card.node);
+              var seq = tween(card.node).sequence(tween().call(function () {
+                card.setAsOnTop();
+              }), tween().to(0.2, {
+                position: new Vec3(posX, posY, 0),
+                scale: new Vec3(0.55, 0.55, 0.55)
+              }));
+              seq.start();
+              posX += 40;
+            });
+          }
+
+          this.nextTurn(toPlayer);
+        };
+
+        _proto.refundMoney = function refundMoney(refundPlayer, moneyRefund, mXRefund) {};
+
+        _proto.startGame = function startGame(cardsArr, nextPlayerUID, listPlaying, listUpdateMoney) {
+          var _this$opponent_info3,
+              _this$my_info5,
+              _this6 = this,
+              _this$my_info6,
+              _this$opponent_info4;
+
+          (_this$opponent_info3 = this.opponent_info) === null || _this$opponent_info3 === void 0 ? void 0 : _this$opponent_info3.ready(false);
+          (_this$my_info5 = this.my_info) === null || _this$my_info5 === void 0 ? void 0 : _this$my_info5.ready(false);
+          var count = 0;
+          cardsArr.forEach(function (x, i) {
+            var _this6$cardPooling, _this6$cardPooling2;
+
+            var opponent_card = (_this6$cardPooling = _this6.cardPooling) === null || _this6$cardPooling === void 0 ? void 0 : _this6$cardPooling.getPooledCard();
+
+            if (opponent_card != null) {
+              var _this6$opponent_info, _this6$opponent_info$, _this6$opponent_info2, _this6$opponent_info3;
+
+              opponent_card.setAsOnTop();
+
+              _this6.opponent_info.addCard(opponent_card);
+
+              Tween.stopAllByTarget(opponent_card.node);
+              opponent_card.node.active = true;
+              var move = tween(opponent_card.node).sequence(tween().delay(0.2 + 0.08 * i), tween().to(0.6, {
+                position: (_this6$opponent_info = _this6.opponent_info) === null || _this6$opponent_info === void 0 ? void 0 : (_this6$opponent_info$ = _this6$opponent_info.getCardPos()) === null || _this6$opponent_info$ === void 0 ? void 0 : _this6$opponent_info$.position,
+                scale: (_this6$opponent_info2 = _this6.opponent_info) === null || _this6$opponent_info2 === void 0 ? void 0 : (_this6$opponent_info3 = _this6$opponent_info2.getCardPos()) === null || _this6$opponent_info3 === void 0 ? void 0 : _this6$opponent_info3.scale
+              }, {
+                easing: 'expoOut'
+              }));
+              move.start();
+            }
+
+            var my_card = (_this6$cardPooling2 = _this6.cardPooling) === null || _this6$cardPooling2 === void 0 ? void 0 : _this6$cardPooling2.getPooledCard();
+
+            if (my_card != null) {
+              var _this6$my_info, _this6$my_info$getCar;
+
+              my_card.setAsOnTop();
+              var card = new GameCard();
+              card.decodeCard(x, GlobalVariables.TIENLEN);
+              my_card.setCard(card);
+
+              _this6.my_info.addCard(my_card, true);
+
+              Tween.stopAllByTarget(my_card.node);
+              my_card.show();
+              var target = new Vec3(_this6.my_info.getCardPos().position);
+              target.x += i * 80;
+              my_card.lockPosition(target);
+              var velocity = 700;
+              var distance = Vec3.distance(target, my_card.node.position);
+              var moveTime = distance / velocity;
+
+              var _move = tween(my_card.node).sequence(tween().delay(0.2 + 0.08 * i), tween().to(moveTime, {
+                position: target,
+                scale: (_this6$my_info = _this6.my_info) === null || _this6$my_info === void 0 ? void 0 : (_this6$my_info$getCar = _this6$my_info.getCardPos()) === null || _this6$my_info$getCar === void 0 ? void 0 : _this6$my_info$getCar.scale
+              }, {
+                easing: 'expoOut'
+              }), tween().call(function () {
+                count += 1;
+
+                if (count >= 13) {
+                  _this6.finishPhatBai(nextPlayerUID);
+                }
+              }));
+
+              _move.start();
+            }
+          }); // (-675,-240) des,origin (6,-206)
+
+          Tween.stopAllByTarget(this.my_info.node);
+          var seq = tween(this.my_info.node).to(0.5, {
+            position: new Vec3(-675, -240, 0),
+            scale: new Vec3(0.8, 0.8, 0.8)
+          });
+          seq.start();
+          (_this$my_info6 = this.my_info) === null || _this$my_info6 === void 0 ? void 0 : _this$my_info6.ready(false);
+          (_this$opponent_info4 = this.opponent_info) === null || _this$opponent_info4 === void 0 ? void 0 : _this$opponent_info4.ready(false);
+          this._state = GameState.PLAYING;
+        };
+
+        _proto.finishPhatBai = function finishPhatBai(nextUID) {
+          this.nextTurn(nextUID);
+
+          if (this.isMe(nextUID)) {
+            this.btn_boluot.node.active = false;
+          }
+        };
+
+        _proto.clearCardInTable = function clearCardInTable() {
+          var _this$my_info7, _this$opponent_info5, _this$cardPooling;
+
+          this._lastTurnCards = [];
+          var cards = [];
+          (_this$my_info7 = this.my_info) === null || _this$my_info7 === void 0 ? void 0 : _this$my_info7.getPlayerCard().forEach(function (c) {
+            return cards.push(c);
+          });
+          (_this$opponent_info5 = this.opponent_info) === null || _this$opponent_info5 === void 0 ? void 0 : _this$opponent_info5.getPlayerCard().forEach(function (c) {
+            return cards.push(c);
+          });
+          (_this$cardPooling = this.cardPooling) === null || _this$cardPooling === void 0 ? void 0 : _this$cardPooling.clearCardsNotInTheseCards(cards);
+        };
+
+        _proto.nextTurn = function nextTurn(uid) {
+          if (uid == "") return;
+
+          if (this.isMe(uid)) {
+            this.btn_danhbai.node.active = true;
+
+            if (this._isNewTurnRound) {
+              this.btn_boluot.node.active = false;
+            } else {
+              this.btn_boluot.node.active = true;
+            }
+
+            this.my_info.startCountDown(20);
+            this.opponent_info.stopCountDown();
+            this.checkCard();
+          } else {
+            this.btn_danhbai.node.active = false;
+            this.btn_boluot.node.active = false;
+            this.opponent_info.startCountDown(20);
+            this.my_info.stopCountDown();
+            this.my_info.getPlayerCard().forEach(function (x) {
+              x.canBeSelected();
+            });
+          }
+        };
+
+        _proto.checkCard = function checkCard() {
+          var _this$my_info8,
+              _this7 = this;
+
+          var _lastTurnCards = this._lastTurnCards.map(function (x) {
+            return x.getCard();
+          });
+
+          var _thisPlayerCards = (_this$my_info8 = this.my_info) === null || _this$my_info8 === void 0 ? void 0 : _this$my_info8.getPlayerCard().map(function (x) {
+            return x.getCard();
+          });
+
+          if (_lastTurnCards != null && _lastTurnCards.length > 0) {
+            (function () {
+              var recommendCards = DemLa_CardLib.getRecommendCards(_lastTurnCards, _thisPlayerCards);
+
+              if (recommendCards.length > 0) {
+                recommendCards = [];
+
+                for (var i = 0; i < _thisPlayerCards.length; i++) {
+                  var pArrayCard = _thisPlayerCards === null || _thisPlayerCards === void 0 ? void 0 : _thisPlayerCards.slice(i, _thisPlayerCards.length);
+                  var rceCard = DemLa_CardLib.getRecommendCards(_lastTurnCards, pArrayCard);
+                  rceCard.forEach(function (r) {
+                    if (recommendCards.filter(function (c) {
+                      return r.serverCode == c.serverCode;
+                    }).length <= 0) {
+                      recommendCards.push(r);
+                    }
+                  });
+                }
+
+                _this7.my_info.getPlayerCard().forEach(function (x) {
+                  if (recommendCards.filter(function (r) {
+                    return r.serverCode == x.getCode();
+                  }).length > 0) {
+                    x.canBeSelected();
+                  } else {
+                    x.cannotBeSelected();
+                  }
+                });
+              } else {
+                _this7.btn_danhbai.node.active = false;
+
+                _this7.my_info.getPlayerCard().forEach(function (x) {
+                  x.cannotBeSelected();
+                });
+              }
+            })();
+          } else {
+            this.my_info.getPlayerCard().forEach(function (x) {
+              x.canBeSelected();
+            });
+          }
+        };
+
+        _proto.setGameConfig = function setGameConfig(b, gS, rmT, aid, maxUser, hasPassword) {
+          var tableType = 4;
+
+          if (b <= 1000) {
+            tableType = 1;
+          } else if (b <= 10000) {
+            tableType = 2;
+          } else if (b <= 100000) {
+            tableType = 3;
+          }
+
+          this.spr_table.spriteFrame = this.sprFrame_tables[tableType];
+          this.lbl_info.string = "Bàn: " + GamePlayManager.roomID + " - Cược: " + StringUtils.formatMoneyNumber(b);
+          this.resetAllPlayerViewAction();
+        };
+
+        _proto.addPlayer = function addPlayer(dn, uid, C, m, pS, rmC, sit, r, platform, playing, as, avatarURL, customerID) {
+          var _this8 = this;
+
+          var info = new PlayerInfo();
+          info.displayName = dn;
+          info.gold = m;
+          info.avatarURL = avatarURL;
+          info.uid = uid;
+          info.isHost = C;
+
+          this._playerInfo.push(info);
+
+          this._playerInfo.forEach(function (p) {
+            if (p.uid == GameConfigManager.uid) {
+              _this8.my_info.setUserInfo(p);
+            } else {
+              _this8.opponent_info.setUserInfo(p);
+            }
+          });
+        };
+
+        _proto.removePlayer = function removePlayer(uid) {
+          var player = this.getPlayerByUID(uid);
+
+          if (player != null) {
+            player.setUserInfo(null);
+          }
+
+          this._playerInfo = this._playerInfo.filter(function (p) {
+            return p.uid != uid;
+          });
+        };
+
+        _proto.prepareNewGame = function prepareNewGame() {
+          var _this$my_info9, _this$my_info10, _this$my_info11, _this$opponent_info6;
+
+          Tween.stopAllByTarget(this.node);
+          (_this$my_info9 = this.my_info) === null || _this$my_info9 === void 0 ? void 0 : _this$my_info9.node.setPosition(new Vec3(6, -206, 0));
+          (_this$my_info10 = this.my_info) === null || _this$my_info10 === void 0 ? void 0 : _this$my_info10.node.setScale(new Vec3(1, 1, 1));
+          (_this$my_info11 = this.my_info) === null || _this$my_info11 === void 0 ? void 0 : _this$my_info11.resetUI();
+          (_this$opponent_info6 = this.opponent_info) === null || _this$opponent_info6 === void 0 ? void 0 : _this$opponent_info6.resetUI();
+          this._lastTurnCards = [];
+          this.cardPooling.reset();
+
+          if (!this.getIsHost() && this._state == GameState.WAITING) {
+            var _this$tienLenSettingP2;
+
+            if ((_this$tienLenSettingP2 = this.tienLenSettingPopup) === null || _this$tienLenSettingP2 === void 0 ? void 0 : _this$tienLenSettingP2.isAutoReady()) {
+              this.sendReady();
+            } else {
+              this.btn_ready.node.active = true;
+            }
+          }
+        };
+
+        _proto.sendReady = function sendReady() {
+          var dict = {};
+          dict["cmd"] = GLOBAL_MESSAGE.INGAME_USER_READY;
+          var data = [MessageRequest.RoomPlugin_Type, "Simms", GamePlayManager.roomID, dict];
+          GameNetworkHandler.send(data);
+        };
+
+        _proto.getIsHost = function getIsHost() {
+          var _this$my_info12;
+
+          return (_this$my_info12 = this.my_info) === null || _this$my_info12 === void 0 ? void 0 : _this$my_info12.isHost();
+        };
+
+        _proto.resetAllPlayerViewAction = function resetAllPlayerViewAction() {
+          this._playerInfo = [];
+        };
+
+        _proto.show = function show(fadeTime) {
+          if (fadeTime === void 0) {
+            fadeTime = 0.4;
+          }
+
+          MiniGameNodeController.getInstance().adjustPosition(GlobalVariables.TIENLEN);
+          return _BaseFullScreenGameVi.prototype.show.call(this, fadeTime);
+        };
+
+        return TienLenFullScreenGameView;
+      }(BaseFullScreenGameView), _defineProperty(_class3, "KEEP_MONEY", 50000), _defineProperty(_class3, "instance", null), _temp), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, "my_info", [_dec2], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, "opponent_info", [_dec3], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, "userChatPopup", [_dec4], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, "userInvitePopup", [_dec5], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, "btn_chat", [_dec6], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor6 = _applyDecoratedDescriptor(_class2.prototype, "btn_exit", [_dec7], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor7 = _applyDecoratedDescriptor(_class2.prototype, "btn_ready", [_dec8], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor8 = _applyDecoratedDescriptor(_class2.prototype, "btn_begin", [_dec9], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor9 = _applyDecoratedDescriptor(_class2.prototype, "btn_boluot", [_dec10], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor10 = _applyDecoratedDescriptor(_class2.prototype, "btn_danhbai", [_dec11], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor11 = _applyDecoratedDescriptor(_class2.prototype, "spr_table", [_dec12], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor12 = _applyDecoratedDescriptor(_class2.prototype, "sprFrame_tables", [_dec13], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return [];
+        }
+      }), _descriptor13 = _applyDecoratedDescriptor(_class2.prototype, "lbl_info", [_dec14], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor14 = _applyDecoratedDescriptor(_class2.prototype, "tienLenSettingPopup", [_dec15], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor15 = _applyDecoratedDescriptor(_class2.prototype, "cardPooling", [_dec16], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      })), _class2)) || _class));
+      /**
+       * [1] Class member could be defined like this.
+       * [2] Use `property` decorator if your want the member to be serializable.
+       * [3] Your initialization goes here.
+       * [4] Your update function goes here.
+       *
+       * Learn more about scripting: https://docs.cocos.com/creator/3.0/manual/en/scripting/
+       * Learn more about CCClass: https://docs.cocos.com/creator/3.0/manual/en/scripting/ccclass.html
+       * Learn more about life-cycle callbacks: https://docs.cocos.com/creator/3.0/manual/en/scripting/life-cycle-callbacks.html
+       */
+
+      cclegacy._RF.pop();
+    }
+  };
+});
+
 System.register("chunks:///_virtual/TaiXiuSessionHistoryDiceItemView.ts", ['./_rollupPluginModLoBabelHelpers.js', 'cc'], function (exports) {
   'use strict';
 
@@ -32433,11 +35880,11 @@ System.register("chunks:///_virtual/ChangeAvatarPopup.ts", ['./_rollupPluginModL
   };
 });
 
-System.register("chunks:///_virtual/main", ['./CommonPopup.ts', './GameConfigManager.ts', './StringUtils.ts', './JackpotItemView.ts', './MiniGameNetworkHandler.ts', './GamePlatformManager.ts', './GameNetworkHandler.ts', './NotiView.ts', './GameUtils.ts', './GlobalVariables.ts', './LoadingView.ts', './BaseFullScreenGameView.ts', './ChipItem.ts', './ChipPanel.ts', './BlinkCmp.ts', './BauCuaBetEntry.ts', './SettingPopup.ts', './BauCuaSettingPopup.ts', './ChipPooling.ts', './BubbleChat.ts', './Downloader.ts', './PlayerView.ts', './SoiCauItemPopup.ts', './SoiCauPopup.ts', './UserChatTextItem.ts', './UserChatPopup.ts', './InvitationPlayerView.ts', './UserInvitePopup.ts', './UserOnlinePopup.ts', './BauCuaFullScreenGameView.ts', './ScaleCmp.ts', './XocDiaSoiCauPopup.ts', './XocDiaFullScreenGameView.ts', './GameHTTPNetwork.ts', './FloatStringCmp.ts', './MD5Algorithm.ts', './TransitionFadeScreen.ts', './ChangeAvatarPopup.ts', './ChangePasswordPopup.ts', './GameHistoryItemView.ts', './GameHistoryPopup.ts', './GameSettingPopup.ts', './InvitePopup.ts', './LoginPopup.ts', './RegisterPopup.ts', './PopupController.ts', './ProfilesPopup.ts', './LobbyViewController.ts', './MiniGamePopup.ts', './MiniPokerMessageHandler.ts', './MauBinh_CardLib.ts', './BaseMiniGameView.ts', './MiniPokerBetHistoryItemView.ts', './MiniPokerBetHistoryView.ts', './MiniPokerBetRankItemView.ts', './MiniPokerBetRankView.ts', './MiniPokerNoHuView.ts', './MiniPoker_SlotMachineItemView.ts', './MiniPoker_SlotMachineColumn.ts', './MiniPoker_SlotMachineCmp.ts', './MiniPokerGameView.ts', './TaiXiuGameItemView.ts', './ChatItemView.ts', './TaiXiuChatView.ts', './TaiXiuMessageHandler.ts', './DragView.ts', './BatCmp.ts', './TaiXiuBetHistoryItemView.ts', './TaiXiuBetHistoryView.ts', './TaiXiuBetRankItemView.ts', './TaiXiuBetRankView.ts', './TaiXiuPopupCmp.ts', './TaiXiuSessionAnalyticsItemView.ts', './TaiXiuSessionAnalyticsView.ts', './LineCmp.ts', './TaiXiuSessionHistorySumItemView.ts', './TaiXiuSessionHistoryView.ts', './TaiXiuGameView.ts', './BigLoadingView.ts', './KimCuongMessageHandler.ts', './MiniGameNodeDragView.ts', './MiniGameNodeController.ts', './CCMiniGameRoot.ts', './GamePlayManager.ts', './KimCuong_SlotMachineItemView.ts', './KimCuong_SlotMachineColumn.ts', './KimCuong_SlotMachineCmp.ts', './KimCuongBetHistoryDetail.ts', './KimCuongBetHistoryItemView.ts', './KimCuongBetHistoryView.ts', './KimCuongBetRankItemView.ts', './KimCuongBetRankView.ts', './KimCuongNoHuView.ts', './KimCuongGameView.ts', './KimCuongLineSelectionView.ts', './CCComponentLoader.ts', './FullScreenGameItemView.ts', './CCMiniGameCommonPopup.ts', './CCButtonLoader.ts', './MiniSlotGameItemView.ts', './SpinButtonCmp.ts', './SoundButtonCmp.ts', './CCSpriteFrameLoader.ts', './DockPanel.ts', './LineSpriteComponent.ts', './TaiXiuSessionHistoryResultSumItemView.ts', './TaiXiuSessionHistoryResultItemView.ts', './TaiXiuSessionHistoryDiceItemView.ts'], function () {
+System.register("chunks:///_virtual/main", ['./CommonPopup.ts', './GameConfigManager.ts', './StringUtils.ts', './JackpotItemView.ts', './MiniGameNetworkHandler.ts', './GamePlatformManager.ts', './GameNetworkHandler.ts', './NotiView.ts', './GameUtils.ts', './GlobalVariables.ts', './LoadingView.ts', './BaseFullScreenGameView.ts', './ChipItem.ts', './ChipPanel.ts', './BlinkCmp.ts', './BauCuaBetEntry.ts', './SettingPopup.ts', './BauCuaSettingPopup.ts', './ChipPooling.ts', './BubbleChat.ts', './Downloader.ts', './PlayerView.ts', './SoiCauItemPopup.ts', './SoiCauPopup.ts', './UserChatTextItem.ts', './UserChatPopup.ts', './InvitationPlayerView.ts', './UserInvitePopup.ts', './UserOnlinePopup.ts', './BauCuaFullScreenGameView.ts', './MauBinh_CardLib.ts', './DemLa_CardLib.ts', './CardItem.ts', './CardPooling.ts', './GameBaiPlayerView.ts', './TienLenSettingPopup.ts', './TienLenFullScreenGameView.ts', './ScaleCmp.ts', './XocDiaSoiCauPopup.ts', './XocDiaFullScreenGameView.ts', './GameHTTPNetwork.ts', './FloatStringCmp.ts', './MD5Algorithm.ts', './TransitionFadeScreen.ts', './GameListView.ts', './ChangeAvatarPopup.ts', './ChangePasswordPopup.ts', './GameHistoryItemView.ts', './GameHistoryPopup.ts', './GameSettingPopup.ts', './InvitePopup.ts', './LoginPopup.ts', './RegisterPopup.ts', './PopupController.ts', './ProfilesPopup.ts', './TableItemView.ts', './TableListView.ts', './LobbyViewController.ts', './MiniGamePopup.ts', './MiniPokerMessageHandler.ts', './BaseMiniGameView.ts', './MiniPokerBetHistoryItemView.ts', './MiniPokerBetHistoryView.ts', './MiniPokerBetRankItemView.ts', './MiniPokerBetRankView.ts', './MiniPokerNoHuView.ts', './MiniPoker_SlotMachineItemView.ts', './MiniPoker_SlotMachineColumn.ts', './MiniPoker_SlotMachineCmp.ts', './MiniPokerGameView.ts', './TaiXiuGameItemView.ts', './ChatItemView.ts', './TaiXiuChatView.ts', './TaiXiuMessageHandler.ts', './DragView.ts', './BatCmp.ts', './TaiXiuBetHistoryItemView.ts', './TaiXiuBetHistoryView.ts', './TaiXiuBetRankItemView.ts', './TaiXiuBetRankView.ts', './TaiXiuPopupCmp.ts', './TaiXiuSessionAnalyticsItemView.ts', './TaiXiuSessionAnalyticsView.ts', './LineCmp.ts', './TaiXiuSessionHistorySumItemView.ts', './TaiXiuSessionHistoryView.ts', './TaiXiuGameView.ts', './BigLoadingView.ts', './KimCuongMessageHandler.ts', './MiniGameNodeDragView.ts', './MiniGameNodeController.ts', './CCMiniGameRoot.ts', './GamePlayManager.ts', './KimCuong_SlotMachineItemView.ts', './KimCuong_SlotMachineColumn.ts', './KimCuong_SlotMachineCmp.ts', './KimCuongBetHistoryDetail.ts', './KimCuongBetHistoryItemView.ts', './KimCuongBetHistoryView.ts', './KimCuongBetRankItemView.ts', './KimCuongBetRankView.ts', './KimCuongNoHuView.ts', './KimCuongGameView.ts', './KimCuongLineSelectionView.ts', './CCComponentLoader.ts', './FullScreenGameItemView.ts', './CCMiniGameCommonPopup.ts', './CCButtonLoader.ts', './MiniSlotGameItemView.ts', './SpinButtonCmp.ts', './SoundButtonCmp.ts', './CCSpriteFrameLoader.ts', './DockPanel.ts', './LineSpriteComponent.ts', './TaiXiuSessionHistoryResultSumItemView.ts', './TaiXiuSessionHistoryResultItemView.ts', './TaiXiuSessionHistoryDiceItemView.ts'], function () {
   'use strict';
 
   return {
-    setters: [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+    setters: [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
     execute: function () {}
   };
 });
