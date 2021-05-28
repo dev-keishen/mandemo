@@ -62480,9 +62480,9 @@ System.register([], function (exports, module) {
             let ammo;
             let isWasm = false;
             if (typeof WebAssembly === 'undefined') {
-                ammo = await module.import('./ammo-bb096ded.js');
+                ammo = await module.import('./ammo-77a85361.js');
             } else {
-                ammo = await module.import('./ammo.wasm-55018a87.js');
+                ammo = await module.import('./ammo.wasm-6c31d3c9.js');
                 isWasm = true;
             }
             var AmmoClosure = ammo.default;

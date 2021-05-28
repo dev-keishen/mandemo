@@ -1126,8 +1126,13 @@ System.register("chunks:///_virtual/MiniGameNodeController.ts", ['./_rollupPlugi
         };
 
         _proto.turnOffAutoSpin = function turnOffAutoSpin() {
-          MiniPokerGameView.getInstance().turnOffAutoSpin();
-          KimCuongGameView.getInstance().turnOffAutoSpin();
+          if (MiniPokerGameView.getInstance() != null) {
+            MiniPokerGameView.getInstance().turnOffAutoSpin();
+          }
+
+          if (KimCuongGameView.getInstance() != null) {
+            KimCuongGameView.getInstance().turnOffAutoSpin();
+          }
         };
 
         _proto.forceAllMachineStop = function forceAllMachineStop(stopAuto) {
@@ -1135,8 +1140,13 @@ System.register("chunks:///_virtual/MiniGameNodeController.ts", ['./_rollupPlugi
             stopAuto = true;
           }
 
-          MiniPokerGameView.getInstance().forceMachineStop(stopAuto);
-          KimCuongGameView.getInstance().forceMachineStop(stopAuto);
+          if (MiniPokerGameView.getInstance() != null) {
+            MiniPokerGameView.getInstance().forceMachineStop(stopAuto);
+          }
+
+          if (KimCuongGameView.getInstance() != null) {
+            KimCuongGameView.getInstance().forceMachineStop(stopAuto);
+          }
         };
 
         _proto.isOpened = function isOpened() {
@@ -10102,6 +10112,8 @@ System.register("chunks:///_virtual/LobbyViewController.ts", ['./_rollupPluginMo
           if (this.currentGameView != this) {
             this.currentGameView.handleLeaveRoomResponse(message);
             return;
+          } else {
+            this.showGameList();
           }
         };
 
@@ -10165,6 +10177,7 @@ System.register("chunks:///_virtual/LobbyViewController.ts", ['./_rollupPluginMo
         };
 
         _proto.handleJoinRoomResponse = function handleJoinRoomResponse(message) {
+          console.log("handleJoinRoomResponse:", JSON.stringify(message));
           var joinResult = message[1];
 
           if (joinResult) {
@@ -10179,7 +10192,41 @@ System.register("chunks:///_virtual/LobbyViewController.ts", ['./_rollupPluginMo
           LoadingView.getInstance().hide();
         };
 
+        _proto.getMessageAndNews = function getMessageAndNews(message) {
+          var messageType = message[0];
+          var dict = message[1];
+          var cmd = dict["cmd"];
+
+          switch (messageType) {
+            case MessageResponse.Extension_Response:
+              {
+                if (cmd == GLOBAL_MESSAGE.MESSAGES_AND_NEWS) {
+                  // int unreadMessages = (int)dict -> getUInt64("ur");
+                  // GamePlayManager:: getInstance() -> unreadMessages = unreadMessages;
+                  this.news = [];
+                  var broadcastMessages = dict["bcm"];
+
+                  for (var i = 0; i < broadcastMessages.length; i++) {
+                    var _message = broadcastMessages[i];
+                    this.news.push(_message);
+                  } // int newNews = (int)dict -> getUInt64("na");
+                  // if (newNews > 0) {
+                  //     GamePlayManager:: getInstance() -> newNews = true;
+                  // }
+                  // gameListView -> checkUnreadMessages();
+
+
+                  return;
+                }
+
+                break;
+              }
+          }
+        };
+
         _proto.handleLobbyMessage = function handleLobbyMessage(message) {
+          this.getMessageAndNews(message);
+
           if (this.currentGameView != this) {
             this.currentGameView.handleMessage(message);
             return;
@@ -10195,8 +10242,8 @@ System.register("chunks:///_virtual/LobbyViewController.ts", ['./_rollupPluginMo
 
                 if (cmd == GLOBAL_MESSAGE.GET_TABLES) {
                   if (dict["mgs"] != null && dict["mgs"] != undefined) {
-                    var _message = dict["mgs"];
-                    NotiView.getInstance().showMessage(_message);
+                    var _message2 = dict["mgs"];
+                    NotiView.getInstance().showMessage(_message2);
                     this.showGameList();
                     return;
                   }
@@ -10378,23 +10425,6 @@ System.register("chunks:///_virtual/LobbyViewController.ts", ['./_rollupPluginMo
                     // string roomPassword = "";
                     // gameListView -> bookRoom(timeForBooking, roomID, serverID, mMBI, MMBI, bet, hasPassword);
                     return;
-                  } else if (cmd == GLOBAL_MESSAGE.MESSAGES_AND_NEWS) {
-                    // int unreadMessages = (int)dict -> getUInt64("ur");
-                    // GamePlayManager:: getInstance() -> unreadMessages = unreadMessages;
-                    this.news = [];
-                    var broadcastMessages = dict["bcm"];
-
-                    for (var i = 0; i < broadcastMessages.length; i++) {
-                      var _message2 = broadcastMessages[i];
-                      this.news.push(_message2);
-                    } // int newNews = (int)dict -> getUInt64("na");
-                    // if (newNews > 0) {
-                    //     GamePlayManager:: getInstance() -> newNews = true;
-                    // }
-                    // gameListView -> checkUnreadMessages();
-
-
-                    return;
                   } else if (cmd == GLOBAL_MESSAGE.USER_INFO) {
                     var userDict = dict["As"]; // int64_t chip = userDict -> getUInt64("chip");
 
@@ -10424,32 +10454,21 @@ System.register("chunks:///_virtual/LobbyViewController.ts", ['./_rollupPluginMo
                     //                             UserDefault:: getInstance() -> setStringForKey("ktraDC", temp);
                     //     #endif
                     // }
-                    // if (dict -> isExistKey("lr")) {
-                    //     MsgPackDict * lr = dict -> getDict("lr");
-                    //     long roomID = lr -> getUInt64("rid");
-                    //     int gameID = (int)lr -> getUInt64("gid");
-                    //     GameUIManager:: getInstance() -> currentGameID = gameID;
-                    //     long serverID = lr -> getUInt64("sid");
-                    //     string roomPassword = "";
-                    //     if (lr -> isExistKey("pwd")) {
-                    //         roomPassword = lr -> getString("pwd");
-                    //     }
-                    //     GamePlayManager:: getInstance() -> joinRoom(roomID, serverID, roomPassword);
-                    // }
-                    // else {
-                    //     //                    GameUIManager::getInstance()->showGameList();
-                    //     long roomID = GamePlayManager:: getInstance() -> roomID;
-                    //     if (roomID != -1) {
-                    //         GamePlayManager:: getInstance() -> joinRoom(roomID, GameConfigManager:: getInstance() -> serverID);
-                    //     }
-                    //     else {
-                    //         LoadingProgressUtil:: getInstance() -> close(); // reconnect khi vao lai app
-                    //         gameListView -> onLogin();
-                    //         if (gameListView -> tableList -> isVisible()) {
-                    //             gameListView -> tableList -> reloadTable();
-                    //         }
-                    //     }
-                    // }
+
+                    if (dict["lr"] != null && dict["lr"] != undefined) {
+                      var lr = dict["lr"];
+                      var _roomID = lr["rid"];
+                      var _gameID = lr["gid"];
+                      var _serverID = lr["sid"];
+                      var _roomPassword = "";
+
+                      if (lr["pwd"] != null && lr["pwd"] != undefined) {
+                        _roomPassword = lr["pwd"];
+                      }
+
+                      this.switchGameScreen(_gameID);
+                      GamePlayManager.joinRoom(_roomID, _serverID, _roomPassword);
+                    }
 
                     this.loadUserInfo();
                   }
@@ -10617,6 +10636,7 @@ System.register("chunks:///_virtual/LobbyViewController.ts", ['./_rollupPluginMo
           }
 
           MiniGameNodeController.getInstance().adjustPosition(GlobalVariables.LOBBY);
+          this.showGameList();
           return _BaseFullScreenGameVi.prototype.show.call(this, fadeTime);
         };
 
@@ -15125,15 +15145,15 @@ System.register("chunks:///_virtual/KimCuongBetHistoryItemView.ts", ['./_rollupP
 System.register("chunks:///_virtual/CardItem.ts", ['./_rollupPluginModLoBabelHelpers.js', 'cc'], function (exports) {
   'use strict';
 
-  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, _defineProperty, cclegacy, _decorator, Sprite, Button, SpriteFrame, Vec3, Color, Tween, Component;
+  var _defineProperty, _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, cclegacy, _decorator, Sprite, Button, SpriteFrame, Vec3, Color, Tween, systemEvent, Component;
 
   return {
     setters: [function (module) {
+      _defineProperty = module.defineProperty;
       _applyDecoratedDescriptor = module.applyDecoratedDescriptor;
       _inheritsLoose = module.inheritsLoose;
       _initializerDefineProperty = module.initializerDefineProperty;
       _assertThisInitialized = module.assertThisInitialized;
-      _defineProperty = module.defineProperty;
     }, function (module) {
       cclegacy = module.cclegacy;
       _decorator = module._decorator;
@@ -15143,16 +15163,17 @@ System.register("chunks:///_virtual/CardItem.ts", ['./_rollupPluginModLoBabelHel
       Vec3 = module.Vec3;
       Color = module.Color;
       Tween = module.Tween;
+      systemEvent = module.systemEvent;
       Component = module.Component;
     }],
     execute: function () {
-      var _dec, _dec2, _dec3, _dec4, _class, _class2, _descriptor, _descriptor2, _descriptor3, _temp;
+      var _dec, _dec2, _dec3, _dec4, _class, _class2, _descriptor, _descriptor2, _descriptor3, _class3, _temp;
 
       cclegacy._RF.push({}, "52d19nOijBGoqu+3PdUtl+l", "CardItem", undefined);
 
       var ccclass = _decorator.ccclass,
           property = _decorator.property;
-      var CardItem = exports('CardItem', (_dec = ccclass('CardItem'), _dec2 = property(Sprite), _dec3 = property(Button), _dec4 = property([SpriteFrame]), _dec(_class = (_class2 = (_temp = /*#__PURE__*/function (_Component) {
+      var CardItem = exports('CardItem', (_dec = ccclass('CardItem'), _dec2 = property(Sprite), _dec3 = property(Button), _dec4 = property([SpriteFrame]), _dec(_class = (_class2 = (_temp = _class3 = /*#__PURE__*/function (_Component) {
         _inheritsLoose(CardItem, _Component);
 
         function CardItem() {
@@ -15203,6 +15224,10 @@ System.register("chunks:///_virtual/CardItem.ts", ['./_rollupPluginModLoBabelHel
           var newPos = new Vec3(this.locked_position);
           newPos.y += this.isSelected ? 20 : 0;
           this.node.setPosition(newPos);
+
+          if (this.isSelected) {
+            systemEvent.emit(CardItem.CARD_SELECTED);
+          }
         };
 
         _proto.getSelected = function getSelected() {
@@ -15214,6 +15239,13 @@ System.register("chunks:///_virtual/CardItem.ts", ['./_rollupPluginModLoBabelHel
           this.node.setPosition(this.locked_position);
           this.setGray();
           this.setInteractable(false);
+        };
+
+        _proto.selected = function selected() {
+          this.isSelected = true;
+          var newPos = new Vec3(this.locked_position);
+          newPos.y += this.isSelected ? 20 : 0;
+          this.node.setPosition(newPos);
         };
 
         _proto.setGray = function setGray() {
@@ -15280,7 +15312,7 @@ System.register("chunks:///_virtual/CardItem.ts", ['./_rollupPluginModLoBabelHel
         };
 
         return CardItem;
-      }(Component), _temp), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, "spr_card", [_dec2], {
+      }(Component), _defineProperty(_class3, "CARD_SELECTED", "CARD_SELECTED"), _temp), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, "spr_card", [_dec2], {
         configurable: true,
         enumerable: true,
         writable: true,
@@ -15820,17 +15852,7 @@ System.register("chunks:///_virtual/DemLa_CardLib.ts", ['cc', './MauBinh_CardLib
 
             if (card.N == 15) {
               // neu la 2
-              // tim cay 2 lon hon
-              for (var i = 0; i < myCards.length; i++) {
-                var icard = myCards[i];
-
-                if (icard.N == 15 && icard.S > card.S) {
-                  cards.push(icard);
-                  return cards;
-                }
-              } // tim tu quy
-
-
+              // tim tu quy
               cards = DemLa_CardLib.getHigherFours2(0, myCards);
               if (cards.length > 0) return cards; // tim 4 doi thong
               // vi tim 4 doi thong bat ky nen cho card_max = 3 bich
@@ -15842,7 +15864,17 @@ System.register("chunks:///_virtual/DemLa_CardLib.ts", ['cc', './MauBinh_CardLib
               cards = DemLa_CardLib.getHigherFourPairs(cmax, myCards);
               if (cards.length > 0) return cards; // tim 3 doi thong
 
-              return DemLa_CardLib.getHigherThreePairs(cmax, myCards);
+              cards = DemLa_CardLib.getHigherThreePairs(cmax, myCards);
+              if (cards.length > 0) return cards; // tim cay 2 lon hon
+
+              for (var i = 0; i < myCards.length; i++) {
+                var icard = myCards[i];
+
+                if (icard.N == 15 && icard.S > card.S) {
+                  cards.push(icard);
+                  return cards;
+                }
+              }
             } else {
               for (var _i2 = 0; _i2 < myCards.length; _i2++) {
                 var c = myCards[_i2];
@@ -17058,6 +17090,10 @@ System.register("chunks:///_virtual/GameBaiPlayerView.ts", ['./_rollupPluginModL
 
           _defineProperty(_assertThisInitialized(_this), "cards", []);
 
+          _defineProperty(_assertThisInitialized(_this), "_state", 0);
+
+          _defineProperty(_assertThisInitialized(_this), "_remainingCard", 0);
+
           return _this;
         }
 
@@ -17084,6 +17120,19 @@ System.register("chunks:///_virtual/GameBaiPlayerView.ts", ['./_rollupPluginModL
 
         _proto.getPlayerCard = function getPlayerCard() {
           return this.cards;
+        };
+
+        _proto.setCurrentState = function setCurrentState(pS, rmC) {
+          this._state = pS;
+          this._remainingCard = rmC;
+        };
+
+        _proto.getCurrentState = function getCurrentState() {
+          return this._state;
+        };
+
+        _proto.getRemainingCard = function getRemainingCard() {
+          return this._remainingCard;
         };
 
         _proto.startCountDown = function startCountDown(remainTime) {
@@ -23736,6 +23785,7 @@ System.register("chunks:///_virtual/CardPooling.ts", ['./_rollupPluginModLoBabel
 
           this.pooled_card.forEach(function (card) {
             card.reset();
+            card.node.setScale(_this2.card_template.node.scale);
             card.node.setPosition(_this2.card_template.node.position);
           });
         };
@@ -34028,10 +34078,10 @@ System.register("chunks:///_virtual/TaiXiuSessionHistorySumItemView.ts", ['./_ro
   };
 });
 
-System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPluginModLoBabelHelpers.js', 'cc', './GameConfigManager.ts', './StringUtils.ts', './MiniGameNetworkHandler.ts', './GameNetworkHandler.ts', './NotiView.ts', './GameUtils.ts', './GlobalVariables.ts', './BaseFullScreenGameView.ts', './UserChatPopup.ts', './UserInvitePopup.ts', './BauCuaFullScreenGameView.ts', './MauBinh_CardLib.ts', './DemLa_CardLib.ts', './CardPooling.ts', './GameBaiPlayerView.ts', './TienLenSettingPopup.ts', './LobbyViewController.ts', './MiniGameNodeController.ts', './GamePlayManager.ts'], function (exports) {
+System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPluginModLoBabelHelpers.js', 'cc', './GameConfigManager.ts', './StringUtils.ts', './MiniGameNetworkHandler.ts', './GameNetworkHandler.ts', './NotiView.ts', './GameUtils.ts', './GlobalVariables.ts', './BaseFullScreenGameView.ts', './UserChatPopup.ts', './UserInvitePopup.ts', './BauCuaFullScreenGameView.ts', './MauBinh_CardLib.ts', './DemLa_CardLib.ts', './CardItem.ts', './CardPooling.ts', './GameBaiPlayerView.ts', './TienLenSettingPopup.ts', './LobbyViewController.ts', './MiniGameNodeController.ts', './GamePlayManager.ts'], function (exports) {
   'use strict';
 
-  var _defineProperty, _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, cclegacy, _decorator, Button, Sprite, SpriteFrame, Label, systemEvent, tween, Tween, Vec3, GameConfigManager, StringUtils, MessageRequest, MessageResponse, GameNetworkHandler, NotiView, GameUtils, GlobalVariables, GLOBAL_MESSAGE, BaseFullScreenGameView, UserChatPopup, UserInvitePopup, PlayerInfo, GameCard, DemLa_CardLib, CardPooling, GameBaiPlayerView, TienLenSettingPopup, LobbyViewController, MiniGameNodeController, GameState, GamePlayManager;
+  var _defineProperty, _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, cclegacy, _decorator, Button, Sprite, SpriteFrame, Label, systemEvent, Tween, Vec3, tween, GameConfigManager, StringUtils, MessageRequest, MessageResponse, GameNetworkHandler, NotiView, GameUtils, GlobalVariables, GLOBAL_MESSAGE, BaseFullScreenGameView, UserChatPopup, UserInvitePopup, PlayerInfo, GameCard, DemLa_CardLib, CardItem, CardPooling, GameBaiPlayerView, TienLenSettingPopup, LobbyViewController, MiniGameNodeController, GameState, GamePlayManager;
 
   return {
     setters: [function (module) {
@@ -34048,9 +34098,9 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
       SpriteFrame = module.SpriteFrame;
       Label = module.Label;
       systemEvent = module.systemEvent;
-      tween = module.tween;
       Tween = module.Tween;
       Vec3 = module.Vec3;
+      tween = module.tween;
     }, function (module) {
       GameConfigManager = module.GameConfigManager;
     }, function (module) {
@@ -34079,6 +34129,8 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
       GameCard = module.GameCard;
     }, function (module) {
       DemLa_CardLib = module.default;
+    }, function (module) {
+      CardItem = module.CardItem;
     }, function (module) {
       CardPooling = module.CardPooling;
     }, function (module) {
@@ -34166,6 +34218,8 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
 
           _defineProperty(_assertThisInitialized(_this), "_lastTurnCards", []);
 
+          _defineProperty(_assertThisInitialized(_this), "_listRecommendCard", []);
+
           return _this;
         }
 
@@ -34184,8 +34238,8 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
           Card_4R-14
           Card_4C-15
           Card_5B-16*/
-          var a = [4];
-          var b = [8, 9, 10, 11, 16, 17, 38, 36, 37, 45, 46, 51, 2];
+          var a = [13, 16, 20];
+          var b = [14, 17, 21, 24, 36, 37, 45, 46, 51, 6];
           var cardA = a.map(function (x) {
             var c = new GameCard();
             c.decodeCard(x, GlobalVariables.TIENLEN);
@@ -34206,9 +34260,54 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
           });
           var recommendCards = DemLa_CardLib.getRecommendCards(cardA, cardB);
           console.log("--------RECOMMEND-------");
-          recommendCards.forEach(function (r) {
+
+          if (recommendCards.length > 0) {
+            recommendCards = [];
+
+            for (var i = 0; i < cardB.length; i++) {
+              var pArrayCard = cardB === null || cardB === void 0 ? void 0 : cardB.slice(i, cardB.length);
+              var rceCard = DemLa_CardLib.getRecommendCards(cardA, pArrayCard);
+              rceCard.forEach(function (r) {
+                if (recommendCards.filter(function (c) {
+                  return r.serverCode == c.serverCode;
+                }).length <= 0) {
+                  recommendCards.push(r);
+                }
+              });
+            }
+
+            recommendCards.forEach(function (r) {
+              console.log(r.getResourceName() + "-" + r.serverCode);
+            });
+          }
+        };
+
+        _proto.testCombination = function testCombination() {
+          /*Card_3T-9
+          Card_4R-14
+          Card_4C-15
+          Card_5B-16*/
+          var a = [4];
+          var b = [8, 9, 10, 11, 16, 17, 38, 36, 37, 45, 46, 51, 6];
+          var cardA = a.map(function (x) {
+            var c = new GameCard();
+            c.decodeCard(x, GlobalVariables.TIENLEN);
+            return c;
+          });
+          console.log("--------SELECTED-------");
+          cardA.forEach(function (r) {
             console.log(r.getResourceName() + "-" + r.serverCode);
           });
+          console.log("--------ALL-------");
+          var cardB = b.map(function (x) {
+            var c = new GameCard();
+            c.decodeCard(x, GlobalVariables.TIENLEN);
+            return c;
+          });
+          cardB.forEach(function (r) {
+            console.log(r.getResourceName() + "-" + r.serverCode);
+          });
+          var combinedCards = DemLa_CardLib.getCombination(cardA, cardB);
         };
 
         _proto.onLoad = function onLoad() {
@@ -34251,6 +34350,78 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
           (_this$btn_danhbai = this.btn_danhbai) === null || _this$btn_danhbai === void 0 ? void 0 : _this$btn_danhbai.node.on("click", function () {
             _this2.onDanhBai();
           });
+          systemEvent.on(CardItem.CARD_SELECTED, function () {
+            if (_this2.my_info.getSelectedCards().length > 0) {
+              _this2.onAutoSelectCards();
+            }
+          });
+        };
+
+        _proto.onAutoSelectCards = function onAutoSelectCards() {
+          var _this3 = this;
+
+          if (this._lastTurnCards.length > 0 && this._listRecommendCard.length > 0) {
+            var _loop = function _loop(i) {
+              var recommendCards = _this3._listRecommendCard[i];
+
+              if (recommendCards.length > 1) {
+                var selectedCards = _this3.my_info.getSelectedCards().map(function (c) {
+                  return c.getCard();
+                });
+
+                var isOK = recommendCards.filter(function (rc) {
+                  return selectedCards.findIndex(function (sc) {
+                    return rc.serverCode == sc.serverCode;
+                  }) >= 0;
+                }).length >= 1;
+
+                if (isOK) {
+                  var lastCard = _this3._lastTurnCards.map(function (x) {
+                    return x.getCard();
+                  });
+
+                  if (DemLa_CardLib.isStraight(lastCard)) {
+                    var _this3$my_info;
+
+                    var count = 0;
+                    var cardItems = (_this3$my_info = _this3.my_info) === null || _this3$my_info === void 0 ? void 0 : _this3$my_info.getPlayerCard().filter(function (pc) {
+                      return recommendCards.findIndex(function (rc) {
+                        return pc.getCode() == rc.serverCode;
+                      }) >= 0;
+                    });
+                    cardItems === null || cardItems === void 0 ? void 0 : cardItems.forEach(function (cardItem) {
+                      if (count < lastCard.length) {
+                        cardItem.selected();
+                        console.log("selected count:" + count);
+                      }
+
+                      count++;
+                    });
+                  } else {
+                    var _this3$my_info2;
+
+                    var _cardItems = (_this3$my_info2 = _this3.my_info) === null || _this3$my_info2 === void 0 ? void 0 : _this3$my_info2.getPlayerCard().filter(function (pc) {
+                      return recommendCards.findIndex(function (rc) {
+                        return pc.getCode() == rc.serverCode;
+                      }) >= 0;
+                    });
+
+                    _cardItems === null || _cardItems === void 0 ? void 0 : _cardItems.forEach(function (cardItem) {
+                      cardItem.selected();
+                    });
+                  }
+
+                  return "break";
+                }
+              }
+            };
+
+            for (var i = 0; i < this._listRecommendCard.length; i++) {
+              var _ret = _loop(i);
+
+              if (_ret === "break") break;
+            }
+          }
         };
 
         _proto.onBoLuot = function onBoLuot() {
@@ -34268,6 +34439,15 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
 
           var _lastTurnCards = this._lastTurnCards.map(function (c) {
             return c.getCard();
+          });
+
+          console.log("=============== SELECTED CARD =======================");
+          _choosingCards === null || _choosingCards === void 0 ? void 0 : _choosingCards.forEach(function (c) {
+            console.log(c.getResourceName() + "-" + c.serverCode);
+          });
+          console.log("=============== LAST TURN CARD =======================");
+          _lastTurnCards === null || _lastTurnCards === void 0 ? void 0 : _lastTurnCards.forEach(function (c) {
+            console.log(c.getResourceName() + "-" + c.serverCode);
           });
 
           if ((_choosingCards === null || _choosingCards === void 0 ? void 0 : _choosingCards.length) == 0) {
@@ -34363,12 +34543,10 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
         };
 
         _proto.handleBackGameFromInterupt = function handleBackGameFromInterupt(timeInterupted) {
-          console.log("handleBackGameFromInterupt::baucua", timeInterupted);
+          console.log("handleBackGameFromInterupt::tlmn", timeInterupted);
 
           if (this._state == GameState.WAITING) {
             this.forceLeaveRoom();
-          } else {
-            this.continueCountDownBy(-timeInterupted);
           }
         };
 
@@ -34377,16 +34555,14 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
         };
 
         _proto.showChat = function showChat(name, content) {
-          var _this$bauCuaSettingPo;
-
-          if (((_this$bauCuaSettingPo = this.bauCuaSettingPopup) === null || _this$bauCuaSettingPo === void 0 ? void 0 : _this$bauCuaSettingPo.isHideChat()) && name != GameConfigManager.uid) {
-            return;
-          }
-
           var player = this.getPlayerByUID(name);
 
           if (player == null) {
             return;
+          }
+
+          if (content.indexOf("e_") >= 0) {
+            content = content.replace("e_", "emo_");
           }
 
           player.showBubbleChat(content);
@@ -34442,7 +34618,7 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
         };
 
         _proto.setHostPlayer = function setHostPlayer(uid) {
-          var _this3 = this,
+          var _this4 = this,
               _this$btn_ready2,
               _this$my_info2,
               _this$opponent_info;
@@ -34450,7 +34626,7 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
           this._playerInfo.forEach(function (p) {
             p.isHost = p.uid == uid;
 
-            var player = _this3.getPlayerByUID(p.uid);
+            var player = _this4.getPlayerByUID(p.uid);
 
             if (player != null) {
               player.setUserInfo(p);
@@ -34482,12 +34658,12 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
         };
 
         _proto.update = function update(dt) {
-          var _this4 = this;
+          var _this5 = this;
 
           if (this.root.active) {
             if (this.pendingMessage.length > 0) {
               this.pendingMessage.forEach(function (m) {
-                _this4.handleMessage(m);
+                _this5.handleMessage(m);
               });
               this.pendingMessage = [];
             }
@@ -34572,48 +34748,71 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
                   }
 
                   this.prepareNewGame();
-                  if (this._state == GameState.VIEWING) ;
+
+                  if (this._state == GameState.VIEWING) {
+                    // demLaGame->hideCards();
+                    // demLaGame->setCurrentStateForPlayers();
+                    if (dict["re"] == true) {
+                      // reconnect
+                      var cardArray = [];
+
+                      for (var _i = 0; _i < arrPlayer.length; _i++) {
+                        var _playerInfoDict = arrPlayer[_i];
+                        var _uid2 = _playerInfoDict["uid"]; // user id
+
+                        if (this.isMe(_uid2)) {
+                          cardArray = _playerInfoDict["cs"];
+                          break;
+                        }
+                      }
+
+                      var lastTurnCards = dict["ldc"];
+                      this.reconnectLastGame(cardArray, lastTurnCards, rmT); // gameView->updateViewingPlayerPositions();
+                    } // gameView->updateReadyStatus();
+
+                  }
+
                   return;
                 } else if (cmd == GLOBAL_MESSAGE.INGAME_USER_LEAVE_AND_JOIN_TABLE) {
                   var t = dict["t"]; // t = 1: vao phong || t = 2: ra phong
 
                   if (t == 1) {
-                    var _playerInfoDict = dict["p"];
-                    var _C = _playerInfoDict["C"]; // chu ban
+                    var _playerInfoDict2 = dict["p"];
+                    var _C = _playerInfoDict2["C"]; // chu ban
 
-                    var a = _playerInfoDict["a"]; // avatar
+                    var a = _playerInfoDict2["a"]; // avatar
 
-                    var g = _playerInfoDict["g"]; // gender
+                    var g = _playerInfoDict2["g"]; // gender
 
-                    var _m = _playerInfoDict["m"]; // money
+                    var _m = _playerInfoDict2["m"]; // money
 
-                    var _sit = _playerInfoDict["sit"];
-                    var _dn = _playerInfoDict["dn"]; // display name
+                    var _sit = _playerInfoDict2["sit"];
+                    var _dn = _playerInfoDict2["dn"]; // display name
 
-                    var _uid2 = _playerInfoDict["uid"]; // user id
+                    var _uid3 = _playerInfoDict2["uid"]; // user id
 
                     var _r = false; // ready
 
-                    var _platformID = _playerInfoDict["pid"]; // platform
+                    var _platformID = _playerInfoDict2["pid"]; // platform
 
-                    if (_playerInfoDict["r"] != null && _playerInfoDict["r"] != undefined) {
-                      _r = _playerInfoDict["r"];
+                    if (_playerInfoDict2["r"] != null && _playerInfoDict2["r"] != undefined) {
+                      _r = _playerInfoDict2["r"];
                     }
 
-                    var _as = _playerInfoDict["As"];
-                    var _avaURL = _playerInfoDict["a"];
+                    var _as = _playerInfoDict2["As"];
+                    var _avaURL = _playerInfoDict2["a"];
                     var _customerID = 0;
 
-                    if (_playerInfoDict["id"] != null && _playerInfoDict["id"] != undefined) {
-                      _customerID = _playerInfoDict["id"];
+                    if (_playerInfoDict2["id"] != null && _playerInfoDict2["id"] != undefined) {
+                      _customerID = _playerInfoDict2["id"];
                     }
 
-                    this.addPlayer(_dn, _uid2, _C, _m, 0, 0, _sit, _r, _platformID, true, _as, _avaURL, _customerID);
+                    this.addPlayer(_dn, _uid3, _C, _m, 0, 0, _sit, _r, _platformID, true, _as, _avaURL, _customerID);
                   } else if (t == 2) {
-                    var _playerInfoDict2 = dict["p"];
-                    var _uid3 = _playerInfoDict2["uid"]; // user id
+                    var _playerInfoDict3 = dict["p"];
+                    var _uid4 = _playerInfoDict3["uid"]; // user id
 
-                    this.removePlayer(_uid3);
+                    this.removePlayer(_uid4);
                   }
 
                   return;
@@ -34684,8 +34883,8 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
 
                   var _arrPlayer = dict["ps"];
 
-                  for (var _i = 0; _i < _arrPlayer.length; _i++) {
-                    var playerDict = _arrPlayer[_i];
+                  for (var _i2 = 0; _i2 < _arrPlayer.length; _i2++) {
+                    var playerDict = _arrPlayer[_i2];
                     finishArr.push(playerDict);
                   }
 
@@ -34706,8 +34905,122 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
           }
         };
 
+        _proto.reconnectLastGame = function reconnectLastGame(cardArray, lastTurnCards, remainingTime) {
+          var _this$my_info3, _this$my_info4, _this$opponent_info2, _this$opponent_info3, _this$my_info5, _this$my_info6;
+
+          this._state = GameState.PLAYING;
+
+          for (var i = 0; i < this.opponent_info.getRemainingCard(); i++) {
+            var _this$cardPooling;
+
+            var opponent_card = (_this$cardPooling = this.cardPooling) === null || _this$cardPooling === void 0 ? void 0 : _this$cardPooling.getPooledCard();
+            opponent_card.setAsOnTop();
+            this.opponent_info.addCard(opponent_card);
+            Tween.stopAllByTarget(opponent_card.node);
+            opponent_card.node.setPosition(this.opponent_info.getCardPos().position);
+            opponent_card.node.setScale(this.opponent_info.getCardPos().scale);
+            opponent_card.node.active = true;
+          }
+
+          for (var _i3 = 0; _i3 < cardArray.length; _i3++) {
+            var _this$cardPooling2;
+
+            var code = cardArray[_i3];
+            var my_card = (_this$cardPooling2 = this.cardPooling) === null || _this$cardPooling2 === void 0 ? void 0 : _this$cardPooling2.getPooledCard();
+
+            if (my_card != null) {
+              my_card.setAsOnTop();
+              var card = new GameCard();
+              card.decodeCard(code, GlobalVariables.TIENLEN);
+              my_card.setCard(card);
+              this.my_info.addCard(my_card, true);
+              Tween.stopAllByTarget(my_card.node);
+              my_card.show();
+              var target = new Vec3(this.my_info.getCardPos().position);
+              target.x += _i3 * 80;
+              my_card.node.setPosition(target);
+              my_card.node.setScale(this.my_info.getCardPos().scale);
+              my_card.lockPosition(target);
+            }
+          }
+
+          this._lastTurnCards = [];
+
+          if (lastTurnCards.length > 0) {
+            console.log("=========== RECONNECT ============");
+            lastTurnCards.forEach(function (x) {
+              var card = new GameCard();
+              card.decodeCard(x, GlobalVariables.TIENLEN);
+              console.log("last turn card:" + card.getResourceName());
+            });
+            var randNum1 = GameUtils.getRandomInt(0, 100) - 75;
+            var randNum2 = GameUtils.getRandomInt(0, 100) - 50;
+            var posX = this.cardPooling.node.position.x + randNum1;
+            var posY = this.cardPooling.node.position.y + randNum2;
+
+            if (lastTurnCards.length >= 8) {
+              posX -= 140;
+            } else if (lastTurnCards.length >= 5) {
+              posX -= 70;
+            }
+
+            for (var _i4 = 0; _i4 < lastTurnCards.length; _i4++) {
+              var _this$cardPooling3;
+
+              var _code = lastTurnCards[_i4];
+
+              var _card = (_this$cardPooling3 = this.cardPooling) === null || _this$cardPooling3 === void 0 ? void 0 : _this$cardPooling3.getPooledCard();
+
+              if (_card != null && _card != undefined) {
+                var data = new GameCard();
+                data.decodeCard(_code, GlobalVariables.TIENLEN);
+
+                _card.setCard(data);
+
+                Tween.stopAllByTarget(_card.node);
+
+                _card.setAsOnTop();
+
+                _card.node.setPosition(new Vec3(posX, posY, 0));
+
+                _card.node.setScale(new Vec3(0.55, 0.55, 0.55));
+
+                _card.show();
+
+                posX += 40;
+
+                this._lastTurnCards.push(_card);
+              }
+            }
+          }
+
+          if (remainingTime > 20) {
+            remainingTime = 20;
+          }
+
+          if (((_this$my_info3 = this.my_info) === null || _this$my_info3 === void 0 ? void 0 : _this$my_info3.getCurrentState()) == 3) {
+            this.my_info.startCountDown(remainingTime);
+            this.btn_danhbai.node.active = true;
+            this.btn_boluot.node.active = lastTurnCards.length > 0;
+          } else if (((_this$my_info4 = this.my_info) === null || _this$my_info4 === void 0 ? void 0 : _this$my_info4.getCurrentState()) == 2) {
+            this.addBoLuotPlayer(this.my_info.getUID());
+          }
+
+          if (((_this$opponent_info2 = this.opponent_info) === null || _this$opponent_info2 === void 0 ? void 0 : _this$opponent_info2.getCurrentState()) == 3) {
+            this.opponent_info.startCountDown(remainingTime);
+            this.btn_danhbai.node.active = false;
+            this.btn_boluot.node.active = false;
+          } else if (((_this$opponent_info3 = this.opponent_info) === null || _this$opponent_info3 === void 0 ? void 0 : _this$opponent_info3.getCurrentState()) == 2) {
+            this.addBoLuotPlayer(this.opponent_info.getUID());
+          }
+
+          Tween.stopAllByTarget(this.my_info.node);
+          (_this$my_info5 = this.my_info) === null || _this$my_info5 === void 0 ? void 0 : _this$my_info5.node.setPosition(new Vec3(-675, -240, 0));
+          (_this$my_info6 = this.my_info) === null || _this$my_info6 === void 0 ? void 0 : _this$my_info6.node.setScale(new Vec3(0.8, 0.8, 0.8));
+        };
+
         _proto.finishThisGame = function finishThisGame(finishArr) {
-          var _this5 = this;
+          var _this6 = this;
 
           for (var i = 0; i < finishArr.length; i++) {
             var playerDict = finishArr[i];
@@ -34736,9 +35049,9 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
           }
 
           var finishAct = tween(this.node).sequence(tween().delay(this._timeToFinish), tween().call(function () {
-            _this5._state = GameState.WAITING;
+            _this6._state = GameState.WAITING;
 
-            _this5.prepareNewGame();
+            _this6.prepareNewGame();
           }));
           finishAct.start();
         };
@@ -34787,16 +35100,16 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
 
           if (this.isMe(fromPlayer)) {
             for (var i = 0; i < arrCards.length; i++) {
-              var _this$my_info3, _this$my_info4;
+              var _this$my_info7, _this$my_info8;
 
               var code = arrCards[i];
-              var card = (_this$my_info3 = this.my_info) === null || _this$my_info3 === void 0 ? void 0 : _this$my_info3.getCardItemWithCode(code);
+              var card = (_this$my_info7 = this.my_info) === null || _this$my_info7 === void 0 ? void 0 : _this$my_info7.getCardItemWithCode(code);
 
               if (card != null && card != undefined) {
                 this._lastTurnCards.push(card);
               }
 
-              (_this$my_info4 = this.my_info) === null || _this$my_info4 === void 0 ? void 0 : _this$my_info4.removeCardItemWithCode(code);
+              (_this$my_info8 = this.my_info) === null || _this$my_info8 === void 0 ? void 0 : _this$my_info8.removeCardItemWithCode(code);
             }
 
             this.my_info.rearrangeCard();
@@ -34819,22 +35132,22 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
               posX += 40;
             });
           } else {
-            for (var _i2 = 0; _i2 < arrCards.length; _i2++) {
-              var _this$opponent_info2;
+            for (var _i5 = 0; _i5 < arrCards.length; _i5++) {
+              var _this$opponent_info4;
 
-              var _code = arrCards[_i2];
+              var _code2 = arrCards[_i5];
 
-              var _card = (_this$opponent_info2 = this.opponent_info) === null || _this$opponent_info2 === void 0 ? void 0 : _this$opponent_info2.popCard();
+              var _card2 = (_this$opponent_info4 = this.opponent_info) === null || _this$opponent_info4 === void 0 ? void 0 : _this$opponent_info4.popCard();
 
-              if (_card != null && _card != undefined) {
+              if (_card2 != null && _card2 != undefined) {
                 var data = new GameCard();
-                data.decodeCard(_code, GlobalVariables.TIENLEN);
+                data.decodeCard(_code2, GlobalVariables.TIENLEN);
 
-                _card.setCard(data);
+                _card2.setCard(data);
 
-                _card.show();
+                _card2.show();
 
-                this._lastTurnCards.push(_card);
+                this._lastTurnCards.push(_card2);
               }
             }
 
@@ -34863,53 +35176,49 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
         _proto.refundMoney = function refundMoney(refundPlayer, moneyRefund, mXRefund) {};
 
         _proto.startGame = function startGame(cardsArr, nextPlayerUID, listPlaying, listUpdateMoney) {
-          var _this$opponent_info3,
-              _this$my_info5,
-              _this6 = this,
-              _this$my_info6,
-              _this$opponent_info4;
+          var _this7 = this,
+              _this$my_info9,
+              _this$opponent_info5;
 
-          (_this$opponent_info3 = this.opponent_info) === null || _this$opponent_info3 === void 0 ? void 0 : _this$opponent_info3.ready(false);
-          (_this$my_info5 = this.my_info) === null || _this$my_info5 === void 0 ? void 0 : _this$my_info5.ready(false);
           var count = 0;
           cardsArr.forEach(function (x, i) {
-            var _this6$cardPooling, _this6$cardPooling2;
+            var _this7$cardPooling, _this7$cardPooling2;
 
-            var opponent_card = (_this6$cardPooling = _this6.cardPooling) === null || _this6$cardPooling === void 0 ? void 0 : _this6$cardPooling.getPooledCard();
+            var opponent_card = (_this7$cardPooling = _this7.cardPooling) === null || _this7$cardPooling === void 0 ? void 0 : _this7$cardPooling.getPooledCard();
 
             if (opponent_card != null) {
-              var _this6$opponent_info, _this6$opponent_info$, _this6$opponent_info2, _this6$opponent_info3;
+              var _this7$opponent_info, _this7$opponent_info$, _this7$opponent_info2, _this7$opponent_info3;
 
               opponent_card.setAsOnTop();
 
-              _this6.opponent_info.addCard(opponent_card);
+              _this7.opponent_info.addCard(opponent_card);
 
               Tween.stopAllByTarget(opponent_card.node);
               opponent_card.node.active = true;
               var move = tween(opponent_card.node).sequence(tween().delay(0.2 + 0.08 * i), tween().to(0.6, {
-                position: (_this6$opponent_info = _this6.opponent_info) === null || _this6$opponent_info === void 0 ? void 0 : (_this6$opponent_info$ = _this6$opponent_info.getCardPos()) === null || _this6$opponent_info$ === void 0 ? void 0 : _this6$opponent_info$.position,
-                scale: (_this6$opponent_info2 = _this6.opponent_info) === null || _this6$opponent_info2 === void 0 ? void 0 : (_this6$opponent_info3 = _this6$opponent_info2.getCardPos()) === null || _this6$opponent_info3 === void 0 ? void 0 : _this6$opponent_info3.scale
+                position: (_this7$opponent_info = _this7.opponent_info) === null || _this7$opponent_info === void 0 ? void 0 : (_this7$opponent_info$ = _this7$opponent_info.getCardPos()) === null || _this7$opponent_info$ === void 0 ? void 0 : _this7$opponent_info$.position,
+                scale: (_this7$opponent_info2 = _this7.opponent_info) === null || _this7$opponent_info2 === void 0 ? void 0 : (_this7$opponent_info3 = _this7$opponent_info2.getCardPos()) === null || _this7$opponent_info3 === void 0 ? void 0 : _this7$opponent_info3.scale
               }, {
                 easing: 'expoOut'
               }));
               move.start();
             }
 
-            var my_card = (_this6$cardPooling2 = _this6.cardPooling) === null || _this6$cardPooling2 === void 0 ? void 0 : _this6$cardPooling2.getPooledCard();
+            var my_card = (_this7$cardPooling2 = _this7.cardPooling) === null || _this7$cardPooling2 === void 0 ? void 0 : _this7$cardPooling2.getPooledCard();
 
             if (my_card != null) {
-              var _this6$my_info, _this6$my_info$getCar;
+              var _this7$my_info, _this7$my_info$getCar;
 
               my_card.setAsOnTop();
               var card = new GameCard();
               card.decodeCard(x, GlobalVariables.TIENLEN);
               my_card.setCard(card);
 
-              _this6.my_info.addCard(my_card, true);
+              _this7.my_info.addCard(my_card, true);
 
               Tween.stopAllByTarget(my_card.node);
               my_card.show();
-              var target = new Vec3(_this6.my_info.getCardPos().position);
+              var target = new Vec3(_this7.my_info.getCardPos().position);
               target.x += i * 80;
               my_card.lockPosition(target);
               var velocity = 700;
@@ -34918,14 +35227,14 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
 
               var _move = tween(my_card.node).sequence(tween().delay(0.2 + 0.08 * i), tween().to(moveTime, {
                 position: target,
-                scale: (_this6$my_info = _this6.my_info) === null || _this6$my_info === void 0 ? void 0 : (_this6$my_info$getCar = _this6$my_info.getCardPos()) === null || _this6$my_info$getCar === void 0 ? void 0 : _this6$my_info$getCar.scale
+                scale: (_this7$my_info = _this7.my_info) === null || _this7$my_info === void 0 ? void 0 : (_this7$my_info$getCar = _this7$my_info.getCardPos()) === null || _this7$my_info$getCar === void 0 ? void 0 : _this7$my_info$getCar.scale
               }, {
                 easing: 'expoOut'
               }), tween().call(function () {
                 count += 1;
 
                 if (count >= 13) {
-                  _this6.finishPhatBai(nextPlayerUID);
+                  _this7.finishPhatBai(nextPlayerUID);
                 }
               }));
 
@@ -34939,8 +35248,8 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
             scale: new Vec3(0.8, 0.8, 0.8)
           });
           seq.start();
-          (_this$my_info6 = this.my_info) === null || _this$my_info6 === void 0 ? void 0 : _this$my_info6.ready(false);
-          (_this$opponent_info4 = this.opponent_info) === null || _this$opponent_info4 === void 0 ? void 0 : _this$opponent_info4.ready(false);
+          (_this$my_info9 = this.my_info) === null || _this$my_info9 === void 0 ? void 0 : _this$my_info9.ready(false);
+          (_this$opponent_info5 = this.opponent_info) === null || _this$opponent_info5 === void 0 ? void 0 : _this$opponent_info5.ready(false);
           this._state = GameState.PLAYING;
         };
 
@@ -34953,17 +35262,17 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
         };
 
         _proto.clearCardInTable = function clearCardInTable() {
-          var _this$my_info7, _this$opponent_info5, _this$cardPooling;
+          var _this$my_info10, _this$opponent_info6, _this$cardPooling4;
 
           this._lastTurnCards = [];
           var cards = [];
-          (_this$my_info7 = this.my_info) === null || _this$my_info7 === void 0 ? void 0 : _this$my_info7.getPlayerCard().forEach(function (c) {
+          (_this$my_info10 = this.my_info) === null || _this$my_info10 === void 0 ? void 0 : _this$my_info10.getPlayerCard().forEach(function (c) {
             return cards.push(c);
           });
-          (_this$opponent_info5 = this.opponent_info) === null || _this$opponent_info5 === void 0 ? void 0 : _this$opponent_info5.getPlayerCard().forEach(function (c) {
+          (_this$opponent_info6 = this.opponent_info) === null || _this$opponent_info6 === void 0 ? void 0 : _this$opponent_info6.getPlayerCard().forEach(function (c) {
             return cards.push(c);
           });
-          (_this$cardPooling = this.cardPooling) === null || _this$cardPooling === void 0 ? void 0 : _this$cardPooling.clearCardsNotInTheseCards(cards);
+          (_this$cardPooling4 = this.cardPooling) === null || _this$cardPooling4 === void 0 ? void 0 : _this$cardPooling4.clearCardsNotInTheseCards(cards);
         };
 
         _proto.nextTurn = function nextTurn(uid) {
@@ -34993,16 +35302,18 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
         };
 
         _proto.checkCard = function checkCard() {
-          var _this$my_info8,
-              _this7 = this;
+          var _this$my_info11,
+              _this8 = this;
 
           var _lastTurnCards = this._lastTurnCards.map(function (x) {
             return x.getCard();
           });
 
-          var _thisPlayerCards = (_this$my_info8 = this.my_info) === null || _this$my_info8 === void 0 ? void 0 : _this$my_info8.getPlayerCard().map(function (x) {
+          var _thisPlayerCards = (_this$my_info11 = this.my_info) === null || _this$my_info11 === void 0 ? void 0 : _this$my_info11.getPlayerCard().map(function (x) {
             return x.getCard();
           });
+
+          this._listRecommendCard = [];
 
           if (_lastTurnCards != null && _lastTurnCards.length > 0) {
             (function () {
@@ -35014,16 +35325,21 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
                 for (var i = 0; i < _thisPlayerCards.length; i++) {
                   var pArrayCard = _thisPlayerCards === null || _thisPlayerCards === void 0 ? void 0 : _thisPlayerCards.slice(i, _thisPlayerCards.length);
                   var rceCard = DemLa_CardLib.getRecommendCards(_lastTurnCards, pArrayCard);
-                  rceCard.forEach(function (r) {
-                    if (recommendCards.filter(function (c) {
-                      return r.serverCode == c.serverCode;
-                    }).length <= 0) {
-                      recommendCards.push(r);
-                    }
-                  });
+
+                  if (rceCard.length > 0) {
+                    _this8._listRecommendCard.push(rceCard);
+
+                    rceCard.forEach(function (r) {
+                      if (recommendCards.filter(function (c) {
+                        return r.serverCode == c.serverCode;
+                      }).length <= 0) {
+                        recommendCards.push(r);
+                      }
+                    });
+                  }
                 }
 
-                _this7.my_info.getPlayerCard().forEach(function (x) {
+                _this8.my_info.getPlayerCard().forEach(function (x) {
                   if (recommendCards.filter(function (r) {
                     return r.serverCode == x.getCode();
                   }).length > 0) {
@@ -35033,9 +35349,9 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
                   }
                 });
               } else {
-                _this7.btn_danhbai.node.active = false;
+                _this8.btn_danhbai.node.active = false;
 
-                _this7.my_info.getPlayerCard().forEach(function (x) {
+                _this8.my_info.getPlayerCard().forEach(function (x) {
                   x.cannotBeSelected();
                 });
               }
@@ -35064,7 +35380,8 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
         };
 
         _proto.addPlayer = function addPlayer(dn, uid, C, m, pS, rmC, sit, r, platform, playing, as, avatarURL, customerID) {
-          var _this8 = this;
+          var _this9 = this,
+              _this$opponent_info7;
 
           var info = new PlayerInfo();
           info.displayName = dn;
@@ -35072,16 +35389,25 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
           info.avatarURL = avatarURL;
           info.uid = uid;
           info.isHost = C;
+          console.log(dn, rmC);
 
           this._playerInfo.push(info);
 
           this._playerInfo.forEach(function (p) {
             if (p.uid == GameConfigManager.uid) {
-              _this8.my_info.setUserInfo(p);
+              _this9.my_info.setUserInfo(p);
             } else {
-              _this8.opponent_info.setUserInfo(p);
+              _this9.opponent_info.setUserInfo(p);
             }
           });
+
+          if (this.isMe(uid)) {
+            this.my_info.setCurrentState(pS, rmC);
+          } else {
+            this.opponent_info.setCurrentState(pS, rmC);
+          }
+
+          console.log((_this$opponent_info7 = this.opponent_info) === null || _this$opponent_info7 === void 0 ? void 0 : _this$opponent_info7.getRemainingCard());
         };
 
         _proto.removePlayer = function removePlayer(uid) {
@@ -35094,16 +35420,20 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
           this._playerInfo = this._playerInfo.filter(function (p) {
             return p.uid != uid;
           });
+
+          if (this.btn_begin.node.active) {
+            this.btn_begin.node.active = false;
+          }
         };
 
         _proto.prepareNewGame = function prepareNewGame() {
-          var _this$my_info9, _this$my_info10, _this$my_info11, _this$opponent_info6;
+          var _this$my_info12, _this$my_info13, _this$my_info14, _this$opponent_info8;
 
           Tween.stopAllByTarget(this.node);
-          (_this$my_info9 = this.my_info) === null || _this$my_info9 === void 0 ? void 0 : _this$my_info9.node.setPosition(new Vec3(6, -206, 0));
-          (_this$my_info10 = this.my_info) === null || _this$my_info10 === void 0 ? void 0 : _this$my_info10.node.setScale(new Vec3(1, 1, 1));
-          (_this$my_info11 = this.my_info) === null || _this$my_info11 === void 0 ? void 0 : _this$my_info11.resetUI();
-          (_this$opponent_info6 = this.opponent_info) === null || _this$opponent_info6 === void 0 ? void 0 : _this$opponent_info6.resetUI();
+          (_this$my_info12 = this.my_info) === null || _this$my_info12 === void 0 ? void 0 : _this$my_info12.node.setPosition(new Vec3(6, -206, 0));
+          (_this$my_info13 = this.my_info) === null || _this$my_info13 === void 0 ? void 0 : _this$my_info13.node.setScale(new Vec3(1, 1, 1));
+          (_this$my_info14 = this.my_info) === null || _this$my_info14 === void 0 ? void 0 : _this$my_info14.resetUI();
+          (_this$opponent_info8 = this.opponent_info) === null || _this$opponent_info8 === void 0 ? void 0 : _this$opponent_info8.resetUI();
           this._lastTurnCards = [];
           this.cardPooling.reset();
 
@@ -35126,9 +35456,9 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
         };
 
         _proto.getIsHost = function getIsHost() {
-          var _this$my_info12;
+          var _this$my_info15;
 
-          return (_this$my_info12 = this.my_info) === null || _this$my_info12 === void 0 ? void 0 : _this$my_info12.isHost();
+          return (_this$my_info15 = this.my_info) === null || _this$my_info15 === void 0 ? void 0 : _this$my_info15.isHost();
         };
 
         _proto.resetAllPlayerViewAction = function resetAllPlayerViewAction() {
