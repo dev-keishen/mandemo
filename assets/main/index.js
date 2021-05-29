@@ -9468,10 +9468,10 @@ System.register("chunks:///_virtual/BatCmp.ts", ['./_rollupPluginModLoBabelHelpe
   };
 });
 
-System.register("chunks:///_virtual/LobbyViewController.ts", ['./_rollupPluginModLoBabelHelpers.js', 'cc', './GameConfigManager.ts', './StringUtils.ts', './MiniGameNetworkHandler.ts', './GamePlatformManager.ts', './GameNetworkHandler.ts', './NotiView.ts', './GlobalVariables.ts', './LoadingView.ts', './BaseFullScreenGameView.ts', './Downloader.ts', './BauCuaFullScreenGameView.ts', './TienLenFullScreenGameView.ts', './XocDiaFullScreenGameView.ts', './GameHTTPNetwork.ts', './FloatStringCmp.ts', './MD5Algorithm.ts', './TransitionFadeScreen.ts', './GameListView.ts', './PopupController.ts', './ProfilesPopup.ts', './TableListView.ts', './MiniGameNodeController.ts', './CCMiniGameRoot.ts', './GamePlayManager.ts'], function (exports) {
+System.register("chunks:///_virtual/LobbyViewController.ts", ['./_rollupPluginModLoBabelHelpers.js', 'cc', './GameConfigManager.ts', './StringUtils.ts', './MiniGameNetworkHandler.ts', './GamePlatformManager.ts', './GameNetworkHandler.ts', './NotiView.ts', './GlobalVariables.ts', './LoadingView.ts', './BaseFullScreenGameView.ts', './Downloader.ts', './BauCuaFullScreenGameView.ts', './GameHTTPNetwork.ts', './ProfilesPopup.ts', './MD5Algorithm.ts', './PopupController.ts', './TienLenFullScreenGameView.ts', './XocDiaFullScreenGameView.ts', './FloatStringCmp.ts', './TransitionFadeScreen.ts', './GameListView.ts', './TableListView.ts', './MiniGameNodeController.ts', './CCMiniGameRoot.ts', './GamePlayManager.ts'], function (exports) {
   'use strict';
 
-  var _defineProperty, _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, cclegacy, _decorator, Node, Button, sp, UITransform, UIOpacity, Label, Sprite, SpriteFrame, sys, systemEvent, game, Game, director, log, Tween, Vec3, tween, GameConfigManager, StringUtils, MessageResponse, MessageRequest, GamePlatformManager, GameNetworkHandler, NotiView, GlobalVariables, GLOBAL_MESSAGE, LoadingView, BaseFullScreenGameView, Downloader, BauCuaFullScreenGameView, TienLenFullScreenGameView, XocDiaFullScreenGameView, GameHTTPNetwork, FloatStringCmp, MD5Algorithm, TransitionFadeScreen, GameListView, PopupController, ProfilesPopup, TableListView, MiniGameNodeController, CCMiniGameRoot, GameState, GamePlayManager, NETWORK_STATE;
+  var _defineProperty, _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, cclegacy, _decorator, Node, Button, sp, UITransform, UIOpacity, Label, Sprite, SpriteFrame, sys, systemEvent, game, Game, director, log, Tween, Vec3, tween, GameConfigManager, StringUtils, MessageResponse, MessageRequest, GamePlatformManager, GameNetworkHandler, NotiView, GlobalVariables, GLOBAL_MESSAGE, LoadingView, BaseFullScreenGameView, Downloader, BauCuaFullScreenGameView, GameHTTPNetwork, ProfilesPopup, MD5Algorithm, PopupController, TienLenFullScreenGameView, XocDiaFullScreenGameView, FloatStringCmp, TransitionFadeScreen, GameListView, TableListView, MiniGameNodeController, CCMiniGameRoot, GameState, GamePlayManager, NETWORK_STATE;
 
   return {
     setters: [function (module) {
@@ -9525,23 +9525,23 @@ System.register("chunks:///_virtual/LobbyViewController.ts", ['./_rollupPluginMo
     }, function (module) {
       BauCuaFullScreenGameView = module.BauCuaFullScreenGameView;
     }, function (module) {
+      GameHTTPNetwork = module.default;
+    }, function (module) {
+      ProfilesPopup = module.ProfilesPopup;
+    }, function (module) {
+      MD5Algorithm = module.MD5Algorithm;
+    }, function (module) {
+      PopupController = module.PopupController;
+    }, function (module) {
       TienLenFullScreenGameView = module.TienLenFullScreenGameView;
     }, function (module) {
       XocDiaFullScreenGameView = module.XocDiaFullScreenGameView;
     }, function (module) {
-      GameHTTPNetwork = module.default;
-    }, function (module) {
       FloatStringCmp = module.FloatStringCmp;
-    }, function (module) {
-      MD5Algorithm = module.MD5Algorithm;
     }, function (module) {
       TransitionFadeScreen = module.TransitionFadeScreen;
     }, function (module) {
       GameListView = module.GameListView;
-    }, function (module) {
-      PopupController = module.PopupController;
-    }, function (module) {
-      ProfilesPopup = module.ProfilesPopup;
     }, function (module) {
       TableListView = module.TableListView;
     }, function (module) {
@@ -10181,6 +10181,11 @@ System.register("chunks:///_virtual/LobbyViewController.ts", ['./_rollupPluginMo
           var joinResult = message[1];
 
           if (joinResult) {
+            if (GamePlayManager.roomID != message[3]) {
+              console.log("chuyen phong!");
+            }
+
+            GamePlayManager.roomID = message[3];
             this.showFullScreenGame();
           } else {
             this.switchGameScreen(GlobalVariables.LOBBY);
@@ -15674,15 +15679,17 @@ System.register("chunks:///_virtual/InvitePopup.ts", ['./_rollupPluginModLoBabel
   };
 });
 
-System.register("chunks:///_virtual/DemLa_CardLib.ts", ['cc', './MauBinh_CardLib.ts'], function (exports) {
+System.register("chunks:///_virtual/DemLa_CardLib.ts", ['cc', './GlobalVariables.ts', './MauBinh_CardLib.ts'], function (exports) {
   'use strict';
 
-  var cclegacy, _decorator, GameCard;
+  var cclegacy, _decorator, GlobalVariables, GameCard;
 
   return {
     setters: [function (module) {
       cclegacy = module.cclegacy;
       _decorator = module._decorator;
+    }, function (module) {
+      GlobalVariables = module.GlobalVariables;
     }, function (module) {
       GameCard = module.GameCard;
     }],
@@ -15841,6 +15848,107 @@ System.register("chunks:///_virtual/DemLa_CardLib.ts", ['cc', './MauBinh_CardLib
           }
 
           return list;
+        };
+
+        DemLa_CardLib.getRecommendCards2 = function getRecommendCards2(selectedCards, myCards) {
+          selectedCards = DemLa_CardLib.sortVector(selectedCards, false);
+          var testPair = [8, 9];
+          var testTriple = [8, 9, 10]; // 3 con 3 nho nhat
+
+          var testFour = [8, 9, 10, 11]; // tu quy 3 nho nhat
+
+          var testStraight = [8, 12, 16]; // sanh 3 con nho nhat
+
+          var testThreePair = [8, 9, 12, 13, 16, 17]; // 3 doi thong nho nhat
+
+          var testFourPair = [8, 9, 12, 13, 16, 17, 20, 21]; // 4 doi thong nho nhat
+
+          var testPairCard = testPair.map(function (x) {
+            var card = new GameCard();
+            card.decodeCard(x, GlobalVariables.TIENLEN);
+            return card;
+          });
+          var pair = this.getHigherPairs(testPairCard, myCards);
+          var testTripleCard = testTriple.map(function (x) {
+            var card = new GameCard();
+            card.decodeCard(x, GlobalVariables.TIENLEN);
+            return card;
+          });
+          var triple = this.getHigherThrees(testTripleCard, myCards);
+          var straight = [];
+
+          for (var i = 3; i <= 13; i++) {
+            var testStraightCard = testStraight.map(function (x) {
+              var card = new GameCard();
+              card.decodeCard(x, GlobalVariables.TIENLEN);
+              return card;
+            });
+
+            if (this.getHigherStraight(testStraightCard, myCards).length > straight.length) {
+              straight = this.getHigherStraight(testStraightCard, myCards);
+            }
+
+            testStraight.push(testStraight[testStraight.length - 1] + 4);
+          }
+
+          var testFourCard = testFour.map(function (x) {
+            var card = new GameCard();
+            card.decodeCard(x, GlobalVariables.TIENLEN);
+            return card;
+          });
+          var four = this.getHigherFours(testFourCard, myCards);
+          var testThreePairCard = testThreePair.map(function (x) {
+            var card = new GameCard();
+            card.decodeCard(x, GlobalVariables.TIENLEN);
+            return card;
+          });
+          var threePairCard = this.getHigherThreePairs2(testThreePairCard, myCards);
+          var testFourPairCard = testFourPair.map(function (x) {
+            var card = new GameCard();
+            card.decodeCard(x, GlobalVariables.TIENLEN);
+            return card;
+          });
+          var fourPairCard = this.getHigherFourPairs2(testFourPairCard, myCards);
+
+          if (fourPairCard.filter(function (x) {
+            return selectedCards.findIndex(function (y) {
+              return x.serverCode == y.serverCode;
+            }) >= 0;
+          }).length >= selectedCards.length) {
+            return fourPairCard;
+          } else if (threePairCard.filter(function (x) {
+            return selectedCards.findIndex(function (y) {
+              return x.serverCode == y.serverCode;
+            }) >= 0;
+          }).length >= selectedCards.length) {
+            return threePairCard;
+          } else if (straight.filter(function (x) {
+            return selectedCards.findIndex(function (y) {
+              return x.serverCode == y.serverCode;
+            }) >= 0;
+          }).length >= selectedCards.length) {
+            return straight;
+          } else if (triple.filter(function (x) {
+            return selectedCards.findIndex(function (y) {
+              return x.serverCode == y.serverCode;
+            }) >= 0;
+          }).length >= selectedCards.length) {
+            return triple;
+          } else if (four.filter(function (x) {
+            return selectedCards.findIndex(function (y) {
+              return x.serverCode == y.serverCode;
+            }) >= 0;
+          }).length >= selectedCards.length) {
+            return four;
+          } else if (pair.filter(function (x) {
+            return selectedCards.findIndex(function (y) {
+              return x.serverCode == y.serverCode;
+            }) >= 0;
+          }).length >= selectedCards.length) {
+            return pair;
+          }
+
+          return [];
         };
 
         DemLa_CardLib.getRecommendCards = function getRecommendCards(list, myCards) {
@@ -17041,7 +17149,7 @@ System.register("chunks:///_virtual/KimCuongNoHuView.ts", ['./_rollupPluginModLo
 System.register("chunks:///_virtual/GameBaiPlayerView.ts", ['./_rollupPluginModLoBabelHelpers.js', 'cc', './PlayerView.ts'], function (exports) {
   'use strict';
 
-  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, _defineProperty, cclegacy, _decorator, Node, Sprite, Tween, tween, Vec3, PlayerView;
+  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, _defineProperty, cclegacy, _decorator, Node, ProgressBar, sp, Tween, tween, Vec3, PlayerView;
 
   return {
     setters: [function (module) {
@@ -17054,7 +17162,8 @@ System.register("chunks:///_virtual/GameBaiPlayerView.ts", ['./_rollupPluginModL
       cclegacy = module.cclegacy;
       _decorator = module._decorator;
       Node = module.Node;
-      Sprite = module.Sprite;
+      ProgressBar = module.ProgressBar;
+      sp = module.sp;
       Tween = module.Tween;
       tween = module.tween;
       Vec3 = module.Vec3;
@@ -17062,13 +17171,13 @@ System.register("chunks:///_virtual/GameBaiPlayerView.ts", ['./_rollupPluginModL
       PlayerView = module.PlayerView;
     }],
     execute: function () {
-      var _dec, _dec2, _dec3, _dec4, _dec5, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _temp;
+      var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _temp;
 
       cclegacy._RF.push({}, "61f2aWYKNNGX7URr2T4Bp/t", "GameBaiPlayerView", undefined);
 
       var ccclass = _decorator.ccclass,
           property = _decorator.property;
-      var GameBaiPlayerView = exports('GameBaiPlayerView', (_dec = ccclass('GameBaiPlayerView'), _dec2 = property(Node), _dec3 = property(Sprite), _dec4 = property(Node), _dec5 = property(Number), _dec(_class = (_class2 = (_temp = /*#__PURE__*/function (_PlayerView) {
+      var GameBaiPlayerView = exports('GameBaiPlayerView', (_dec = ccclass('GameBaiPlayerView'), _dec2 = property(Node), _dec3 = property(ProgressBar), _dec4 = property(sp.Skeleton), _dec5 = property(Node), _dec6 = property(Number), _dec(_class = (_class2 = (_temp = /*#__PURE__*/function (_PlayerView) {
         _inheritsLoose(GameBaiPlayerView, _PlayerView);
 
         function GameBaiPlayerView() {
@@ -17082,17 +17191,21 @@ System.register("chunks:///_virtual/GameBaiPlayerView.ts", ['./_rollupPluginModL
 
           _initializerDefineProperty(_assertThisInitialized(_this), "card_pos", _descriptor, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "spr_countdown", _descriptor2, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "progressBar", _descriptor2, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "nodeTimer", _descriptor3, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "time_dot", _descriptor3, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "maxTime", _descriptor4, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "nodeTimer", _descriptor4, _assertThisInitialized(_this));
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "maxTime", _descriptor5, _assertThisInitialized(_this));
 
           _defineProperty(_assertThisInitialized(_this), "cards", []);
 
           _defineProperty(_assertThisInitialized(_this), "_state", 0);
 
           _defineProperty(_assertThisInitialized(_this), "_remainingCard", 0);
+
+          _defineProperty(_assertThisInitialized(_this), "prgress_tween", null);
 
           return _this;
         }
@@ -17140,9 +17253,36 @@ System.register("chunks:///_virtual/GameBaiPlayerView.ts", ['./_rollupPluginModL
 
           Tween.stopAllByTarget(this.nodeTimer);
           this.nodeTimer.active = true;
+
+          if (this.prgress_tween != null && this.prgress_tween != undefined) {
+            this.prgress_tween.stop();
+          }
+
           var countdown = Math.floor(remainTime);
+          this.time_dot.setAnimation(0, "loop", true);
+          this.progressBar.progress = countdown / this.maxTime;
+          this.time_dot.node.parent.setRotationFromEuler(0, 0, 360 * this.progressBar.progress);
           var sequence = tween(this.nodeTimer).repeat(countdown, tween().sequence(tween().call(function () {
-            _this2.spr_countdown.fillStart = countdown / _this2.maxTime;
+            if (_this2.prgress_tween != null && _this2.prgress_tween != undefined) {
+              _this2.prgress_tween.stop();
+            }
+
+            var obj = {
+              a: _this2.progressBar.progress
+            };
+            _this2.prgress_tween = tween(obj).to(1, {
+              a: countdown / _this2.maxTime
+            }, {
+              progress: function progress(start, end, current, ratio) {
+                _this2.progressBar.progress = current;
+
+                _this2.time_dot.node.parent.setRotationFromEuler(0, 0, 360 * _this2.progressBar.progress);
+
+                return start + (end - start) * ratio;
+              }
+            });
+
+            _this2.prgress_tween.start();
           }), tween().delay(1), tween().call(function () {
             countdown -= 1;
           })));
@@ -17151,7 +17291,7 @@ System.register("chunks:///_virtual/GameBaiPlayerView.ts", ['./_rollupPluginModL
 
         _proto.stopCountDown = function stopCountDown() {
           this.nodeTimer.active = false;
-          this.spr_countdown.fillStart = 1;
+          this.progressBar.progress = 0;
         };
 
         _proto.resetUI = function resetUI() {
@@ -17221,21 +17361,28 @@ System.register("chunks:///_virtual/GameBaiPlayerView.ts", ['./_rollupPluginModL
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, "spr_countdown", [_dec3], {
+      }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, "progressBar", [_dec3], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, "nodeTimer", [_dec4], {
+      }), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, "time_dot", [_dec4], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, "maxTime", [_dec5], {
+      }), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, "nodeTimer", [_dec5], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, "maxTime", [_dec6], {
         configurable: true,
         enumerable: true,
         writable: true,
@@ -17665,10 +17812,10 @@ System.register("chunks:///_virtual/BaseMiniGameView.ts", ['./_rollupPluginModLo
   };
 });
 
-System.register("chunks:///_virtual/PopupController.ts", ['./_rollupPluginModLoBabelHelpers.js', 'cc', './CommonPopup.ts', './ChangeAvatarPopup.ts', './ChangePasswordPopup.ts', './GameHistoryPopup.ts', './GameSettingPopup.ts', './InvitePopup.ts', './LoginPopup.ts', './RegisterPopup.ts', './ProfilesPopup.ts', './GamePlayManager.ts'], function (exports) {
+System.register("chunks:///_virtual/PopupController.ts", ['./_rollupPluginModLoBabelHelpers.js', 'cc', './CommonPopup.ts', './ProfilesPopup.ts', './ChangeAvatarPopup.ts', './ChangePasswordPopup.ts', './GameHistoryPopup.ts', './GameSettingPopup.ts', './InvitePopup.ts', './LoginPopup.ts', './RegisterPopup.ts', './GamePlayManager.ts'], function (exports) {
   'use strict';
 
-  var _defineProperty, _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, cclegacy, _decorator, Component, CommonPopup, ChangeAvatarPopup, ChangePasswordPopup, GameHistoryPopup, GameSettingPopup, InvitePopup, LoginPopup, RegisterPopup, ProfilesPopup, GamePlayManager, NETWORK_STATE;
+  var _defineProperty, _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, cclegacy, _decorator, Component, CommonPopup, ProfilesPopup, ChangeAvatarPopup, ChangePasswordPopup, GameHistoryPopup, GameSettingPopup, InvitePopup, LoginPopup, RegisterPopup, GamePlayManager, NETWORK_STATE;
 
   return {
     setters: [function (module) {
@@ -17684,6 +17831,8 @@ System.register("chunks:///_virtual/PopupController.ts", ['./_rollupPluginModLoB
     }, function (module) {
       CommonPopup = module.CommonPopup;
     }, function (module) {
+      ProfilesPopup = module.ProfilesPopup;
+    }, function (module) {
       ChangeAvatarPopup = module.default;
     }, function (module) {
       ChangePasswordPopup = module.ChangePasswordPopup;
@@ -17697,8 +17846,6 @@ System.register("chunks:///_virtual/PopupController.ts", ['./_rollupPluginModLoB
       LoginPopup = module.LoginPopup;
     }, function (module) {
       RegisterPopup = module.RegisterPopup;
-    }, function (module) {
-      ProfilesPopup = module.ProfilesPopup;
     }, function (module) {
       GamePlayManager = module.GamePlayManager;
       NETWORK_STATE = module.NETWORK_STATE;
@@ -23188,19 +23335,11 @@ System.register("chunks:///_virtual/BubbleChat.ts", ['./_rollupPluginModLoBabelH
         _proto.show = function show(content, isAllowEmo) {
           var _this3 = this;
 
-          if (isAllowEmo === void 0) {
-            isAllowEmo = false;
-          }
-
           for (var i = 1; i <= 30; i++) {
             var emo = "emo_";
             emo += i.toString();
 
             if (content == emo) {
-              if (isAllowEmo) {
-                this.showEmo(content);
-              }
-
               return;
             }
           }
@@ -24489,10 +24628,10 @@ System.register("chunks:///_virtual/SoundButtonCmp.ts", ['./_rollupPluginModLoBa
   };
 });
 
-System.register("chunks:///_virtual/MiniPokerBetHistoryView.ts", ['./_rollupPluginModLoBabelHelpers.js', 'cc', './CommonPopup.ts', './StringUtils.ts', './GlobalVariables.ts', './MauBinh_CardLib.ts', './GameHTTPNetwork.ts', './MiniPokerBetHistoryItemView.ts'], function (exports) {
+System.register("chunks:///_virtual/MiniPokerBetHistoryView.ts", ['./_rollupPluginModLoBabelHelpers.js', 'cc', './CommonPopup.ts', './StringUtils.ts', './GlobalVariables.ts', './GameHTTPNetwork.ts', './MauBinh_CardLib.ts', './MiniPokerBetHistoryItemView.ts'], function (exports) {
   'use strict';
 
-  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, _defineProperty, cclegacy, _decorator, Button, Label, Node, UIOpacity, CommonPopup, StringUtils, GlobalVariables, GameCard, GameHTTPNetwork, MiniPokerBetHistoryItemView;
+  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, _defineProperty, cclegacy, _decorator, Button, Label, Node, UIOpacity, CommonPopup, StringUtils, GlobalVariables, GameHTTPNetwork, GameCard, MiniPokerBetHistoryItemView;
 
   return {
     setters: [function (module) {
@@ -24515,9 +24654,9 @@ System.register("chunks:///_virtual/MiniPokerBetHistoryView.ts", ['./_rollupPlug
     }, function (module) {
       GlobalVariables = module.GlobalVariables;
     }, function (module) {
-      GameCard = module.GameCard;
-    }, function (module) {
       GameHTTPNetwork = module.default;
+    }, function (module) {
+      GameCard = module.GameCard;
     }, function (module) {
       MiniPokerBetHistoryItemView = module.default;
     }],
@@ -34078,10 +34217,10 @@ System.register("chunks:///_virtual/TaiXiuSessionHistorySumItemView.ts", ['./_ro
   };
 });
 
-System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPluginModLoBabelHelpers.js', 'cc', './GameConfigManager.ts', './StringUtils.ts', './MiniGameNetworkHandler.ts', './GameNetworkHandler.ts', './NotiView.ts', './GameUtils.ts', './GlobalVariables.ts', './BaseFullScreenGameView.ts', './UserChatPopup.ts', './UserInvitePopup.ts', './BauCuaFullScreenGameView.ts', './MauBinh_CardLib.ts', './DemLa_CardLib.ts', './CardItem.ts', './CardPooling.ts', './GameBaiPlayerView.ts', './TienLenSettingPopup.ts', './LobbyViewController.ts', './MiniGameNodeController.ts', './GamePlayManager.ts'], function (exports) {
+System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPluginModLoBabelHelpers.js', 'cc', './GameConfigManager.ts', './StringUtils.ts', './MiniGameNetworkHandler.ts', './GameNetworkHandler.ts', './NotiView.ts', './GameUtils.ts', './GlobalVariables.ts', './BaseFullScreenGameView.ts', './UserChatPopup.ts', './UserInvitePopup.ts', './BauCuaFullScreenGameView.ts', './PopupController.ts', './MauBinh_CardLib.ts', './DemLa_CardLib.ts', './CardItem.ts', './CardPooling.ts', './GameBaiPlayerView.ts', './TienLenSettingPopup.ts', './LobbyViewController.ts', './MiniGameNodeController.ts', './GamePlayManager.ts'], function (exports) {
   'use strict';
 
-  var _defineProperty, _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, cclegacy, _decorator, Button, Sprite, SpriteFrame, Label, systemEvent, Tween, Vec3, tween, GameConfigManager, StringUtils, MessageRequest, MessageResponse, GameNetworkHandler, NotiView, GameUtils, GlobalVariables, GLOBAL_MESSAGE, BaseFullScreenGameView, UserChatPopup, UserInvitePopup, PlayerInfo, GameCard, DemLa_CardLib, CardItem, CardPooling, GameBaiPlayerView, TienLenSettingPopup, LobbyViewController, MiniGameNodeController, GameState, GamePlayManager;
+  var _defineProperty, _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, cclegacy, _decorator, Button, Sprite, SpriteFrame, Label, systemEvent, Tween, Vec3, tween, GameConfigManager, StringUtils, MessageRequest, MessageResponse, GameNetworkHandler, NotiView, GameUtils, GlobalVariables, GLOBAL_MESSAGE, BaseFullScreenGameView, UserChatPopup, UserInvitePopup, PlayerInfo, PopupController, GameCard, DemLa_CardLib, CardItem, CardPooling, GameBaiPlayerView, TienLenSettingPopup, LobbyViewController, MiniGameNodeController, GameState, GamePlayManager;
 
   return {
     setters: [function (module) {
@@ -34125,6 +34264,8 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
       UserInvitePopup = module.UserInvitePopup;
     }, function (module) {
       PlayerInfo = module.PlayerInfo;
+    }, function (module) {
+      PopupController = module.PopupController;
     }, function (module) {
       GameCard = module.GameCard;
     }, function (module) {
@@ -34218,6 +34359,8 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
 
           _defineProperty(_assertThisInitialized(_this), "_lastTurnCards", []);
 
+          _defineProperty(_assertThisInitialized(_this), "_cardInTable", []);
+
           _defineProperty(_assertThisInitialized(_this), "_listRecommendCard", []);
 
           return _this;
@@ -34287,8 +34430,8 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
           Card_4R-14
           Card_4C-15
           Card_5B-16*/
-          var a = [4];
-          var b = [8, 9, 10, 11, 16, 17, 38, 36, 37, 45, 46, 51, 6];
+          var a = [9, 14];
+          var b = [9, 14, 16, 20, 24, 28, 32, 37, 38, 40, 46, 51, 1];
           var cardA = a.map(function (x) {
             var c = new GameCard();
             c.decodeCard(x, GlobalVariables.TIENLEN);
@@ -34307,7 +34450,14 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
           cardB.forEach(function (r) {
             console.log(r.getResourceName() + "-" + r.serverCode);
           });
-          var combinedCards = DemLa_CardLib.getCombination(cardA, cardB);
+          var recommendCards = DemLa_CardLib.getRecommendCards2(cardA, cardB);
+          console.log("--------RECOMMEND-------");
+
+          if (recommendCards.length > 0) {
+            recommendCards.forEach(function (r) {
+              console.log(r.getResourceName() + "-" + r.serverCode);
+            });
+          }
         };
 
         _proto.onLoad = function onLoad() {
@@ -34317,7 +34467,7 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
               _this$btn_begin,
               _this$btn_ready,
               _this$btn_boluot,
-              _this$btn_danhbai; // this.testCard();
+              _this$btn_danhbai; // this.testCombination();
 
 
           _BaseFullScreenGameVi.prototype.onLoad.call(this);
@@ -34360,7 +34510,7 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
         _proto.onAutoSelectCards = function onAutoSelectCards() {
           var _this3 = this;
 
-          if (this._lastTurnCards.length > 0 && this._listRecommendCard.length > 0) {
+          if (this._lastTurnCards.length > 0) {
             var _loop = function _loop(i) {
               var recommendCards = _this3._listRecommendCard[i];
 
@@ -34392,7 +34542,6 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
                     cardItems === null || cardItems === void 0 ? void 0 : cardItems.forEach(function (cardItem) {
                       if (count < lastCard.length) {
                         cardItem.selected();
-                        console.log("selected count:" + count);
                       }
 
                       count++;
@@ -34421,6 +34570,27 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
 
               if (_ret === "break") break;
             }
+          } else {
+            var selectedCards = this.my_info.getSelectedCards().map(function (c) {
+              return c.getCard();
+            });
+            var myCards = this.my_info.getPlayerCard().map(function (c) {
+              return c.getCard();
+            });
+            var recommendCards = DemLa_CardLib.getRecommendCards2(selectedCards, myCards);
+
+            if (recommendCards.length > 0) {
+              var _this$my_info;
+
+              var cardItems = (_this$my_info = this.my_info) === null || _this$my_info === void 0 ? void 0 : _this$my_info.getPlayerCard().filter(function (pc) {
+                return recommendCards.findIndex(function (rc) {
+                  return pc.getCode() == rc.serverCode;
+                }) >= 0;
+              });
+              cardItems === null || cardItems === void 0 ? void 0 : cardItems.forEach(function (cardItem) {
+                cardItem.selected();
+              });
+            }
           }
         };
 
@@ -34431,9 +34601,9 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
         };
 
         _proto.onDanhBai = function onDanhBai() {
-          var _this$my_info;
+          var _this$my_info2;
 
-          var _choosingCards = (_this$my_info = this.my_info) === null || _this$my_info === void 0 ? void 0 : _this$my_info.getSelectedCards().map(function (c) {
+          var _choosingCards = (_this$my_info2 = this.my_info) === null || _this$my_info2 === void 0 ? void 0 : _this$my_info2.getSelectedCards().map(function (c) {
             return c.getCard();
           });
 
@@ -34551,6 +34721,31 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
         };
 
         _proto.handleLeaveRoomResponse = function handleLeaveRoomResponse(message) {
+          if (message != null) {
+            var leaveRoomCode = message[1];
+
+            if (!leaveRoomCode) {
+              return;
+            }
+
+            var reasonCode = message[2];
+            var mesDialog = "";
+
+            if (reasonCode == 2) {
+              mesDialog = message[5];
+            }
+
+            if (mesDialog != "") {
+              var _PopupController$getI;
+
+              (_PopupController$getI = PopupController.getInstance()) === null || _PopupController$getI === void 0 ? void 0 : _PopupController$getI.showCommonPopup(mesDialog, function () {
+                var _PopupController$getI2;
+
+                (_PopupController$getI2 = PopupController.getInstance()) === null || _PopupController$getI2 === void 0 ? void 0 : _PopupController$getI2.hideCommonPopup();
+              });
+            }
+          }
+
           _BaseFullScreenGameVi.prototype.handleLeaveRoomResponse.call(this, message);
         };
 
@@ -34620,7 +34815,7 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
         _proto.setHostPlayer = function setHostPlayer(uid) {
           var _this4 = this,
               _this$btn_ready2,
-              _this$my_info2,
+              _this$my_info3,
               _this$opponent_info;
 
           this._playerInfo.forEach(function (p) {
@@ -34637,7 +34832,7 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
             this.btn_ready.node.active = false;
           }
 
-          (_this$my_info2 = this.my_info) === null || _this$my_info2 === void 0 ? void 0 : _this$my_info2.ready(false);
+          (_this$my_info3 = this.my_info) === null || _this$my_info3 === void 0 ? void 0 : _this$my_info3.ready(false);
           (_this$opponent_info = this.opponent_info) === null || _this$opponent_info === void 0 ? void 0 : _this$opponent_info.ready(false);
         };
 
@@ -34906,7 +35101,7 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
         };
 
         _proto.reconnectLastGame = function reconnectLastGame(cardArray, lastTurnCards, remainingTime) {
-          var _this$my_info3, _this$my_info4, _this$opponent_info2, _this$opponent_info3, _this$my_info5, _this$my_info6;
+          var _this$my_info4, _this$my_info5, _this$opponent_info2, _this$opponent_info3, _this$my_info6, _this$my_info7;
 
           this._state = GameState.PLAYING;
 
@@ -34998,11 +35193,11 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
             remainingTime = 20;
           }
 
-          if (((_this$my_info3 = this.my_info) === null || _this$my_info3 === void 0 ? void 0 : _this$my_info3.getCurrentState()) == 3) {
+          if (((_this$my_info4 = this.my_info) === null || _this$my_info4 === void 0 ? void 0 : _this$my_info4.getCurrentState()) == 3) {
             this.my_info.startCountDown(remainingTime);
             this.btn_danhbai.node.active = true;
             this.btn_boluot.node.active = lastTurnCards.length > 0;
-          } else if (((_this$my_info4 = this.my_info) === null || _this$my_info4 === void 0 ? void 0 : _this$my_info4.getCurrentState()) == 2) {
+          } else if (((_this$my_info5 = this.my_info) === null || _this$my_info5 === void 0 ? void 0 : _this$my_info5.getCurrentState()) == 2) {
             this.addBoLuotPlayer(this.my_info.getUID());
           }
 
@@ -35015,8 +35210,8 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
           }
 
           Tween.stopAllByTarget(this.my_info.node);
-          (_this$my_info5 = this.my_info) === null || _this$my_info5 === void 0 ? void 0 : _this$my_info5.node.setPosition(new Vec3(-675, -240, 0));
-          (_this$my_info6 = this.my_info) === null || _this$my_info6 === void 0 ? void 0 : _this$my_info6.node.setScale(new Vec3(0.8, 0.8, 0.8));
+          (_this$my_info6 = this.my_info) === null || _this$my_info6 === void 0 ? void 0 : _this$my_info6.node.setPosition(new Vec3(-675, -240, 0));
+          (_this$my_info7 = this.my_info) === null || _this$my_info7 === void 0 ? void 0 : _this$my_info7.node.setScale(new Vec3(0.8, 0.8, 0.8));
         };
 
         _proto.finishThisGame = function finishThisGame(finishArr) {
@@ -35100,16 +35295,16 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
 
           if (this.isMe(fromPlayer)) {
             for (var i = 0; i < arrCards.length; i++) {
-              var _this$my_info7, _this$my_info8;
+              var _this$my_info8, _this$my_info9;
 
               var code = arrCards[i];
-              var card = (_this$my_info7 = this.my_info) === null || _this$my_info7 === void 0 ? void 0 : _this$my_info7.getCardItemWithCode(code);
+              var card = (_this$my_info8 = this.my_info) === null || _this$my_info8 === void 0 ? void 0 : _this$my_info8.getCardItemWithCode(code);
 
               if (card != null && card != undefined) {
                 this._lastTurnCards.push(card);
               }
 
-              (_this$my_info8 = this.my_info) === null || _this$my_info8 === void 0 ? void 0 : _this$my_info8.removeCardItemWithCode(code);
+              (_this$my_info9 = this.my_info) === null || _this$my_info9 === void 0 ? void 0 : _this$my_info9.removeCardItemWithCode(code);
             }
 
             this.my_info.rearrangeCard();
@@ -35177,7 +35372,7 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
 
         _proto.startGame = function startGame(cardsArr, nextPlayerUID, listPlaying, listUpdateMoney) {
           var _this7 = this,
-              _this$my_info9,
+              _this$my_info10,
               _this$opponent_info5;
 
           var count = 0;
@@ -35248,7 +35443,7 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
             scale: new Vec3(0.8, 0.8, 0.8)
           });
           seq.start();
-          (_this$my_info9 = this.my_info) === null || _this$my_info9 === void 0 ? void 0 : _this$my_info9.ready(false);
+          (_this$my_info10 = this.my_info) === null || _this$my_info10 === void 0 ? void 0 : _this$my_info10.ready(false);
           (_this$opponent_info5 = this.opponent_info) === null || _this$opponent_info5 === void 0 ? void 0 : _this$opponent_info5.ready(false);
           this._state = GameState.PLAYING;
         };
@@ -35262,11 +35457,11 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
         };
 
         _proto.clearCardInTable = function clearCardInTable() {
-          var _this$my_info10, _this$opponent_info6, _this$cardPooling4;
+          var _this$my_info11, _this$opponent_info6, _this$cardPooling4;
 
           this._lastTurnCards = [];
           var cards = [];
-          (_this$my_info10 = this.my_info) === null || _this$my_info10 === void 0 ? void 0 : _this$my_info10.getPlayerCard().forEach(function (c) {
+          (_this$my_info11 = this.my_info) === null || _this$my_info11 === void 0 ? void 0 : _this$my_info11.getPlayerCard().forEach(function (c) {
             return cards.push(c);
           });
           (_this$opponent_info6 = this.opponent_info) === null || _this$opponent_info6 === void 0 ? void 0 : _this$opponent_info6.getPlayerCard().forEach(function (c) {
@@ -35302,14 +35497,14 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
         };
 
         _proto.checkCard = function checkCard() {
-          var _this$my_info11,
+          var _this$my_info12,
               _this8 = this;
 
           var _lastTurnCards = this._lastTurnCards.map(function (x) {
             return x.getCard();
           });
 
-          var _thisPlayerCards = (_this$my_info11 = this.my_info) === null || _this$my_info11 === void 0 ? void 0 : _this$my_info11.getPlayerCard().map(function (x) {
+          var _thisPlayerCards = (_this$my_info12 = this.my_info) === null || _this$my_info12 === void 0 ? void 0 : _this$my_info12.getPlayerCard().map(function (x) {
             return x.getCard();
           });
 
@@ -35427,12 +35622,12 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
         };
 
         _proto.prepareNewGame = function prepareNewGame() {
-          var _this$my_info12, _this$my_info13, _this$my_info14, _this$opponent_info8;
+          var _this$my_info13, _this$my_info14, _this$my_info15, _this$opponent_info8;
 
           Tween.stopAllByTarget(this.node);
-          (_this$my_info12 = this.my_info) === null || _this$my_info12 === void 0 ? void 0 : _this$my_info12.node.setPosition(new Vec3(6, -206, 0));
-          (_this$my_info13 = this.my_info) === null || _this$my_info13 === void 0 ? void 0 : _this$my_info13.node.setScale(new Vec3(1, 1, 1));
-          (_this$my_info14 = this.my_info) === null || _this$my_info14 === void 0 ? void 0 : _this$my_info14.resetUI();
+          (_this$my_info13 = this.my_info) === null || _this$my_info13 === void 0 ? void 0 : _this$my_info13.node.setPosition(new Vec3(6, -206, 0));
+          (_this$my_info14 = this.my_info) === null || _this$my_info14 === void 0 ? void 0 : _this$my_info14.node.setScale(new Vec3(1, 1, 1));
+          (_this$my_info15 = this.my_info) === null || _this$my_info15 === void 0 ? void 0 : _this$my_info15.resetUI();
           (_this$opponent_info8 = this.opponent_info) === null || _this$opponent_info8 === void 0 ? void 0 : _this$opponent_info8.resetUI();
           this._lastTurnCards = [];
           this.cardPooling.reset();
@@ -35456,9 +35651,9 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
         };
 
         _proto.getIsHost = function getIsHost() {
-          var _this$my_info15;
+          var _this$my_info16;
 
-          return (_this$my_info15 = this.my_info) === null || _this$my_info15 === void 0 ? void 0 : _this$my_info15.isHost();
+          return (_this$my_info16 = this.my_info) === null || _this$my_info16 === void 0 ? void 0 : _this$my_info16.isHost();
         };
 
         _proto.resetAllPlayerViewAction = function resetAllPlayerViewAction() {
@@ -36210,7 +36405,7 @@ System.register("chunks:///_virtual/ChangeAvatarPopup.ts", ['./_rollupPluginModL
   };
 });
 
-System.register("chunks:///_virtual/main", ['./CommonPopup.ts', './GameConfigManager.ts', './StringUtils.ts', './JackpotItemView.ts', './MiniGameNetworkHandler.ts', './GamePlatformManager.ts', './GameNetworkHandler.ts', './NotiView.ts', './GameUtils.ts', './GlobalVariables.ts', './LoadingView.ts', './BaseFullScreenGameView.ts', './ChipItem.ts', './ChipPanel.ts', './BlinkCmp.ts', './BauCuaBetEntry.ts', './SettingPopup.ts', './BauCuaSettingPopup.ts', './ChipPooling.ts', './BubbleChat.ts', './Downloader.ts', './PlayerView.ts', './SoiCauItemPopup.ts', './SoiCauPopup.ts', './UserChatTextItem.ts', './UserChatPopup.ts', './InvitationPlayerView.ts', './UserInvitePopup.ts', './UserOnlinePopup.ts', './BauCuaFullScreenGameView.ts', './MauBinh_CardLib.ts', './DemLa_CardLib.ts', './CardItem.ts', './CardPooling.ts', './GameBaiPlayerView.ts', './TienLenSettingPopup.ts', './TienLenFullScreenGameView.ts', './ScaleCmp.ts', './XocDiaSoiCauPopup.ts', './XocDiaFullScreenGameView.ts', './GameHTTPNetwork.ts', './FloatStringCmp.ts', './MD5Algorithm.ts', './TransitionFadeScreen.ts', './GameListView.ts', './ChangeAvatarPopup.ts', './ChangePasswordPopup.ts', './GameHistoryItemView.ts', './GameHistoryPopup.ts', './GameSettingPopup.ts', './InvitePopup.ts', './LoginPopup.ts', './RegisterPopup.ts', './PopupController.ts', './ProfilesPopup.ts', './TableItemView.ts', './TableListView.ts', './LobbyViewController.ts', './MiniGamePopup.ts', './MiniPokerMessageHandler.ts', './BaseMiniGameView.ts', './MiniPokerBetHistoryItemView.ts', './MiniPokerBetHistoryView.ts', './MiniPokerBetRankItemView.ts', './MiniPokerBetRankView.ts', './MiniPokerNoHuView.ts', './MiniPoker_SlotMachineItemView.ts', './MiniPoker_SlotMachineColumn.ts', './MiniPoker_SlotMachineCmp.ts', './MiniPokerGameView.ts', './TaiXiuGameItemView.ts', './ChatItemView.ts', './TaiXiuChatView.ts', './TaiXiuMessageHandler.ts', './DragView.ts', './BatCmp.ts', './TaiXiuBetHistoryItemView.ts', './TaiXiuBetHistoryView.ts', './TaiXiuBetRankItemView.ts', './TaiXiuBetRankView.ts', './TaiXiuPopupCmp.ts', './TaiXiuSessionAnalyticsItemView.ts', './TaiXiuSessionAnalyticsView.ts', './LineCmp.ts', './TaiXiuSessionHistorySumItemView.ts', './TaiXiuSessionHistoryView.ts', './TaiXiuGameView.ts', './BigLoadingView.ts', './KimCuongMessageHandler.ts', './MiniGameNodeDragView.ts', './MiniGameNodeController.ts', './CCMiniGameRoot.ts', './GamePlayManager.ts', './KimCuong_SlotMachineItemView.ts', './KimCuong_SlotMachineColumn.ts', './KimCuong_SlotMachineCmp.ts', './KimCuongBetHistoryDetail.ts', './KimCuongBetHistoryItemView.ts', './KimCuongBetHistoryView.ts', './KimCuongBetRankItemView.ts', './KimCuongBetRankView.ts', './KimCuongNoHuView.ts', './KimCuongGameView.ts', './KimCuongLineSelectionView.ts', './CCComponentLoader.ts', './FullScreenGameItemView.ts', './CCMiniGameCommonPopup.ts', './CCButtonLoader.ts', './MiniSlotGameItemView.ts', './SpinButtonCmp.ts', './SoundButtonCmp.ts', './CCSpriteFrameLoader.ts', './DockPanel.ts', './LineSpriteComponent.ts', './TaiXiuSessionHistoryResultSumItemView.ts', './TaiXiuSessionHistoryResultItemView.ts', './TaiXiuSessionHistoryDiceItemView.ts'], function () {
+System.register("chunks:///_virtual/main", ['./CommonPopup.ts', './GameConfigManager.ts', './StringUtils.ts', './JackpotItemView.ts', './MiniGameNetworkHandler.ts', './GamePlatformManager.ts', './GameNetworkHandler.ts', './NotiView.ts', './GameUtils.ts', './GlobalVariables.ts', './LoadingView.ts', './BaseFullScreenGameView.ts', './ChipItem.ts', './ChipPanel.ts', './BlinkCmp.ts', './BauCuaBetEntry.ts', './SettingPopup.ts', './BauCuaSettingPopup.ts', './ChipPooling.ts', './BubbleChat.ts', './Downloader.ts', './PlayerView.ts', './SoiCauItemPopup.ts', './SoiCauPopup.ts', './UserChatTextItem.ts', './UserChatPopup.ts', './InvitationPlayerView.ts', './UserInvitePopup.ts', './UserOnlinePopup.ts', './BauCuaFullScreenGameView.ts', './GameHTTPNetwork.ts', './ProfilesPopup.ts', './ChangeAvatarPopup.ts', './ChangePasswordPopup.ts', './GameHistoryItemView.ts', './GameHistoryPopup.ts', './GameSettingPopup.ts', './InvitePopup.ts', './MD5Algorithm.ts', './LoginPopup.ts', './RegisterPopup.ts', './PopupController.ts', './MauBinh_CardLib.ts', './DemLa_CardLib.ts', './CardItem.ts', './CardPooling.ts', './GameBaiPlayerView.ts', './TienLenSettingPopup.ts', './TienLenFullScreenGameView.ts', './ScaleCmp.ts', './XocDiaSoiCauPopup.ts', './XocDiaFullScreenGameView.ts', './FloatStringCmp.ts', './TransitionFadeScreen.ts', './GameListView.ts', './TableItemView.ts', './TableListView.ts', './LobbyViewController.ts', './MiniGamePopup.ts', './MiniPokerMessageHandler.ts', './BaseMiniGameView.ts', './MiniPokerBetHistoryItemView.ts', './MiniPokerBetHistoryView.ts', './MiniPokerBetRankItemView.ts', './MiniPokerBetRankView.ts', './MiniPokerNoHuView.ts', './MiniPoker_SlotMachineItemView.ts', './MiniPoker_SlotMachineColumn.ts', './MiniPoker_SlotMachineCmp.ts', './MiniPokerGameView.ts', './TaiXiuGameItemView.ts', './ChatItemView.ts', './TaiXiuChatView.ts', './TaiXiuMessageHandler.ts', './DragView.ts', './BatCmp.ts', './TaiXiuBetHistoryItemView.ts', './TaiXiuBetHistoryView.ts', './TaiXiuBetRankItemView.ts', './TaiXiuBetRankView.ts', './TaiXiuPopupCmp.ts', './TaiXiuSessionAnalyticsItemView.ts', './TaiXiuSessionAnalyticsView.ts', './LineCmp.ts', './TaiXiuSessionHistorySumItemView.ts', './TaiXiuSessionHistoryView.ts', './TaiXiuGameView.ts', './BigLoadingView.ts', './KimCuongMessageHandler.ts', './MiniGameNodeDragView.ts', './MiniGameNodeController.ts', './CCMiniGameRoot.ts', './GamePlayManager.ts', './KimCuong_SlotMachineItemView.ts', './KimCuong_SlotMachineColumn.ts', './KimCuong_SlotMachineCmp.ts', './KimCuongBetHistoryDetail.ts', './KimCuongBetHistoryItemView.ts', './KimCuongBetHistoryView.ts', './KimCuongBetRankItemView.ts', './KimCuongBetRankView.ts', './KimCuongNoHuView.ts', './KimCuongGameView.ts', './KimCuongLineSelectionView.ts', './CCComponentLoader.ts', './FullScreenGameItemView.ts', './CCMiniGameCommonPopup.ts', './CCButtonLoader.ts', './MiniSlotGameItemView.ts', './SpinButtonCmp.ts', './SoundButtonCmp.ts', './CCSpriteFrameLoader.ts', './DockPanel.ts', './LineSpriteComponent.ts', './TaiXiuSessionHistoryResultSumItemView.ts', './TaiXiuSessionHistoryResultItemView.ts', './TaiXiuSessionHistoryDiceItemView.ts'], function () {
   'use strict';
 
   return {
