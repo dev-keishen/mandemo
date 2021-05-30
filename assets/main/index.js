@@ -17279,7 +17279,7 @@ System.register("chunks:///_virtual/GameBaiPlayerView.ts", ['./_rollupPluginModL
               a: _this2.progressBar.progress
             };
             _this2.prgress_tween = tween(obj).to(1, {
-              a: countdown / _this2.maxTime
+              a: (countdown - 1) / _this2.maxTime
             }, {
               progress: function progress(start, end, current, ratio) {
                 _this2.progressBar.progress = current;
@@ -23327,27 +23327,35 @@ System.register("chunks:///_virtual/BubbleChat.ts", ['./_rollupPluginModLoBabelH
         var _proto = BubbleChat.prototype;
 
         _proto.showEmo = function showEmo(content) {
-          var _this2 = this;
-
           if (this.emo == null) return;
           this.emo.node.active = true;
           var track = this.emo.setAnimation(0, content, false);
+          var self = this;
 
           if (track) {
             this.emo.setCompleteListener(function (trackEntry) {
-              _this2.emo.node.active = false;
+              var name = trackEntry.animation ? trackEntry.animation.name : '';
+              self.emo.node.active = false;
             });
           }
         };
 
         _proto.show = function show(content, isAllowEmo) {
-          var _this3 = this;
+          var _this2 = this;
+
+          if (isAllowEmo === void 0) {
+            isAllowEmo = false;
+          }
 
           for (var i = 1; i <= 30; i++) {
             var emo = "emo_";
             emo += i.toString();
 
             if (content == emo) {
+              if (i <= 16 && isAllowEmo) {
+                this.showEmo(content);
+              }
+
               return;
             }
           }
@@ -23379,28 +23387,28 @@ System.register("chunks:///_virtual/BubbleChat.ts", ['./_rollupPluginModLoBabelH
           }, {
             easing: 'expoOut'
           }), tween().call(function () {
-            tween(_this3.chat_content_node).delay(5).call(function () {
-              _this3.hide();
+            tween(_this2.chat_content_node).delay(5).call(function () {
+              _this2.hide();
             }).start();
           }));
           seq.start();
         };
 
         _proto.hide = function hide() {
-          var _this4 = this;
+          var _this3 = this;
 
           Tween.stopAllByTarget(this.chat_content_node);
           Tween.stopAllByTarget(this.chat_content_node_opacity);
           this.chat_content_node.scale = Vec3.ONE;
           this.chat_content_node_opacity.opacity = 255;
           var seq = tween(this.chat_content_node).sequence(tween().call(function () {
-            tween(_this4.chat_content_node).to(0.25, {
+            tween(_this3.chat_content_node).to(0.25, {
               scale: Vec3.ZERO
             }, {
               easing: 'expoIn'
             }).call(function () {}).start();
           }), tween().delay(0.1), tween().call(function () {
-            tween(_this4.chat_content_node_opacity).to(0.2, {
+            tween(_this3.chat_content_node_opacity).to(0.2, {
               opacity: 1
             }).start();
           }));
