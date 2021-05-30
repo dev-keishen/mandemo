@@ -17249,15 +17249,23 @@ System.register("chunks:///_virtual/GameBaiPlayerView.ts", ['./_rollupPluginModL
         };
 
         _proto.startCountDown = function startCountDown(remainTime) {
-          var _this2 = this;
+          var _this$spr_avatar,
+              _this2 = this;
 
           Tween.stopAllByTarget(this.nodeTimer);
+          Tween.stopAllByTarget(this.spr_avatar.node);
           this.nodeTimer.active = true;
 
           if (this.prgress_tween != null && this.prgress_tween != undefined) {
             this.prgress_tween.stop();
           }
 
+          var scale = tween((_this$spr_avatar = this.spr_avatar) === null || _this$spr_avatar === void 0 ? void 0 : _this$spr_avatar.node).sequence(tween().to(0.1, {
+            scale: new Vec3(this.spr_avatar.node.scale.x + this.spr_avatar.node.scale.x * 0.3, this.spr_avatar.node.scale.y + this.spr_avatar.node.scale.y * 0.3, this.spr_avatar.node.scale.z + this.spr_avatar.node.scale.z * 0.3)
+          }), tween().to(0.1, {
+            scale: new Vec3(this.spr_avatar.node.scale)
+          }));
+          scale.start();
           var countdown = Math.floor(remainTime);
           this.time_dot.setAnimation(0, "loop", true);
           this.progressBar.progress = countdown / this.maxTime;
@@ -23897,6 +23905,7 @@ System.register("chunks:///_virtual/CardPooling.ts", ['./_rollupPluginModLoBabel
         _proto.onLoad = function onLoad() {
           for (var i = 0; i < 52; i++) {
             var card = instantiate(this.card_template.node);
+            card.name = "card_00" + i;
             card.parent = this.card_template.node.parent;
             card.active = false;
             this.pooled_card.push(card.getComponent(CardItem));
@@ -23934,7 +23943,7 @@ System.register("chunks:///_virtual/CardPooling.ts", ['./_rollupPluginModLoBabel
 
           this.pooled_card.forEach(function (card) {
             if (cards.filter(function (c) {
-              return c.getCode() == card.getCode();
+              return c.name == card.name;
             }).length <= 0) {
               card.reset();
               card.node.setPosition(_this3.card_template.node.position);
@@ -34220,7 +34229,7 @@ System.register("chunks:///_virtual/TaiXiuSessionHistorySumItemView.ts", ['./_ro
 System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPluginModLoBabelHelpers.js', 'cc', './GameConfigManager.ts', './StringUtils.ts', './MiniGameNetworkHandler.ts', './GameNetworkHandler.ts', './NotiView.ts', './GameUtils.ts', './GlobalVariables.ts', './BaseFullScreenGameView.ts', './UserChatPopup.ts', './UserInvitePopup.ts', './BauCuaFullScreenGameView.ts', './PopupController.ts', './MauBinh_CardLib.ts', './DemLa_CardLib.ts', './CardItem.ts', './CardPooling.ts', './GameBaiPlayerView.ts', './TienLenSettingPopup.ts', './LobbyViewController.ts', './MiniGameNodeController.ts', './GamePlayManager.ts'], function (exports) {
   'use strict';
 
-  var _defineProperty, _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, cclegacy, _decorator, Button, Sprite, SpriteFrame, Label, systemEvent, Tween, Vec3, tween, GameConfigManager, StringUtils, MessageRequest, MessageResponse, GameNetworkHandler, NotiView, GameUtils, GlobalVariables, GLOBAL_MESSAGE, BaseFullScreenGameView, UserChatPopup, UserInvitePopup, PlayerInfo, PopupController, GameCard, DemLa_CardLib, CardItem, CardPooling, GameBaiPlayerView, TienLenSettingPopup, LobbyViewController, MiniGameNodeController, GameState, GamePlayManager;
+  var _defineProperty, _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, cclegacy, _decorator, Button, Sprite, SpriteFrame, Label, systemEvent, Tween, Vec3, tween, UIOpacity, GameConfigManager, StringUtils, MessageRequest, MessageResponse, GameNetworkHandler, NotiView, GameUtils, GlobalVariables, GLOBAL_MESSAGE, BaseFullScreenGameView, UserChatPopup, UserInvitePopup, PlayerInfo, PopupController, GameCard, DemLa_CardLib, CardItem, CardPooling, GameBaiPlayerView, TienLenSettingPopup, LobbyViewController, MiniGameNodeController, GameState, GamePlayManager;
 
   return {
     setters: [function (module) {
@@ -34240,6 +34249,7 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
       Tween = module.Tween;
       Vec3 = module.Vec3;
       tween = module.tween;
+      UIOpacity = module.UIOpacity;
     }, function (module) {
       GameConfigManager = module.GameConfigManager;
     }, function (module) {
@@ -34289,7 +34299,7 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
     execute: function () {
       exports('DemLa_Message', void 0);
 
-      var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _dec8, _dec9, _dec10, _dec11, _dec12, _dec13, _dec14, _dec15, _dec16, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11, _descriptor12, _descriptor13, _descriptor14, _descriptor15, _class3, _temp;
+      var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _dec8, _dec9, _dec10, _dec11, _dec12, _dec13, _dec14, _dec15, _dec16, _dec17, _dec18, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11, _descriptor12, _descriptor13, _descriptor14, _descriptor15, _descriptor16, _descriptor17, _class3, _temp;
 
       cclegacy._RF.push({}, "f34ca6K3Q5JJL5yzQl1DJ2f", "TienLenFullScreenGameView", undefined);
 
@@ -34305,7 +34315,7 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
         DemLa_Message[DemLa_Message["PASS"] = 254] = "PASS";
       })(DemLa_Message || (DemLa_Message = exports('DemLa_Message', {})));
 
-      var TienLenFullScreenGameView = exports('TienLenFullScreenGameView', (_dec = ccclass('TienLenFullScreenGameView'), _dec2 = property(GameBaiPlayerView), _dec3 = property(GameBaiPlayerView), _dec4 = property(UserChatPopup), _dec5 = property(UserInvitePopup), _dec6 = property(Button), _dec7 = property(Button), _dec8 = property(Button), _dec9 = property(Button), _dec10 = property(Button), _dec11 = property(Button), _dec12 = property(Sprite), _dec13 = property([SpriteFrame]), _dec14 = property(Label), _dec15 = property(TienLenSettingPopup), _dec16 = property(CardPooling), _dec(_class = (_class2 = (_temp = _class3 = /*#__PURE__*/function (_BaseFullScreenGameVi) {
+      var TienLenFullScreenGameView = exports('TienLenFullScreenGameView', (_dec = ccclass('TienLenFullScreenGameView'), _dec2 = property(GameBaiPlayerView), _dec3 = property(GameBaiPlayerView), _dec4 = property(UserChatPopup), _dec5 = property(UserInvitePopup), _dec6 = property(Button), _dec7 = property(Button), _dec8 = property(Button), _dec9 = property(Button), _dec10 = property(Button), _dec11 = property(Button), _dec12 = property(Sprite), _dec13 = property([SpriteFrame]), _dec14 = property(Sprite), _dec15 = property([SpriteFrame]), _dec16 = property(Label), _dec17 = property(TienLenSettingPopup), _dec18 = property(CardPooling), _dec(_class = (_class2 = (_temp = _class3 = /*#__PURE__*/function (_BaseFullScreenGameVi) {
         _inheritsLoose(TienLenFullScreenGameView, _BaseFullScreenGameVi);
 
         function TienLenFullScreenGameView() {
@@ -34341,11 +34351,15 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
 
           _initializerDefineProperty(_assertThisInitialized(_this), "sprFrame_tables", _descriptor12, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "lbl_info", _descriptor13, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "spr_finishFx", _descriptor13, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "tienLenSettingPopup", _descriptor14, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "sprFrame_finishFx", _descriptor14, _assertThisInitialized(_this));
 
-          _initializerDefineProperty(_assertThisInitialized(_this), "cardPooling", _descriptor15, _assertThisInitialized(_this));
+          _initializerDefineProperty(_assertThisInitialized(_this), "lbl_info", _descriptor15, _assertThisInitialized(_this));
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "tienLenSettingPopup", _descriptor16, _assertThisInitialized(_this));
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "cardPooling", _descriptor17, _assertThisInitialized(_this));
 
           _defineProperty(_assertThisInitialized(_this), "_playerInfo", []);
 
@@ -35241,6 +35255,41 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
                 player.showLoseFx(0, this._timeToFinish * 0.5);
               }
             }
+
+            if (!this.isMe(uid)) {
+              if (playerDict["cs"] != null && playerDict["cs"] != undefined) {
+                var arrCards = playerDict["cs"];
+                var pos = new Vec3(this.opponent_info.node.position);
+                pos.y = 133;
+                pos.x -= 25 * arrCards.length / 2;
+
+                var _loop2 = function _loop2(_i5) {
+                  var _this6$opponent_info;
+
+                  var code = arrCards[_i5];
+                  var card = (_this6$opponent_info = _this6.opponent_info) === null || _this6$opponent_info === void 0 ? void 0 : _this6$opponent_info.popCard();
+
+                  if (card != null && card != undefined) {
+                    var data = new GameCard();
+                    data.decodeCard(code, GlobalVariables.TIENLEN);
+                    card.setCard(data);
+                    card.show();
+                    Tween.stopAllByTarget(card.node);
+                    var seq = tween(card.node).sequence(tween().call(function () {
+                      card.setAsOnTop();
+                    }), tween().to(0.3, {
+                      position: new Vec3(pos)
+                    }));
+                    seq.start();
+                    pos.x += 35;
+                  }
+                };
+
+                for (var _i5 = 0; _i5 < arrCards.length; _i5++) {
+                  _loop2(_i5);
+                }
+              }
+            }
           }
 
           var finishAct = tween(this.node).sequence(tween().delay(this._timeToFinish), tween().call(function () {
@@ -35266,6 +35315,54 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
           this.clearCardInTable();
         };
 
+        _proto.checkFx = function checkFx() {
+          Tween.stopAllByTarget(this.spr_finishFx.node);
+          Tween.stopAllByTarget(this.spr_finishFx.node.getComponent(UIOpacity));
+          var fxPath = -1;
+
+          var checkFxCards = this._lastTurnCards.map(function (x) {
+            return x.getCard();
+          });
+
+          DemLa_CardLib.sortVector(checkFxCards, false);
+
+          if (DemLa_CardLib.isFourOfAKind(checkFxCards)) {
+            fxPath = 0;
+          }
+
+          if (DemLa_CardLib.isThreePairsStraight(checkFxCards)) {
+            fxPath = 1;
+          }
+
+          if (DemLa_CardLib.isFourPairsStraight(checkFxCards)) {
+            fxPath = 2;
+          }
+
+          if (fxPath != -1) {
+            this.spr_finishFx.spriteFrame = this.sprFrame_finishFx[fxPath];
+            this.spr_finishFx.node.setScale(new Vec3(0.2, 0.2, 0.2));
+            var opa = this.spr_finishFx.node.getComponent(UIOpacity);
+            opa.opacity = 255;
+            var seq = tween(this.spr_finishFx.node).sequence(tween().to(0.15, {
+              scale: Vec3.ONE
+            }), tween().to(0.15, {
+              scale: new Vec3(1.5, 1.5, 1.5)
+            }), tween().to(0.15, {
+              scale: Vec3.ONE
+            }), tween().to(0.15, {
+              scale: new Vec3(1.2, 1.2, 1.2)
+            }), tween().to(0.15, {
+              scale: Vec3.ONE
+            }), tween().delay(0.5), tween().call(function () {
+              var fadeOut = tween(opa).to(0.2, {
+                opacity: 1
+              });
+              fadeOut.start();
+            }));
+            seq.start();
+          }
+        };
+
         _proto.danhBai = function danhBai(fromPlayer, arrCards, toPlayer, mX, lM) {
           this._isNewTurnRound = false;
 
@@ -35288,7 +35385,7 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
           });
 
           var randNum1 = GameUtils.getRandomInt(0, 100) - 75;
-          var randNum2 = GameUtils.getRandomInt(0, 100) - 50;
+          var randNum2 = GameUtils.getRandomInt(-50, 25);
           var posX = this.cardPooling.node.position.x + randNum1;
           var posY = this.cardPooling.node.position.y + randNum2;
           this._lastTurnCards = [];
@@ -35327,10 +35424,10 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
               posX += 40;
             });
           } else {
-            for (var _i5 = 0; _i5 < arrCards.length; _i5++) {
+            for (var _i6 = 0; _i6 < arrCards.length; _i6++) {
               var _this$opponent_info4;
 
-              var _code2 = arrCards[_i5];
+              var _code2 = arrCards[_i6];
 
               var _card2 = (_this$opponent_info4 = this.opponent_info) === null || _this$opponent_info4 === void 0 ? void 0 : _this$opponent_info4.popCard();
 
@@ -35365,6 +35462,7 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
             });
           }
 
+          this.checkFx();
           this.nextTurn(toPlayer);
         };
 
@@ -35754,21 +35852,35 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
         initializer: function initializer() {
           return [];
         }
-      }), _descriptor13 = _applyDecoratedDescriptor(_class2.prototype, "lbl_info", [_dec14], {
+      }), _descriptor13 = _applyDecoratedDescriptor(_class2.prototype, "spr_finishFx", [_dec14], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor14 = _applyDecoratedDescriptor(_class2.prototype, "tienLenSettingPopup", [_dec15], {
+      }), _descriptor14 = _applyDecoratedDescriptor(_class2.prototype, "sprFrame_finishFx", [_dec15], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return [];
+        }
+      }), _descriptor15 = _applyDecoratedDescriptor(_class2.prototype, "lbl_info", [_dec16], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor15 = _applyDecoratedDescriptor(_class2.prototype, "cardPooling", [_dec16], {
+      }), _descriptor16 = _applyDecoratedDescriptor(_class2.prototype, "tienLenSettingPopup", [_dec17], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor17 = _applyDecoratedDescriptor(_class2.prototype, "cardPooling", [_dec18], {
         configurable: true,
         enumerable: true,
         writable: true,
