@@ -1200,8 +1200,10 @@ System.register("chunks:///_virtual/MiniGameNodeController.ts", ['./_rollupPlugi
                     (_BigLoadingView$getIn2 = BigLoadingView.getInstance()) === null || _BigLoadingView$getIn2 === void 0 ? void 0 : _BigLoadingView$getIn2.hide(function () {
                       LobbyViewController.getInstance().onLoggedIn();
                     });
-                  } else {
+                  } else if (!GamePlayManager.isRefreshingInBackground) {
                     LobbyViewController.getInstance().onLoggedIn();
+                  } else {
+                    GamePlayManager.isRefreshingInBackground = false;
                   }
                 } else {
                   log("=== Logged In minigame FAILED ===");
@@ -1213,10 +1215,15 @@ System.register("chunks:///_virtual/MiniGameNodeController.ts", ['./_rollupPlugi
 
             case MessageResponse.LogOut_Response:
               {
-                var _LoadingView$getInsta;
+                if (GamePlayManager.isRefreshingInBackground) {
+                  GamePlayManager.login();
+                } else {
+                  var _LoadingView$getInsta;
 
-                (_LoadingView$getInsta = LoadingView.getInstance()) === null || _LoadingView$getInsta === void 0 ? void 0 : _LoadingView$getInsta.hide();
-                LobbyViewController.getInstance().onLoggedOut();
+                  (_LoadingView$getInsta = LoadingView.getInstance()) === null || _LoadingView$getInsta === void 0 ? void 0 : _LoadingView$getInsta.hide();
+                  LobbyViewController.getInstance().onLoggedOut();
+                }
+
                 break;
               }
 
@@ -10393,7 +10400,7 @@ System.register("chunks:///_virtual/LobbyViewController.ts", ['./_rollupPluginMo
 
         _proto.handleBackGameFromInterupt = function handleBackGameFromInterupt(timeInterupted) {
           console.log("handleBackGameFromInterupt::lobby");
-          GameNetworkHandler.reconnect();
+          GamePlayManager.refreshInBackground();
         };
 
         _proto.autoLoginAcc = function autoLoginAcc() {
@@ -10763,7 +10770,6 @@ System.register("chunks:///_virtual/LobbyViewController.ts", ['./_rollupPluginMo
 
           if (this.currentGameView != this) {
             this.currentGameView.handleLeaveRoomResponse(message);
-            return;
           } else {
             this.showGameList();
           }
@@ -11299,7 +11305,16 @@ System.register("chunks:///_virtual/LobbyViewController.ts", ['./_rollupPluginMo
           }
 
           MiniGameNodeController.getInstance().adjustPosition(GlobalVariables.LOBBY);
-          this.showGameList();
+          var previousGameID = this.getPreviousGameView().getGameID();
+
+          if ((previousGameID == GlobalVariables.TIENLEN || previousGameID == GlobalVariables.SAM) && GamePlayManager.STATE == NETWORK_STATE.LOGGED_IN) {
+            var _LobbyViewController$;
+
+            (_LobbyViewController$ = LobbyViewController.getInstance()) === null || _LobbyViewController$ === void 0 ? void 0 : _LobbyViewController$.playGame(previousGameID);
+          } else {
+            this.showGameList();
+          }
+
           return _BaseFullScreenGameVi.prototype.show.call(this, fadeTime);
         };
 
@@ -12147,13 +12162,17 @@ System.register("chunks:///_virtual/PlayerView.ts", ['./_rollupPluginModLoBabelH
           sequence.start();
         };
 
-        _proto.showBubbleChat = function showBubbleChat(content) {
+        _proto.showBubbleChat = function showBubbleChat(content, timeToShow) {
+          if (timeToShow === void 0) {
+            timeToShow = 5;
+          }
+
           if (content == "" || content == null || content == undefined) {
             return;
           }
 
           var chat = this.bubbleChats[this.currentBubbleChatInd];
-          chat.show(content, !this.is_hidden);
+          chat.show(content, !this.is_hidden, timeToShow);
           this.currentBubbleChatInd++;
 
           if (this.currentBubbleChatInd >= this.bubbleChats.length) {
@@ -15974,6 +15993,10 @@ System.register("chunks:///_virtual/CardItem.ts", ['./_rollupPluginModLoBabelHel
           this.node.setSiblingIndex(((_this$node$parent = this.node.parent) === null || _this$node$parent === void 0 ? void 0 : _this$node$parent.children.length) - 1);
         };
 
+        _proto.isCanSelect = function isCanSelect() {
+          return this.button.interactable;
+        };
+
         return CardItem;
       }(Component), _defineProperty(_class3, "CARD_SELECTED", "CARD_SELECTED"), _temp), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, "spr_card", [_dec2], {
         configurable: true,
@@ -17835,6 +17858,12 @@ System.register("chunks:///_virtual/GameBaiPlayerView.ts", ['./_rollupPluginModL
 
         _proto.getPlayerCard = function getPlayerCard() {
           return this.cards;
+        };
+
+        _proto.getCountPosibleToSelect = function getCountPosibleToSelect() {
+          return this.cards.filter(function (x) {
+            return x.isCanSelect();
+          }).length;
         };
 
         _proto.setCurrentState = function setCurrentState(pS, rmC) {
@@ -21193,6 +21222,11 @@ System.register("chunks:///_virtual/GamePlayManager.ts", ['./_rollupPluginModLoB
           (_LobbyViewController$ = LobbyViewController.getInstance()) === null || _LobbyViewController$ === void 0 ? void 0 : _LobbyViewController$.reconnect();
         };
 
+        GamePlayManager.refreshInBackground = function refreshInBackground() {
+          GamePlayManager.isRefreshingInBackground = true;
+          GamePlayManager.logout();
+        };
+
         GamePlayManager.logout = function logout() {
           var _LoadingView$getInsta;
 
@@ -21337,7 +21371,7 @@ System.register("chunks:///_virtual/GamePlayManager.ts", ['./_rollupPluginModLoB
         };
 
         return GamePlayManager;
-      }(), _defineProperty(_class2, "roomID", ""), _defineProperty(_class2, "roomPassword", ""), _defineProperty(_class2, "STATE", NETWORK_STATE.UNLOGGED_IN), _defineProperty(_class2, "timeoutChat", null), _temp)) || _class));
+      }(), _defineProperty(_class2, "roomID", ""), _defineProperty(_class2, "roomPassword", ""), _defineProperty(_class2, "STATE", NETWORK_STATE.UNLOGGED_IN), _defineProperty(_class2, "isRefreshingInBackground", false), _defineProperty(_class2, "timeoutChat", null), _temp)) || _class));
       /**
        * [1] Class member could be defined like this.
        * [2] Use `property` decorator if your want the member to be serializable.
@@ -23942,11 +23976,11 @@ System.register("chunks:///_virtual/BubbleChat.ts", ['./_rollupPluginModLoBabelH
           }
         };
 
-        _proto.show = function show(content, isAllowEmo) {
+        _proto.show = function show(content, isAllowEmo, timeToShow) {
           var _this2 = this;
 
-          if (isAllowEmo === void 0) {
-            isAllowEmo = false;
+          if (timeToShow === void 0) {
+            timeToShow = 5;
           }
 
           for (var i = 1; i <= 30; i++) {
@@ -23989,7 +24023,7 @@ System.register("chunks:///_virtual/BubbleChat.ts", ['./_rollupPluginModLoBabelH
           }, {
             easing: 'expoOut'
           }), tween().call(function () {
-            tween(_this2.chat_content_node).delay(5).call(function () {
+            tween(_this2.chat_content_node).delay(timeToShow).call(function () {
               _this2.hide();
             }).start();
           }));
@@ -27905,6 +27939,8 @@ System.register("chunks:///_virtual/TienLenSettingPopup.ts", ['./_rollupPluginMo
 
           _initializerDefineProperty(_assertThisInitialized(_this), "toggle_autoready", _descriptor2, _assertThisInitialized(_this));
 
+          _defineProperty(_assertThisInitialized(_this), "isWillExit", false);
+
           return _this;
         }
 
@@ -27946,12 +27982,18 @@ System.register("chunks:///_virtual/TienLenSettingPopup.ts", ['./_rollupPluginMo
           if (!ended) {
             var _NotiView$getInstance, _LobbyViewController$2;
 
-            (_NotiView$getInstance = NotiView.getInstance()) === null || _NotiView$getInstance === void 0 ? void 0 : _NotiView$getInstance.showMessage("Ván chơi chưa kết thúc!", null, (_LobbyViewController$2 = LobbyViewController.getInstance()) === null || _LobbyViewController$2 === void 0 ? void 0 : _LobbyViewController$2.getCurrentViewGameID());
+            var fxText = "Bạn sẽ rời phòng khi kết thúc ván.";
+            (_NotiView$getInstance = NotiView.getInstance()) === null || _NotiView$getInstance === void 0 ? void 0 : _NotiView$getInstance.showMessage(fxText, null, (_LobbyViewController$2 = LobbyViewController.getInstance()) === null || _LobbyViewController$2 === void 0 ? void 0 : _LobbyViewController$2.getCurrentViewGameID());
+            this.isWillExit = true;
             return;
           }
 
           GamePlayManager.leaveRoom();
           LoadingView.getInstance().show();
+        };
+
+        _proto.reset = function reset() {
+          this.isWillExit = false;
         };
 
         return TienLenSettingPopup;
@@ -30125,6 +30167,8 @@ System.register("chunks:///_virtual/BaseFullScreenGameView.ts", ['./_rollupPlugi
 
           _defineProperty(_assertThisInitialized(_this), "gameID", -2);
 
+          _defineProperty(_assertThisInitialized(_this), "previousGameView", null);
+
           _defineProperty(_assertThisInitialized(_this), "refreshMoneyCb", []);
 
           return _this;
@@ -30151,6 +30195,14 @@ System.register("chunks:///_virtual/BaseFullScreenGameView.ts", ['./_rollupPlugi
         _proto.getVisiblePlayerByID = function getVisiblePlayerByID(uid) {};
 
         _proto.getPlayerByUID = function getPlayerByUID(uid) {};
+
+        _proto.getPreviousGameView = function getPreviousGameView(prevView) {
+          return this.previousGameView;
+        };
+
+        _proto.setPreviousGameView = function setPreviousGameView(prevView) {
+          this.previousGameView = prevView;
+        };
 
         _proto.sendBet = function sendBet(eid, bet) {};
 
@@ -32291,6 +32343,9 @@ System.register("chunks:///_virtual/SamFullScreenGameView.ts", ['./_rollupPlugin
 
           if (this._state == GameState.WAITING) {
             this.forceLeaveRoom();
+          } else {
+            this.leaveRoom();
+            GamePlayManager.refreshInBackground();
           }
         };
 
@@ -32375,6 +32430,36 @@ System.register("chunks:///_virtual/SamFullScreenGameView.ts", ['./_rollupPlugin
             var goldSafe = as["safe"];
             GameConfigManager.gold = gold;
             systemEvent.emit(LobbyViewController.REFRESH_MONEY, GameConfigManager.gold);
+          } else if (cmd == GLOBAL_MESSAGE.USER_INFO) {
+            var userDict = dict["As"]; // int64_t chip = userDict -> getUInt64("chip");
+
+            var _gold = userDict["gold"]; // int vip = (int)userDict -> getUInt64("vip");
+
+            var customerID = dict["id"];
+            var displayName = dict["dn"];
+            var userID = dict["uid"];
+            var avatarURL = dict["a"];
+            GameConfigManager.gold = _gold;
+            GameConfigManager.customerID = customerID;
+            GameConfigManager.uid = userID;
+            console.log("my uid:", GameConfigManager.uid);
+            GameConfigManager.displayName = displayName;
+            GameConfigManager.avaURL = avatarURL;
+
+            if (dict["lr"] != null && dict["lr"] != undefined) {
+              var lr = dict["lr"];
+              var roomID = lr["rid"];
+              var gameID = lr["gid"];
+              var serverID = lr["sid"];
+              var roomPassword = "";
+
+              if (lr["pwd"] != null && lr["pwd"] != undefined) {
+                roomPassword = lr["pwd"];
+              }
+
+              LobbyViewController.getInstance().switchGameScreen(gameID);
+              GamePlayManager.joinRoom(roomID, serverID, roomPassword);
+            }
           } // else if (cmd == 303) {
           //     // MsgPackArray * playerArr = dict->getArray("us");
           //     // gameView->showPlayersToBeInvited(playerArr);
@@ -32736,7 +32821,7 @@ System.register("chunks:///_virtual/SamFullScreenGameView.ts", ['./_rollupPlugin
               return;
             }
 
-            view.showBubbleChat("Báo 1");
+            view.showBubbleChat("Báo 1", 1);
           }
         };
 
@@ -32800,9 +32885,9 @@ System.register("chunks:///_virtual/SamFullScreenGameView.ts", ['./_rollupPlugin
             baoSamStr = "Báo Sâm";
           }
 
-          view.showBubbleChat(baoSamStr);
+          view.showBubbleChat(baoSamStr, 1);
 
-          if (this.isMe(name)) {
+          if (this.isMe(name) || sam) {
             this.btn_sam.node.active = false;
             this.btn_khongsam.node.active = false;
           }
@@ -32895,6 +32980,8 @@ System.register("chunks:///_virtual/SamFullScreenGameView.ts", ['./_rollupPlugin
                 this._lastTurnCards.push(_card);
               }
             }
+
+            this.checkCard();
           }
 
           if (remainingTime > 20) {
@@ -32903,7 +32990,7 @@ System.register("chunks:///_virtual/SamFullScreenGameView.ts", ['./_rollupPlugin
 
           if (((_this$my_info4 = this.my_info) === null || _this$my_info4 === void 0 ? void 0 : _this$my_info4.getCurrentState()) == 3) {
             this.my_info.startCountDown(remainingTime);
-            this.btn_danhbai.node.active = true;
+            this.btn_danhbai.node.active = this.my_info.getCountPosibleToSelect() > 0;
             this.btn_boluot.node.active = lastTurnCards.length > 0;
           } else if (((_this$my_info5 = this.my_info) === null || _this$my_info5 === void 0 ? void 0 : _this$my_info5.getCurrentState()) == 2) {
             this.addBoLuotPlayer(this.my_info.getUID());
@@ -32939,6 +33026,18 @@ System.register("chunks:///_virtual/SamFullScreenGameView.ts", ['./_rollupPlugin
                 winnings = playerDict["sm"];
               }
 
+              var loseType = 0;
+
+              if (playerDict["lt"] != null && playerDict["lt"] != undefined) {
+                loseType = playerDict["lt"];
+              }
+
+              var rankOfHand = 0;
+
+              if (playerDict["wcr"] != null && playerDict["wcr"] != undefined) {
+                rankOfHand = playerDict["wcr"];
+              }
+
               var ag = playerDict["m"];
               player.setMoney(ag);
               player.winning = Math.abs(winnings);
@@ -32948,6 +33047,8 @@ System.register("chunks:///_virtual/SamFullScreenGameView.ts", ['./_rollupPlugin
               } else {
                 player.showLoseFx(0, this._timeToFinish * 0.5);
               }
+
+              this.runActionFinishForPlayer(player, winnings, rankOfHand, false, loseType);
             }
 
             if (!this.isMe(uid)) {
@@ -32986,12 +33087,71 @@ System.register("chunks:///_virtual/SamFullScreenGameView.ts", ['./_rollupPlugin
             }
           }
 
-          var finishAct = tween(this.node).sequence(tween().delay(this._timeToFinish), tween().call(function () {
+          var finishAct = tween(this.node).sequence(tween().call(function () {
+            _this7.btn_danhbai.node.active = false;
+            _this7.btn_boluot.node.active = false;
+          }), tween().delay(this._timeToFinish), tween().call(function () {
+            var _this7$tienLenSetting;
+
             _this7._state = GameState.WAITING;
 
-            _this7.prepareNewGame();
+            if ((_this7$tienLenSetting = _this7.tienLenSettingPopup) === null || _this7$tienLenSetting === void 0 ? void 0 : _this7$tienLenSetting.isWillExit) {
+              _this7.tienLenSettingPopup.exitRoom();
+            } else {
+              _this7.prepareNewGame();
+            }
           }));
           finishAct.start();
+        };
+
+        _proto.runActionFinishForPlayer = function runActionFinishForPlayer(player, winnings, rank, thangTrang, loseType) {
+          var fxText = "";
+
+          if (winnings > 0) {
+            if (loseType == 5) {
+              fxText = "Ăn Sâm";
+            } else if (loseType == 6) {
+              fxText = "Chặn Sâm";
+            }
+          } else {
+            if (thangTrang && winnings == 0) {
+              fxText = "Hòa";
+            }
+
+            if (loseType == 3) {
+              fxText = "Đền";
+            } else if (loseType == 1) {
+              fxText = "Bị Bắt Sâm";
+            } else if (loseType == 4) {
+              fxText = "Thối 2";
+            } else if (loseType == 2) {
+              fxText = "Cóng";
+            }
+          }
+
+          if (rank == 1) {
+            // dong hoa
+            fxText = "Đồng Hoa";
+          } else if (rank == 2) {
+            // tu quy 2
+            fxText = "Tứ Quý 2";
+          } else if (rank == 3) {
+            // 3 xam
+            fxText = "3 Xám";
+          } else if (rank == 4) {
+            // 5 doi
+            fxText = "5 Đôi";
+          } else if (rank == 5) {
+            // sanh rong
+            fxText = "Sảnh Rồng";
+          } else if (rank == 6) {
+            // sanh rong dong hoa
+            fxText = "Sảnh Rồng\nĐồng Hoa";
+          }
+
+          if (fxText.length > 0) {
+            player.showBubbleChat(fxText, this._timeToFinish);
+          }
         };
 
         _proto.addBoLuotPlayer = function addBoLuotPlayer(fromPlayer) {
@@ -32999,7 +33159,7 @@ System.register("chunks:///_virtual/SamFullScreenGameView.ts", ['./_rollupPlugin
           var player = this.getPlayerByUID(fromPlayer);
 
           if (player != null) {
-            player.showBubbleChat("Bỏ");
+            player.showBubbleChat("Bỏ", 1);
           }
 
           this._lastTurnCards.forEach(function (card) {
@@ -33428,7 +33588,7 @@ System.register("chunks:///_virtual/SamFullScreenGameView.ts", ['./_rollupPlugin
         };
 
         _proto.prepareNewGame = function prepareNewGame() {
-          var _this$my_info13, _this$my_info14, _this$my_info15, _this$opponent_info9;
+          var _this$my_info13, _this$my_info14, _this$my_info15, _this$opponent_info9, _this$tienLenSettingP3;
 
           Tween.stopAllByTarget(this.node);
           Tween.stopAllByTarget(this.lbl_countdown.node);
@@ -33449,6 +33609,8 @@ System.register("chunks:///_virtual/SamFullScreenGameView.ts", ['./_rollupPlugin
               this.btn_ready.node.active = true;
             }
           }
+
+          (_this$tienLenSettingP3 = this.tienLenSettingPopup) === null || _this$tienLenSettingP3 === void 0 ? void 0 : _this$tienLenSettingP3.reset();
         };
 
         _proto.sendReady = function sendReady() {
@@ -34792,6 +34954,7 @@ System.register("chunks:///_virtual/TransitionFadeScreen.ts", ['./_rollupPluginM
           }
 
           from.hide(fadeTime).delay(delayTime).then(tween().call(function () {
+            to.setPreviousGameView(from);
             to.show().start();
           })).start();
         };
@@ -37240,6 +37403,9 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
 
           if (this._state == GameState.WAITING) {
             this.forceLeaveRoom();
+          } else {
+            this.leaveRoom();
+            GamePlayManager.refreshInBackground();
           }
         };
 
@@ -37324,6 +37490,36 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
             var goldSafe = as["safe"];
             GameConfigManager.gold = gold;
             systemEvent.emit(LobbyViewController.REFRESH_MONEY, GameConfigManager.gold);
+          } else if (cmd == GLOBAL_MESSAGE.USER_INFO) {
+            var userDict = dict["As"]; // int64_t chip = userDict -> getUInt64("chip");
+
+            var _gold = userDict["gold"]; // int vip = (int)userDict -> getUInt64("vip");
+
+            var customerID = dict["id"];
+            var displayName = dict["dn"];
+            var userID = dict["uid"];
+            var avatarURL = dict["a"];
+            GameConfigManager.gold = _gold;
+            GameConfigManager.customerID = customerID;
+            GameConfigManager.uid = userID;
+            console.log("my uid:", GameConfigManager.uid);
+            GameConfigManager.displayName = displayName;
+            GameConfigManager.avaURL = avatarURL;
+
+            if (dict["lr"] != null && dict["lr"] != undefined) {
+              var lr = dict["lr"];
+              var roomID = lr["rid"];
+              var gameID = lr["gid"];
+              var serverID = lr["sid"];
+              var roomPassword = "";
+
+              if (lr["pwd"] != null && lr["pwd"] != undefined) {
+                roomPassword = lr["pwd"];
+              }
+
+              LobbyViewController.getInstance().switchGameScreen(gameID);
+              GamePlayManager.joinRoom(roomID, serverID, roomPassword);
+            }
           } // else if (cmd == 303) {
           //     // MsgPackArray * playerArr = dict->getArray("us");
           //     // gameView->showPlayersToBeInvited(playerArr);
@@ -37710,6 +37906,8 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
                 this._lastTurnCards.push(_card);
               }
             }
+
+            this.checkCard();
           }
 
           if (remainingTime > 20) {
@@ -37718,7 +37916,7 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
 
           if (((_this$my_info4 = this.my_info) === null || _this$my_info4 === void 0 ? void 0 : _this$my_info4.getCurrentState()) == 3) {
             this.my_info.startCountDown(remainingTime);
-            this.btn_danhbai.node.active = true;
+            this.btn_danhbai.node.active = this.my_info.getCountPosibleToSelect() > 0;
             this.btn_boluot.node.active = lastTurnCards.length > 0;
           } else if (((_this$my_info5 = this.my_info) === null || _this$my_info5 === void 0 ? void 0 : _this$my_info5.getCurrentState()) == 2) {
             this.addBoLuotPlayer(this.my_info.getUID());
@@ -37754,6 +37952,12 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
                 winnings = playerDict["sm"];
               }
 
+              var rankOfHand = 0;
+
+              if (playerDict["whR"] != null && playerDict["whR"] != undefined) {
+                rankOfHand = playerDict["whR"];
+              }
+
               var ag = playerDict["m"];
               player.setMoney(ag);
               player.winning = Math.abs(winnings);
@@ -37763,6 +37967,8 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
               } else {
                 player.showLoseFx(0, this._timeToFinish * 0.5);
               }
+
+              this.runActionFinishForPlayer(player, winnings, rankOfHand, false);
             }
 
             if (!this.isMe(uid)) {
@@ -37801,12 +38007,69 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
             }
           }
 
-          var finishAct = tween(this.node).sequence(tween().delay(this._timeToFinish), tween().call(function () {
+          var finishAct = tween(this.node).sequence(tween().call(function () {
+            _this6.btn_danhbai.node.active = false;
+            _this6.btn_boluot.node.active = false;
+          }), tween().delay(this._timeToFinish), tween().call(function () {
+            var _this6$tienLenSetting;
+
             _this6._state = GameState.WAITING;
 
-            _this6.prepareNewGame();
+            if ((_this6$tienLenSetting = _this6.tienLenSettingPopup) === null || _this6$tienLenSetting === void 0 ? void 0 : _this6$tienLenSetting.isWillExit) {
+              _this6.tienLenSettingPopup.exitRoom();
+            } else {
+              _this6.prepareNewGame();
+            }
           }));
           finishAct.start();
+        };
+
+        _proto.runActionFinishForPlayer = function runActionFinishForPlayer(player, winnings, rank, thangTrang) {
+          var fxText = "";
+          if (winnings > 0) ;else {
+            if (player.getPlayerCard().length == 13 && !thangTrang) {
+              fxText = "Cóng";
+            }
+          }
+
+          if (rank == 1) {
+            // tu quy 3
+            fxText = "Tứ Quý 3";
+          } else if (rank == 2) {
+            // tu quy 2
+            fxText = "Tứ Quý 2";
+          } else if (rank == 3) {
+            // 2 tu quy
+            fxText = "2 Tứ Quý";
+          } else if (rank == 4) {
+            // 6 doi
+            fxText = "6 Đôi";
+          } else if (rank == 5) {
+            // 3 doi thong co 3 bich
+            fxText = "3 Đôi Thông\ncó 3 Bích";
+          } else if (rank == 6) {
+            // 4 doi thong co 3 bich
+            fxText = "4 Đôi Thông\ncó 3 Bích";
+          } else if (rank == 7) {
+            // 5 doi thong
+            fxText = "5 Đôi Thông";
+          } else if (rank == 8) {
+            // 6 doi thong
+            fxText = "6 Đôi Thông";
+          } else if (rank == 9) {
+            // dong hoa
+            fxText = "Đồng Hoa";
+          } else if (rank == 10) {
+            // sanh rong
+            fxText = "Sảnh Rồng";
+          } else if (rank == 11) {
+            // sanh rong dong hoa
+            fxText = "Sảnh Rồng\nĐồng Hoa";
+          }
+
+          if (fxText.length > 0) {
+            player.showBubbleChat(fxText, this._timeToFinish);
+          }
         };
 
         _proto.addBoLuotPlayer = function addBoLuotPlayer(fromPlayer) {
@@ -37814,7 +38077,7 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
           var player = this.getPlayerByUID(fromPlayer);
 
           if (player != null) {
-            player.showBubbleChat("Bỏ");
+            player.showBubbleChat("Bỏ", 1);
           }
 
           this._lastTurnCards.forEach(function (card) {
@@ -38182,8 +38445,7 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
         };
 
         _proto.addPlayer = function addPlayer(dn, uid, C, m, pS, rmC, sit, r, platform, playing, as, avatarURL, customerID) {
-          var _this9 = this,
-              _this$opponent_info7;
+          var _this9 = this;
 
           var info = new PlayerInfo();
           info.displayName = dn;
@@ -38208,8 +38470,6 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
           } else {
             this.opponent_info.setCurrentState(pS, rmC);
           }
-
-          console.log((_this$opponent_info7 = this.opponent_info) === null || _this$opponent_info7 === void 0 ? void 0 : _this$opponent_info7.getRemainingCard());
         };
 
         _proto.removePlayer = function removePlayer(uid) {
@@ -38229,13 +38489,13 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
         };
 
         _proto.prepareNewGame = function prepareNewGame() {
-          var _this$my_info13, _this$my_info14, _this$my_info15, _this$opponent_info8;
+          var _this$my_info13, _this$my_info14, _this$my_info15, _this$opponent_info7;
 
           Tween.stopAllByTarget(this.node);
           (_this$my_info13 = this.my_info) === null || _this$my_info13 === void 0 ? void 0 : _this$my_info13.node.setPosition(new Vec3(6, -206, 0));
           (_this$my_info14 = this.my_info) === null || _this$my_info14 === void 0 ? void 0 : _this$my_info14.node.setScale(new Vec3(1, 1, 1));
           (_this$my_info15 = this.my_info) === null || _this$my_info15 === void 0 ? void 0 : _this$my_info15.resetUI();
-          (_this$opponent_info8 = this.opponent_info) === null || _this$opponent_info8 === void 0 ? void 0 : _this$opponent_info8.resetUI();
+          (_this$opponent_info7 = this.opponent_info) === null || _this$opponent_info7 === void 0 ? void 0 : _this$opponent_info7.resetUI();
           this._lastTurnCards = [];
           this.cardPooling.reset();
 
@@ -38248,6 +38508,8 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
               this.btn_ready.node.active = true;
             }
           }
+
+          this.tienLenSettingPopup.reset();
         };
 
         _proto.sendReady = function sendReady() {
