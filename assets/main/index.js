@@ -17771,10 +17771,10 @@ System.register("chunks:///_virtual/KimCuongNoHuView.ts", ['./_rollupPluginModLo
   };
 });
 
-System.register("chunks:///_virtual/GameBaiPlayerView.ts", ['./_rollupPluginModLoBabelHelpers.js', 'cc', './PlayerView.ts'], function (exports) {
+System.register("chunks:///_virtual/GameBaiPlayerView.ts", ['./_rollupPluginModLoBabelHelpers.js', 'cc', './BubbleChat.ts', './PlayerView.ts'], function (exports) {
   'use strict';
 
-  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, _defineProperty, cclegacy, _decorator, Node, ProgressBar, sp, Tween, tween, Vec3, PlayerView;
+  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, _defineProperty, cclegacy, _decorator, Node, ProgressBar, sp, Tween, tween, Vec3, BubbleChat, PlayerView;
 
   return {
     setters: [function (module) {
@@ -17793,16 +17793,18 @@ System.register("chunks:///_virtual/GameBaiPlayerView.ts", ['./_rollupPluginModL
       tween = module.tween;
       Vec3 = module.Vec3;
     }, function (module) {
+      BubbleChat = module.BubbleChat;
+    }, function (module) {
       PlayerView = module.PlayerView;
     }],
     execute: function () {
-      var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _temp;
+      var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _temp;
 
       cclegacy._RF.push({}, "61f2aWYKNNGX7URr2T4Bp/t", "GameBaiPlayerView", undefined);
 
       var ccclass = _decorator.ccclass,
           property = _decorator.property;
-      var GameBaiPlayerView = exports('GameBaiPlayerView', (_dec = ccclass('GameBaiPlayerView'), _dec2 = property(Node), _dec3 = property(ProgressBar), _dec4 = property(sp.Skeleton), _dec5 = property(Node), _dec6 = property(Number), _dec(_class = (_class2 = (_temp = /*#__PURE__*/function (_PlayerView) {
+      var GameBaiPlayerView = exports('GameBaiPlayerView', (_dec = ccclass('GameBaiPlayerView'), _dec2 = property(Node), _dec3 = property(ProgressBar), _dec4 = property(sp.Skeleton), _dec5 = property(Node), _dec6 = property(Number), _dec7 = property(BubbleChat), _dec(_class = (_class2 = (_temp = /*#__PURE__*/function (_PlayerView) {
         _inheritsLoose(GameBaiPlayerView, _PlayerView);
 
         function GameBaiPlayerView() {
@@ -17823,6 +17825,8 @@ System.register("chunks:///_virtual/GameBaiPlayerView.ts", ['./_rollupPluginModL
           _initializerDefineProperty(_assertThisInitialized(_this), "nodeTimer", _descriptor4, _assertThisInitialized(_this));
 
           _initializerDefineProperty(_assertThisInitialized(_this), "maxTime", _descriptor5, _assertThisInitialized(_this));
+
+          _initializerDefineProperty(_assertThisInitialized(_this), "resultText", _descriptor6, _assertThisInitialized(_this));
 
           _defineProperty(_assertThisInitialized(_this), "cards", []);
 
@@ -17877,6 +17881,18 @@ System.register("chunks:///_virtual/GameBaiPlayerView.ts", ['./_rollupPluginModL
 
         _proto.getRemainingCard = function getRemainingCard() {
           return this._remainingCard;
+        };
+
+        _proto.showResultText = function showResultText(content, timeToShow) {
+          if (timeToShow === void 0) {
+            timeToShow = 5;
+          }
+
+          if (content == "" || content == null || content == undefined) {
+            return;
+          }
+
+          this.resultText.show(content, false, timeToShow);
         };
 
         _proto.startCountDown = function startCountDown(remainTime) {
@@ -18027,6 +18043,13 @@ System.register("chunks:///_virtual/GameBaiPlayerView.ts", ['./_rollupPluginModL
         writable: true,
         initializer: function initializer() {
           return 20;
+        }
+      }), _descriptor6 = _applyDecoratedDescriptor(_class2.prototype, "resultText", [_dec7], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
         }
       })), _class2)) || _class));
       /**
@@ -33150,7 +33173,7 @@ System.register("chunks:///_virtual/SamFullScreenGameView.ts", ['./_rollupPlugin
           }
 
           if (fxText.length > 0) {
-            player.showBubbleChat(fxText, this._timeToFinish);
+            player.showResultText(fxText, this._timeToFinish);
           }
         };
 
@@ -38068,7 +38091,7 @@ System.register("chunks:///_virtual/TienLenFullScreenGameView.ts", ['./_rollupPl
           }
 
           if (fxText.length > 0) {
-            player.showBubbleChat(fxText, this._timeToFinish);
+            player.showResultText(fxText, this._timeToFinish);
           }
         };
 
