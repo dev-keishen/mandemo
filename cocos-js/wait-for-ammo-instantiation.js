@@ -1,4 +1,4 @@
-System.register(['./ammo-instantiated-41a2d72e.js'], function (exports) {
+System.register(['./ammo-instantiated-04809f52.js'], function (exports) {
     'use strict';
     var legacyCC;
     return {

@@ -217,7 +217,7 @@ System.register([], function (exports, module) {
               _global.CC_SUPPORT_JIT = SUPPORT_JIT;
             }
 
-            var engineVersion = exports('eo', '3.1');
+            var engineVersion = exports('eo', '3.1.1');
             _global.CocosEngine = legacyCC.ENGINE_VERSION = engineVersion;
             _global.cc = legacyCC;
 
@@ -11327,7 +11327,12 @@ System.register([], function (exports, module) {
               };
 
               _proto.getSafeAreaEdge = function getSafeAreaEdge() {
-                throw new Error('TODO');
+                return {
+                  top: 0,
+                  bottom: 0,
+                  left: 0,
+                  right: 0
+                };
               };
 
               _proto.getBatteryLevel = function getBatteryLevel() {
@@ -35838,10 +35843,10 @@ System.register([], function (exports, module) {
                 this._deviceEventName = void 0;
                 this._globalEventClass = void 0;
                 this._didAccelerateFunc = void 0;
-                this.support = true;
+                this.support = window.DeviceMotionEvent !== undefined || window.DeviceOrientationEvent !== undefined;
                 this._globalEventClass = window.DeviceMotionEvent || window.DeviceOrientationEvent;
 
-                if (system.browserType === BrowserType.QQ) {
+                if (system.browserType === BrowserType.MOBILE_QQ) {
                   this._globalEventClass = window.DeviceOrientationEvent;
                 }
 
@@ -35981,7 +35986,7 @@ System.register([], function (exports, module) {
               function KeyboardInputSource() {
                 this.support = void 0;
                 this._eventTarget = new EventTarget();
-                this.support = !system.isMobile;
+                this.support = document.documentElement.onkeyup !== undefined;
 
                 this._registerEvent();
               }
@@ -36029,12 +36034,12 @@ System.register([], function (exports, module) {
                 this._pointLocked = false;
                 this._isPressed = false;
                 this._preMousePos = new Vec2();
-                this.support = !system.isMobile && !EDITOR;
+                this.support =  document.documentElement.onmouseup !== undefined;
 
                 if (this.support) {
                   this._canvas = document.getElementById('GameCanvas');
 
-                  if (!this._canvas && DEBUG) {
+                  if (!this._canvas && !TEST) {
                     console.warn('failed to access canvas');
                   }
 
@@ -36195,12 +36200,12 @@ System.register([], function (exports, module) {
                 this.support = void 0;
                 this._canvas = void 0;
                 this._eventTarget = new EventTarget();
-                this.support = system.isMobile;
+                this.support = document.documentElement.ontouchstart !== undefined || document.ontouchstart !== undefined || navigator.msPointerEnabled;
 
                 if (this.support) {
                   this._canvas = document.getElementById('GameCanvas');
 
-                  if (!this._canvas && DEBUG) {
+                  if (!this._canvas && !TEST) {
                     console.warn('failed to access canvas');
                   }
 
@@ -37587,8 +37592,29 @@ System.register([], function (exports, module) {
                 system.restartJSVM();
               },
               getSafeAreaRect: function getSafeAreaRect() {
-                var visibleSize = legacyCC.view.getVisibleSize();
-                return legacyCC.rect(0, 0, visibleSize.width, visibleSize.height);
+                var locView = legacyCC.view;
+                var edge = system.getSafeAreaEdge();
+                var viewSize = system.getViewSize();
+                var leftBottom = new Vec2(edge.left, viewSize.height - edge.bottom);
+                var rightTop = new Vec2(viewSize.width - edge.right, edge.top);
+                var relatedPos = {
+                  left: 0,
+                  top: 0,
+                  width: viewSize.width,
+                  height: viewSize.height
+                };
+                locView.convertToLocationInView(leftBottom.x, leftBottom.y, relatedPos, leftBottom);
+                locView.convertToLocationInView(rightTop.x, rightTop.y, relatedPos, rightTop);
+
+                locView._convertPointWithScale(leftBottom);
+
+                locView._convertPointWithScale(rightTop);
+
+                var x = leftBottom.x;
+                var y = leftBottom.y;
+                var width = rightTop.x - leftBottom.x;
+                var height = rightTop.y - leftBottom.y;
+                return new Rect(x, y, width, height);
               },
               __init: function __init() {
                 try {
@@ -42620,6 +42646,8 @@ System.register([], function (exports, module) {
                   frameBuffer.destroy();
                   frameBuffer.initialize(new FramebufferInfo(shadowRenderPass, renderTargets, depth));
                 }
+
+                shadowInfo.shadowMapDirty = false;
               };
 
               return ShadowFlow;
@@ -47562,6 +47590,10 @@ System.register([], function (exports, module) {
               return 0.5 * ((k -= 2) * k * k * k * k + 2);
             }
             function sineIn(k) {
+              if (k === 1) {
+                return 1;
+              }
+
               return 1 - Math.cos(k * Math.PI / 2);
             }
             function sineOut(k) {
@@ -47681,10 +47713,18 @@ System.register([], function (exports, module) {
               return a * Math.pow(2, -10 * (k -= 1)) * Math.sin((k - s) * (2 * Math.PI) / p) * 0.5 + 1;
             }
             function backIn(k) {
+              if (k === 1) {
+                return 1;
+              }
+
               var s = 1.70158;
               return k * k * ((s + 1) * k - s);
             }
             function backOut(k) {
+              if (k === 0) {
+                return 0;
+              }
+
               var s = 1.70158;
               return --k * k * ((s + 1) * k + s) + 1;
             }
@@ -62073,7 +62113,7 @@ System.register([], function (exports, module) {
                 return true;
               }
 
-              return !!clip1 && !!clip2 && (clip1.name === clip2.name || clip1._uuid === clip2._uuid);
+              return !!clip1 && !!clip2 && clip1._uuid === clip2._uuid && clip1._uuid;
             }
 
             replaceProperty(Animation.prototype, 'Animation', [{
@@ -62480,9 +62520,9 @@ System.register([], function (exports, module) {
             let ammo;
             let isWasm = false;
             if (typeof WebAssembly === 'undefined') {
-                ammo = await module.import('./ammo-77a85361.js');
+                ammo = await module.import('./ammo-a1ff9ee7.js');
             } else {
-                ammo = await module.import('./ammo.wasm-6c31d3c9.js');
+                ammo = await module.import('./ammo.wasm-0f657809.js');
                 isWasm = true;
             }
             var AmmoClosure = ammo.default;
